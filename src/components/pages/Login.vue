@@ -1,25 +1,25 @@
 <template>
 <div class="main_wrap">
-    <Header></Header>
-    <form method="post" class="login_form">
+    <div class="login_form">
+    <form method="post">
     <h1 class="login_title">用户登录</h1>
     <input type="text" name="username" placeholder="用户名" class="input_txt" autocomplete="off" v-model="username"  @click="errshow=false">
     <input type="password" name="password" placeholder="密码" class="input_txt" v-model="password"  @click="errshow=false">
     <div class="error_tip" v-show="errshow">{{errmsg}}</div>
     <input type="button" value="登 录" class="input_sub" @click="fnLogin">
     </form>
+    <div class="nav">
+        <router-link to='/'>首页</router-link>|<router-link to='/register'>注册</router-link>
+    </div>
+    </div>   
 </div>
 </template>
 
 <script>
-import Header from '@/components/widget/Header'
 import cons from '@/components/constent'
 
 export default {   
     name: 'Login',
-    components:{
-        Header
-    },
     data () {
         return {
         username:'',
@@ -71,9 +71,7 @@ width:100%;
 height:100%;
 left:0px;
 top:0px;
-/* background:linear-gradient(45deg,#facff1,#6db9db); */
-/* background: url('../../assets/imgs/register.jpg'); */
-background: #ffffe0;
+background: #f5f5f5;
 }
 
 .login_logo{
@@ -85,28 +83,38 @@ margin:45px 0px 0 0px;
 }
 .login_form{
 width:330px;
-height:292px;
+height:302px;
 background:#fff;
 position:fixed;
 left:50%;
 top:50%;
-margin-top:-146px;
+margin-top:-156px;
 margin-left:-165px;
 overflow:hidden;
 border-radius:6px;
+}
+.login_form .nav{
+text-align: center;
+margin-top: 15px;
+font-size: 13px;
+}
+.login_form .nav a{
+text-decoration:none;
+margin: 0 10px;
+color: black;        
 }
 .login_form .error_tip{
 position:absolute;
 font-size:12px;
 color:#f00;
-bottom:75px;
+bottom:90px;
 left:50%;
 transform:translate(-50%)
 }
 .login_title{
 line-height:72px;
 text-align:center;
-background:linear-gradient(90deg,rgba(246,60,47,0.6),rgba(128,58,242,0.6));
+background: rgb(63, 67, 68);
 color:#fff;
 font-size:20px;
 }
@@ -135,11 +143,11 @@ width:298px;
 height:32px;
 border:0px;
 border-radius:4px;
-background:rgba(247,60,45,0.6);
+background: rgb(63, 67, 68);
 color:#fff;
 cursor:pointer; 
 }
 .input_sub:hover{
-background:rgba(247,60,45,0.4);
+background: rgb(114, 119, 121);
 }
 </style>

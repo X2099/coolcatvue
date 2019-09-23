@@ -1,7 +1,7 @@
 <template>
 <div class="main_wrap">
-    <Header></Header>
-    <form method="post" class="register_form">
+    <div class="register_form">
+    <form method="post">
     <h1 class="register_title">用户注册</h1>
     <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
     <input type="text" placeholder="密码" class="input_txt">
@@ -11,6 +11,10 @@
     <div class="error_tip" v-show="errshow">{{errmsg}}</div> 
     <input type="button" value="注 册" class="input_sub">
     </form>
+    <div class="nav">
+        <router-link to='/'>首页</router-link>|<router-link to='/login'>登录</router-link>
+    </div>
+    </div>
 </div>
 </template>
 
@@ -89,12 +93,12 @@ export default {
     height:100%;
     left:0px;
     top:0px;
-    background: #ffffe0;
+    background: #f5f5f5;
 }
 
 .register_form{
 width: 330px;
-height: 450px;
+height: 460px;
 background: #fff;
 position: fixed;
 left: 50%;
@@ -104,18 +108,28 @@ margin-left: -165px;
 overflow: hidden;
 border-radius:6px;
 }
+.register_form .nav{
+text-align: center;
+margin-top: 15px;
+font-size: 13px;
+}
+.register_form .nav a{
+text-decoration:none;
+margin: 0 10px;
+color: black;    
+}
 .register_form .error_tip{
 position: absolute;
 font-size: 12px;
 color: #f00;
-bottom: 75px;
+bottom: 85px;
 left: 50%;
 transform: translate(-50%);
 }
 .register_title{
 line-height: 72px;
 text-align: center;
-background:linear-gradient(90deg, black, white);
+background: rgb(63, 67, 68);
 color: #fff;
 font-size:20px;
 }
@@ -138,12 +152,12 @@ width: 298px;
 height: 32px;
 border: 0px;
 border-radius: 4px;
-background:linear-gradient(90deg, white, black);
+background: rgb(63, 67, 68);
 color:#fff;
 cursor:pointer; 
 }
 
 .input_sub:hover{
-background:linear-gradient(90deg, black, white);
+background: rgb(114, 119, 121);
 }
 </style>
