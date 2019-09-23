@@ -73,7 +73,7 @@ left:0px;
 top:0px;
 /* background:linear-gradient(45deg,#facff1,#6db9db); */
 /* background: url('../../assets/imgs/register.jpg'); */
-background: #ffffe0; 
+background: #ffffe0;
 }
 
 .login_logo{

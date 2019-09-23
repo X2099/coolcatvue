@@ -1,7 +1,7 @@
 <template>
-    <div class="home">
+    <div class="main_wrap">
         <Header></Header>
-        <div class="main">
+        <div class="home">
             <div v-for="article in article_list" :key="article" class="article">
                 <h4>{{ article.title }}</h4>
                 <p>{{ article.body }}</p>
@@ -41,17 +41,21 @@ export default {
 </script>
 
 <style scoped>
-.home{
-    position:fixed;
+.main_wrap{
+    position:absolute;
     width:100%;
     height:100%;
     background: #ffffe0; 
 }
-.main .article{
+.main_wrap .home{
+    background: #ffffe0;
+    padding-bottom: 10px;
+}
+.home .article{
     /* width: 100%; */
-    height: 100px;
+    height: 500px;
     text-align: center;
     background: #f5f5f5;
-    margin: 10px 20px;
+    margin: 40px 20px;
 }
 </style>
