@@ -11,7 +11,7 @@
     <div class="error_tip"><p v-if="password_errshow">{{ password_errmsg }}</p></div>
     <input type="text" placeholder="邮箱" class="input_txt" v-model="email" @blur="checkEmail">
     <div class="error_tip"><p v-if="email_errshow">{{ email_errmsg }}</p></div>
-    <input type="text" placeholder="验证码" class="input_txt">
+    <input type="text" placeholder="验证码" class="input_txt" v-model="code" @blur="checkCode">
     <div class="error_tip"><p v-if="code_errshow">{{ code_errmsg }}</p></div>
     <input type="button" value="获取验证码" class="input_sub" @click="sendCode"> 
     <input type="button" value="注 册" class="input_sub" @click="fnRegister">
@@ -80,7 +80,7 @@ export default {
         checkPassword(){
             this.password_errmsg = '';
             this.password_errshow = false;
-            if(this.password1==''){
+            if((this.password1==''&this.password2!='')||(this.password1==''&this.password2=='')){
                 this.password_errmsg = "密码不能为空";
                 this.password_errshow = true;
                 return;
@@ -118,7 +118,7 @@ export default {
         })
         .then(response=>{
             this.errshow = false;
-            // return;
+            return;
         })
         .catch(error=>{           
             this.email_errmsg = error.response.data.msg;
@@ -129,7 +129,6 @@ export default {
         sendCode(){
             this.checkEmail();
             if(this.email_errshow==false){
-                alert("OK");
                 this.axios.post(cons.apis + 'api/auth/send_code/',
                 {
                     email: this.email
@@ -144,11 +143,40 @@ export default {
             }
         },
 
+        checkCode(){
+            this.code_errmsg = '';
+            this.code_errshow = false;
+            var codeReg = /^[0-9]{6}$/;
+            if(!codeReg.test(this.code)){
+                this.code_errmsg = '验证码格式错误';
+                this.code_errshow = true;
+            } 
+        },
+
         fnRegister(){
-            if(this.username==''||this.password1==''||this.password2 == ''||this.email==''||this.code==''){
-                this.errmsg = "缺少必要的参数";
-                this.errshow = true;
+            this.checkUsername();
+            this.checkPassword();
+            this.checkEmail();
+            this.checkCode();
+            if(this.username_errshow||this.password_errshow||this.email_errshow||this.code_errshow){
                 return;
+            }else{
+                this.axios.post(cons.apis + 'api/auth/',
+                {
+                    username: this.username,
+                    password1: this.password1,
+                    password2: this.password2,
+                    email: this.email,
+                    code: this.code
+                })
+                .then(response=>{
+                    alert("注册成功，请登录吧！");
+                    this.$router.push({path:'/login'});
+                })
+                .catch(error=>{
+                    this.code_errmsg = error.response.data.code;
+                    this.code_errshow = true;
+                })
             }
         },
     }

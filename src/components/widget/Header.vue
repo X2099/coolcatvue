@@ -79,7 +79,7 @@ export default {
 }
 
 .header .right .user{
-    color: #a5babb;
+    color: rgb(13, 123, 153);
     cursor: default;
 }
 .header .right .user:hover{

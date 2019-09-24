@@ -38,8 +38,7 @@ export default {
         this.axios.post(cons.apis + 'api/login',
         {
             username:this.username,
-            password:this.password,
-            
+            password:this.password,         
             })
             
             .then(response=>{
