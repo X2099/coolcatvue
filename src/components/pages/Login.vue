@@ -1,16 +1,16 @@
 <template>
 <div class="main_wrap">
     <div class="login_form">
-    <form method="post">
-    <h1 class="login_title">用户登录</h1>
-    <input type="text" name="username" placeholder="用户名" class="input_txt" autocomplete="off" v-model="username"  @click="errshow=false">
-    <input type="password" name="password" placeholder="密码" class="input_txt" v-model="password"  @click="errshow=false">
-    <div class="error_tip" v-show="errshow">{{errmsg}}</div>
-    <input type="button" value="登 录" class="input_sub" @click="fnLogin">
-    </form>
-    <div class="nav">
+        <form method="post">
+        <h1 class="login_title">用户登录</h1>
+        <input type="text" name="username" placeholder="用户名" class="input_txt" autocomplete="off" v-model="username"  @click="errshow=false">
+        <input type="password" name="password" placeholder="密码" class="input_txt" v-model="password"  @click="errshow=false">
+        <div class="error_tip" v-show="errshow">{{errmsg}}</div>
+        <input type="button" value="登 录" class="input_sub" @click="fnLogin">
+        </form>
+        <div class="nav">
         <router-link to='/'>首页</router-link>|<router-link to='/register'>注册</router-link>
-    </div>
+        </div>
     </div>   
 </div>
 </template>
@@ -35,7 +35,7 @@ export default {
             this.errshow = true;
             return;
         };
-        this.axios.post(cons.apis + 'api/auth/login/',
+        this.axios.post(cons.apis + 'api/login',
         {
             username:this.username,
             password:this.password,
@@ -43,16 +43,12 @@ export default {
             })
             
             .then(response=>{
-            alert(JSON.stringify(response.headers));
-            alert(response.headers['content-type']);
-            alert(response.headers['content-length']);
-            console.log(response.headers);
             // 存储用户登录信息
-            // sessionStorage.clear();
-            // localStorage.clear();
-            // localStorage.token = response.data.token;
-            // localStorage.username = response.data.username;
-            // localStorage.user_id = response.data.id;
+            sessionStorage.clear();
+            localStorage.clear();
+            localStorage.token = response.data.token;
+            localStorage.username = response.data.username;
+            localStorage.uid = response.data.id;
             this.$router.push({path:'/'});
             })
             .catch(error=>{
@@ -73,14 +69,6 @@ left:0px;
 top:0px;
 background: #f5f5f5;
 }
-
-.login_logo{
-background:rgba(47,64,80,0.6);
-height:45px;
-}
-.login_logo img{
-margin:45px 0px 0 0px;
-}
 .login_form{
 width:330px;
 height:302px;
@@ -97,11 +85,12 @@ border-radius:6px;
 text-align: center;
 margin-top: 15px;
 font-size: 13px;
+color: rgb(63, 67, 68);
 }
 .login_form .nav a{
 text-decoration:none;
 margin: 0 10px;
-color: black;        
+color: rgb(63, 67, 68);        
 }
 .login_form .error_tip{
 position:absolute;
@@ -128,14 +117,6 @@ border-radius:4px;
 outline:none;
 text-indent:10px; 
 }
-.forget_pass{
-display:block;
-width:298px;
-margin:10px auto 0;
-text-align:right;
-font-size:14px;
-color:#5195d0;
-}
 .input_sub{
 display:block;
 margin:40px auto 0;
@@ -145,7 +126,8 @@ border:0px;
 border-radius:4px;
 background: rgb(63, 67, 68);
 color:#fff;
-cursor:pointer; 
+cursor:pointer;
+outline:none; 
 }
 .input_sub:hover{
 background: rgb(114, 119, 121);
