@@ -5,14 +5,15 @@
     <h1 class="register_title">用户注册</h1>
     <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
     <div class="error_tip"><p v-if="username_errshow">{{ username_errmsg }}</p></div>
-    <input type="text" placeholder="密码" class="input_txt">
+    <input type="password" placeholder="密码" class="input_txt" v-model="password1" @blur="checkPassword">
     <div class="error_tip"></div>
-    <input type="text" placeholder="确认密码" class="input_txt">
+    <input type="password" placeholder="确认密码" class="input_txt" v-model="password2" @blur="checkPassword">
     <div class="error_tip"><p v-if="password_errshow">{{ password_errmsg }}</p></div>
     <input type="text" placeholder="邮箱" class="input_txt" v-model="email" @blur="checkEmail">
     <div class="error_tip"><p v-if="email_errshow">{{ email_errmsg }}</p></div>
     <input type="text" placeholder="验证码" class="input_txt">
-    <div class="error_tip"><p v-if="code_errshow">{{ code_errmsg }}</p></div> 
+    <div class="error_tip"><p v-if="code_errshow">{{ code_errmsg }}</p></div>
+    <input type="button" value="获取验证码" class="input_sub" @click="sendCode"> 
     <input type="button" value="注 册" class="input_sub" @click="fnRegister">
     </form>
     <div class="nav">
@@ -76,15 +77,38 @@ export default {
         });
         },
 
+        checkPassword(){
+            this.password_errmsg = '';
+            this.password_errshow = false;
+            if(this.password1==''){
+                this.password_errmsg = "密码不能为空";
+                this.password_errshow = true;
+                return;
+            }else{
+                if(this.password1!=this.password2){
+                this.password_errmsg = "两次密码不一致，请重新输入";
+                this.password_errshow = true;
+                return;
+                }
+            }
+        },
+
         checkEmail(){
+        this.email_errmsg = '';
+        this.email_errshow = false;
+        if(this.email==''){
+            this.email_errmsg = "邮箱不能为空";
+            this.email_errshow = true;
+            return;
+        };
         var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
         if(this.email==''){
             return;
         }else{
             if(emailReg.test(this.email)){
             }else{
-                this.errmsg = "邮箱格式不正确";
-                this.errshow = true;
+                this.email_errmsg = "请输入一个正确的邮箱地址";
+                this.email_errshow = true;
                 return;
             };
         };
@@ -94,12 +118,30 @@ export default {
         })
         .then(response=>{
             this.errshow = false;
-            return;
+            // return;
         })
-        .catch(error=>{
-            this.errshow = true;
-            this.errmsg = error.response.data.msg;            
+        .catch(error=>{           
+            this.email_errmsg = error.response.data.msg;
+            this.email_errshow = true;           
         });
+        },
+
+        sendCode(){
+            this.checkEmail();
+            if(this.email_errshow==false){
+                alert("OK");
+                this.axios.post(cons.apis + 'api/auth/send_code/',
+                {
+                    email: this.email
+                })
+                .then(response=>{
+                    alert("验证码已发送至您的邮箱，请注意查收！");
+                })
+                .catch(error=>{
+                    this.email_errmsg = error.response.data.msg;
+                    this.email_errshow = true;
+                })
+            }
         },
 
         fnRegister(){
@@ -125,12 +167,12 @@ export default {
 
 .register_form{
 width: 330px;
-height: 460px;
+height: 490px;
 background: #fff;
 position: fixed;
 left: 50%;
 top: 50%;
-margin-top: -226px;
+margin-top: -246px;
 margin-left: -165px;
 overflow: hidden;
 border-radius:6px;
@@ -183,7 +225,7 @@ text-indent: 10px;
 }
 .input_sub{
 display: block;
-margin: 20px auto 0;
+margin: 10px auto 0;
 width: 298px;
 height: 32px;
 border: 0px;
