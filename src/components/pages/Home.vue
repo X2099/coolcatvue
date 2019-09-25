@@ -4,7 +4,6 @@
         <div class="home">
             <div v-for="article in article_list" :key="article" class="article">
                 <h4>{{ article.title }}</h4>
-                <p>{{ article.body }}</p>
             </div>
         </div>
     </div>
@@ -54,7 +53,7 @@ export default {
 }
 .home .article{
     /* width: 100%; */
-    height: 500px;
+    height: 50px;
     text-align: center;
     background: #fff;
     margin: 40px 20px;

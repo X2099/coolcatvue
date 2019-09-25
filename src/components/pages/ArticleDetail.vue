@@ -3,13 +3,14 @@
     <Header></Header>
     <div class="article">
         <mavon-editor class="md"
-                    :value="content"
-                    :subfield = "false"
-                    :defaultOpen = "'preview'"
-                    :toolbarsFlag = "false"
-                    :editable="false"
-                    :scrollStyle="true"
-                    :ishljs = "true" style="box-shadow: none"></mavon-editor>
+            :value="body"
+            :subfield = "false"
+            :defaultOpen = "'preview'"
+            :toolbarsFlag = "false"
+            :editable="false"
+            :scrollStyle="true"
+            :ishljs = "true" style="box-shadow: none"
+            ></mavon-editor>
     </div>
 </div>
 </template>
@@ -18,6 +19,7 @@
 import Header from '@/components/widget/Header'
 import {mavonEditor} from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import cons from '@/components/constent'
 
 export default {
     components:{
@@ -26,9 +28,26 @@ export default {
     },
     data(){
         return {
-            content: "```python1233```"
-        }
-        
+        title: '',
+        body: '',
+        }    
+    },
+    methods:{
+        // 获取文章标签
+        getArticle(){
+            this.axios.get(cons.apis + 'api/articles/4/',{
+            responseType: 'json'
+            })
+            .then(response=>{
+                this.body = '# ' + response.data.title + '\n\n' + response.data.body;
+            })
+            .catch(error=>{
+                alert("获取数据失败！")
+            })
+        },
+    },
+    mounted(){
+    this.getArticle();
     },
 }
 </script>
@@ -44,7 +63,8 @@ export default {
 .main_wrap .article .md{
     /* width: 90%; */
     /* position: absolute; */
-    min-height: 1000px;
-    margin: 2% 25%;
+    min-height: 600px;
+    margin: 2% 20% 4% 20%;
+    background: #ffffff;
 }
 </style>

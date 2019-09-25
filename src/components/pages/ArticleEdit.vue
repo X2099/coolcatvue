@@ -1,23 +1,24 @@
 <template>
     <div class="main_wrap">
-        <!-- <Header></Header> -->
+        <Header></Header>
         <div class="edit_article">        
             <div class="title">
                 <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">
+                
+            </div>
+            
+            <div class="body">
                 <div class="sub">
                     <button @click="menu_show=!menu_show;getCategories();getTags()">发布</button>
-                </div>
-            </div>
-            <div class="menu" v-show="menu_show">
+                </div>           
+                <mavon-editor v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 700px"/>
+                <div class="menu" v-show="menu_show">
                 <h5>文章分类：</h5>
                 <p v-for="category in category_list" :key="category">{{ category.name }}</p>
                 <h5>标签选择：</h5>
                 <p v-for="tag in tag_list" :key="tag">{{ tag.name }}</p>
                 <button @click="createArticle">确认发布</button>
-            </div>
-            
-            <div class="body">           
-                <mavon-editor v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 900px"/>           
+            </div>           
             </div>
         </div>
         
@@ -116,12 +117,14 @@ import { error } from 'util'
             // 创建文章
             createArticle(){
                 let token = localStorage.token;
+                let uid = localStorage.uid;
                 this.axios.post(cons.apis + 'api/articles/',
                     {
                         title: this.title,
                         body: this.body,
                         category: 1,
-                        tags: [1, 2]
+                        tags: [1, 2],
+                        author: uid
                     },
                     {
                     headers:{
@@ -145,6 +148,7 @@ import { error } from 'util'
 
 <style scoped>
 .main_wrap{
+    overflow-y: scroll;
     position:absolute;
     width:100%;
     height:100%;
@@ -179,25 +183,26 @@ import { error } from 'util'
 }
 
 .edit_article .menu{
-    position: fixed;
-    z-index: 2;
+    position: absolute;
+    z-index: 100;
     float: right;
-    top: 60px;
-    right: 2%;
+    top: 0px;
+    right: 0;
     /* margin:20px auto 0; */
     width: 15%;
     min-height: 100px;
-    background: #ffffff;
+    background: #ce1f1f;
     border: 1px solid #c4bfbf;
     /* color:#fff; */
     /* cursor:pointer; */
     /* outline:none; */
 }
 .edit_article .body{
-    position: fixed;
-    z-index: 1;
-    top: 60px;
+    position: relative;
+    z-index: 10;
+    /* top: 110px; */
     width: 100%;
     height: 100%;
+    margin-bottom: 3%;
 }
 </style>

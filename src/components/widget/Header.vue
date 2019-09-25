@@ -60,7 +60,7 @@ export default {
 .header .left li{
     list-style: none;
     float: right;
-    margin-right: 12%;
+    margin-right: 10%;
     line-height: 50px;
     color: aliceblue;
     cursor: pointer;
