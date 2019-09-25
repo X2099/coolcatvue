@@ -1,15 +1,22 @@
 <template>
     <div class="main_wrap">
-        <Header></Header>
+        <!-- <Header></Header> -->
         <div class="edit_article">        
             <div class="title">
                 <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt">
+                <div class="sub">
+                    <button @click="menu_show=!menu_show;getCategories();getTags()">发布</button>
+                </div>
             </div>
+            <div class="menu" v-show="menu_show">
+                <h5>文章分类：</h5>
+                <p v-for="category in category_list" :key="category">{{ category.name }}</p>
+                <h5>标签选择：</h5>
+                <p v-for="tag in tag_list" :key="tag">{{ tag.name }}</p>
+            </div>
+            
             <div class="body">           
-                <mavon-editor v-model="content" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 700px"/>           
-            </div>
-            <div class="input_sub">
-                <button class="input_sub" @click="submit">保存为草稿</button>|<button class="input_sub" @click="submit">发表</button>
+                <mavon-editor v-model="content" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 900px"/>           
             </div>
         </div>
         
@@ -20,6 +27,8 @@
     import Header from '@/components/widget/Header'
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
+    import cons from '@/components/constent'
+import { error } from 'util'
 
     export default {
         name: "",
@@ -33,7 +42,9 @@
                 content:'',
                 html:'',
                 configs: {},
-                test: ''
+                menu_show: false,
+                category_list: [],
+                tag_list: [],
             }
         },
         methods: {
@@ -59,7 +70,46 @@
                 console.log(this.content);
                 console.log(this.html);
                 this.$message.success('提交成功，已打印至控制台！');
-            }
+            },
+            // 获取文章分类
+            getCategories(){
+                if(this.menu_show==false){
+                    return;
+                }
+                let token = localStorage.token;
+                this.axios.get(cons.apis + 'api/categories/',{
+                    headers:{
+                    'Authorization': 'JWT ' + token
+                },
+                responseType: 'json'
+                })
+                .then(response=>{
+                    this.category_list = response.data;
+                })
+                .catch(error=>{
+                    alert("获取数据失败！")
+                })
+            },
+            
+            // 获取文章标签
+            getTags(){
+                if(this.menu_show==false){
+                    return;
+                }
+                let token = localStorage.token;
+                this.axios.get(cons.apis + 'api/tags/',{
+                    headers:{
+                    'Authorization': 'JWT ' + token
+                },
+                responseType: 'json'
+                })
+                .then(response=>{
+                    this.tag_list = response.data;
+                })
+                .catch(error=>{
+                    alert("获取数据失败！")
+                })
+            },      
         },
         mounted() {
 
@@ -69,7 +119,6 @@
 
 <style scoped>
 .main_wrap{
-    overflow-y: scroll;
     position:absolute;
     width:100%;
     height:100%;
@@ -80,7 +129,8 @@
     margin-left: 1.5%; 
 }
 .edit_article .title .input_txt{
-    width: 97%;
+    float: left;
+    width: 80%;
     height: 60px;
     font-size: 24px;
     line-height: 60px;
@@ -89,16 +139,39 @@
     outline:none;
     background: #f5f5f5;
 }
-.edit_article .input_sub{
-display:block;
-margin:20px auto 0;
-width:298px;
-height:32px;
-border:0px;
-border-radius:4px;
-background: rgb(63, 67, 68);
-color:#fff;
-cursor:pointer;
-outline:none;
+.edit_article .title .sub{
+    float: left;
+    display:block;
+    /* margin:20px auto 0; */
+    width: 20%;
+    height:60px;
+    /* background: rgb(63, 67, 68);
+    background: lightblue; */
+    /* color:#fff; */
+    /* cursor:pointer; */
+    /* outline:none; */
+}
+
+.edit_article .menu{
+    position: fixed;
+    z-index: 2;
+    float: right;
+    top: 60px;
+    right: 2%;
+    /* margin:20px auto 0; */
+    width: 15%;
+    min-height: 100px;
+    background: #ffffff;
+    border: 1px solid #c4bfbf;
+    /* color:#fff; */
+    /* cursor:pointer; */
+    /* outline:none; */
+}
+.edit_article .body{
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    width: 100%;
+    height: 100%;
 }
 </style>

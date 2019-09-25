@@ -11,7 +11,7 @@
         <div class="nav">
         <router-link to='/'>首页</router-link>|<router-link to='/register'>注册</router-link>
         </div>
-    </div>   
+    </div>
 </div>
 </template>
 
