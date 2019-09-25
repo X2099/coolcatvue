@@ -3,7 +3,7 @@
         <!-- <Header></Header> -->
         <div class="edit_article">        
             <div class="title">
-                <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt">
+                <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">
                 <div class="sub">
                     <button @click="menu_show=!menu_show;getCategories();getTags()">发布</button>
                 </div>
@@ -13,10 +13,11 @@
                 <p v-for="category in category_list" :key="category">{{ category.name }}</p>
                 <h5>标签选择：</h5>
                 <p v-for="tag in tag_list" :key="tag">{{ tag.name }}</p>
+                <button @click="createArticle">确认发布</button>
             </div>
             
             <div class="body">           
-                <mavon-editor v-model="content" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 900px"/>           
+                <mavon-editor v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 900px"/>           
             </div>
         </div>
         
@@ -39,12 +40,13 @@ import { error } from 'util'
         },
         data() {
             return {
-                content:'',
+                body:'',
                 html:'',
                 configs: {},
                 menu_show: false,
                 category_list: [],
                 tag_list: [],
+                title: '',
             }
         },
         methods: {
@@ -109,7 +111,31 @@ import { error } from 'util'
                 .catch(error=>{
                     alert("获取数据失败！")
                 })
-            },      
+            },
+
+            // 创建文章
+            createArticle(){
+                let token = localStorage.token;
+                this.axios.post(cons.apis + 'api/articles/',
+                    {
+                        title: this.title,
+                        body: this.body,
+                        category: 1,
+                        tags: [1, 2]
+                    },
+                    {
+                    headers:{
+                    'authorization': 'JWT ' + token,
+                    },
+                    responseType: 'json'
+                })
+                .then(response=>{
+                    alert("创建文章成功！");
+                })
+                .catch(error=>{
+                    alert("创建文章失败！")
+                })
+            },        
         },
         mounted() {
 
