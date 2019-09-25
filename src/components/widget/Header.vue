@@ -13,9 +13,9 @@
         <div class="left">
             <ul>
             <li>留言板</li>
-            <li>发表文章</li>
+            <li><router-link to="/edit">写文章</router-link></li>
             <li>标签管理</li>
-            <li><router-link to="/">文章分类</router-link></li>
+            <li><router-link to="/articles">我的文章</router-link></li>
             <li><router-link to="/">首页</router-link></li>
             </ul>
         </div>

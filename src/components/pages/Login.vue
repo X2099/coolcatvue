@@ -42,7 +42,6 @@ export default {
             })
             
             .then(response=>{
-            // 存储用户登录信息
             sessionStorage.clear();
             localStorage.clear();
             localStorage.token = response.data.token;
@@ -51,9 +50,14 @@ export default {
             this.$router.push({path:'/'});
             })
             .catch(error=>{
-            this.errmsg = error.response.data.msg;
-            this.errshow = true;
-            }); 
+                var errmsg = error.response.data.msg;
+                if(errmsg){
+                this.errmsg = error.response.data.msg;
+                }else{
+                this.errmsg = "用户名或者密码错误";               
+                }
+                this.errshow = true;
+            });
         }
         }
 }
@@ -93,7 +97,7 @@ color: rgb(63, 67, 68);
 }
 .login_form .error_tip{
 position:absolute;
-font-size:12px;
+font-size:10px;
 color:#f00;
 bottom:90px;
 left:50%;

@@ -5,10 +5,10 @@
     <h1 class="register_title">用户注册</h1>
     <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
     <div class="error_tip"><p v-if="username_errshow">{{ username_errmsg }}</p></div>
-    <input type="password" placeholder="密码" class="input_txt" v-model="password1" @blur="checkPassword">
-    <div class="error_tip"></div>
-    <input type="password" placeholder="确认密码" class="input_txt" v-model="password2" @blur="checkPassword">
-    <div class="error_tip"><p v-if="password_errshow">{{ password_errmsg }}</p></div>
+    <input type="password" placeholder="密码" class="input_txt" v-model="password1" @blur="checkPassword1">
+    <div class="error_tip"><p v-if="password_errshow1">{{ password_errmsg1 }}</p></div>
+    <input type="password" placeholder="确认密码" class="input_txt" v-model="password2" @blur="checkPassword2">
+    <div class="error_tip"><p v-if="password_errshow2">{{ password_errmsg2 }}</p></div>
     <input type="text" placeholder="邮箱" class="input_txt" v-model="email" @blur="checkEmail">
     <div class="error_tip"><p v-if="email_errshow">{{ email_errmsg }}</p></div>
     <input type="text" placeholder="验证码" class="input_txt" v-model="code" @blur="checkCode">
@@ -34,19 +34,21 @@ export default {
     },
     data(){
         return {
-            username: '',
-            password1: '',
-            password2: '',
-            email: '',
-            code: '',
-            username_errmsg: '',
-            password_errmsg: '',
-            email_errmsg: '',
-            code_errmsg: '',
-            username_errshow: false,
-            password_errshow: false,
-            email_errshow: false,
-            code_errshow: false,
+        username: '',
+        password1: '',
+        password2: '',
+        email: '',
+        code: '',
+        username_errmsg: '',
+        password_errmsg1: '',
+        password_errmsg2: '',
+        email_errmsg: '',
+        code_errmsg: '',
+        username_errshow: false,
+        password_errshow1: false,
+        password_errshow2: false,
+        email_errshow: false,
+        code_errshow: false,
         }
     },
     methods:{
@@ -77,22 +79,24 @@ export default {
         });
         },
 
-        checkPassword(){
-            this.password_errmsg = '';
-            this.password_errshow = false;
-            if((this.password1==''&this.password2!='')||(this.password1==''&this.password2=='')){
-                this.password_errmsg = "密码不能为空";
-                this.password_errshow = true;
+        checkPassword1(){
+            this.password_errmsg1 = '';
+            this.password_errshow1 = false;
+            if(this.password1==''){
+                this.password_errmsg1 = "密码不能为空";
+                this.password_errshow1 = true;
                 return;
-            }else{
-                if(this.password1!=this.password2){
-                this.password_errmsg = "两次密码不一致，请重新输入";
-                this.password_errshow = true;
-                return;
-                }
             }
         },
-
+        checkPassword2(){
+            this.password_errmsg2 = '';
+            this.password_errshow2 = false;
+            if(this.password1!=this.password2){
+                this.password_errmsg2 = "两次密码不一致，请重新输入";
+                this.password_errshow2 = true;
+                return;
+            }
+        },
         checkEmail(){
         this.email_errmsg = '';
         this.email_errshow = false;
@@ -125,7 +129,15 @@ export default {
             this.email_errshow = true;           
         });
         },
-
+        checkCode(){
+            this.code_errmsg = '';
+            this.code_errshow = false;
+            var codeReg = /^[0-9]{6}$/;
+            if(!codeReg.test(this.code)){
+                this.code_errmsg = '验证码格式错误';
+                this.code_errshow = true;
+            } 
+        },
         sendCode(){
             this.checkEmail();
             if(this.email_errshow==false){
@@ -142,23 +154,13 @@ export default {
                 })
             }
         },
-
-        checkCode(){
-            this.code_errmsg = '';
-            this.code_errshow = false;
-            var codeReg = /^[0-9]{6}$/;
-            if(!codeReg.test(this.code)){
-                this.code_errmsg = '验证码格式错误';
-                this.code_errshow = true;
-            } 
-        },
-
         fnRegister(){
             this.checkUsername();
-            this.checkPassword();
+            this.checkPassword1();
+            this.checkPassword2();
             this.checkEmail();
             this.checkCode();
-            if(this.username_errshow||this.password_errshow||this.email_errshow||this.code_errshow){
+            if(this.username_errshow||this.password_errshow1||this.password_errshow2||this.email_errshow||this.code_errshow){
                 return;
             }else{
                 this.axios.post(cons.apis + 'api/auth/',
@@ -170,7 +172,6 @@ export default {
                     code: this.code
                 })
                 .then(response=>{
-                    alert("注册成功，请登录吧！");
                     this.$router.push({path:'/login'});
                 })
                 .catch(error=>{
@@ -192,7 +193,6 @@ export default {
     top:0px;
     background: #f5f5f5;
 }
-
 .register_form{
 width: 330px;
 height: 490px;
@@ -218,21 +218,12 @@ color: rgb(63, 67, 68);
 }
 .register_form .error_tip{
 height: 20px;
-width: 298px;
+width: 278px;
 font-size: 10px;
-text-align: center;
 line-height: 20px;
 margin: auto;
 color: #f00;
 }
-/* .register_form .error_tip{
-position: absolute;
-font-size: 12px;
-color: #f00;
-bottom: 85px;
-left: 50%;
-transform: translate(-50%);
-} */
 .register_title{
 line-height: 72px;
 text-align: center;
