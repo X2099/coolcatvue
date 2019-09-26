@@ -46,6 +46,10 @@ export default {
     height: 50px;
     background: rgb(63, 67, 68);
     cursor: text;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .header a{
     text-decoration:none;

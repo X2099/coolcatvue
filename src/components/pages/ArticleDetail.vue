@@ -9,7 +9,8 @@
             :toolbarsFlag = "false"
             :editable="false"
             :scrollStyle="true"
-            :ishljs = "true" style="box-shadow: none"
+            :ishljs = "true"
+            :boxShadow = "false"
             ></mavon-editor>
     </div>
 </div>
@@ -61,8 +62,6 @@ export default {
     background: #f5f5f5;
 }
 .main_wrap .article .md{
-    /* width: 90%; */
-    /* position: absolute; */
     min-height: 600px;
     margin: 2% 20% 4% 20%;
     background: #ffffff;
