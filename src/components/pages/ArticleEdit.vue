@@ -16,22 +16,28 @@
             <div class="menu" v-show="menu_show">
                 <h1>发布文章</h1>
                 <h2>分类</h2>
+
                 <div class="categroy">
-                    <p v-for="category in category_list" :key="category">
-                        {{ category.name }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="submit" value="×" class="input_sub">
-                    </p>
+                    <label v-for="cat in category_list" :key="cat">
+                        <p type="radio" @click="selectCategory(cat.id)" :style="category==cat.id?'color:dodgerblue':''">
+                            {{ cat.name }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" value="×" class="input_sub">
+                        </p>
+                    </label>
                     <input type="text" name="tag" placeholder="添加1个分类..." autocomplete="off" class="input_txt">
                     <input type="submit" value="＋" class="input_sub" style="color:dodgerblue">
                 </div>
+
                 <h2>标签</h2>
-                <div class="tag">                   
-                    <p v-for="tag in tag_list" :key="tag">
-                        {{ tag.name }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="submit" value="×" class="input_sub">
-                    </p>
+                <div class="tag"> 
+                    <label>                  
+                        <p v-for="tag in tag_list" :key="tag" @click="selectTag(tag.id)">
+                            {{ tag.name }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" value="×" class="input_sub">
+                        </p>
+                    </label>
                     <input type="text" name="tag" placeholder="添加1个标签..." autocomplete="off" class="input_txt" v-model="tag">
                     <input type="submit" value="＋" class="input_sub" style="color:dodgerblue" @click="addTag">
                 </div>
@@ -73,7 +79,9 @@
                 category_list: [],
                 tag_list: [],
                 title: '',
+                category: '',
                 tag: '',
+                tags: [],
             }
         },
         methods: {
@@ -138,6 +146,24 @@
                 .catch(error=>{
                     alert("获取数据失败！")
                 })
+            },
+
+            // 选中分类
+            selectCategory(id){
+                this.category = id
+            },
+
+            // 选中分类
+            selectTag(id){
+                for(let i=0;i<this.tags.length;i++){
+                    if(id == this.tags[i]){
+                    alert("-");
+                    this.tags.splice(id);
+                    }else{
+                    alert("-");
+                    this.tags.push(id);
+                    }
+                }
             },
 
             // 创建文章
