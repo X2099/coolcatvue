@@ -19,24 +19,26 @@
 
                 <div class="categroy">
                     <label v-for="cat in category_list" :key="cat">
-                        <p type="radio" @click="selectCategory(cat.id)" :style="category==cat.id?'color:dodgerblue':''">
-                            {{ cat.name }}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="submit" value="×" class="input_sub">
-                        </p>
+                    <p :style="category==cat.id?'color:dodgerblue':''">
+                        <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">
+                        {{ cat.name }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" value="×" class="input_sub">
+                    </p>
                     </label>
                     <input type="text" name="tag" placeholder="添加1个分类..." autocomplete="off" class="input_txt">
                     <input type="submit" value="＋" class="input_sub" style="color:dodgerblue">
                 </div>
 
                 <h2>标签</h2>
-                <div class="tag"> 
-                    <label>                  
-                        <p v-for="tag in tag_list" :key="tag" @click="selectTag(tag.id)">
-                            {{ tag.name }}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="submit" value="×" class="input_sub">
-                        </p>
+                <div class="tag">
+                    <label v-for="tag in tag_list" :key="tag" >                                    
+                    <p :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
+                        <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
+                        {{ tag.name }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" value="×" class="input_sub">
+                    </p>
                     </label>
                     <input type="text" name="tag" placeholder="添加1个标签..." autocomplete="off" class="input_txt" v-model="tag">
                     <input type="submit" value="＋" class="input_sub" style="color:dodgerblue" @click="addTag">
@@ -148,36 +150,23 @@
                 })
             },
 
-            // 选中分类
-            selectCategory(id){
-                this.category = id
-            },
-
-            // 选中分类
-            selectTag(id){
-                for(let i=0;i<this.tags.length;i++){
-                    if(id == this.tags[i]){
-                    alert("-");
-                    this.tags.splice(id);
-                    }else{
-                    alert("-");
-                    this.tags.push(id);
-                    }
-                }
-            },
-
             // 创建文章
             createArticle(){
-                let token = localStorage.token;
+                if(this.title==''||this.body==''||this.category==''||this.tags==[]){
+                    alert("文章标题、内容、分类、标签不能为空！");
+                    return;
+                }
                 let uid = localStorage.uid;
-                this.axios.post(cons.apis + 'api/articles/',
-                    {
+                let article_form = {
                         title: this.title,
                         body: this.body,
                         category: 1,
                         tags: [1, 2],
                         author: uid
-                    },
+                    }
+                let token = localStorage.token;
+                this.axios.post(cons.apis + 'api/articles/',
+                    article_form,
                     {
                     headers:{
                     'authorization': 'JWT ' + token,
@@ -185,7 +174,7 @@
                     responseType: 'json'
                 })
                 .then(response=>{
-                    alert("创建文章成功！");
+                    this.$router.push({path:'/articles'});
                 })
                 .catch(error=>{
                     alert("创建文章失败！")
