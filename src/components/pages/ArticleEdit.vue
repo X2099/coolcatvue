@@ -11,37 +11,63 @@
             <label class="button">保存草稿</label>
             <label class="button">添加封面</label>
             <label class="button">富文本编辑</label>
-            <label class="button" @click="menu_show=!menu_show;getCategories();getTags()" style="color:dodgerblue;font-size:16px">发布</label>     
+            <label class="button" @click="menu_show=!menu_show;getCategories();getTags()" style="color:dodgerblue;font-size:16px">{{ menu_show?'▾ ':'▴ ' }}发布</label>     
 
             <div class="menu" v-show="menu_show">
                 <h1>发布文章</h1>
                 <h2>分类</h2>
 
-                <div class="categroy">
-                    <label v-for="cat in category_list" :key="cat">
-                    <p :style="category==cat.id?'color:dodgerblue':''">
-                        <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">
-                        {{ cat.name }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="submit" value="×" class="input_sub">
-                    </p>
-                    </label>
-                    <input type="text" name="tag" placeholder="添加1个分类..." autocomplete="off" class="input_txt">
-                    <input type="submit" value="＋" class="input_sub" style="color:dodgerblue">
+                <div class="category">
+                    <div class="empty" v-if="category_list.length<=0">
+                        <p>您还未添加任何分类!</p>
+                    </div>
+                    <div v-else>
+                        <div v-for="cat in category_list" :key="cat" class="parent">
+                            <label :style="category==cat.id?'color:dodgerblue':''">
+                            <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                         
+                            </label>
+                            <div v-for="sub_cat in cat.subs" :key="sub_cat"  class="sub">
+                            <label :style="category==sub_cat.id?'color:dodgerblue':''">
+                            <input type="radio" v-model="category" :value="sub_cat.id" style="visibility:hidden;width:0">{{ sub_cat.name }}
+                            </label>
+                            </div>
+                        </div>    
+                    </div>                     
                 </div>
+
+                <div class="input_cat">
+                    <select name="abc" v-model="parent">
+                        <option seleted ="seleted" value=''>选择分类</option>
+                        <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
+                    </select>
+                    <input type="text" placeholder="添加1个分类..." autocomplete="off" class="input_txt">
+                    <input type="submit" value="+" class="input_sub">
+                    <!-- <input type="submit" :value="show?'添加分类 ▼':'添加分类 ▲'" @click="show=!show"> -->
+                </div> 
+                <div :style="show?'':'display:none'" class="add_category">
+                    <input type="radio"  :value=none v-model="parent"><label>----</label>
+                    <div v-for="cat in category_list" :key="cat">
+                        <input type="radio" :value="cat.id" v-model="parent">{{ cat.name }}
+                    </div>
+                    <input type="text" placeholder="添加1个分类..." autocomplete="off" class="input_txt">
+                    <input type="submit" value="+" class="input_sub">
+                </div> 
 
                 <h2>标签</h2>
                 <div class="tag">
-                    <label v-for="tag in tag_list" :key="tag" >                                    
-                    <p :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
-                        <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
-                        {{ tag.name }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="submit" value="×" class="input_sub">
-                    </p>
-                    </label>
+                    <div class="empty" v-if="tag_list.length<=0">
+                        <p>您还未添加任何标签!</p>
+                    </div>
+                    <div v-else>
+                        <div v-for="tag in tag_list" :key="tag" >                                    
+                            <label :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
+                                <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
+                                {{ tag.name }}
+                            </label>
+                        </div>
+                    </div>
                     <input type="text" name="tag" placeholder="添加1个标签..." autocomplete="off" class="input_txt" v-model="tag">
-                    <input type="submit" value="＋" class="input_sub" style="color:dodgerblue" @click="addTag">
+                    <input type="submit" value="+" class="input_sub" @click="addTag">
                 </div>
                 <div class="submit">
                     <button @click="createArticle">确认并发布</button>
@@ -84,6 +110,8 @@
                 category: '',
                 tag: '',
                 tags: [],
+                parent: '',
+                show: false,
             }
         },
         methods: {
@@ -116,6 +144,9 @@
                     return;
                 }
                 let token = localStorage.token;
+                if(!token){
+                    return;
+                }
                 this.axios.get(cons.apis + 'api/categories/',{
                     headers:{
                     'Authorization': 'JWT ' + token
@@ -136,6 +167,9 @@
                     return;
                 }
                 let token = localStorage.token;
+                if(!token){
+                    return;
+                }
                 this.axios.get(cons.apis + 'api/tags/',{
                     headers:{
                     'Authorization': 'JWT ' + token
@@ -272,42 +306,55 @@
     float: left;
     top: 110px;
     right: 44px;
-    width: 14%;
+    width: 15%;
     color: gray;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
+
 .edit_article .sub_menu .menu h1{
-    margin: 5% 5%;
+    margin: 5% 10%;
     font-size: 18px;
 }
 .edit_article .sub_menu .menu h2{
-    margin: 5% 10%;
+    margin: 5% 15%;
     font-size: 16px;
 }
-.edit_article .sub_menu .menu .categroy{
-    margin: 5% 10%;
+.edit_article .sub_menu .menu .category{
+    margin: 5% 15%;
+    font-size: 13px;
 }
 .edit_article .sub_menu .menu .tag{
-    margin: 5% 10%;
+    margin: 5% 15%;
+    font-size: 13px;
 }
+.edit_article .sub_menu .menu .input_cat{
+    width: 35%; 
+    font-size: 10px;
+    margin-left: 15%;
+    /* color: dodgerblue; */
+    /* background: darkblue; */
+}
+.menu .input_cat input{
+    /* width: 35%;  */
+    font-size: 10px;
+    /* margin: 5% 0%; */
+    /* padding-left: 0; */
 
-
+    /* color: dodgerblue; */
+}
 .menu input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: rgb(173, 171, 171);
   font-size: 12px;
 }
-
 .tag input:-moz-placeholder, textarea:-moz-placeholder {
   color: rgb(173, 171, 171);
   font-size: 10px;
 }
-
 .tag input::-moz-placeholder, textarea::-moz-placeholder {
   color: rgb(173, 171, 171);
   font-size: 10px;
 }
-
 .tag input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: rgb(173, 171, 171);
   font-size: 10px;
@@ -326,7 +373,7 @@
 .menu .input_sub{
     font-size: 14px;
     text-align: center;
-    margin-right: 10%;
+    margin-left: 5%;
     padding-bottom: 2%;
     border: none;
     outline: none;
@@ -334,11 +381,42 @@
     background: #fbfbfb;
     cursor: pointer;
 }
-
-.edit_article .sub_menu .menu p{
-    font-size: 12px;
-    margin: 5% auto;
+.menu .category .parent{
+    min-width: 35%;
+    margin: 3% auto;
 }
+.menu .category .parent label{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu .category .parent label:hover{
+    color: dodgerblue;
+}
+
+.menu .category .sub{
+    min-width: 35%;
+    margin: 3% auto 3% 5%;
+}
+.menu .category .sub label{
+    font-size: 13px;
+    font-weight: normal;
+}
+.menu .tag .empty{
+    margin-bottom: 5%;
+}
+.menu .tag label{
+    font-size: 12px;
+    min-width: 35%;
+    float: left;
+    margin: auto 5% 5% auto;
+    text-align: center;
+    border: 1px solid rgb(202, 195, 195);
+}
+.menu .tag label:hover{
+    color: dodgerblue;
+}
+
 .edit_article .sub_menu .menu .submit{
     width: 100%;
     margin: 5% auto;
@@ -359,7 +437,6 @@
     float: right;
     position: relative;
     z-index: 1;
-    /* top: 110px; */
     width: 100%;
     height: 100%;
     margin-bottom: 3%;
