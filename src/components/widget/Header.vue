@@ -4,7 +4,7 @@
         <div class="right" v-if="username">
             <label @click="fnLogout">注销</label>       
             <label class="user">欢迎你，{{ username }}</label>
-            <img src="../../assets/imgs/lu.png"/>           
+            <img src="../../assets/imgs/avatar.png"/>           
         </div>
         <div class="right" v-else>        
             <label><router-link to="/register">注册</router-link></label>
