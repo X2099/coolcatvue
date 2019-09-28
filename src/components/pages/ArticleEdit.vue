@@ -5,13 +5,26 @@
             <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
         </div>
 
+        
+
         <div class="sub_menu">
             <div class="button">保存草稿</div>
             <div class="button">添加封面</div>
             <div class="button">富文本编辑</div>
-            <div class="button" @click="menu_show=!menu_show;getCategories();getTags()" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</div>
-            <div class="button" v-if="username"><img src="../../assets/imgs/avatar.png"/></div>
-            <div class="menu" v-show="menu_show">
+            <div class="button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</div>
+            <div class="button" v-if="username" >
+                <img src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>
+            </div>
+
+            <div class="usermenu" v-if="usermenu_show">
+                <div class="option">我的文章</div>
+                <div class="option">我的草稿</div>
+                <div class="option">设置</div>
+                <div class="option"><router-link to='/'>我的主页</router-link></div>
+                <div class="option">退出</div>
+            </div>
+
+            <div class="menu" v-if="menu_show">
                 <h1>发布文章</h1>
                 <h2>分类</h2>
                 <div class="category">
@@ -35,7 +48,7 @@
                 <div class="input_cat">
                     <label>所属：</label>
                     <select v-model="parent" :style="parent?'color:dodgerblue':''">
-                    <option seleted ="seleted" value=''>一一一一</option>
+                    <option seleted ="seleted" value=''>————</option>
                     <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
                     </select>      
                 </div>
@@ -89,6 +102,10 @@
             Header,
             mavonEditor,
         },
+        mounted(){
+            this.getCategories();
+            this.getTags();
+        },
         data() {
             return {
                 username: localStorage.username, // 登录用户
@@ -97,6 +114,7 @@
                 html:'', // ？
                 configs: {}, // ？
                 menu_show: false, // 是否显示发布菜单
+                usermenu_show: false, // 是否显示用户菜单
                 category_list: [], // 分类数据
                 tag_list: [], // 标签数据
                 category: '', // 文章分类
@@ -132,9 +150,6 @@
             },
             // 获取文章分类
             getCategories(){
-                if(this.menu_show==false){
-                    return;
-                }
                 let token = localStorage.token;
                 if(!token){
                     return;
@@ -155,9 +170,6 @@
             
             // 获取文章标签
             getTags(){
-                if(this.menu_show==false){
-                    return;
-                }
                 let token = localStorage.token;
                 if(!token){
                     return;
@@ -274,14 +286,11 @@
                 })
             },     
         },
-        mounted(){
-        }
     }
 </script>
 
 <style scoped>
 .main_wrap{
-    overflow-y: scroll;
     position:absolute;
     width:100%;
     height:100%;
@@ -340,6 +349,29 @@
     filter: alpha=(opacity(80));
     }
 
+.edit_article .sub_menu .usermenu{
+    position: absolute;
+    z-index: 3;
+    top: 60px;
+    right: 0;
+    width: 10%;
+    color: gray;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 3%;
+}
+.usermenu .option{
+    /* float: left; */
+    margin: 20% 10%;
+    /* width: 15%; */
+    /* line-height: 60px; */
+    font-size: 16px;
+    color: rgb(138, 144, 145);
+    /* text-align: center; */
+    cursor: pointer;
+}
+
 .edit_article .sub_menu .menu{
     position: absolute;
     z-index: 2;
@@ -369,7 +401,7 @@
     font-size: 13px;
 }
 .edit_article .sub_menu .menu .input_cat{
-    font-size: 12px;
+    font-size: 14px;
     margin: 5% auto 3% 15%;
     color: rgb(173, 171, 171);
 }
@@ -377,6 +409,7 @@
     outline:none;
     font-size: 12px;
     color: rgb(173, 171, 171);
+    height: 20px;
 }
 .menu .input_cat option{
     color: rgb(173, 171, 171);
