@@ -1,5 +1,5 @@
 <template>
-<div class="main_wrap">
+<div class="main_wrap" @click="hideMenu">
     <div class="edit_article">        
         <div class="title">
             <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
@@ -11,12 +11,14 @@
             <div class="button">保存草稿</div>
             <div class="button">添加封面</div>
             <div class="button">富文本编辑</div>
-            <div class="button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</div>
+            <div id="pub_button" class="button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">
+                {{ menu_show?'▴ ':'▾ ' }}发布
+            </div>
             <div class="button" v-if="username" >
-                <img src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>
+                <img src="../../assets/imgs/avatar.png" id="user_img" @click="usermenu_show=!usermenu_show"/>
             </div>
 
-            <div class="usermenu" v-if="usermenu_show">
+            <div id="user_menu" class="usermenu" v-show="usermenu_show">
                 <div class="option">我的文章</div>
                 <div class="option">我的草稿</div>
                 <div class="option">设置</div>
@@ -24,7 +26,7 @@
                 <div class="option">退出</div>
             </div>
 
-            <div class="menu" v-if="menu_show">
+            <div id="pub_menu" class="menu" v-show="menu_show">
                 <h1>发布文章</h1>
                 <h2>分类</h2>
                 <div class="category">
@@ -147,6 +149,27 @@
                 console.log(this.content);
                 console.log(this.html);
                 this.$message.success('提交成功，已打印至控制台！');
+            },
+            // 点击外部区域隐藏发布菜单和用户菜单
+            hideMenu(event){
+                let elm1 = document.getElementById("pub_button");
+                let elm2 = document.getElementById("pub_menu");
+                let elm3 = document.getElementById("user_img");
+                let elm4 = document.getElementById("user_menu");
+                let out_elm1 = !elm1.contains(event.target);
+                let out_elm2 = !elm2.contains(event.target);
+                let out_elm3 = !elm3.contains(event.target);
+                let out_elm4 = !elm4.contains(event.target);
+                if(elm1 && elm2){
+                    if(out_elm1 && out_elm2){
+                        this.menu_show = false;
+                    }
+                }
+                if(elm3 && elm4){
+                    if(out_elm3 && out_elm4){
+                        this.usermenu_show = false;
+                    }
+                }
             },
             // 获取文章分类
             getCategories(){
