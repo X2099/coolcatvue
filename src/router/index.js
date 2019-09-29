@@ -5,6 +5,7 @@ import Register from '@/components/pages/Register'
 import Login from '@/components/pages/Login'
 import ArticleEdit from '@/components/pages/ArticleEdit'
 import ArticleDetail from '@/components/pages/ArticleDetail'
+import MyArticles from '@/components/pages/MyArticles'
 
 Vue.use(Router)
 
@@ -33,8 +34,8 @@ export default new Router({
     },
     {
       path: '/articles',
-      name: 'ArticleDetail',
-      component: ArticleDetail
+      name: 'MyArticles',
+      component: MyArticles
     }
   ]
 })

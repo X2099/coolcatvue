@@ -1,6 +1,6 @@
 <template>
 <div class="main_wrap" @click="hideMenu">
-    <div class="edit_article">        
+    <div class="edit_article"  style="position:absolute;width:100%;height:100%">        
         <div class="title">
             <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
         </div>
@@ -8,18 +8,26 @@
         
 
         <div class="sub_menu">
-            <div class="button">保存草稿</div>
-            <div class="button">添加封面</div>
-            <div class="button">富文本编辑</div>
-            <div id="pub_button" class="button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">
-                {{ menu_show?'▴ ':'▾ ' }}发布
+            <div class="button">
+                <label><p>保存草稿</p></label>
             </div>
-            <div class="button" v-if="username" >
+            <div class="button">
+                <label><p>添加封面</p></label>
+            </div>
+            <div class="button">
+                <label><p>富文本编辑</p></label>
+            </div>
+            <div class="button">
+                <label>
+                <p id="pub_button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</p>
+                </label>
+            </div>
+            <div class="button" v-if="username">
                 <img src="../../assets/imgs/avatar.png" id="user_img" @click="usermenu_show=!usermenu_show"/>
             </div>
 
             <div id="user_menu" class="usermenu" v-show="usermenu_show">
-                <div class="option">我的文章</div>
+                <div class="option"><label>我的文章</label></div>
                 <div class="option">我的草稿</div>
                 <div class="option">设置</div>
                 <div class="option"><router-link to='/'>我的主页</router-link></div>
@@ -36,21 +44,19 @@
                     <div v-else>
                         <div v-for="cat in category_list" :key="cat" class="parent">
                             <label :style="category==cat.id?'color:dodgerblue':''">
-                            <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                         
+                            <input type="radio" name="category" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                         
                             </label>
-                            <div v-for="sub_cat in cat.subs" :key="sub_cat"  class="sub">
-                            <label :style="category==sub_cat.id?'color:dodgerblue':''">
-                            <input type="radio" v-model="category" :value="sub_cat.id" style="visibility:hidden;width:0">{{ sub_cat.name }}
-                            </label>
-                            </div>
+                            <select v-model="category" class="sub" v-if="cat.subs.length > 0">
+                            <option seleted ="seleted" value=''>选择子分类</option>
+                            <option :value="sub_cat.id" v-for="sub_cat in cat.subs" :key="sub_cat">{{ sub_cat.name }}</option>
+                            </select> 
                         </div>    
                     </div>                     
                 </div>
 
                 <div class="input_cat">
-                    <label>所属：</label>
                     <select v-model="parent" :style="parent?'color:dodgerblue':''">
-                    <option seleted ="seleted" value=''>————</option>
+                    <option seleted ="seleted" value=''>所属分类</option>
                     <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
                     </select>      
                 </div>
@@ -80,11 +86,9 @@
                 </div>
             </div>
 
-        </div>
-
-        
+        </div>       
         <div class="body">               
-        <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 700px"/>                        
+        <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                        
         </div>
     </div>   
 </div>   
@@ -321,48 +325,55 @@
 }
 .edit_article .title{
     width: 70%;
-    height: 60px;
+    height: 6%;
     float: left; 
     background: #ffffff;
 }
 .edit_article .title .input_txt{
     float: left;
     width: 96%;
-    height: 60px;
+    height: 100%;
     margin-left: 2%;
     font-size: 24px;
-    line-height: 60px;
+    line-height: 100%;
     font-weight: bold;
     border:none;
     outline:none;
 }
 .edit_article .sub_menu{
     float: left;
-    display:block;
     width: 30%;
-    height: 60px;
+    height: 6%;
     background: #ffffff;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-
 .edit_article .sub_menu .button{
+    display: table;
+    overflow: hidden;
     float: left;
     margin-left: 5%;
     width: 15%;
-    line-height: 60px;
+    height: 100%;
     font-size: 14px;
     color: rgb(138, 144, 145);
     text-align: center;
-    cursor: pointer;
-    /* background: burlywood; */
 }
-.sub_menu img{
-    height: 40px;
+
+.sub_menu .button label{
+    vertical-align: middle;
+    display: table-cell;
+}
+.sub_menu .button p{
+    cursor: pointer;
+}
+.sub_menu .button img{
     border-radius: 50%;
-    margin: 10px auto;
+    line-height: 70%;
+    margin-top: 11%;
+    height: 70%;
     background: #ccc;
     opacity: 1;
     filter: alpha=(opacity(100));
@@ -371,11 +382,10 @@
     opacity: 0.8;
     filter: alpha=(opacity(80));
     }
-
 .edit_article .sub_menu .usermenu{
     position: absolute;
     z-index: 3;
-    top: 60px;
+    top: 6%;
     right: 0;
     width: 10%;
     color: gray;
@@ -384,24 +394,26 @@
     border-right: none;
     border-radius: 3%;
 }
+
 .usermenu .option{
-    /* float: left; */
     margin: 20% 10%;
-    /* width: 15%; */
-    /* line-height: 60px; */
     font-size: 16px;
     color: rgb(138, 144, 145);
-    /* text-align: center; */
     cursor: pointer;
+}
+
+.usermenu .option a{
+    color: rgb(138, 144, 145);
+    text-decoration: none;
 }
 
 .edit_article .sub_menu .menu{
     position: absolute;
     z-index: 2;
     float: left;
-    top: 60px;
+    top: 6%;
     right: 4.5%;
-    width: 24%;
+    width: 20%;
     color: gray;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -416,11 +428,11 @@
     font-size: 16px;
 }
 .edit_article .sub_menu .menu .category{
-    margin: 5% 15%;
+    margin: 5% 10% 5% 15%;
     font-size: 13px;
 }
 .edit_article .sub_menu .menu .tag{
-    margin: 5% 15%;
+    margin: 5% 10% 5% 15%;
     font-size: 13px;
 }
 .edit_article .sub_menu .menu .input_cat{
@@ -428,11 +440,12 @@
     margin: 5% auto 3% 15%;
     color: rgb(173, 171, 171);
 }
-.menu .input_cat select{
-    outline:none;
+.menu .input_cat select{  
+    outline: none;
     font-size: 12px;
+    font-family: 'simsun';
     color: rgb(173, 171, 171);
-    height: 20px;
+    line-height: 20px;
 }
 .menu .input_cat option{
     color: rgb(173, 171, 171);
@@ -483,25 +496,29 @@
 }
 .menu .category .parent label{
     font-size: 14px;
-    font-weight: bold;
 }
 .menu .category .parent label:hover{
     color: dodgerblue;
 }
 .menu .category .sub{
-    min-width: 35%;
-    margin: 3% auto 3% 5%;
-}
-.menu .category .sub label{
-    font-size: 13px;
-    font-weight: normal;
+    /* width: 25%; */
+    margin: 1% 3%;
+    border: none;
+    border-bottom: 1px solid gray;
+    background: none;
+    font-size: 12px;
+    font-family: 'simsun';
+    text-align: center;
+    color: gray;
+    outline: none;
+    /* appearance: none; */
 }
 .menu .tag .empty{
     margin-bottom: 5%;
 }
 .menu .tag label{
     font-size: 12px;
-    min-width: 35%;
+    min-width: 26%;
     float: left;
     margin: auto 5% 5% auto;
     text-align: center;
@@ -531,7 +548,6 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 100%;
-    margin-bottom: 3%;
+    height: 94%;
 }
 </style>

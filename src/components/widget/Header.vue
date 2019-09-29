@@ -52,7 +52,7 @@ export default {
     user-select: none;
 }
 .header a{
-    text-decoration:none;
+    text-decoration: none;
     color: #fff;
 }
 .header img{

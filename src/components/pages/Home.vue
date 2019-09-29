@@ -2,9 +2,9 @@
     <div class="main_wrap">
         <Header></Header>
         <div class="home">
-            <div v-for="article in article_list" :key="article" class="article">
+            <!-- <div v-for="article in article_list" :key="article" class="article">
                 <h4>{{ article.title }}</h4>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
