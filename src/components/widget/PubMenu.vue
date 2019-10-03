@@ -1,74 +1,81 @@
 <template>
 <div id="pub_menu" class="main_wrap">
     <h1>发布文章</h1>
-    <h2>分类</h2>
     <div class="category">
+        <h2>分类</h2>
         <div class="empty" v-if="category_list.length<=0">
             <p>您还未添加任何分类!</p>
         </div>
-        <div v-else>
-            <div v-for="cat in category_list" :key="cat" class="parent">
-                <label :style="category==cat.id?'color:dodgerblue':''">
-                <input type="radio" name="category" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                         
+        <div v-else class="nonempty">
+            <div v-for="cat in category_list" :key="cat">
+                <label :style="category==cat.id?'color:dodgerblue':''" class="parent">
+                <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                                       
                 </label>
-            <select v-model="category" class="sub" v-if="cat.subs.length > 0">
-                <option seleted ="seleted" value=''>选择子分类</option>
-                <option :value="sub_cat.id" v-for="sub_cat in cat.subs" :key="sub_cat">{{ sub_cat.name }}</option>
-            </select> 
-            </div>    
+                <label v-for="sub_cat in cat.subs" :key="sub_cat" :style="category==sub_cat.id?'color:dodgerblue':''" class="sub">
+                <input type="radio" v-model="category" :value="sub_cat.id" style="visibility:hidden;width:0">{{ sub_cat.name }}
+                </label>
+            </div>
+        </div>
+        <div class="add_category">
+            <select v-model="parent" :style="parent?'color:dodgerblue':''">
+                <option seleted ="seleted" value=''>所属分类</option>
+                <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
+            </select>
+            <input type="text" placeholder="添加1个分类..." autocomplete="off" class="add_input" v-model="cat">
+            <input type="submit" value="☑" class="add_submit" @click="addCategory">
         </div>                     
-    </div>
-    <div class="input_cat">
-        <select v-model="parent" :style="parent?'color:dodgerblue':''">
-        <option seleted ="seleted" value=''>所属分类</option>
-        <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
-        </select>      
-    </div>
-    <div class="add_cat">
-        <input type="text" placeholder="添加1个分类..." autocomplete="off" class="input_txt" v-model="cat">
-        <input type="submit" value="+" class="input_sub" @click="addCategory">
-    </div>
-
-    <h2>标签</h2>
+    </div>       
     <div class="tag">
-    <div class="empty" v-if="tag_list.length<=0">
-        <p>您还未添加任何标签!</p>
-    </div>
-    <div v-else>
-        <div v-for="tag in tag_list" :key="tag" >                                    
+        <h2>标签</h2>
+        <div class="empty" v-if="tag_list.length<=0">
+            <p>您还未添加任何标签!</p>
+        </div>
+        <div v-else>
+            <div v-for="tag in tag_list" :key="tag" >                                    
             <label :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
             <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
             {{ tag.name }}
             </label>
+            </div>
+        </div>
+        <div class="add_tag">
+            <input type="text" placeholder="添加1个标签..." autocomplete="off" class="add_input" v-model="tag">
+            <input type="submit" value="☑" class="add_submit" @click="addTag">
         </div>
     </div>
-        <input type="text" placeholder="添加1个标签..." autocomplete="off" class="input_txt" v-model="tag">
-        <input type="submit" value="+" class="input_sub" @click="addTag">
-    </div>
     <div class="submit">
-        <button @click="createArticle">确认并发布</button>
+    <button @click="createArticle">确认并发布</button>
     </div>
 </div>
 </template>
 
-
 <script>
 import cons from '@/components/constent'
+let token = localStorage.token;
+let uid = localStorage.uid;
 
 export default {
-    data() {
+    name: "",
+    props: [],
+    data(){
         return{
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
+            category: '', // 文章分类
+            tags: [], // 文章标签
             parent: '', // 添加分类的父级分类
             cat: '', // 添加分类名称
-            tag: '', // 添加标签的名称
+            tag: '', // 添加标签的名称           
         }
     },
-    methods: {
+    mounted(){
+        this.getCategories();
+        this.getTags();
+        this.upload();
+    }, 
+    methods:{
         // 获取文章分类
             getCategories(){
-                let token = localStorage.token;
                 if(!token){
                     return;
                 }
@@ -82,13 +89,11 @@ export default {
                     this.category_list = response.data;
                 })
                 .catch(error=>{
-                    alert("获取数据失败！")
+                    alert("获取分类数据失败！")
                 })
-            },
-            
+            },          
             // 获取文章标签
             getTags(){
-                let token = localStorage.token;
                 if(!token){
                     return;
                 }
@@ -98,11 +103,12 @@ export default {
                 },
                 responseType: 'json'
                 })
+                
                 .then(response=>{
                     this.tag_list = response.data;
                 })
                 .catch(error=>{
-                    alert("获取数据失败！")
+                    alert("获取标签数据失败");
                 })
             },
 
@@ -115,7 +121,6 @@ export default {
                     alert("分类名称最大长度为40个字符，请重新输入！");
                     return;
                 }
-                let uid = localStorage.uid;
                 let category_form = {
                     name: this.cat,
                     owner: uid
@@ -123,7 +128,6 @@ export default {
                 if(this.parent!=''){
                     category_form.parent = this.parent;
                 }
-                let token = localStorage.token;
                 this.axios.post(cons.apis + 'api/categories/',
                     category_form,
                     {
@@ -141,7 +145,6 @@ export default {
                     alert("添加标签失败！")
                 })
             },
-
             // 创建标签
             addTag(){
                 if(this.tag==''){
@@ -151,13 +154,12 @@ export default {
                     alert("标签名称最大长度为40个字符，请重新输入！");
                     return;
                 }
-                let token = localStorage.token;
-                let uid = localStorage.uid;
-                this.axios.post(cons.apis + 'api/tags/',
-                    {
+                let tag_form = {
                     name: this.tag,
                     owner: uid
-                    },
+                }
+                this.axios.post(cons.apis + 'api/tags/',
+                    tag_form,
                     {
                     headers:{
                     'authorization': 'JWT ' + token,
@@ -171,150 +173,160 @@ export default {
                 .catch(error=>{
                     alert("添加标签失败！")
                 })
-            },     
+            },
+             // 创建文章
+            createArticle(){
+                if(this.title==''||this.body==''||this.category==''||this.tags==[]){
+                    alert("文章标题、内容、分类、标签不能为空！");
+                    return;
+                }
+                let article_form = {
+                        title: this.title,
+                        body: this.body,
+                        category: 1,
+                        tags: [1, 2],
+                        author: uid
+                    }
+                this.axios.post(cons.apis + 'api/articles/',
+                    article_form,
+                    {
+                    headers:{
+                    'authorization': 'JWT ' + token,
+                    },
+                    responseType: 'json'
+                })
+                .then(response=>{
+                    this.$router.push({path:'/articles'});
+                })
+                .catch(error=>{
+                    alert("创建文章失败！")
+                })
+            },
+            // 数据传递
+            upload(){
+                return this.$emit('upload', this.category_list);
+            }    
     },
-    mounted(){
-            this.getCategories();
-            this.getTags();
-        },
 }
 </script>
 
 <style scoped>
 .main_wrap{
-    position: absolute;
     z-index: 2;
     float: left;
     top: 6%;
     right: 4.5%;
-    width: 20%;
-    color: gray;
+    width: 25%;
+    height: 90%;
+    color: slategray;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
-
 h1{
-    margin: 5% 10%;
+    margin: 6% auto auto 10%;
     font-size: 18px;
 }
+.category, .tag{
+    margin: 5% 10% auto 10%;
+    font-size: 13px;
+}
 h2{
-    margin: 5% 15%;
+    margin: 5% auto;
     font-size: 16px;
+    font-weight: 500;
 }
-.category{
-    margin: 5% 10% 5% 15%;
-    font-size: 13px;
-}
-.tag{
-    margin: 5% 10% 5% 15%;
-    font-size: 13px;
-}
-.input_cat{
-    font-size: 14px;
-    margin: 5% auto 3% 15%;
-    color: rgb(173, 171, 171);
-}
-.input_cat select{  
-    outline: none;
-    font-size: 12px;
-    font-family: 'simsun';
-    color: rgb(173, 171, 171);
-    line-height: 20px;
-}
-.input_cat option{
-    color: rgb(173, 171, 171);
-}
-.add_cat{
-    margin: auto 15%;
+.empty{
+    margin: 5% auto;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: rgb(173, 171, 171);
   font-size: 12px;
 }
-.tag input:-moz-placeholder, textarea:-moz-placeholder {
-  color: rgb(173, 171, 171);
-  font-size: 10px;
+.add_category, .add_tag{
+    width: 100%;
 }
-.tag input::-moz-placeholder, textarea::-moz-placeholder {
-  color: rgb(173, 171, 171);
-  font-size: 10px;
+.add_category select{
+    margin-bottom: 1%; 
+    outline: none;
+    font-size: 12px;
+    font-family: 'simsun';
+    height: 22px;
+    color: slategray;
 }
-.tag input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: rgb(173, 171, 171);
-  font-size: 10px;
+.add_category option{
+    color: slategray;
 }
-.input_txt{
-    width: 70%;
+.add_input{
+    width: 90%;
     font-size: 12px;
     padding-bottom: 2%;
     border: none;
     outline: none;
-    color: gray;
+    color: slategray;
     background: #fbfbfb;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid slategray;
 }
-.input_sub{
+.add_submit{
     font-size: 14px;
-    text-align: center;
-    margin-left: 5%;
-    padding-bottom: 2%;
     border: none;
     outline: none;
-    color: rgb(202, 195, 195);
+    color: dodgerblue;
     background: #fbfbfb;
     cursor: pointer;
 }
+.nonempty{
+    margin-bottom: 3%;
+    float: left;
+}
 .category .parent{
-    min-width: 35%;
-    margin: 3% auto;
-}
-.category .parent label{
-    font-size: 14px;
-}
-.category .parent label:hover{
-    color: dodgerblue;
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 1%;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
 }
 .category .sub{
-    /* width: 25%; */
-    margin: 1% 3%;
-    border: none;
-    border-bottom: 1px solid gray;
-    background: none;
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 1%;
     font-size: 12px;
-    font-family: 'simsun';
-    text-align: center;
-    color: gray;
-    outline: none;
-    /* appearance: none; */
+    cursor: pointer;
 }
-.tag .empty{
-    margin-bottom: 5%;
+.category .parent:hover{
+    color: dodgerblue;
+}
+.category .sub:hover{
+    color: dodgerblue;
 }
 .tag label{
     font-size: 12px;
     min-width: 26%;
     float: left;
-    margin: auto 5% 5% auto;
+    margin: auto 5% 1% auto;
     text-align: center;
+    cursor: pointer;
     border: 1px solid rgb(202, 195, 195);
 }
 .tag label:hover{
     color: dodgerblue;
 }
 .submit{
-    width: 100%;
-    margin: 5% auto;
+    margin: 6% 10% 8% 10%;
     font-size: 16px;
     text-align: center;
 }
 .submit button{
-    margin: 4% auto;
     text-align: center;
     padding: 1% 8%;
     color: dodgerblue;
     font-size: 14px;
     background: none;
     border: 1px solid dodgerblue;
-    outline: none; 
+    outline: none;
+    cursor: pointer; 
 }
 </style>
