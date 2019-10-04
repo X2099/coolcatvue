@@ -46,6 +46,10 @@
     <div class="submit">
     <button @click="createArticle">确认并发布</button>
     </div>
+
+    <div class="error">
+        <p v-for="errmsg in error_list" :key="errmsg">{{ errmsg }}</p>
+    </div>
 </div>
 </template>
 
@@ -53,6 +57,9 @@
 import cons from '@/components/constent'
 let token = localStorage.token;
 let uid = localStorage.uid;
+
+setInterval(()=>{this.test}, 1000);
+
 
 export default {
     name: "",
@@ -65,13 +72,16 @@ export default {
             tags: [], // 文章标签
             parent: '', // 添加分类的父级分类
             cat: '', // 添加分类名称
-            tag: '', // 添加标签的名称           
+            tag: '', // 添加标签的名称
+            error_list: [], // 错误信息
+            timer: null, // 清除错误信息定时器   
         }
     },
     mounted(){
         this.getCategories();
         this.getTags();
         this.upload();
+        // this.setTimer();
     }, 
     methods:{
         // 获取文章分类
@@ -89,7 +99,8 @@ export default {
                     this.category_list = response.data;
                 })
                 .catch(error=>{
-                    alert("获取分类数据失败！")
+                    this.error_list.push("获取分类数据失败，请刷新重试");
+                    this.clearErrmsg();
                 })
             },          
             // 获取文章标签
@@ -108,7 +119,8 @@ export default {
                     this.tag_list = response.data;
                 })
                 .catch(error=>{
-                    alert("获取标签数据失败");
+                    this.error_list.push("获取标签数据失败，请刷新重试");
+                    this.clearErrmsg();
                 })
             },
 
@@ -118,7 +130,8 @@ export default {
                     return;
                 }
                 if(this.cat.length > 40){
-                    alert("分类名称最大长度为40个字符，请重新输入！");
+                    this.error_list.push("分类名称最大长度为40个字符，请重新输入");
+                    this.clearErrmsg();
                     return;
                 }
                 let category_form = {
@@ -142,7 +155,8 @@ export default {
                     this.getCategories();
                 })
                 .catch(error=>{
-                    alert("添加标签失败！")
+                    this.error_list.push("添加分类失败");
+                    this.clearErrmsg();
                 })
             },
             // 创建标签
@@ -151,7 +165,8 @@ export default {
                     return;
                 }
                 if(this.tag.length > 40){
-                    alert("标签名称最大长度为40个字符，请重新输入！");
+                    this.error_list.push("标签名称最大长度为40个字符，请重新输入");
+                    this.clearErrmsg();
                     return;
                 }
                 let tag_form = {
@@ -171,13 +186,25 @@ export default {
                     this.getTags();
                 })
                 .catch(error=>{
-                    alert("添加标签失败！")
+                    this.error_list.push("添加标签失败");
+                    this.clearErrmsg();
                 })
             },
              // 创建文章
             createArticle(){
-                if(this.title==''||this.body==''||this.category==''||this.tags==[]){
-                    alert("文章标题、内容、分类、标签不能为空！");
+                if(this.title==''){
+                    this.error_list.push("文章标题不能为空");
+                    this.clearErrmsg();
+                    return;
+                }
+                if(this.body==''){
+                    this.error_list.push("文章内容不能为空");
+                    this.clearErrmsg();
+                    return;
+                }
+                if(this.category==''){
+                    this.error_list.push("必须选择一个分类");
+                    this.clearErrmsg();
                     return;
                 }
                 let article_form = {
@@ -199,9 +226,21 @@ export default {
                     this.$router.push({path:'/articles'});
                 })
                 .catch(error=>{
-                    alert("创建文章失败！")
+                    this.error_list.push("创建文章失败");
+                    this.clearErrmsg();
                 })
             },
+            // 实时清理错误信息
+            clearErrmsg(){
+                if(this.timer==null){
+                    this.timer = setInterval(()=>{
+                    this.error_list.shift();
+                    if(this.error_list.length<=0){
+                        clearTimeout(timer)
+                        }
+                    }, 4000)
+                }              
+            },              
             // 数据传递
             upload(){
                 return this.$emit('upload', this.category_list);
@@ -328,5 +367,20 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     border: 1px solid dodgerblue;
     outline: none;
     cursor: pointer; 
+}
+.error{
+    z-index: 3;
+    top: 0%;
+    right: 0%;
+    width: 50%;
+    position: absolute;
+}
+.error p{
+    margin: 5%;
+    padding: 2.5% 5%;
+    font-size:12px;
+    color:#f00;
+    border: 0.5px solid red;
+    background: LavenderBlush;
 }
 </style>
