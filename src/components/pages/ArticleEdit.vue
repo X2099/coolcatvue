@@ -9,17 +9,17 @@
             <label><p>保存草稿</p></label>
         </div>
         <div class="button">
-            <label><p>添加封面</p></label>
+            <label><p>文章封面</p></label>
         </div>
         <div class="button">
-            <label><p>富文本编辑</p></label>
+            <label><p>•••</p></label>
         </div>
         <div class="button">
             <label>
             <p id="pub_button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</p>
             </label>
         </div>
-        <div class="button" v-if="username">
+        <div class="user" v-if="username">
             <img src="../../assets/imgs/avatar.png" id="user_img" @click="usermenu_show=!usermenu_show"/>
         </div>      
     </div>    
@@ -27,16 +27,15 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     <div id="pub_menu" v-show="menu_show">
-        <PubMenu></PubMenu>
+        <PubMenu :title="title" :body="body"></PubMenu>
     </div>
-    <!-- <div id="user_menu" v-show="usermenu_show">
+    <div id="user_menu" v-show="usermenu_show">
         <UserMenu></UserMenu>
-    </div>   -->
+    </div>  
 </div>   
 </template>
 
 <script>
-    import Header from '@/components/widget/Header'
     import PubMenu from '@/components/widget/PubMenu'
     import UserMenu from '@/components/widget/UserMenu'
     import { mavonEditor } from 'mavon-editor'
@@ -48,7 +47,6 @@
         name: "",
         props: [],
         components: {
-            Header,
             mavonEditor,
             PubMenu,
             UserMenu
@@ -95,22 +93,22 @@
             hideMenu(event){
                 let elm1 = document.getElementById("pub_button");
                 let elm2 = document.getElementById("pub_menu");
-                // let elm3 = document.getElementById("user_img");
-                // let elm4 = document.getElementById("user_menu");
+                let elm3 = document.getElementById("user_img");
+                let elm4 = document.getElementById("user_menu");
                 let out_elm1 = !elm1.contains(event.target);
                 let out_elm2 = !elm2.contains(event.target);
-                // let out_elm3 = !elm3.contains(event.target);
-                // let out_elm4 = !elm4.contains(event.target);
+                let out_elm3 = !elm3.contains(event.target);
+                let out_elm4 = !elm4.contains(event.target);
                 if(elm1 && elm2){
                     if(out_elm1 && out_elm2){
                         this.menu_show = false;
                     }
                 }
-                // if(elm3 && elm4){
-                //     if(out_elm3 && out_elm4){
-                //         this.usermenu_show = false;
-                //     }
-                // }
+                if(elm3 && elm4){
+                    if(out_elm3 && out_elm4){
+                        this.usermenu_show = false;
+                    }
+                }
             },
             // 监听数据
             listen(data){
@@ -126,7 +124,6 @@
     width:100%;
     height:100%;
     background: #f5f5f5;
-    background: lightgreen;
 }
 
 .title{
@@ -137,7 +134,7 @@
 }
 .title .input_txt{
     float: left;
-    width: 96%;
+    width: 90%;
     height: 100%;
     margin-left: 2%;
     font-size: 24px;
@@ -175,11 +172,14 @@
 .sub_menu .button p{
     cursor: pointer;
 }
-.sub_menu .button img{
+
+.sub_menu .user img{
+    position:fixed;
+    top: 0.8%;
+    right: 1%;
+    float: left;
     border-radius: 50%;
-    line-height: 70%;
-    margin-top: 11%;
-    height: 70%;
+    height: 4.4%;
     background: #ccc;
     opacity: 1;
     filter: alpha=(opacity(100));

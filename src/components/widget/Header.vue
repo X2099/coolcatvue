@@ -1,11 +1,9 @@
 <template>
     <div class="header">
         <img src="../../assets/imgs/logo.png"/>
-        <div class="right" v-if="username">
-            <label @click="fnLogout">注销</label>       
-            <label class="user">欢迎你，{{ username }}</label>
-            <img src="../../assets/imgs/avatar.png"/>           
-        </div>
+        <div  class="right" v-if="username">
+            <img src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>           
+        </div>   
         <div class="right" v-else>        
             <label><router-link to="/register">注册</router-link></label>
             <label><router-link to="/login">登录</router-link></label>
@@ -19,23 +17,24 @@
             <li><router-link to="/">首页</router-link></li>
             </ul>
         </div>
+        <div v-show="usermenu_show">
+            <HeaderMenu></HeaderMenu>
+        </div>
     </div>
 </template>
 
 <script>
+import HeaderMenu from '@/components/widget/HeaderMenu'
+
 export default {
+    components: {
+            HeaderMenu
+        },
     data(){
         return{
             username: localStorage.username,
+            usermenu_show: false,
         }
-    },
-    methods:{
-        fnLogout(){
-            sessionStorage.clear();
-            localStorage.clear();
-            this.username = '';
-            this.$router.push({path:'/login'});
-        },
     }
 }
 </script>
@@ -57,9 +56,11 @@ export default {
 }
 .header img{
     float: left;
-    margin-left: 2%;
-    height: 50px;
+    margin: 5px 2%;
+    height: 40px;
     cursor: crosshair;
+    border-radius: 50%;
+    background: #f5f5f5;
 }
 .header .left li{
     list-style: none;
@@ -78,15 +79,7 @@ export default {
 }
 .header .right img{
     float: right;
-    line-height: 50px;
     cursor: default;
-}
-
-.header .right .user{
-    color: rgb(13, 123, 153);
-    cursor: default;
-}
-.header .right .user:hover{
-    color: #0ddce7;
+    margin-right: 2%;
 }
 </style>

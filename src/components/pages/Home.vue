@@ -47,10 +47,10 @@ export default {
     height:100%;
     background: #f5f5f5; 
 }
-.main_wrap .home{
+/* .main_wrap .home{
     background: #f5f5f5;
     padding-bottom: 10px;
-}
+} */
 .home .article{
     /* width: 100%; */
     height: 50px;

@@ -58,13 +58,10 @@ import cons from '@/components/constent'
 let token = localStorage.token;
 let uid = localStorage.uid;
 
-setInterval(()=>{this.test}, 1000);
-
-
 export default {
     name: "",
-    props: [],
-    data(){
+    props: ['title', 'body'],
+    data() {
         return{
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
@@ -80,8 +77,6 @@ export default {
     mounted(){
         this.getCategories();
         this.getTags();
-        this.upload();
-        // this.setTimer();
     }, 
     methods:{
         // 获取文章分类
@@ -240,11 +235,7 @@ export default {
                         }
                     }, 4000)
                 }              
-            },              
-            // 数据传递
-            upload(){
-                return this.$emit('upload', this.category_list);
-            }    
+            },  
     },
 }
 </script>
@@ -255,7 +246,7 @@ export default {
     float: left;
     top: 6%;
     right: 4.5%;
-    width: 25%;
+    width: 25.5%;
     height: 90%;
     color: slategray;
     background: #fbfbfb;

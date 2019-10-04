@@ -1,13 +1,15 @@
 <template>
     <div class="main_wrap">
         <Header></Header>
-        <div class="home">
-            <div v-for="article in article_list" :key="article" class="article">
-                <h4>{{ article.title }}</h4>
-                <h4>分类：{{ article.category.name }}</h4>
-                <h4>标签: {{ article.tags }}</h4>
-                <h4>作者: {{ article.author.username }}</h4>
+        <div v-for="article in article_list" :key="article" class="article">
+            <div  class="intro">
+                <p>{{ article.author.username }} • 3天前 • {{ article.category.name }}</p>
+                <h1>{{ article.title }}</h1>
+                <p><label v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
             </div>
+            <div class="cover">
+                <img src="static/images/article.jpg" />
+            </div>            
         </div>
     </div>
 </template>
@@ -50,15 +52,40 @@ export default {
     height:100%;
     background: #f5f5f5; 
 }
-.main_wrap .home{
-    background: #f5f5f5;
-    padding-bottom: 10px;
+.main_wrap .article{
+    padding: 100% auto;
+    margin: 1% 20%;
 }
-.home .article{
-    /* width: 100%; */
-    /* height: 50px; */
-    text-align: center;
-    background: #fff;
-    margin: 40px 20px;
+.article .intro{
+    float: left;
+    width: 50%;
+    height: 100px;
+    background: #ffffff;
+    /* background: yellowgreen; */
+    margin: 2px auto;
+    padding: 4% 0 4% 10%;
+}
+.article .intro p{
+    color: gray;
+    margin: 2% auto;
+    font-size: 13px;
+}
+.article .intro h1{
+    font-size: 20px;
+}
+.article .cover{
+    float: left;
+    margin: 2px auto;
+    width: 40%;
+    height: 100px;
+    padding: 4% 0;
+    background: #ffffff;
+    /* background: yellow; */
+}
+.article .cover img{ 
+    /* width: 50%; */
+    height: 100px;
+    /* padding: 2%; */
+    
 }
 </style>
