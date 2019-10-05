@@ -41,8 +41,8 @@ export default {
 
 <style scoped>
 .main_wrap{
-    overflow-y: scroll;
-    position:absolute;
+    overflow-y: hidden;
+    position: absolute;
     width:100%;
     height:100%;
     background: #f5f5f5; 

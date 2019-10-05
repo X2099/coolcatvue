@@ -1,18 +1,18 @@
 <template>
     <div class="main_wrap">
         <Header></Header>
-        <ArticleList></ArticleList>
+        <ArticleDetail></ArticleDetail>
     </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import ArticleList from '@/components/widget/ArticleList'
+import ArticleDetail from '@/components/widget/ArticleDetail'
 
 export default {
     components:{
         Header,
-        ArticleList
+        ArticleDetail,
     },
 }
 </script>

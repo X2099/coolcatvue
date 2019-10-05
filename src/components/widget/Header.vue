@@ -80,8 +80,6 @@ export default {
     margin: auto 2%;
     height: 40px;
     cursor: crosshair;
-    border-radius: 50%;
-    background: #f5f5f5;
 }
 .header .left li{
     list-style: none;
@@ -102,5 +100,14 @@ export default {
     float: right;
     cursor: default;
     margin-right: 2%;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: alpha=(opacity(100));
 }
+.header .right img:hover{
+    opacity: 1;
+    filter: alpha=(opacity(80));
+    }
 </style>

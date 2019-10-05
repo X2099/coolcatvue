@@ -5,8 +5,8 @@
         </div>
         <div v-for="article in article_list" :key="article" class="article">
             <div  class="intro">
-                <p>{{ article.author.username }} • 3天前 • {{ article.category.name }}</p>
-                <h1>{{ article.title }}</h1>
+                <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
+                <h1 @click="articleDetail(article.id)">{{ article.title }}</h1>
                 <p><label v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
             </div>
             <div class="cover">
@@ -21,16 +21,24 @@
 
 <script>
 import cons from '@/components/constent'
+import moment from "moment"
+import 'moment/locale/zh-cn'
 
 export default {
     components:{
     },
-    mounted(){
+    created() {
     this.getArticles();
     },
     data(){
         return {
             article_list: []
+        }
+    },
+    filters:{
+        FromNow:function(val){
+            // return moment(val).format("YYYY-DD-MM");
+            return moment(val).fromNow();
         }
     },
     methods:{
@@ -42,7 +50,15 @@ export default {
             .catch(error=>{
                 alert("获取文章数据失败！");
             })
-        }
+        },
+        articleDetail(id){
+            this.$router.push({
+                name: 'Article',
+                params: {
+                    id: id
+                }
+            });
+        },
     }
 }
 </script>
@@ -50,15 +66,10 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    background: yellowgreen;
     height: 92%;
-    /* margin: 2% 0; */
-    /* padding: 20px 0; */
 }
 .article{
-    /* padding: 100% auto; */
     margin: 0% 20%;
-    background: yellow;  
 }
 .article .intro{
     float: left;
@@ -67,15 +78,16 @@ export default {
     background: #ffffff;
     margin: 2px auto;
     padding: 4% 0 4% 10%;
-    background: lightseagreen;
 }
 .article .intro p{
     color: gray;
     margin: 2% auto;
     font-size: 13px;
+    cursor: pointer;
 }
 .article .intro h1{
     font-size: 20px;
+    cursor: pointer;
 }
 .article .cover{
     float: left;
@@ -87,6 +99,6 @@ export default {
 }
 .article .cover img{
     height: 100px;
-    
+    cursor: pointer; 
 }
 </style>

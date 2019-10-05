@@ -33,14 +33,13 @@ width: 12%;
 height: 65%;
 color: gray;
 background: #ffffff;
-/* box-shadow: 0 1px 5px 0 gray; */
 border-right: none;
+cursor: pointer;
 }
 .option{
 margin: 20% 10%;
 font-size: 16px;
 color: rgb(138, 144, 145);
-cursor: pointer;
 }
 
 .option a{
