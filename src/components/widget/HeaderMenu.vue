@@ -1,6 +1,6 @@
 <template>
 <div id="user_menu" class="main_wrap">
-    <div class="option">我的文章</div>
+    <div class="option"><router-link to='/articles'>我的文章</router-link></div>
     <div class="option">我的草稿</div>
     <div class="option"><router-link to='/'>我的主页</router-link></div>
     <div class="option">管理</div>

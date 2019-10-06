@@ -5,8 +5,8 @@
             <img :style="imgSytle" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>           
         </div>   
         <div class="right" v-else>        
-            <label><router-link to="/register">注册</router-link></label>
-            <label><router-link to="/login">登录</router-link></label>
+            <label :style="liSytle"><router-link to="/register">注册</router-link></label>
+            <label :style="liSytle"><router-link to="/login">登录</router-link></label>
         </div>
         <div class="left">
             <ul>

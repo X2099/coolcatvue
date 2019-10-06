@@ -89,6 +89,9 @@ export default {
     font-size: 20px;
     cursor: pointer;
 }
+.article .intro h1:hover{
+    text-decoration: underline;
+}
 .article .cover{
     float: left;
     margin: 2px auto;

@@ -1,15 +1,12 @@
 <template>
 <div class="main_wrap">
     <div class="title">
-        <div class="avatar">
-            <img :style="imgSytle" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>
+        <div :style="imgSytle" class="avatar">
+            <img :style="imgSytle" src="static/images/author.png" @click="usermenu_show=!usermenu_show"/>
         </div>
-        <div class="profile">
-            <p>{{ article.author.username }}</p>
-            <p>{{ article.pub_time }} 阅读：{{ article.views }}</p>
-        </div>
-        <div class="cover">
-            <img src="static/images/cover.jpg" />
+        <div class="profile" ref="profile">
+            <p class="username">{{ article.author.username }}</p>
+            <p class="info">{{ article.pub_time | formatDate }} 阅读 {{ article.views }}</p>
         </div>
     </div>
     <div class="article">
@@ -21,7 +18,6 @@
             :editable=false
             :scrollStyle=true
             :ishljs=true
-            :boxShadow=false
             ></mavon-editor>
     </div>
 </div>
@@ -30,6 +26,8 @@
 <script>
 import {mavonEditor} from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import moment from "moment"
+import 'moment/locale/zh-cn'
 import cons from '@/components/constent'
 
 export default {
@@ -41,13 +39,32 @@ export default {
             id: '',
             article: {},
             body: '',
+            height: null,
+            imgSytle: {},
         }    
+    },
+    filters:{
+        formatDate:function(val){
+            return moment(val).format("YYYY年DD月MM日");
+        }
     },
     created() {
         this.getArticleId();
-        this.getArticle();
+        this.getArticle();      
+    },
+    updated() {
+        if(this.height==null){
+            this.setStyle();
+        }      
     },
     methods:{
+        // 设置样式
+        setStyle(){
+            this.height = window.getComputedStyle(this.$refs.profile).height;
+            this.imgSytle = {
+                'height': this.height,
+            };
+        },
         // 接收参数
         getArticleId() {
             this.id = this.$route.params.id;
@@ -77,39 +94,46 @@ export default {
 }
 .title{
     margin: 2% 20% 0 20%;
-    /* height: 10%; */
+    height: 15%;
+    /* width: 100%; */
     background: #fbfbfb;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    /* background: yellow; */
+    user-select: none;
 }
 .title .avatar{
     float: left;
-    margin: 2% 0 0 2%;
-    background: greenyellow;
+    margin-top: 5%;
+    margin-left: 1.65em;
+    /* background: greenyellow; */
 }
 .title .profile{
     float: left;
-    margin: 2% 0 0 2%;
-    background: lightcyan;
+    margin: 5% 0 0 2%;
+    /* background: lightcyan; */
+}
+.title .profile .username{
+    font-weight: bold;
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+.title .profile .info{
+    font-size: 14px;
+    font-weight: 100;
+    letter-spacing: 1px;
 }
 .title .avatar img{
-    cursor: default;
-    margin: 2% 0 0 2%;
     cursor: pointer;
-    background: #f5f5f5;
-    /* background: yellow; */
-    height: 30px;
+    background: #e4e2e2;
+    /* width: 100%; */
+    /* height: 100%; */
     border-radius: 50%;
     opacity: 0.9;
     filter: alpha=(opacity(100));
 }
-.title .cover{
-    clear:both;
-}
-.title .cover img{
-    margin: 2% 10%;
-    width: 80%;
-}
 .article{
-    overflow-y: auto; 
+    overflow-y: auto;
+    clear:both; 
 }
 .main_wrap .article .md{
     margin: 0 20% 2% 20%;
