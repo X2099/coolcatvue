@@ -6,9 +6,6 @@
 
     <div class="sub_menu">
         <div class="button">
-            <label><p>保存草稿</p></label>
-        </div>
-        <div class="button">
             <label><p>文章封面</p></label>
         </div>
         <div class="button">
@@ -27,7 +24,7 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     <div id="pub_menu" v-show="menu_show">
-        <PubMenu :title="title" :body="body" :category=category :tags=tags></PubMenu>
+        <PubMenu :id="id" :title="title" :body="body" :category=category :tags=tags></PubMenu>
     </div>
     <div id="user_menu" v-show="usermenu_show">
         <UserMenu></UserMenu>
@@ -57,6 +54,7 @@
         data() {
             return {
                 username: localStorage.username, // 登录用户
+                id: '', // 文章id
                 title: '', // 文章标题
                 body:'', // 文章正文
                 category: '', // 文章分类
@@ -70,15 +68,17 @@
         methods: {
             // 获取被编辑文章数据
             getArticle() {
-                let id = this.$route.params.id;
-                if(id){
+                this.id = this.$route.params.id;
+                if(this.id){
+                    // alert("OK");
                     this.category = this.$route.params.category;
-                    this.axios.get(cons.apis + 'api/articles/' + id + '/',{
+                    this.axios.get(cons.apis + 'api/articles/' + this.id + '/',{
                     responseType: 'json'
                     })
                     .then(response=>{
                         this.title = response.data.title;
                         this.body = response.data.body;
+                        this.category = response.data.category.id;
                         let tags = response.data.tags;
                         for(let i=0;i<tags.length;i++){
                             this.tags.push(tags[i].id);
@@ -150,7 +150,7 @@
 }
 
 .title{
-    width: 70%;
+    width: 75%;
     height: 6%;
     float: left; 
     background: #ffffff;
@@ -168,7 +168,7 @@
 }
 .sub_menu{
     float: left;
-    width: 30%;
+    width: 25%;
     height: 6%;
     background: #ffffff;
     -webkit-user-select: none;
@@ -181,7 +181,7 @@
     overflow: hidden;
     float: left;
     margin-left: 5%;
-    width: 15%;
+    width: 20%;
     height: 100%;
     font-size: 14px;
     color: rgb(138, 144, 145);

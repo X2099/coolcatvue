@@ -44,7 +44,8 @@
         </div>
     </div>
     <div class="submit">
-    <button @click="createArticle">确认并发布</button>
+        <button class="draft" @click="status='d';createArticle()">保存为草稿</button>
+        <button @click="createArticle">确认并发布</button>
     </div>
 
     <div class="error">
@@ -60,9 +61,10 @@ let uid = localStorage.uid;
 
 export default {
     name: "",
-    props: ['title', 'body', 'category', 'tags'],
+    props: ['id', 'title', 'body', 'category', 'tags'],
     data() {
         return{
+            status: 'p', // 文章类型（p：发布，d：草稿）
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
             category: '', // 文章分类
@@ -205,25 +207,43 @@ export default {
                 let article_form = {
                         title: this.title,
                         body: this.body,
-                        category: 1,
-                        tags: [1, 2],
-                        author: uid
+                        category: this.category,
+                        tags: this.tags,
+                        author: uid,
+                        status: this.status
                     }
-                this.axios.post(cons.apis + 'api/articles/',
+                if(this.id!=''){
+                    this.axios.put(cons.apis + 'api/articles/' + this.id + '/',
                     article_form,
                     {
                     headers:{
                     'authorization': 'JWT ' + token,
                     },
                     responseType: 'json'
-                })
-                .then(response=>{
-                    this.$router.push({path:'/articles'});
-                })
-                .catch(error=>{
-                    this.error_list.push("创建文章失败");
-                    this.clearErrmsg();
-                })
+                    })
+                    .then(response=>{
+                        this.$router.push({path:'/articles'});
+                    })
+                    .catch(error=>{
+                        this.error_list.push("修改文章失败");
+                        this.clearErrmsg();
+                    })
+                }else{
+                    this.axios.post(cons.apis + 'api/articles/',
+                    article_form,
+                    {
+                    headers:{
+                    'authorization': 'JWT ' + token,
+                    },
+                    responseType: 'json'
+                    })
+                    .then(response=>{
+                        this.$router.push({path:'/articles'});
+                    })
+                    .catch(error=>{
+                        this.clearErrmsg();
+                    })
+                }               
             },
             // 实时清理错误信息
             clearErrmsg(){
@@ -245,7 +265,7 @@ export default {
     z-index: 2;
     float: left;
     top: 6%;
-    right: 4.5%;
+    right: 6.25%;
     width: 25.5%;
     height: 90%;
     color: slategray;
@@ -358,6 +378,15 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     border: 1px solid dodgerblue;
     outline: none;
     cursor: pointer; 
+}
+.submit .draft{
+    color: LightGray;
+    border: 1px solid LightGray;
+    padding: 1% 8%;
+}
+.submit .draft:hover{
+    color: Grey;
+    border: 1px solid Grey;
 }
 .error{
     z-index: 3;

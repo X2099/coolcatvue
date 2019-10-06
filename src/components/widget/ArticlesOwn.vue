@@ -14,7 +14,7 @@
                     <label class="category">分类：{{ article.category.name }}</label>
                     <label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label>
                 </p>
-                <p><span class="edit" @click="articleEdit(article.id, article.category.id)">编辑</span></p>
+                <p><span class="edit" @click="articleEdit(article.id)">编辑</span></p>
             </div>                      
         </div>
         <div style="clear:both">
@@ -68,12 +68,11 @@ export default {
             });
         },
         // 去编辑页传参
-        articleEdit(article_id, category_id){
+        articleEdit(id){
             this.$router.push({
                 name: 'ArticleEdit',
                 params: {
-                    id: article_id,
-                    category: category_id,                   
+                    id: id                   
                 }
             })
         },
