@@ -27,7 +27,7 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     <div id="pub_menu" v-show="menu_show">
-        <PubMenu :title="title" :body="body"></PubMenu>
+        <PubMenu :title="title" :body="body" :category=category :tags=tags></PubMenu>
     </div>
     <div id="user_menu" v-show="usermenu_show">
         <UserMenu></UserMenu>
@@ -52,20 +52,43 @@
             UserMenu
         },
         mounted(){
+            this.getArticle();
         },
         data() {
             return {
                 username: localStorage.username, // 登录用户
                 title: '', // 文章标题
                 body:'', // 文章正文
+                category: '', // 文章分类
+                tags: [], // 文章标签
                 html:'', // ？
                 configs: {}, // ？
-                usermenu_show: false, // 是否显示用户菜单             
-                category: '', // 文章分类
+                usermenu_show: false, // 是否显示用户菜单                            
                 menu_show: false, // 是否显示发布菜单
             }
         },
         methods: {
+            // 获取被编辑文章数据
+            getArticle() {
+                let id = this.$route.params.id;
+                if(id){
+                    this.category = this.$route.params.category;
+                    this.axios.get(cons.apis + 'api/articles/' + id + '/',{
+                    responseType: 'json'
+                    })
+                    .then(response=>{
+                        this.title = response.data.title;
+                        this.body = response.data.body;
+                        let tags = response.data.tags;
+                        for(let i=0;i<tags.length;i++){
+                            this.tags.push(tags[i].id);
+                        };
+                    })
+                    .catch(error=>{
+                        alert("获取数据失败！")
+                    })
+                }               
+            },
             // 将图片上传到服务器，返回地址替换到md中
             $imgAdd(pos, $file){
                 let formdata = new FormData();

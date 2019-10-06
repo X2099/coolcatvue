@@ -60,7 +60,7 @@ let uid = localStorage.uid;
 
 export default {
     name: "",
-    props: ['title', 'body'],
+    props: ['title', 'body', 'category', 'tags'],
     data() {
         return{
             category_list: [], // 分类数据

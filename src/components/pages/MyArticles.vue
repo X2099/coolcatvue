@@ -7,7 +7,7 @@
 
 <script>
 import Header from '@/components/widget/Header'
-import ArticleList from '@/components/widget/ArticleList'
+import ArticleList from '@/components/widget/ArticlesOwn'
 
 export default {
     components:{

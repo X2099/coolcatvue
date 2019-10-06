@@ -4,14 +4,18 @@
             <p><br></p>
         </div>
         <div v-for="article in article_list" :key="article" class="article">
-            <div  class="intro">
-                <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
-                <h1 @click="articleDetail(article.id)">{{ article.title }}</h1>
-                <p><label v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
-            </div>
             <div class="cover">
-                <img src="static/images/article.jpg"  @click="articleDetail(article.id)" />
-            </div>            
+                <img src="static/images/cover_article.jpg" @click="articleDetail(article.id)" />
+            </div> 
+            <div  class="intro">
+                <p>{{ article.pub_time | FromNow }}</p>
+                <h1 @click="articleDetail(article.id)">{{ article.title }}</h1>
+                <p>
+                    <label class="category">分类：{{ article.category.name }}</label>
+                    <label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label>
+                </p>
+                <p><span class="edit" @click="articleEdit(article.id, article.category.id)">编辑</span></p>
+            </div>                      
         </div>
         <div style="clear:both">
             <p><br></p>
@@ -23,6 +27,7 @@
 import cons from '@/components/constent'
 import moment from "moment"
 import 'moment/locale/zh-cn'
+let uid = localStorage.uid
 
 export default {
     components:{
@@ -37,13 +42,15 @@ export default {
     },
     filters:{
         FromNow:function(val){
-            // return moment(val).format("YYYY-DD-MM");
-            return moment(val).fromNow();
+            return moment(val).format("YYYY年MM月DD日 h:mm:ss");
+            // return moment(val).fromNow();
         }
     },
     methods:{
         getArticles(){
-            this.axios.get(cons.apis + 'api/articles/')
+            this.axios.get(cons.apis + 'api/articles/',{
+                params:{'author': uid}
+            })
             .then(response=>{
                 this.article_list = response.data;
             })
@@ -51,6 +58,7 @@ export default {
                 alert("获取文章数据失败！");
             })
         },
+        // 去详情页传递参数
         articleDetail(id){
             this.$router.push({
                 name: 'Article',
@@ -58,6 +66,16 @@ export default {
                     id: id
                 }
             });
+        },
+        // 去编辑页传参
+        articleEdit(article_id, category_id){
+            this.$router.push({
+                name: 'ArticleEdit',
+                params: {
+                    id: article_id,
+                    category: category_id,                   
+                }
+            })
         },
     }
 }
@@ -76,28 +94,38 @@ export default {
     width: 50%;
     height: 100px;
     background: #ffffff;
-    margin: 0.5px auto;
-    padding: 4% 0 4% 10%;
+    margin: 1px auto;
+    padding: 4% 0;
+    /* background: yellowgreen; */
 }
 .article .intro p{
     color: gray;
-    margin: 2% auto;
+    margin: 1% auto;
     font-size: 13px;
-    cursor: pointer;
+    cursor: default;
 }
 .article .intro h1{
     font-size: 20px;
     cursor: pointer;
 }
 .article .intro h1:hover{
+    color: dodgerblue;
+}
+.article .intro .category{
+    font-weight: 600;
+}
+.article .intro .edit{
+    font-weight: 100;
+    cursor: pointer;
     text-decoration: underline;
+    color: dodgerblue;
 }
 .article .cover{
     float: left;
-    margin: 0.5px auto;
-    width: 40%;
+    margin: 1px auto;
+    width: 25%;
     height: 100px;
-    padding: 4% 0;
+    padding: 4% 0 4% 25%;
     background: #ffffff;
 }
 .article .cover img{
