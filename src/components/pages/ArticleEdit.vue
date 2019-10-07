@@ -132,10 +132,6 @@
                         this.usermenu_show = false;
                     }
                 }
-            },
-            // 监听数据
-            listen(data){
-                alert(data);
             }
         },
     }

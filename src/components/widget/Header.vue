@@ -5,7 +5,7 @@
         </div>
         <div class="user">
             <div class="profile" v-if="username">
-                <img :style="imgSytle" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show"/>           
+                <img id="user_img" :style="imgSytle" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
             </div>   
             <div class="operate" v-else>        
                 <label :style="middleSytle" class="register"><router-link to="/register">注册</router-link></label>
@@ -21,7 +21,7 @@
             <li :style="middleSytle">留言板</li>
         </ul>
         </div>
-        <div v-show="usermenu_show">
+        <div id="user_menu" v-show="usermenu_show">
             <HeaderMenu></HeaderMenu>
         </div>
     </div>
@@ -33,6 +33,7 @@ import HeaderMenu from '@/components/widget/HeaderMenu'
 
 
 export default {
+    props: ['show'],
     components: {
             HeaderMenu
         },
@@ -44,10 +45,19 @@ export default {
             imgSytle: {}, // 动态设置img标签样式
         }
     },
+    watch: {
+        usermenu_show: function(newValue, oldValue){
+            this.$emit('update:show', newValue);
+        },
+        show: function(newValue, oldValue){
+            this.usermenu_show = newValue;
+        }
+    },
     mounted() {
         this.setStyle();
     },
     methods: {
+        // 动态设置样式
         setStyle(){
             let height = this.$refs.header.offsetHeight;
             this.middleSytle = {
@@ -58,7 +68,7 @@ export default {
                 'height': height * 0.7 + 'px',
             }
         },
-    }
+    },   
 }
 </script>
 
@@ -120,7 +130,7 @@ a{
 }
 .user .operate .welcome:hover{  
     color: Gold;
-    cursor: crosshair;
+    /* cursor: crosshair; */
 }
 .user .operate .register{
     margin-right: 15%;

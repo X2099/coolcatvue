@@ -27,12 +27,14 @@ export default {
 .main_wrap{
 position: absolute;
 z-index: 3;
-top: 50px;
-right: 2%;
+top: 8%;
+right: 1.8%;
 width: 12%;
 height: 65%;
 color: gray;
 background: #ffffff;
+opacity: 0.9;
+filter: alpha=(opacity(100));
 border-right: none;
 cursor: pointer;
 }
