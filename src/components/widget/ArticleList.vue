@@ -6,8 +6,8 @@
         <div v-for="article in article_list" :key="article" class="article">
             <div  class="intro">
                 <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
-                <h1 @click="articleDetail(article.id)">{{ article.title }}</h1>
-                <p><label v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
+                <p><label class="title" @click="articleDetail(article.id)">{{ article.title }}</label></p>
+                <p><label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
             </div>
             <div class="cover">
                 <img src="static/images/article.jpg"  @click="articleDetail(article.id)" />
@@ -83,13 +83,14 @@ export default {
     color: gray;
     margin: 2% auto;
     font-size: 13px;
-    cursor: pointer;
 }
-.article .intro h1{
+.article .intro .title{
     font-size: 20px;
+    color: black;
+    font-weight: bold;
     cursor: pointer;
 }
-.article .intro h1:hover{
+.article .intro .title:hover{
     text-decoration: underline;
 }
 .article .cover{

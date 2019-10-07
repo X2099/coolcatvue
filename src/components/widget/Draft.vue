@@ -3,19 +3,21 @@
         <div style="clear:both">
             <p><br></p>
         </div>
-        <div v-for="article in article_list" :key="article" class="article">
-            <div class="cover">
-                <img src="static/images/cover_article.jpg" @click="articleDetail(article.id)" />
-            </div> 
-            <div  class="intro">
-                <p>{{ article.pub_time | FromNow }}</p>
-                <p><label class="title" @click="articleDetail(article.id)">{{ article.title }}</label></p>
-                <p>
-                    <label class="category">分类：{{ article.category.name }}</label>
+        <div class="theme">
+            <h4 class="draft">草稿专栏（{{ article_list.length }}）</h4>      
+            <div v-for="article in article_list" :key="article" class="article">
+                <div class="cover">
+                    <img src="static/images/logo.jpg" />
+                </div> 
+                <div  class="intro">
+                    <p><label class="title" @click="articleEdit(article.id)">{{ article.title }}</label></p>
+                    <p>
+                    <label class="category">{{ article.category.name }}</label></p><p>
                     <label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label>
-                </p>
-                <p><span class="edit" @click="articleEdit(article.id)">编辑</span></p>
-            </div>                      
+                    </p>  
+                    <p class="update_time">{{ article.update_time | FromNow }}  ···</p>
+                </div>                      
+            </div>
         </div>
         <div style="clear:both">
             <p><br></p>
@@ -49,7 +51,10 @@ export default {
     methods:{
         getArticles(){
             this.axios.get(cons.apis + 'api/articles/',{
-                params:{'author': uid}
+                params:{
+                    'author': uid,
+                    'status': 'd',
+                    }
             })
             .then(response=>{
                 this.article_list = response.data;
@@ -57,15 +62,6 @@ export default {
             .catch(error=>{
                 alert("获取文章数据失败！");
             })
-        },
-        // 去详情页传递参数
-        articleDetail(id){
-            this.$router.push({
-                name: 'Article',
-                params: {
-                    id: id
-                }
-            });
         },
         // 去编辑页传参
         articleEdit(id){
@@ -85,6 +81,13 @@ export default {
     overflow-y: auto;
     height: 92%;
 }
+.theme .draft{
+    margin: 0% 20%;
+    padding: 2% 8%;
+    background: lightblue;
+    background: #ffffff;
+    margin-bottom: 1px;
+}
 .article{
     margin: 0% 20%;
 }
@@ -93,21 +96,22 @@ export default {
     width: 50%;
     height: 100px;
     background: #ffffff;
-    margin: 1px auto;
-    padding: 4% 0;
-    /* background: yellowgreen; */
+    padding: 2% 0;
 }
 .article .intro p{
     color: gray;
     margin: 1% auto;
     font-size: 13px;
-    cursor: default;
+    cursor: default;  
 }
 .article .intro .title{
     font-size: 20px;
     color: black;
     font-weight: bold;
     cursor: pointer;
+}
+.article .intro .update_time{
+    letter-spacing: 1px
 }
 .article .intro .title:hover{
     color: dodgerblue;
@@ -123,10 +127,9 @@ export default {
 }
 .article .cover{
     float: left;
-    margin: 1px auto;
     width: 25%;
     height: 100px;
-    padding: 4% 0 4% 25%;
+    padding: 2% 0 2% 25%;
     background: #ffffff;
 }
 .article .cover img{

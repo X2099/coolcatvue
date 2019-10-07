@@ -1,18 +1,18 @@
 <template>
     <div class="main_wrap" @click="hideMenu">
         <Header :show.sync="usermenu_show"></Header>
-        <ArticlesOwn></ArticlesOwn>
+        <Draft></Draft>
     </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import ArticlesOwn from '@/components/widget/ArticlesOwn'
+import Draft from '@/components/widget/Draft'
 
 export default {
     components:{
         Header,
-        ArticlesOwn
+        Draft
     },
     data() {
         return {

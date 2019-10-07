@@ -1,9 +1,9 @@
 <template>
 <div id="user_menu" class="main_wrap">
     <div class="option"><router-link to='/articles'>我的文章</router-link></div>
-    <div class="option">我的草稿</div>
+    <div class="option"><router-link to='/drafts'>我的草稿</router-link></div>
     <div class="option"><router-link to='/'>我的主页</router-link></div>
-    <div class="option">管理</div>
+    <div class="option"><router-link to='/'>管理</router-link></div>
     <div class="option">设置</div>
     <div class="option" @click="fnLogout">退出</div>
     <div class="option">关于</div>
