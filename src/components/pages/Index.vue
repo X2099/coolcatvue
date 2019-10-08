@@ -1,7 +1,7 @@
 <template>
-    <div class="main_wrap" @click="hideMenu">
-        <Header :show.sync="usermenu_show"></Header>
-        <ArticleList></ArticleList>
+    <div class="main_wrap" @click="hideMenu" ref="index">
+        <Header :show.sync="usermenu_show" ref="header"></Header>
+        <ArticleList ref="body" :style="this.heightStyle"></ArticleList>
     </div>
 </template>
 
@@ -17,7 +17,11 @@ export default {
     data() {
         return {
             usermenu_show: false,
+            heightStyle: {},
         }
+    },
+    mounted() {
+        this.setStyle();
     },
     methods:{
         hideMenu(event){
@@ -30,7 +34,13 @@ export default {
                     this.usermenu_show = false;
                 }
             }
+        },
+        setStyle(){
+        let height = this.$refs.index.offsetHeight;
+        this.heightStyle = {
+            'height': height - 45 + 'px',
         }
+        },
     }
 }
 </script>

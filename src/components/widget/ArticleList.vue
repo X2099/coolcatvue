@@ -66,7 +66,6 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    height: 94%;
 }
 .article{
     margin: 0% 20%;

@@ -27,7 +27,7 @@ export default {
 .main_wrap{
 position: absolute;
 z-index: 3;
-top: 8%;
+top: 45px;
 right: 1.8%;
 width: 12%;
 height: 65%;

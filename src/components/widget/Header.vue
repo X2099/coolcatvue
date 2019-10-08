@@ -1,24 +1,24 @@
 <template>
     <div ref="header" class="forehead">
         <div class="logo">
-            <img :style="imgSytle" src="../../assets/imgs/logo.png"/>
+            <img src="../../assets/imgs/logo.png"/>
         </div>
         <div class="user">
             <div class="profile" v-if="username">
-                <img id="user_img" :style="imgSytle" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
+                <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
             </div>   
             <div class="operate" v-else>        
-                <label :style="middleSytle" class="register"><router-link to="/register">注册</router-link></label>
-                <label :style="middleSytle" class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
-                <label :style="middleSytle"><router-link to="/login">登录</router-link></label>
+                <label class="register"><router-link to="/register">注册</router-link></label>
+                <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
+                <label><router-link to="/login">登录</router-link></label>
             </div>
         </div>
         <div class="nav">
         <ul>
-            <li :style="middleSytle"><router-link to="/">首页</router-link></li>
-            <li :style="middleSytle"><router-link to="/articles">我的文章</router-link></li>
-            <li :style="middleSytle"><router-link to="/edit">写文章</router-link></li>
-            <li :style="middleSytle">留言板</li>
+            <li><router-link to="/">首页</router-link></li>
+            <li><router-link to="/articles">我的文章</router-link></li>
+            <li><router-link to="/edit">写文章</router-link></li>
+            <li>留言板</li>
         </ul>
         </div>
         <div id="user_menu" v-show="usermenu_show">
@@ -53,30 +53,13 @@ export default {
             this.usermenu_show = newValue;
         }
     },
-    mounted() {
-        this.setStyle();
-    },
-    methods: {
-        // 动态设置样式
-        setStyle(){
-            let height = this.$refs.header.offsetHeight;
-            
-            this.middleSytle = {
-                'line-height': height + 'px',
-            };
-            this.imgSytle = {
-                'margin-top': height * 0.17 + 'px',
-                'height': height * 0.66 + 'px',
-            }
-        },
-    },   
 }
 </script>
 
 <style>
 .forehead{
     width: 100%;
-    height: 6%;
+    height: 45px;
     background: #4F4F4F;
     cursor: text;
     -webkit-user-select: none;
@@ -94,8 +77,8 @@ a{
     color: #fff;
 }
 .logo img{
-    margin-left: 35%;
-    height: 0px;
+    height: 40px;
+    margin: 2.5px 35%;
     cursor: crosshair;
 }
 .nav{
@@ -107,7 +90,7 @@ a{
     width: 25%;
     text-align: center;
     color: aliceblue;
-    height: 100%;
+    line-height: 45px;
 }
 .nav li a{
     cursor: pointer;
@@ -119,7 +102,8 @@ a{
 }
 .user .operate label{
     float: right;  
-    color: aliceblue;     
+    color: aliceblue;
+    line-height: 45px;     
     font-size: 14px;
     font-weight: 100;
 }
@@ -131,15 +115,14 @@ a{
 }
 .user .operate .welcome:hover{  
     color: Gold;
-    /* cursor: crosshair; */
 }
 .user .operate .register{
     margin-right: 15%;
 }
 .user .profile img{
     cursor: default;
-    margin-left: 55%;
-    height: 0px;
+    margin: 7.5px auto 7.5px 55%;
+    height: 30px;
     cursor: pointer;
     background: #ffffff;
     border-radius: 50%;
