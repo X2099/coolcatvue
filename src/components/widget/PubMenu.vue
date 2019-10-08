@@ -227,7 +227,7 @@ export default {
                     responseType: 'json'
                     })
                     .then(response=>{
-                        this.$router.push({path:'/articles'});
+                        this.$router.push({path:'/drafts'});
                     })
                     .catch(error=>{
                         this.error_list.push("修改文章失败");

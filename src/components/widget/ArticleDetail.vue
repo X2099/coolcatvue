@@ -53,7 +53,11 @@ export default {
     },
     created() {
         this.getArticleId();
-        this.getArticle();      
+        this.getArticle();
+        // 在页面刷新时将文章id保存到sessionStorage里
+        window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('id', JSON.stringify(this.id))
+        })    
     },
     updated() {
         if(this.height==null){
@@ -71,6 +75,10 @@ export default {
         // 接收参数
         getArticleId() {
             this.id = this.$route.params.id;
+            if(!this.id){
+                this.id = parseInt(sessionStorage.getItem('id'));
+                sessionStorage.clear();
+            }
         },
         // 获取文章
         getArticle(){
@@ -86,7 +94,7 @@ export default {
                 this.tags = res.tags;
             })
             .catch(error=>{
-                alert("获取数据失败！")
+                // alert("获取数据失败！")
             })
         },
     },

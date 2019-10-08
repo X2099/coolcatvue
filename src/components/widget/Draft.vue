@@ -12,8 +12,8 @@
                 <div  class="intro">
                     <p><label class="title" @click="articleEdit(article.id)">{{ article.title }}</label></p>
                     <p>
-                    <label class="category">{{ article.category.name }}</label></p><p>
-                    <label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
+                    分类：<label class="category">{{ article.category.name }}</label></p><p>
+                    标签：<label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
                     </p>  
                     <p class="update_time">{{ article.update_time | FromNow }}  ···</p>
                 </div>                      
