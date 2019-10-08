@@ -9,7 +9,7 @@
                 <div class="cover">
                     <img src="static/images/logo.jpg" />
                 </div> 
-                <div  class="intro">
+                <div  class="intro">                    
                     <p><label class="title" @click="articleEdit(article.id)">{{ article.title }}</label></p>
                     <p>
                     分类：<label class="category">{{ article.category.name }}</label></p><p>
@@ -44,7 +44,7 @@ export default {
     },
     filters:{
         FromNow:function(val){
-            return moment(val).format("YYYY年MM月DD日 h:mm:ss");
+            return moment(val).format("YYYY年MM月DD日 A h:mm:ss");
             // return moment(val).fromNow();
         }
     },

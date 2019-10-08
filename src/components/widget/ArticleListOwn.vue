@@ -46,7 +46,7 @@ export default {
     },
     filters:{
         FromNow:function(val){
-            return moment(val).format("YYYY年MM月DD日 h:mm:ss");
+            return moment(val).format("YYYY年MM月DD日 A h:mm:ss");
             // return moment(val).fromNow();
         }
     },

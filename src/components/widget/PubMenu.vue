@@ -66,6 +66,7 @@ export default {
     props: ['id', 'title', 'body', 'category', 'tags'],
     data() {
         return{
+            id: '',
             title: '',
             body: '',
             category: '',
@@ -217,7 +218,7 @@ export default {
                         author: uid,
                         status: this.status
                     }
-                if(this.id!=''){
+                if(this.id){
                     this.axios.put(cons.apis + 'api/articles/' + this.id + '/',
                     article_form,
                     {
@@ -227,7 +228,11 @@ export default {
                     responseType: 'json'
                     })
                     .then(response=>{
-                        this.$router.push({path:'/drafts'});
+                        if(this.status=='p'){
+                            this.$router.push({path:'/articles'});
+                        }else{
+                            this.$router.push({path:'/drafts'});
+                        } 
                     })
                     .catch(error=>{
                         this.error_list.push("修改文章失败");
@@ -243,7 +248,11 @@ export default {
                     responseType: 'json'
                     })
                     .then(response=>{
-                        this.$router.push({path:'/articles'});
+                        if(this.status=='p'){
+                            this.$router.push({path:'/articles'});
+                        }else{
+                            this.$router.push({path:'/drafts'});
+                        }
                     })
                     .catch(error=>{
                         this.clearErrmsg();
