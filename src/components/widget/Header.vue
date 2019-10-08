@@ -60,12 +60,13 @@ export default {
         // 动态设置样式
         setStyle(){
             let height = this.$refs.header.offsetHeight;
+            
             this.middleSytle = {
                 'line-height': height + 'px',
             };
             this.imgSytle = {
-                'margin-top': height * 0.15 + 'px',
-                'height': height * 0.7 + 'px',
+                'margin-top': height * 0.17 + 'px',
+                'height': height * 0.66 + 'px',
             }
         },
     },   
@@ -75,7 +76,7 @@ export default {
 <style>
 .forehead{
     width: 100%;
-    height: 8%;
+    height: 6%;
     background: #4F4F4F;
     cursor: text;
     -webkit-user-select: none;

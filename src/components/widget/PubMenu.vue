@@ -7,19 +7,21 @@
             <p>您还未添加任何分类!</p>
         </div>
         <div v-else class="nonempty">
-            <div v-for="cat in category_list" :key="cat">
+            <div v-for="(cat,index) in category_list" :key="index">
                 <label :style="category==cat.id?'color:dodgerblue':''" class="parent">
                 <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                                       
                 </label>
-                <label v-for="sub_cat in cat.subs" :key="sub_cat" :style="category==sub_cat.id?'color:dodgerblue':''" class="sub">
+                <label v-for="(sub_cat,index) in cat.subs" :key="index" :style="category==sub_cat.id?'color:dodgerblue':''" class="sub">
                 <input type="radio" v-model="category" :value="sub_cat.id" style="visibility:hidden;width:0">{{ sub_cat.name }}
                 </label>
             </div>
         </div>
+        <!-- 去除以上浮动 -->
+        <div style="clear: both;"></div>
         <div class="add_category">
             <select v-model="parent" :style="parent?'color:dodgerblue':''">
                 <option seleted ="seleted" value=''>所属分类</option>
-                <option :value="cat.id" v-for="cat in category_list" :key="cat">{{ cat.name }}</option>
+                <option :value="cat.id" v-for="(cat,index) in category_list" :key="index">{{ cat.name }}</option>
             </select>
             <input type="text" placeholder="添加1个分类..." autocomplete="off" class="add_input" v-model="cat">
             <input type="submit" value="☑" class="add_submit" @click="addCategory">
@@ -31,7 +33,7 @@
             <p>您还未添加任何标签!</p>
         </div>
         <div v-else>
-            <div v-for="tag in tag_list" :key="tag" >                                    
+            <div v-for="(tag,index) in tag_list" :key="index" >                                    
             <label :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
             <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
             {{ tag.name }}
@@ -49,7 +51,7 @@
     </div>
 
     <div class="error">
-        <p v-for="errmsg in error_list" :key="errmsg">{{ errmsg }}</p>
+        <p v-for="(errmsg,index) in error_list" :key="index">{{ errmsg }}</p>
     </div>
 </div>
 </template>
@@ -64,11 +66,13 @@ export default {
     props: ['id', 'title', 'body', 'category', 'tags'],
     data() {
         return{
+            title: '',
+            body: '',
+            category: '',
+            tags: '',
             status: 'p', // 文章类型（p：发布，d：草稿）
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
-            category: '', // 文章分类
-            tags: [], // 文章标签
             parent: '', // 添加分类的父级分类
             cat: '', // 添加分类名称
             tag: '', // 添加标签的名称
@@ -76,6 +80,7 @@ export default {
             timer: null, // 清除错误信息定时器   
         }
     },
+    // },
     mounted(){
         this.getCategories();
         this.getTags();
@@ -251,7 +256,7 @@ export default {
                     this.timer = setInterval(()=>{
                     this.error_list.shift();
                     if(this.error_list.length<=0){
-                        clearTimeout(timer)
+                        clearTimeout(this.timer)
                         }
                     }, 4000)
                 }              
@@ -280,6 +285,7 @@ h1{
     font-size: 18px;
 }
 .category, .tag{
+    clear: both;
     margin: 5% 10% auto 10%;
     font-size: 13px;
 }

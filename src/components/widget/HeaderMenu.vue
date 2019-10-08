@@ -17,7 +17,7 @@ export default {
             sessionStorage.clear();
             localStorage.clear();
             this.username = '';
-            this.$router.push({path:'/login'});
+            this.$router.push({path:'/'});
         },
     }    
 }

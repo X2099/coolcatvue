@@ -3,7 +3,7 @@
         <div style="clear:both">
             <p><br></p>
         </div>
-        <div v-for="article in article_list" :key="article" class="article">
+        <div v-for="(article,index) in article_list" :key="index" class="article">
             <div class="cover">
                 <img src="static/images/cover_article.jpg" @click="articleDetail(article.id)" />
             </div> 
@@ -12,7 +12,7 @@
                 <p><label class="title" @click="articleDetail(article.id)">{{ article.title }}</label></p>
                 <p>
                     <label class="category">分类：{{ article.category.name }}</label>
-                    <label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label>
+                    <label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
                 </p>
                 <p><span class="edit" @click="articleEdit(article.id)">编辑</span></p>
             </div>                      
@@ -27,13 +27,17 @@
 import cons from '@/components/constent'
 import moment from "moment"
 import 'moment/locale/zh-cn'
-let uid = localStorage.uid
+let uid = localStorage.uid;
+let token = localStorage.token;
+
+
 
 export default {
     components:{
     },
     created() {
-    this.getArticles();
+        this.authenticate();
+        this.getArticles();
     },
     data(){
         return {
@@ -47,16 +51,24 @@ export default {
         }
     },
     methods:{
+        // 验证是否登录
+        authenticate(){
+            if(!(uid&&token)){
+                this.$router.push({path:'/login'});
+            }
+        },
         getArticles(){
-            this.axios.get(cons.apis + 'api/articles/',{
+            if(uid){
+                this.axios.get(cons.apis + 'api/articles/',{
                 params:{'author': uid}
-            })
-            .then(response=>{
-                this.article_list = response.data;
-            })
-            .catch(error=>{
-                alert("获取文章数据失败！");
-            })
+                })
+                .then(response=>{
+                    this.article_list = response.data;
+                })
+                .catch(error=>{
+                    alert("获取文章数据失败！");
+                })
+            }    
         },
         // 去详情页传递参数
         articleDetail(id){
@@ -83,7 +95,7 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    height: 92%;
+    height: 94%;
 }
 .article{
     margin: 0% 20%;

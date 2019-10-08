@@ -3,11 +3,11 @@
         <div style="clear:both">
             <p><br></p>
         </div>
-        <div v-for="article in article_list" :key="article" class="article">
+        <div v-for="(article,index) in article_list" :key="index" class="article">
             <div  class="intro">
                 <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
                 <p><label class="title" @click="articleDetail(article.id)">{{ article.title }}</label></p>
-                <p><label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label></p>
+                <p><label class="tag" v-for="(tag, index) in article.tags" :key="index">{{ tag.name }} </label></p>
             </div>
             <div class="cover">
                 <img src="static/images/article.jpg"  @click="articleDetail(article.id)" />
@@ -66,7 +66,7 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    height: 92%;
+    height: 94%;
 }
 .article{
     margin: 0% 20%;

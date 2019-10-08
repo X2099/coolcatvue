@@ -5,7 +5,7 @@
         </div>
         <div class="theme">
             <h4 class="draft">草稿专栏（{{ article_list.length }}）</h4>      
-            <div v-for="article in article_list" :key="article" class="article">
+            <div v-for="(article,index) in article_list" :key="index" class="article">
                 <div class="cover">
                     <img src="static/images/logo.jpg" />
                 </div> 
@@ -13,7 +13,7 @@
                     <p><label class="title" @click="articleEdit(article.id)">{{ article.title }}</label></p>
                     <p>
                     <label class="category">{{ article.category.name }}</label></p><p>
-                    <label class="tag" v-for="tag in article.tags" :key="tag">{{ tag.name }} </label>
+                    <label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
                     </p>  
                     <p class="update_time">{{ article.update_time | FromNow }}  ···</p>
                 </div>                      
@@ -79,7 +79,7 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    height: 92%;
+    height: 94%;
 }
 .theme .draft{
     margin: 0% 20%;

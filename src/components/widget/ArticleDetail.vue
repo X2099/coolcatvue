@@ -5,7 +5,7 @@
             <img :style="imgSytle" src="static/images/author.png" @click="usermenu_show=!usermenu_show"/>
         </div>
         <div class="profile" ref="profile">
-            <p class="username">{{ article.author.username }}</p>
+            <p class="username">{{ author.username }}</p>
             <p class="info">{{ article.pub_time | formatDate }} 阅读 {{ article.views }}</p>
         </div>
     </div>
@@ -38,6 +38,9 @@ export default {
         return {
             id: '',
             article: {},
+            category : '',
+            tags: [],
+            author: [],
             body: '',
             height: null,
             imgSytle: {},
@@ -75,8 +78,12 @@ export default {
             responseType: 'json'
             })
             .then(response=>{
-                this.body = '# ' + response.data.title + '\n\n' + response.data.body;
-                this.article = response.data;
+                let res = response.data
+                this.article = res;
+                this.body = '# ' + res.title + '\n\n' + res.body;
+                this.author = res.author;
+                this.category = res.category;
+                this.tags = res.tags;
             })
             .catch(error=>{
                 alert("获取数据失败！")

@@ -24,11 +24,11 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     <div id="pub_menu" v-show="menu_show">
-        <PubMenu :id="id" :title="title" :body="body" :category=category :tags=tags></PubMenu>
+        <PubMenu :id=id :title=title :body=body :category=category :tags=tags></PubMenu>
     </div>
     <div id="user_menu" v-show="usermenu_show">
         <UserMenu></UserMenu>
-    </div>  
+    </div>
 </div>   
 </template>
 
@@ -79,6 +79,7 @@
                         this.title = response.data.title;
                         this.body = response.data.body;
                         this.category = response.data.category.id;
+                        // alert(this.category);
                         let tags = response.data.tags;
                         for(let i=0;i<tags.length;i++){
                             this.tags.push(tags[i].id);
@@ -87,7 +88,7 @@
                     .catch(error=>{
                         alert("获取数据失败！")
                     })
-                }               
+                }              
             },
             // 将图片上传到服务器，返回地址替换到md中
             $imgAdd(pos, $file){
@@ -194,11 +195,11 @@
 
 .sub_menu .user img{
     position:fixed;
-    top: 0.8%;
-    right: 1%;
+    top: 1%;
+    right: 1.1%;
     float: left;
     border-radius: 50%;
-    height: 4.4%;
+    height: 3.8%;
     background: #ccc;
     opacity: 1;
     filter: alpha=(opacity(100));
