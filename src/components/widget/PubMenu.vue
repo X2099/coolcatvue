@@ -83,193 +83,201 @@ export default {
     },
     // },
     mounted(){
+        this.authenticate();
         this.getCategories();
         this.getTags();
     }, 
     methods:{
+        // 验证是否登录
+        authenticate(){
+            if(!(uid&&token)){       
+                alert("请先确认您已登录！")           
+                this.$router.push({path:'/'});      
+            }
+        },
         // 获取文章分类
-            getCategories(){
-                if(!token){
-                    return;
-                }
-                this.axios.get(cons.apis + 'api/categories/',{
-                    headers:{
-                    'Authorization': 'JWT ' + token
-                },
-                responseType: 'json'
-                })
-                .then(response=>{
-                    this.category_list = response.data;
-                })
-                .catch(error=>{
-                    this.error_list.push("获取分类数据失败，请刷新重试");
-                    this.clearErrmsg();
-                })
-            },          
-            // 获取文章标签
-            getTags(){
-                if(!token){
-                    return;
-                }
-                this.axios.get(cons.apis + 'api/tags/',{
-                    headers:{
-                    'Authorization': 'JWT ' + token
-                },
-                responseType: 'json'
-                })
-                
-                .then(response=>{
-                    this.tag_list = response.data;
-                })
-                .catch(error=>{
-                    this.error_list.push("获取标签数据失败，请刷新重试");
-                    this.clearErrmsg();
-                })
+        getCategories(){
+            if(!token){
+                return;
+            }
+            this.axios.get(cons.apis + 'api/categories/',{
+                headers:{
+                'Authorization': 'JWT ' + token
             },
+            responseType: 'json'
+            })
+            .then(response=>{
+                this.category_list = response.data;
+            })
+            .catch(error=>{
+                this.error_list.push("获取分类数据失败，请刷新重试");
+                this.clearErrmsg();
+            })
+        },          
+        // 获取文章标签
+        getTags(){
+            if(!token){
+                return;
+            }
+            this.axios.get(cons.apis + 'api/tags/',{
+                headers:{
+                'Authorization': 'JWT ' + token
+            },
+            responseType: 'json'
+            })
+            
+            .then(response=>{
+                this.tag_list = response.data;
+            })
+            .catch(error=>{
+                this.error_list.push("获取标签数据失败，请刷新重试");
+                this.clearErrmsg();
+            })
+        },
 
-            // 创建分类
-            addCategory(){
-                if(this.cat==''){
-                    return;
+        // 创建分类
+        addCategory(){
+            if(this.cat==''){
+                return;
+            }
+            if(this.cat.length > 40){
+                this.error_list.push("分类名称最大长度为40个字符，请重新输入");
+                this.clearErrmsg();
+                return;
+            }
+            let category_form = {
+                name: this.cat,
+                owner: uid
+            }
+            if(this.parent!=''){
+                category_form.parent = this.parent;
+            }
+            this.axios.post(cons.apis + 'api/categories/',
+                category_form,
+                {
+                headers:{
+                'authorization': 'JWT ' + token,
+                },
+                responseType: 'json'
+            })
+            .then(response=>{
+                this.cat = '';
+                this.parent = '';
+                this.getCategories();
+            })
+            .catch(error=>{
+                this.error_list.push("添加分类失败");
+                this.clearErrmsg();
+            })
+        },
+        // 创建标签
+        addTag(){
+            if(this.tag==''){
+                return;
+            }
+            if(this.tag.length > 40){
+                this.error_list.push("标签名称最大长度为40个字符，请重新输入");
+                this.clearErrmsg();
+                return;
+            }
+            let tag_form = {
+                name: this.tag,
+                owner: uid
+            }
+            this.axios.post(cons.apis + 'api/tags/',
+                tag_form,
+                {
+                headers:{
+                'authorization': 'JWT ' + token,
+                },
+                responseType: 'json'
+            })
+            .then(response=>{
+                this.tag = '';
+                this.getTags();
+            })
+            .catch(error=>{
+                this.error_list.push("添加标签失败");
+                this.clearErrmsg();
+            })
+        },
+            // 创建文章
+        createArticle(){
+            if(this.title==''){
+                this.error_list.push("文章标题不能为空");
+                this.clearErrmsg();
+                return;
+            }
+            if(this.body==''){
+                this.error_list.push("文章内容不能为空");
+                this.clearErrmsg();
+                return;
+            }
+            if(this.category==''){
+                this.error_list.push("必须选择一个分类");
+                this.clearErrmsg();
+                return;
+            }
+            let article_form = {
+                    title: this.title,
+                    body: this.body,
+                    category: this.category,
+                    tags: this.tags,
+                    author: uid,
+                    status: this.status
                 }
-                if(this.cat.length > 40){
-                    this.error_list.push("分类名称最大长度为40个字符，请重新输入");
-                    this.clearErrmsg();
-                    return;
-                }
-                let category_form = {
-                    name: this.cat,
-                    owner: uid
-                }
-                if(this.parent!=''){
-                    category_form.parent = this.parent;
-                }
-                this.axios.post(cons.apis + 'api/categories/',
-                    category_form,
-                    {
-                    headers:{
-                    'authorization': 'JWT ' + token,
-                    },
-                    responseType: 'json'
+            if(this.id){
+                this.axios.put(cons.apis + 'api/articles/' + this.id + '/',
+                article_form,
+                {
+                headers:{
+                'authorization': 'JWT ' + token,
+                },
+                responseType: 'json'
                 })
                 .then(response=>{
-                    this.cat = '';
-                    this.parent = '';
-                    this.getCategories();
+                    if(this.status=='p'){
+                        this.$router.push({path:'/articles'});
+                    }else{
+                        this.$router.push({path:'/drafts'});
+                    } 
                 })
                 .catch(error=>{
-                    this.error_list.push("添加分类失败");
+                    this.error_list.push("修改文章失败");
                     this.clearErrmsg();
                 })
-            },
-            // 创建标签
-            addTag(){
-                if(this.tag==''){
-                    return;
-                }
-                if(this.tag.length > 40){
-                    this.error_list.push("标签名称最大长度为40个字符，请重新输入");
-                    this.clearErrmsg();
-                    return;
-                }
-                let tag_form = {
-                    name: this.tag,
-                    owner: uid
-                }
-                this.axios.post(cons.apis + 'api/tags/',
-                    tag_form,
-                    {
-                    headers:{
-                    'authorization': 'JWT ' + token,
-                    },
-                    responseType: 'json'
+            }else{
+                this.axios.post(cons.apis + 'api/articles/',
+                article_form,
+                {
+                headers:{
+                'authorization': 'JWT ' + token,
+                },
+                responseType: 'json'
                 })
                 .then(response=>{
-                    this.tag = '';
-                    this.getTags();
-                })
-                .catch(error=>{
-                    this.error_list.push("添加标签失败");
-                    this.clearErrmsg();
-                })
-            },
-             // 创建文章
-            createArticle(){
-                if(this.title==''){
-                    this.error_list.push("文章标题不能为空");
-                    this.clearErrmsg();
-                    return;
-                }
-                if(this.body==''){
-                    this.error_list.push("文章内容不能为空");
-                    this.clearErrmsg();
-                    return;
-                }
-                if(this.category==''){
-                    this.error_list.push("必须选择一个分类");
-                    this.clearErrmsg();
-                    return;
-                }
-                let article_form = {
-                        title: this.title,
-                        body: this.body,
-                        category: this.category,
-                        tags: this.tags,
-                        author: uid,
-                        status: this.status
+                    if(this.status=='p'){
+                        this.$router.push({path:'/articles'});
+                    }else{
+                        this.$router.push({path:'/drafts'});
                     }
-                if(this.id){
-                    this.axios.put(cons.apis + 'api/articles/' + this.id + '/',
-                    article_form,
-                    {
-                    headers:{
-                    'authorization': 'JWT ' + token,
-                    },
-                    responseType: 'json'
-                    })
-                    .then(response=>{
-                        if(this.status=='p'){
-                            this.$router.push({path:'/articles'});
-                        }else{
-                            this.$router.push({path:'/drafts'});
-                        } 
-                    })
-                    .catch(error=>{
-                        this.error_list.push("修改文章失败");
-                        this.clearErrmsg();
-                    })
-                }else{
-                    this.axios.post(cons.apis + 'api/articles/',
-                    article_form,
-                    {
-                    headers:{
-                    'authorization': 'JWT ' + token,
-                    },
-                    responseType: 'json'
-                    })
-                    .then(response=>{
-                        if(this.status=='p'){
-                            this.$router.push({path:'/articles'});
-                        }else{
-                            this.$router.push({path:'/drafts'});
-                        }
-                    })
-                    .catch(error=>{
-                        this.clearErrmsg();
-                    })
-                }               
-            },
-            // 实时清理错误信息
-            clearErrmsg(){
-                if(this.timer==null){
-                    this.timer = setInterval(()=>{
-                    this.error_list.shift();
-                    if(this.error_list.length<=0){
-                        clearTimeout(this.timer)
-                        }
-                    }, 4000)
-                }              
-            },  
+                })
+                .catch(error=>{
+                    this.clearErrmsg();
+                })
+            }               
+        },
+        // 实时清理错误信息
+        clearErrmsg(){
+            if(this.timer==null){
+                this.timer = setInterval(()=>{
+                this.error_list.shift();
+                if(this.error_list.length<=0){
+                    clearTimeout(this.timer)
+                    }
+                }, 4000)
+            }              
+        },  
     },
 }
 </script>
@@ -280,8 +288,8 @@ export default {
     float: left;
     top: 6%;
     right: 6.25%;
-    width: 25.5%;
-    height: 90%;
+    width: 300px;
+    height: 600px;
     color: slategray;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

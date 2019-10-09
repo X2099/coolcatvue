@@ -29,13 +29,15 @@
 import cons from '@/components/constent'
 import moment from "moment"
 import 'moment/locale/zh-cn'
-let uid = localStorage.uid
+let uid = localStorage.uid;
+let token = localStorage.token;
 
 export default {
     components:{
     },
     created() {
-    this.getArticles();
+        this.authenticate();
+        this.getArticles();
     },
     data(){
         return {
@@ -49,6 +51,13 @@ export default {
         }
     },
     methods:{
+        // 验证是否登录
+        authenticate(){
+            if(!(uid&&token)){        
+                alert("请先确认您已登录！")           
+                this.$router.push({path:'/'});  
+            }
+        },
         getArticles(){
             this.axios.get(cons.apis + 'api/articles/',{
                 params:{

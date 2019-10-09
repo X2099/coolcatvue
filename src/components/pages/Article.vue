@@ -1,7 +1,7 @@
 <template>
-    <div class="main_wrap" @click="hideMenu">
+    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
         <Header :show.sync="usermenu_show"></Header>
-        <ArticleDetail></ArticleDetail>
+        <ArticleDetail :style="this.heightStyle"></ArticleDetail>
     </div>
 </template>
 
@@ -17,9 +17,14 @@ export default {
     data() {
         return {
             usermenu_show: false,
+            heightStyle: {},
         }
     },
+    mounted(){
+        this.setHeight();
+    },
     methods:{
+        // 隐藏用户菜单
         hideMenu(event){
             let elm1 = document.getElementById("user_img");
             let elm2 = document.getElementById("user_menu");
@@ -30,7 +35,14 @@ export default {
                     this.usermenu_show = false;
                 }
             }
-        }
+        },
+        // 设置页面高度
+        setHeight(){
+        let height = this.$refs.main_wrap.offsetHeight;
+        this.heightStyle = {
+            'height': height - 45 + 'px',
+            }
+        },
     }
 }
 </script>

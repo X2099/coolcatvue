@@ -16,8 +16,8 @@ export default {
         fnLogout(){
             sessionStorage.clear();
             localStorage.clear();
-            this.username = '';
             this.$router.push({path:'/'});
+            location.reload();
         },
     }    
 }
@@ -28,9 +28,9 @@ export default {
 position: absolute;
 z-index: 3;
 top: 45px;
-right: 1.8%;
-width: 12%;
-height: 65%;
+right: 33px;
+width: 150px;
+height: 450px;
 color: gray;
 background: #ffffff;
 opacity: 0.9;

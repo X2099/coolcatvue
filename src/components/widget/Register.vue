@@ -1,21 +1,23 @@
 <template>
 <div class="main_wrap">
+    <div id="background"></div>
     <div class="register_form">
-    <form method="post">
-    <h1 class="register_title">用户注册</h1>
-    <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
-    <div class="error_tip"><p v-if="username_errshow">{{ username_errmsg }}</p></div>
-    <input type="password" placeholder="密码" class="input_txt" v-model="password1" @blur="checkPassword1">
-    <div class="error_tip"><p v-if="password_errshow1">{{ password_errmsg1 }}</p></div>
-    <input type="password" placeholder="确认密码" class="input_txt" v-model="password2" @blur="checkPassword2">
-    <div class="error_tip"><p v-if="password_errshow2">{{ password_errmsg2 }}</p></div>
-    <input type="text" placeholder="邮箱" class="input_txt" v-model="email" @blur="checkEmail">
-    <div class="error_tip"><p v-if="email_errshow">{{ email_errmsg }}</p></div>
-    <input type="text" placeholder="验证码" class="input_txt" v-model="code" @blur="checkCode">
-    <div class="error_tip"><p v-if="code_errshow">{{ code_errmsg }}</p></div>
-    <input type="button" value="获取验证码" class="input_sub" @click="sendCode"> 
-    <input type="button" value="注 册" class="input_sub" @click="fnRegister">
-    </form>
+        <h1 class="register_title">用户注册</h1>
+        <h1 class="close" @click="fnClose">✕</h1>
+        <form method="post"> 
+            <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
+            <div class="error_tip"><p v-if="username_errshow">{{ username_errmsg }}</p></div>
+            <input type="password" placeholder="密码" class="input_txt" v-model="password1" @blur="checkPassword1">
+            <div class="error_tip"><p v-if="password_errshow1">{{ password_errmsg1 }}</p></div>
+            <input type="password" placeholder="确认密码" class="input_txt" v-model="password2" @blur="checkPassword2">
+            <div class="error_tip"><p v-if="password_errshow2">{{ password_errmsg2 }}</p></div>
+            <input type="text" placeholder="邮箱" class="input_txt" v-model="email" @blur="checkEmail">
+            <div class="error_tip"><p v-if="email_errshow">{{ email_errmsg }}</p></div>
+            <input type="text" placeholder="验证码" class="input_txt" v-model="code" @blur="checkCode">
+            <div class="error_tip"><p v-if="code_errshow">{{ code_errmsg }}</p></div>
+            <input type="button" value="获取验证码" class="input_sub" @click="sendCode"> 
+            <input type="button" value="注 册" class="input_sub" @click="fnRegister">
+        </form>
     <div class="nav">
         <router-link to='/'>首页</router-link>|<router-link to='/login'>登录</router-link>
     </div>
@@ -52,6 +54,10 @@ export default {
         }
     },
     methods:{
+        // 关闭注册窗
+        fnClose(){
+            this.$emit('closeRegister', false);
+        },
         checkUsername(){
         this.username_errmsg = '';
         this.username_errshow = false;
@@ -185,15 +191,20 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
-    position:fixed;
-    width:100%;
-    height:100%;
-    left:0px;
-    top:0px;
-    background: #f5f5f5;
+#background{
+position:fixed;
+z-index: 2;
+width:100%;
+height:100%;
+left:0px;
+top:0px;
+background: #4F4F4F;
+opacity: 0.3;
+filter: alpha=(opacity(100));
 }
 .register_form{
+position:fixed;
+z-index: 2;
 width: 330px;
 height: 490px;
 background: #fff;
@@ -203,7 +214,6 @@ top: 50%;
 margin-top: -246px;
 margin-left: -165px;
 overflow: hidden;
-border-radius:6px;
 }
 .register_form .nav{
 text-align: center;
@@ -224,13 +234,19 @@ line-height: 20px;
 margin: auto;
 color: #f00;
 }
-.register_title{
+.register_form h1{
 line-height: 72px;
-text-align: center;
-background: rgb(63, 67, 68);
-color: #fff;
-font-size:20px;
-margin-bottom: 20px;
+margin: auto 30px;
+font-size: 18px;
+}
+.register_form .register_title{
+float: left;
+color: #4F4F4F;
+}
+.login_form .close{
+float: right;
+color: DarkGray;
+cursor: pointer;
 }
 .input_txt{
 display: block;

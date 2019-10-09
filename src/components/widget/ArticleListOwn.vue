@@ -54,7 +54,8 @@ export default {
         // 验证是否登录
         authenticate(){
             if(!(uid&&token)){
-                this.$router.push({path:'/login'});
+                alert("请先确认您已登录！")           
+                this.$router.push({path:'/'});   
             }
         },
         getArticles(){

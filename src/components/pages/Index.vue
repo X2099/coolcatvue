@@ -1,7 +1,7 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="index">
-        <Header :show.sync="usermenu_show" ref="header"></Header>
-        <ArticleList ref="body" :style="this.heightStyle"></ArticleList>
+    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
+        <Header :show.sync="usermenu_show"></Header>
+        <ArticleList :style="this.heightStyle"></ArticleList>
     </div>
 </template>
 
@@ -9,10 +9,11 @@
 import Header from '@/components/widget/Header'
 import ArticleList from '@/components/widget/ArticleList'
 
+
 export default {
     components:{
         Header,
-        ArticleList
+        ArticleList,
     },
     data() {
         return {
@@ -21,9 +22,10 @@ export default {
         }
     },
     mounted() {
-        this.setStyle();
+        this.setHeight();
     },
     methods:{
+        // 隐藏用户菜单
         hideMenu(event){
             let elm1 = document.getElementById("user_img");
             let elm2 = document.getElementById("user_menu");
@@ -35,11 +37,12 @@ export default {
                 }
             }
         },
-        setStyle(){
-        let height = this.$refs.index.offsetHeight;
+        // 设置页面高度
+        setHeight(){
+        let height = this.$refs.main_wrap.offsetHeight;
         this.heightStyle = {
             'height': height - 45 + 'px',
-        }
+            }
         },
     }
 }

@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/pages/Index'
-import Register from '@/components/pages/Register'
-import Login from '@/components/pages/Login'
 import ArticleEdit from '@/components/pages/ArticleEdit'
 import Article from '@/components/pages/Article'
 import MyArticles from '@/components/pages/MyArticles'
@@ -17,16 +15,6 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
     },
     {
       path: '/edit',

@@ -6,22 +6,11 @@
     <div class="option"><router-link to='/'>我的主页</router-link></div>
     <div class="option">管理</div>
     <div class="option">设置</div>
-    <div class="option" @click="fnLogout">退出</div>
     <div class="option">关于</div>
 </div>
 </template>
 
 <script>
-export default {
-    methods: {
-        fnLogout(){
-            sessionStorage.clear();
-            localStorage.clear();
-            this.username = '';
-            this.$router.push({path:'/'});
-        },
-    }  
-}
 </script>
 
 <style scoped>
@@ -30,8 +19,8 @@ position: absolute;
 z-index: 3;
 top: 6%;
 right: 0;
-width: 12%;
-height: 65%;
+width: 150px;
+height: 450px;
 color: gray;
 background: #ffffff;
 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

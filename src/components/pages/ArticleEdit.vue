@@ -48,7 +48,7 @@
             PubMenu,
             UserMenu
         },
-        mounted(){
+        mounted(){   
             this.getArticle();
         },
         data() {
@@ -65,7 +65,7 @@
                 menu_show: false, // 是否显示发布菜单
             }
         },
-        methods: {
+        methods: {            
             // 获取被编辑文章数据
             getArticle() {
                 this.id = this.$route.params.id;

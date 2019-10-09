@@ -8,34 +8,41 @@
                 <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
             </div>   
             <div class="operate" v-else>        
-                <label class="register"><router-link to="/register">注册</router-link></label>
+                <label class="register"><label @click="showRegister=true">注册</label></label>
                 <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
-                <label><router-link to="/login">登录</router-link></label>
+                <label @click="showLogin=true">登录</label>
             </div>
         </div>
         <div class="nav">
         <ul>
             <li><router-link to="/">首页</router-link></li>
-            <li><router-link to="/articles">我的文章</router-link></li>
-            <li><router-link to="/edit">写文章</router-link></li>
+            <li><label @click="articles">我的文章</label></li>
+            <li><label @click="edit">写文章</label></li>
             <li>留言板</li>
         </ul>
         </div>
-        <div id="user_menu" v-show="usermenu_show">
-            <HeaderMenu></HeaderMenu>
-        </div>
+        <HeaderMenu id="user_menu" v-show="usermenu_show"></HeaderMenu>
+        <Register @closeRegister="closeRegister" v-if="showRegister"></Register>
+        <Login @closeLogin="closeLogin" v-if="showLogin"></Login>
     </div>
 </template>
 
 <script>
+import Register from '@/components/widget/Register'
+import Login from '@/components/widget/Login'
 import HeaderMenu from '@/components/widget/HeaderMenu'
+
+let uid = localStorage.uid;
+let token = localStorage.token;
 
 
 
 export default {
     props: ['show'],
     components: {
-            HeaderMenu
+            HeaderMenu,
+            Register,
+            Login,
         },
     data(){
         return{
@@ -43,6 +50,8 @@ export default {
             usermenu_show: false,
             middleSytle: {}, // 动态设置li标签样式
             imgSytle: {}, // 动态设置img标签样式
+            showLogin: false, // 显示登录窗
+            showRegister: false, // 显示注册窗
         }
     },
     watch: {
@@ -53,11 +62,38 @@ export default {
             this.usermenu_show = newValue;
         }
     },
+    methods: {
+        // 关闭注册窗
+        closeRegister(val){
+            this.showRegister = val;
+        },
+        // 关闭登录窗
+        closeLogin(val){
+            this.showLogin = val;
+        },
+        // 我的文章页
+        articles(){           
+            if(uid&&token){           
+                this.$router.push({path:'/articles'});
+            }else{               
+                this.showLogin = true;
+            }
+        },
+        // 文章编辑页
+        edit(){           
+            if(uid&&token){           
+                this.$router.push({path:'/edit'});
+            }else{               
+                this.showLogin = true;
+            }
+        },
+    }
 }
 </script>
 
 <style>
 .forehead{
+    z-index: 1;
     width: 100%;
     height: 45px;
     background: #4F4F4F;
@@ -92,7 +128,7 @@ a{
     color: aliceblue;
     line-height: 45px;
 }
-.nav li a{
+.nav li label{
     cursor: pointer;
 }
 .user{
@@ -120,8 +156,9 @@ a{
     margin-right: 15%;
 }
 .user .profile img{
+    float: right;
     cursor: default;
-    margin: 7.5px auto 7.5px 55%;
+    margin: 7.5px 18px 7.5px auto;
     height: 30px;
     cursor: pointer;
     background: #ffffff;
