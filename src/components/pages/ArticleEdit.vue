@@ -1,5 +1,6 @@
 <template>
 <div class="main_wrap" @click="hideMenu">
+    <UploadImage></UploadImage>
     <div class="title">
         <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
     </div>
@@ -23,18 +24,17 @@
     <div class="body">               
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
-    <div id="pub_menu" v-show="menu_show">
-        <PubMenu :id=id :title=title :body=body :category=category :tags=tags></PubMenu>
-    </div>
-    <div id="user_menu" v-show="usermenu_show">
-        <UserMenu></UserMenu>
-    </div>
+    
+    <PubMenu id="pub_menu" v-show="menu_show" :article_id=id :title=title :body=body :category=category :tags=tags ></PubMenu>
+    <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
 </div>   
 </template>
 
 <script>
     import PubMenu from '@/components/widget/PubMenu'
     import UserMenu from '@/components/widget/UserMenu'
+    import UploadImage from '@/components/widget/UploadImage'
+
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
     import cons from '@/components/constent'
@@ -46,7 +46,8 @@
         components: {
             mavonEditor,
             PubMenu,
-            UserMenu
+            UserMenu,
+            UploadImage,
         },
         mounted(){   
             this.getArticle();

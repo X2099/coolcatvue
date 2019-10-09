@@ -18,6 +18,7 @@
             :editable=false
             :scrollStyle=true
             :ishljs=true
+            style="position:inherit"
             ></mavon-editor>
     </div>
 </div>
@@ -104,16 +105,12 @@ export default {
 <style scoped>
 .main_wrap{
     overflow-y: auto;
-    height: 92%;
-    width: 100%;
 }
 .title{
     margin: 2% 20% 0 20%;
     height: 15%;
-    /* width: 100%; */
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    /* background: yellow; */
     user-select: none;
 }
 .title .avatar{
@@ -140,8 +137,6 @@ export default {
 .title .avatar img{
     cursor: pointer;
     background: #e4e2e2;
-    /* width: 100%; */
-    /* height: 100%; */
     border-radius: 50%;
     opacity: 0.9;
     filter: alpha=(opacity(100));

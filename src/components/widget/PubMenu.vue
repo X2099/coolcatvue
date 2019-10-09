@@ -63,10 +63,10 @@ let uid = localStorage.uid;
 
 export default {
     name: "",
-    props: ['id', 'title', 'body', 'category', 'tags'],
+    props: ['article_id', 'title', 'body', 'category', 'tags'],
     data() {
         return{
-            id: '',
+            article_id: '',
             title: '',
             body: '',
             category: '',
@@ -226,8 +226,8 @@ export default {
                     author: uid,
                     status: this.status
                 }
-            if(this.id){
-                this.axios.put(cons.apis + 'api/articles/' + this.id + '/',
+            if(this.article_id){
+                this.axios.put(cons.apis + 'api/articles/' + this.article_id + '/',
                 article_form,
                 {
                 headers:{

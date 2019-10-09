@@ -15,7 +15,7 @@
         </div>
         <div class="nav">
         <ul>
-            <li><router-link to="/">首页</router-link></li>
+            <li><label @click="index">首页</label></li>
             <li><label @click="articles">我的文章</label></li>
             <li><label @click="edit">写文章</label></li>
             <li>留言板</li>
@@ -71,6 +71,9 @@ export default {
         closeLogin(val){
             this.showLogin = val;
         },
+        index(){
+            this.$router.push({path: '/'});
+        },
         // 我的文章页
         articles(){           
             if(uid&&token){           
@@ -97,6 +100,7 @@ export default {
     width: 100%;
     height: 45px;
     background: #4F4F4F;
+    color: #f5f5f5;
     cursor: text;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -107,10 +111,6 @@ export default {
     width: 10%;
     float: left;
     height: 100%;
-}
-a{
-    text-decoration: none;
-    color: #fff;
 }
 .logo img{
     height: 40px;
@@ -125,7 +125,6 @@ a{
     float: left;
     width: 25%;
     text-align: center;
-    color: aliceblue;
     line-height: 45px;
 }
 .nav li label{
@@ -137,20 +136,18 @@ a{
     height: 100%;
 }
 .user .operate label{
-    float: right;  
-    color: aliceblue;
+    float: right;
     line-height: 45px;     
     font-size: 14px;
-    font-weight: 100;
-}
-.user .operate label a{  
+    font-weight: 10;
     cursor: pointer;
 }
-.user .operate label a:hover{  
+.user .operate label:hover{  
     color: dodgerblue;
 }
 .user .operate .welcome:hover{  
     color: Gold;
+    cursor: text;
 }
 .user .operate .register{
     margin-right: 15%;

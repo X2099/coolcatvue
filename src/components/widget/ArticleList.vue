@@ -75,7 +75,7 @@ export default {
     width: 50%;
     height: 100px;
     background: #ffffff;
-    margin: 0.5px auto;
+    margin: 1px auto;
     padding: 4% 0 4% 10%;
 }
 .article .intro p{
@@ -94,7 +94,7 @@ export default {
 }
 .article .cover{
     float: left;
-    margin: 0.5px auto;
+    margin: 1px auto;
     width: 40%;
     height: 100px;
     padding: 4% 0;

@@ -2,7 +2,7 @@
 <div class="main_wrap">
     <div id="background"></div>
     <div class="register_form">
-        <h1 class="register_title">用户注册</h1>
+        <h1 class="register_title">注册</h1>
         <h1 class="close" @click="fnClose">✕</h1>
         <form method="post"> 
             <input type="text" placeholder="用户名" class="input_txt" v-model="username" @blur="checkUsername">
@@ -208,7 +208,6 @@ z-index: 2;
 width: 330px;
 height: 490px;
 background: #fff;
-position: fixed;
 left: 50%;
 top: 50%;
 margin-top: -246px;
@@ -228,7 +227,7 @@ color: rgb(63, 67, 68);
 }
 .register_form .error_tip{
 height: 20px;
-width: 278px;
+width: 250px;
 font-size: 10px;
 line-height: 20px;
 margin: auto;
@@ -243,15 +242,16 @@ font-size: 18px;
 float: left;
 color: #4F4F4F;
 }
-.login_form .close{
+.register_form .close{
 float: right;
 color: DarkGray;
 cursor: pointer;
+
 }
 .input_txt{
 display: block;
 margin: auto;
-width: 298px;
+width: 270px;
 height: 32px;
 border: 1px solid #d0d0d0;
 border-radius: 4px;
@@ -261,16 +261,17 @@ text-indent: 10px;
 .input_sub{
 display: block;
 margin: 10px auto 0;
-width: 298px;
+width: 270px;
 height: 32px;
 border: 0px;
 border-radius: 4px;
-background: rgb(63, 67, 68);
+background: dodgerblue;
 color:#fff;
 cursor:pointer;
 outline:none; 
 }
 .input_sub:hover{
-background: rgb(114, 119, 121);
+opacity: 0.75;
+filter: alpha=(opacity(100));
 }
 </style>

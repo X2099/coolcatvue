@@ -88,7 +88,6 @@ z-index: 2;
 width:330px;
 height:312px;
 background:#fff;
-position:fixed;
 left:50%;
 top:50%;
 margin-top:-156px;
