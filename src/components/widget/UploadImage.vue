@@ -1,25 +1,41 @@
 <template>
-    <div class="main_wrap">
-        <h1>添加文章封面</h1>
-        <!-- <input type="file" class="input_image" value="上传" accept="image/gif,image/jpeg,image/jpg,image/png"> -->
-        <input class="aload" type='button' value='上传附件' @click="openfile" />
-        <input id='showFileName' type='text' readonly style="border: none;"/>
-        <input id='hiddenFile' type='file' style="display:none" @change="getName" />
-    </div>
+<div class="main_wrap">
+    <h1>添加文章封面</h1>
+    <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" />
+    <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile($event)" accept="image/gif,image/jpeg,image/jpg,image/png" />
+</div>
 </template>
 
 <script>
+import cons from '@/components/constent'
+let token = localStorage.token;
+let uid = localStorage.uid;
+
 export default {
     methods: {
-        openfile(){
+        addFile(){
             document.getElementById("hiddenFile").click();
         },
-        getName(){
-            alert("change");
-            let name = document.getElementById("hiddenFile").value.split("\\");
-            // alert(name);
-            document.getElementById('showFileName').value = name[name.length - 1];
-            // alert(name);
+        uploadFile(data){
+            let files = this.$refs.image.files[0];
+            let datas = new FormData()
+            alert(datas);
+	        datas.append("cover",files)
+            this.axios.post(cons.apis + 'api/articles/upload/',
+                datas,
+                {
+                headers:{
+                    'authorization': 'JWT ' + token,
+                },
+                responseType: 'json'
+            })
+            .then(response=>{
+                alert(response.data.msg);
+            })
+            .catch(error=>{
+                this.error_list.push("上传图片失败");
+                this.clearErrmsg();
+            })
         }
     }
 }
@@ -31,22 +47,28 @@ export default {
     float: left;
     top: 6%;
     right: 21%;
-    width: 600px;
-    height: 300px;
+    width: 300px;
+    height: 160px;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
-.input_image{
-    width: 300px;
-    height: 200px;
-    background: yellowgreen;
+h1{
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    margin: 10px auto;
+    color: DarkGrey;
 }
-.aload{
-    width: 500px;
-    height: 200px;
-    line-height: 200px;
+.dummy{
+    width: 250px;
+    height: 90px;
+    margin: auto 25px;
+    font-size: 16px;
+    color: #B5B5B5;
+    border: none;
+    outline: medium;
 }
 </style>
