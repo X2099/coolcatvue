@@ -1,5 +1,5 @@
 <template>
-<div id="pub_menu" class="main_wrap">
+<div class="main_wrap">
     <h1>发布文章</h1>
     <div class="category">
         <h2>分类</h2>
@@ -285,7 +285,6 @@ export default {
 <style scoped>
 .main_wrap{
     z-index: 2;
-    float: left;
     top: 6%;
     right: 6.25%;
     width: 300px;

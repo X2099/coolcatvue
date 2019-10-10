@@ -2,7 +2,7 @@
 <div class="main_wrap">
     <h1>添加文章封面</h1>
     <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" />
-    <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile($event)" accept="image/gif,image/jpeg,image/jpg,image/png" />
+    <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile()" accept="image/gif,image/jpeg,image/jpg,image/png" />
 </div>
 </template>
 
@@ -16,13 +16,12 @@ export default {
         addFile(){
             document.getElementById("hiddenFile").click();
         },
-        uploadFile(data){
-            let files = this.$refs.image.files[0];
-            let datas = new FormData()
-            alert(datas);
-	        datas.append("cover",files)
+        uploadFile(){
+            let file = this.$refs.image.files[0];
+            let cover_form = new FormData()
+	        cover_form.append("cover",file)
             this.axios.post(cons.apis + 'api/articles/upload/',
-                datas,
+                cover_form,
                 {
                 headers:{
                     'authorization': 'JWT ' + token,
@@ -44,7 +43,6 @@ export default {
 <style scoped>
 .main_wrap{
     z-index: 2;
-    float: left;
     top: 6%;
     right: 21%;
     width: 300px;

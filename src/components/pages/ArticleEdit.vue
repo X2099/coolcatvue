@@ -1,20 +1,19 @@
 <template>
 <div class="main_wrap" @click="hideMenu">
-    <UploadImage></UploadImage>
     <div class="title">
         <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
     </div>
 
     <div class="sub_menu">
         <div class="button">
-            <label><p>文章封面</p></label>
+            <label id="upload_button" @click="upload_show=!upload_show"><p>文章封面</p></label>
         </div>
         <div class="button">
             <label><p>•••</p></label>
         </div>
         <div class="button">
             <label>
-            <p id="pub_button" @click="menu_show=!menu_show" style="color:dodgerblue;font-size:16px">{{ menu_show?'▴ ':'▾ ' }}发布</p>
+            <p id="pub_button" @click="menu_show=!menu_show">{{ menu_show?'▴ ':'▾ ' }}发布</p>
             </label>
         </div>
         <div class="user" v-if="username">
@@ -27,6 +26,7 @@
     
     <PubMenu id="pub_menu" v-show="menu_show" :article_id=id :title=title :body=body :category=category :tags=tags ></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
+    <UploadImage id="upload_menu" v-show="upload_show"></UploadImage>
 </div>   
 </template>
 
@@ -64,6 +64,7 @@
                 configs: {}, // ？
                 usermenu_show: false, // 是否显示用户菜单                            
                 menu_show: false, // 是否显示发布菜单
+                upload_show: false, // 是否显示添加封面菜单
             }
         },
         methods: {            
@@ -120,10 +121,14 @@
                 let elm2 = document.getElementById("pub_menu");
                 let elm3 = document.getElementById("user_img");
                 let elm4 = document.getElementById("user_menu");
+                let elm5 = document.getElementById("upload_button");
+                let elm6 = document.getElementById("upload_menu");
                 let out_elm1 = !elm1.contains(event.target);
                 let out_elm2 = !elm2.contains(event.target);
                 let out_elm3 = !elm3.contains(event.target);
                 let out_elm4 = !elm4.contains(event.target);
+                let out_elm5 = !elm5.contains(event.target);
+                let out_elm6 = !elm6.contains(event.target);
                 if(elm1 && elm2){
                     if(out_elm1 && out_elm2){
                         this.menu_show = false;
@@ -132,6 +137,11 @@
                 if(elm3 && elm4){
                     if(out_elm3 && out_elm4){
                         this.usermenu_show = false;
+                    }
+                }
+                if(elm5 && elm6){
+                    if(out_elm5 && out_elm6){
+                        this.upload_show = false;
                     }
                 }
             }
@@ -193,7 +203,10 @@
 .sub_menu .button p{
     cursor: pointer;
 }
-
+#pub_button{
+    color:dodgerblue;
+    font-size:16px
+}
 .sub_menu .user img{
     position:fixed;
     top: 1%;
