@@ -288,7 +288,7 @@ export default {
     top: 6%;
     right: 6.25%;
     width: 300px;
-    height: 600px;
+    height: 550px;
     color: slategray;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

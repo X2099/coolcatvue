@@ -24,7 +24,7 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     
-    <PubMenu id="pub_menu" v-show="menu_show" :article_id=id :title=title :body=body :category=category :tags=tags ></PubMenu>
+    <PubMenu id="pub_menu" :article_id=id :title=title :body=body :category=category :tags=tags v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
     <UploadImage id="upload_menu" v-show="upload_show"></UploadImage>
 </div>   
@@ -151,12 +151,11 @@
 
 <style scoped>
 .main_wrap{
-    position:fixed;
-    width:100%;
-    height:100%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     background: #f5f5f5;
 }
-
 .title{
     width: 75%;
     height: 6%;

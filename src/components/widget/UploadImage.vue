@@ -19,21 +19,12 @@ export default {
             heightStyle : {},
         }
     },
-    watch: {
-        'cover_url':function(new_val, old_val){
-            if(old_val==''&&new_val!=''){
-                alert("change");
-                this.setHeight();
-            }        
-        }
-    },
     methods: {
         addFile(){
             document.getElementById("hiddenFile").click();
         },
         uploadFile(){
             let file = this.$refs.image.files[0];
-            alert(file.getWidth);
             let cover_form = new FormData()
 	        cover_form.append("cover",file)
             this.axios.post(cons.apis + 'api/articles/upload/',
@@ -45,31 +36,17 @@ export default {
                 responseType: 'json'
             })
             .then(response=>{
-                this.cover_url = response.data.cover_url;
-                this.setHeight();
+                this.cover_url = cons.apis + 'static/' + response.data.cover;
+                let height = response.data.height;
+                let width = response.data.width;
+                this.heightStyle = {
+                    'height': 250 * height / width + 70 + 'px',
+                }
             })
             .catch(error=>{
                 this.error_list.push("上传图片失败");
                 this.clearErrmsg();
             })
-        },
-        setHeight(){
-            let height = this.$refs.cover.offsetHeight;
-            alert(height);
-            this.heightStyle = {
-                'height': '400px',
-            }
-            // if(this.cover_url!=""){
-            //     // alert(height);
-            //     this.heightStyle = {
-            //     'height': height + 45 + 'px',
-            //     }
-            // }else{
-            //     this.heightStyle = {
-            //         'height': '',
-            //     }
-            // }
-            
         },
     }
 }
@@ -77,7 +54,7 @@ export default {
 
 <style scoped>
 .main_wrap{
-    /* position:fixed; */
+    position: fixed;
     z-index: 2;
     top: 6%;
     right: 21%;
@@ -91,12 +68,9 @@ export default {
 }
 
 img{
-    /* width: 250px; */
-    background: #B5B5B5;
-    /* margin: 10% 10%; */
-    margin: auto 25px;
     width: 250px;
-    height: 320px;
+    background: #B5B5B5;
+    margin: auto 25px;
 }
 h1{
     font-size: 18px;
