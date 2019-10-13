@@ -9,44 +9,56 @@
 
 <script>
 import cons from '@/components/constent'
+import { clearTimeout } from 'timers';
 let token = localStorage.token;
 let uid = localStorage.uid;
 
 export default {
     data() {
         return{
+            cover_image: null,
             cover_url: '',
             heightStyle : {},
+            height: '',
+            width: '',
+            timer: null,
         }
     },
     methods: {
         addFile(){
             document.getElementById("hiddenFile").click();
         },
+        startTimer(){         
+            this.timer = setInterval(()=>{
+                this.setHeight();
+            }, 0.1);  
+        },
+        setHeight(){
+            let height = null;
+            let width = null;
+            height = sessionStorage.getItem('height');
+            width = sessionStorage.getItem('width');
+            this.heightStyle = {
+                'height': 250 * height / width + 70 + 'px',
+                }
+            if(height!=undefined||width!=undefined){
+                sessionStorage.clear();
+                clearInterval(this.timer); 
+            }
+        },
         uploadFile(){
             let file = this.$refs.image.files[0];
-            let cover_form = new FormData()
-	        cover_form.append("cover",file)
-            this.axios.post(cons.apis + 'api/articles/upload/',
-                cover_form,
-                {
-                headers:{
-                    'authorization': 'JWT ' + token,
-                },
-                responseType: 'json'
-            })
-            .then(response=>{
-                this.cover_url = cons.apis + 'static/' + response.data.cover;
-                let height = response.data.height;
-                let width = response.data.width;
-                this.heightStyle = {
-                    'height': 250 * height / width + 70 + 'px',
-                }
-            })
-            .catch(error=>{
-                this.error_list.push("上传图片失败");
-                this.clearErrmsg();
-            })
+            let files = this.$refs.image.files;
+            let imgSrc = URL.createObjectURL(file);
+            let img = new Image();
+            img.src = imgSrc;
+            img.onload = function(){
+                sessionStorage.setItem('height', JSON.stringify(img.height));
+                sessionStorage.setItem('width', JSON.stringify(img.width));
+            }
+            this.startTimer();
+            this.cover_url = imgSrc;
+            this.$emit('getCover', this.cover_url);
         },
     }
 }

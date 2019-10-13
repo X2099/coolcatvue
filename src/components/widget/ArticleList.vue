@@ -10,7 +10,8 @@
                 <p><label class="tag" v-for="(tag, index) in article.tags" :key="index">{{ tag.name }} </label></p>
             </div>
             <div class="cover">
-                <img src="static/images/article.jpg"  @click="articleDetail(article.id)" />
+                <img :src="article.cover_image" v-if="article.cover_image" @click="articleDetail(article.id)" />
+                <img src="static/images/article.jpg" v-else @click="articleDetail(article.id)" />
             </div>            
         </div>
         <div style="clear:both">

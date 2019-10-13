@@ -6,7 +6,7 @@
 
     <div class="sub_menu">
         <div class="button">
-            <label id="upload_button" @click="upload_show=!upload_show"><p>文章封面</p></label>
+            <label id="upload_button" :style="cover_image!=''?'color:dodgerblue':''" @click="upload_show=!upload_show"><p>文章封面</p></label>
         </div>
         <div class="button">
             <label><p>•••</p></label>
@@ -24,9 +24,9 @@
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
     
-    <PubMenu id="pub_menu" :article_id=id :title=title :body=body :category=category :tags=tags v-show="menu_show"></PubMenu>
+    <PubMenu id="pub_menu" :article_id=id :title=title :body=body :category=category :tags=tags :cover_image=cover_image v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
-    <UploadImage id="upload_menu" v-show="upload_show"></UploadImage>
+    <UploadImage id="upload_menu" v-show="upload_show" @getCover="getCover"></UploadImage>
 </div>   
 </template>
 
@@ -60,6 +60,7 @@
                 body:'', // 文章正文
                 category: '', // 文章分类
                 tags: [], // 文章标签
+                cover_image: '', // 文章封面
                 html:'', // ？
                 configs: {}, // ？
                 usermenu_show: false, // 是否显示用户菜单                            
@@ -67,12 +68,16 @@
                 upload_show: false, // 是否显示添加封面菜单
             }
         },
-        methods: {            
+        methods: {
+            // 上传图片
+            getCover(file){
+                this.cover_image = file;
+                // alert(this.cover_image);
+            },       
             // 获取被编辑文章数据
             getArticle() {
                 this.id = this.$route.params.id;
                 if(this.id){
-                    // alert("OK");
                     this.category = this.$route.params.category;
                     this.axios.get(cons.apis + 'api/articles/' + this.id + '/',{
                     responseType: 'json'
@@ -81,14 +86,13 @@
                         this.title = response.data.title;
                         this.body = response.data.body;
                         this.category = response.data.category.id;
-                        // alert(this.category);
                         let tags = response.data.tags;
                         for(let i=0;i<tags.length;i++){
                             this.tags.push(tags[i].id);
                         };
                     })
                     .catch(error=>{
-                        alert("获取数据失败！")
+                        alert("获取被编辑文章数据失败！")
                     })
                 }              
             },

@@ -63,14 +63,15 @@ let uid = localStorage.uid;
 
 export default {
     name: "",
-    props: ['article_id', 'title', 'body', 'category', 'tags'],
+    props: ['article_id', 'title', 'body', 'category', 'tags', 'cover_image'],
     data() {
         return{
-            article_id: '',
+            // article_id: '',
             title: '',
             body: '',
             category: '',
-            tags: '',
+            tags: [],
+            cover_image: '',
             status: 'p', // 文章类型（p：发布，d：草稿）
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
@@ -81,7 +82,6 @@ export default {
             timer: null, // 清除错误信息定时器   
         }
     },
-    // },
     mounted(){
         this.authenticate();
         this.getCategories();
@@ -125,7 +125,6 @@ export default {
             },
             responseType: 'json'
             })
-            
             .then(response=>{
                 this.tag_list = response.data;
             })
@@ -218,20 +217,23 @@ export default {
                 this.clearErrmsg();
                 return;
             }
-            let article_form = {
-                    title: this.title,
-                    body: this.body,
-                    category: this.category,
-                    tags: this.tags,
-                    author: uid,
-                    status: this.status
-                }
+            let article_form = new FormData();
+            article_form.append('title', this.title);
+            article_form.append('body', this.body);
+            article_form.append('category', this.category);
+            for(let i=0;i<this.tags.length;i++){
+                article_form.append('tags', this.tags[i]);
+            }
+            article_form.append('author', uid);
+            article_form.append('status', this.status);
+            article_form.append('cover_image', this.cover_image);
             if(this.article_id){
                 this.axios.put(cons.apis + 'api/articles/' + this.article_id + '/',
                 article_form,
                 {
                 headers:{
                 'authorization': 'JWT ' + token,
+                'Content-Type': 'multipart/form-data',
                 },
                 responseType: 'json'
                 })
@@ -272,10 +274,12 @@ export default {
             if(this.timer==null){
                 this.timer = setInterval(()=>{
                 this.error_list.shift();
+                console.log("定时删除错误信息...");
                 if(this.error_list.length<=0){
-                    clearTimeout(this.timer)
+                    // 清除定时器
+                    clearInterval(this.timer);
                     }
-                }, 4000)
+                }, 3000)
             }              
         },  
     },
