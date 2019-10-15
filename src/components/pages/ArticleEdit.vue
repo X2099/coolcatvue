@@ -6,7 +6,9 @@
 
     <div class="sub_menu">
         <div class="button">
-            <label id="upload_button" :style="cover_image!=''?'color:dodgerblue':''" @click="upload_show=!upload_show"><p>文章封面</p></label>
+            <label id="upload_button" :style="cover_image!=''?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
+                <p><i class="el-icon-picture" style="font-size:20px"></i></p>
+            </label>
         </div>
         <div class="button">
             <label><p>•••</p></label>
@@ -26,7 +28,7 @@
     
     <PubMenu id="pub_menu" :article_id=id :title=title :body=body :category=category :tags=tags :cover_image=cover_image v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
-    <UploadImage id="upload_menu" v-show="upload_show" @getCover="getCover"></UploadImage>
+    <UploadImage id="upload_menu" :cover_url=cover_url v-show="upload_show" @getCover="getCover"></UploadImage>
 </div>   
 </template>
 
@@ -60,6 +62,7 @@
                 body:'', // 文章正文
                 category: '', // 文章分类
                 tags: [], // 文章标签
+                cover_url: [],
                 cover_image: '', // 文章封面
                 html:'', // ？
                 configs: {}, // ？
@@ -86,6 +89,7 @@
                         this.title = response.data.title;
                         this.body = response.data.body;
                         this.category = response.data.category.id;
+                        this.cover_url = response.data.cover_image;
                         let tags = response.data.tags;
                         for(let i=0;i<tags.length;i++){
                             this.tags.push(tags[i].id);
