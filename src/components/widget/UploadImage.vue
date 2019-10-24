@@ -1,14 +1,15 @@
 <template>
 <div>
-    <div class="remove">
+    <div class="remove" v-if="cover_url||preview_url">
         <div id="remove">
-            <i class="el-icon-delete-solid"></i>
+            <i class="el-icon-delete-solid" @click=removeFile></i>
         </div>
     </div>
     <div class="main_wrap" :style="heightStyle">
         <h1>添加文章封面</h1>
-        <img ref="upload_cover" :src="upload_cover_url" v-show="upload_cover_url" />
-        <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" v-show="!upload_cover_url" />
+        <img ref="cover" :src="cover_url" v-if="cover_url" />
+        <img ref="preview" :src="preview_url" v-show="preview_url" />
+        <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" v-show="!cover_url&&!preview_url" />
         <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile()" accept="image/gif,image/jpeg,image/jpg,image/png" />
     </div>
 </div>
@@ -16,57 +17,98 @@
 
 <script>
 import cons from '@/components/constent'
-import { clearTimeout } from 'timers';
 let token = localStorage.token;
 let uid = localStorage.uid;
 
 export default {
-    props: ['cover_url'],
+    props: ['cover_url', 'article_id'],
     data() {
         return{
             cover_image: null,
-            upload_cover_url: '',
+            preview_url: null,
             heightStyle : {},
             height: '',
             width: '',
-            timer: null,
         }
     },
     mounted() {
-        // this.uploadFile();
-        // this.setHeight();
+        this.showCover();
     },
     methods: {
         addFile(){
             document.getElementById("hiddenFile").click();
         },
-        setHeight(){         
-            this.timer = setInterval(()=>{
-                console.log("预览图片设置高度");
-                let height = sessionStorage.getItem('height');
-                let width = sessionStorage.getItem('width');
-                this.heightStyle = {
-                    'height': 250 * height / width + 70 + 'px',
-                    }
-                if(height!=undefined||width!=undefined){
-                    sessionStorage.clear();
-                    clearInterval(this.timer); 
-                }
-            }, 1);
-        },
-        uploadFile(){
+        uploadFile(){      
             let file = this.$refs.image.files[0];
             let files = this.$refs.image.files;
             let imgSrc = URL.createObjectURL(file);
             let img = new Image();
             img.src = imgSrc;
-            img.onload = function(){
+            let timer = setInterval(()=>{
+                console.log("预览图片设置高度");
+                img.onload = function(){
                 sessionStorage.setItem('height', JSON.stringify(img.height));
                 sessionStorage.setItem('width', JSON.stringify(img.width));
+                }
+                let height = sessionStorage.getItem('height');
+                let width = sessionStorage.getItem('width');
+                if(height!=null&&width!=null){
+                    this.heightStyle = {'height': 250 * height / width + 70 + 'px'}
+                    sessionStorage.clear();
+                    clearInterval(timer); 
+                }
+            }, 1);
+            this.preview_url = imgSrc;
+            alert(file);
+            this.$emit('getCover', this.$refs.image.files[0]);
+        },
+        showCover(){
+            let i = 0;
+            let timer = setInterval(()=>{  
+                console.log("封面图片设置高度");
+                let img = new Image();
+                img.src = this.cover_url;
+                let height = sessionStorage.getItem('height');
+                let width = sessionStorage.getItem('width');
+                if(height==null||width==null){
+                    img.onload = function(){
+                    sessionStorage.setItem('height', JSON.stringify(img.height));
+                    sessionStorage.setItem('width', JSON.stringify(img.width));
+                    };
+                }
+                if(i>=3||height!=null&&width!=null){
+                    this.heightStyle = {'height': 250 * height / width + 70 + 'px'};
+                    sessionStorage.clear();
+                    clearInterval(timer);
+                }
+                i++;
+            }, 500);
+        },
+        removeFile(){
+            this.preview_url = '';
+            if(this.article_id&&this.cover_url!=''){
+                let article_form = new FormData();
+                article_form.append('cover_image', null);
+                this.axios.patch(cons.apis + 'api/articles/' + this.article_id + '/remove/',
+                article_form,
+                {
+                    headers:{
+                    'authorization': 'JWT ' + token,
+                    'Content-Type': 'multipart/form-data',
+                    },
+                    responseType: 'json'
+                })
+                .then(response=>{
+                    return;
+                    alert("OK");
+                })
+                .catch(error=>{
+                    alert("删除图片失败！");
+                })
             }
-            this.upload_cover_url = imgSrc;
-            this.setHeight();
-            this.$emit('getCover', this.upload_cover_url);  
+            this.cover_url = '';
+            this.$emit('getCover', false);
+            this.heightStyle = {'height': '160px'};
         },
     }
 }
@@ -96,12 +138,18 @@ export default {
 }
 #remove{
     margin: 45px 25px 0 0;
-    /* background: red; */
-    /* width: 5px;
-    height: 5px; */
 }
 #remove i{
-    margin: 5px 5px 0 0;
+    margin: 10px 10px 0 0;
+    padding: 5px 3px;
+    font-size: 18px;
+    color: #ffffff;
+    border-radius: 3px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+#remove i:hover{
+    opacity: 1;
 }
 .main_wrap img{
     width: 250px;

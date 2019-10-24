@@ -6,7 +6,7 @@
 
     <div class="sub_menu">
         <div class="button">
-            <label id="upload_button" :style="cover_image!=''?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
+            <label id="upload_button" :style="cover_url?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
                 <p><i class="el-icon-picture" style="font-size:20px"></i></p>
             </label>
         </div>
@@ -25,10 +25,9 @@
     <div class="body">               
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @change="change" style="height:100%"/>                       
     </div>
-    
     <PubMenu id="pub_menu" :article_id=id :title=title :body=body :category=category :tags=tags :cover_image=cover_image v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
-    <UploadImage id="upload_menu" :cover_url=cover_url v-show="upload_show" @getCover="getCover"></UploadImage>
+    <UploadImage id="upload_menu" :cover_url=cover_url :article_id=id v-show="upload_show" @getCover="getCover"></UploadImage>
 </div>   
 </template>
 
@@ -62,7 +61,7 @@
                 body:'', // 文章正文
                 category: '', // 文章分类
                 tags: [], // 文章标签
-                cover_url: [],
+                cover_url: '',
                 cover_image: '', // 文章封面
                 html:'', // ？
                 configs: {}, // ？
@@ -75,7 +74,6 @@
             // 上传图片
             getCover(file){
                 this.cover_image = file;
-                // alert(this.cover_image);
             },       
             // 获取被编辑文章数据
             getArticle() {
@@ -202,7 +200,6 @@
     color: rgb(138, 144, 145);
     text-align: center;
 }
-
 .sub_menu .button label{
     vertical-align: middle;
     display: table-cell;
