@@ -7,7 +7,7 @@
     </div>
     <div class="main_wrap" :style="heightStyle">
         <h1>添加文章封面</h1>
-        <img ref="cover" :src="cover_url" v-if="cover_url" />
+        <img ref="cover" :src="cover_url" v-show="cover_url" />
         <img ref="preview" :src="preview_url" v-show="preview_url" />
         <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" v-show="!cover_url&&!preview_url" />
         <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile()" accept="image/gif,image/jpeg,image/jpg,image/png" />
@@ -59,8 +59,7 @@ export default {
                 }
             }, 1);
             this.preview_url = imgSrc;
-            alert(file);
-            this.$emit('getCover', this.$refs.image.files[0]);
+            this.$emit('getCover', file);
         },
         showCover(){
             let i = 0;
@@ -87,10 +86,7 @@ export default {
         removeFile(){
             this.preview_url = '';
             if(this.article_id&&this.cover_url!=''){
-                let article_form = new FormData();
-                article_form.append('cover_image', null);
-                this.axios.patch(cons.apis + 'api/articles/' + this.article_id + '/remove/',
-                article_form,
+                this.axios.delete(cons.apis + 'api/articles/remove/?article_id=' + this.article_id,
                 {
                     headers:{
                     'authorization': 'JWT ' + token,
@@ -104,6 +100,7 @@ export default {
                 })
                 .catch(error=>{
                     alert("删除图片失败！");
+                    
                 })
             }
             this.cover_url = '';
