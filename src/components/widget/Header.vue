@@ -72,12 +72,12 @@ export default {
             this.showLogin = val;
         },
         index(){
-            this.$router.push({path: '/'});
+            this.$router.push({path: '/'}).catch(err => {err});
         },
         // 我的文章页
         articles(){           
             if(uid&&token){           
-                this.$router.push({path:'/articles'});
+                this.$router.push({path:'/articles'}).catch(err => {err});
             }else{               
                 this.showLogin = true;
             }
@@ -85,7 +85,7 @@ export default {
         // 文章编辑页
         edit(){           
             if(uid&&token){           
-                this.$router.push({path:'/edit'});
+                this.$router.push({path:'/edit'}).catch(err => {err});
             }else{               
                 this.showLogin = true;
             }
