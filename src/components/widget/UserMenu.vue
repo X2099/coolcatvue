@@ -2,7 +2,6 @@
 <div class="main_wrap">
     <div class="option"><router-link to='/articles'>我的文章</router-link></div>
     <div class="option"><router-link to='/drafts'>我的草稿</router-link></div>
-    
     <div class="option"><router-link to='/'>我的主页</router-link></div>
     <div class="option">管理</div>
     <div class="option">设置</div>
@@ -33,7 +32,6 @@ font-size: 16px;
 color: rgb(138, 144, 145);
 cursor: pointer;
 }
-
 .option a{
 color: rgb(138, 144, 145);
 text-decoration: none;

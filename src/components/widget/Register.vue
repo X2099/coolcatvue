@@ -18,9 +18,9 @@
             <input type="button" value="获取验证码" class="input_sub" @click="sendCode"> 
             <input type="button" value="注 册" class="input_sub" @click="fnRegister">
         </form>
-    <div class="nav">
-        <router-link to='/'>首页</router-link>|<router-link to='/login'>登录</router-link>
-    </div>
+        <div class="nav">
+            <a @click="goLogin">已有账号登录</a>
+        </div>
     </div>
 </div>
 </template>
@@ -57,6 +57,10 @@ export default {
         // 关闭注册窗
         fnClose(){
             this.$emit('closeRegister', false);
+        },
+        // 去登录
+        goLogin(){
+            this.$emit('goLogin', true);
         },
         checkUsername(){
         this.username_errmsg = '';
@@ -223,7 +227,8 @@ color: rgb(63, 67, 68);
 .register_form .nav a{
 text-decoration:none;
 margin: 0 10px;
-color: rgb(63, 67, 68); 
+color: rgb(63, 67, 68);
+cursor: pointer; 
 }
 .register_form .error_tip{
 height: 20px;

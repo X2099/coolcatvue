@@ -10,9 +10,7 @@
             <div class="error_tip" v-show="errshow">{{errmsg}}</div>
             <input type="button" value="登 录" class="input_sub" @click="fnLogin">
         </form>
-        <div class="nav">
-        <router-link to='/'>首页</router-link>|<router-link to='/register'>注册</router-link>
-        </div>
+        <div class="nav">没有账号？<a @click="goRegister">注册</a></div>
     </div>
 </div>
 </template>
@@ -34,6 +32,10 @@ export default {
         // 关闭登录窗
         fnClose(){
             this.$emit('closeLogin', false);
+        },
+        // 去注册
+        goRegister(){
+            this.$emit('goRegister', true);
         },
         // 登录
         fnLogin(){
@@ -59,7 +61,7 @@ export default {
             .catch(error=>{
                 var errmsg = error.response.data.msg;
                 if(errmsg){
-                this.errmsg = error.response.data.msg;
+                this.errmsg = errmsg;
                 }else{
                 this.errmsg = "用户名或者密码错误";               
                 }
@@ -104,7 +106,8 @@ color: #4F4F4F;
 .login_form .nav a{
 text-decoration:none;
 margin: 0 10px;
-color: #4F4F4F;        
+color: #4F4F4F;
+cursor: pointer;        
 }
 .login_form .error_tip{
 position:absolute;

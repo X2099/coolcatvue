@@ -22,8 +22,8 @@
         </ul>
         </div>
         <HeaderMenu id="user_menu" v-show="usermenu_show"></HeaderMenu>
-        <Register @closeRegister="closeRegister" v-if="showRegister"></Register>
-        <Login @closeLogin="closeLogin" v-if="showLogin"></Login>
+        <Register @closeRegister="closeRegister" @goLogin="goLogin" v-if="showRegister"></Register>
+        <Login @closeLogin="closeLogin" @goRegister="goRegister" v-if="showLogin"></Login>
     </div>
 </template>
 
@@ -71,6 +71,16 @@ export default {
         closeLogin(val){
             this.showLogin = val;
         },
+        // 从登录到注册
+        goRegister(val){
+            this.showLogin = false;
+            this.showRegister = val;
+        },
+        goLogin(val){
+            this.showRegister = false;
+            this.showLogin = val;
+        },
+        // 首页
         index(){
             this.$router.push({path: '/'}).catch(err => {err});
         },

@@ -3,7 +3,6 @@
     <div class="title">
         <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">     
     </div>
-
     <div class="sub_menu">
         <div class="button">
             <label id="upload_button" :style="has_image?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
@@ -162,23 +161,23 @@
                 let elm4 = document.getElementById("user_menu");
                 let elm5 = document.getElementById("upload_button");
                 let elm6 = document.getElementById("upload_menu");
-                let out_elm1 = !elm1.contains(event.target);
-                let out_elm2 = !elm2.contains(event.target);
-                let out_elm3 = !elm3.contains(event.target);
-                let out_elm4 = !elm4.contains(event.target);
-                let out_elm5 = !elm5.contains(event.target);
-                let out_elm6 = !elm6.contains(event.target);
-                if(elm1 && elm2){
+                if(elm1&&elm2){
+                    let out_elm1 = !elm1.contains(event.target);
+                    let out_elm2 = !elm2.contains(event.target);
                     if(out_elm1 && out_elm2){
                         this.menu_show = false;
                     }
                 }
-                if(elm3 && elm4){
+                if(elm3&&elm4){
+                    let out_elm3 = !elm3.contains(event.target);
+                    let out_elm4 = !elm4.contains(event.target);
                     if(out_elm3 && out_elm4){
                         this.usermenu_show = false;
                     }
                 }
-                if(elm5 && elm6){
+                if(elm5&&elm6){
+                    let out_elm5 = !elm5.contains(event.target);
+                    let out_elm6 = !elm6.contains(event.target);
                     if(out_elm5 && out_elm6){
                         this.upload_show = false;
                     }
