@@ -311,7 +311,7 @@ h1{
     font-size: 13px;
 }
 h2{
-    margin: 5% auto;
+    margin: 2.5% auto;
     font-size: 16px;
     font-weight: 500;
 }

@@ -38,9 +38,8 @@ export default {
         addFile(){
             document.getElementById("hiddenFile").click();
         },
-        uploadFile(){      
+        uploadFile(){ 
             let file = this.$refs.image.files[0];
-            let files = this.$refs.image.files;
             let imgSrc = URL.createObjectURL(file);
             let img = new Image();
             img.src = imgSrc;
@@ -60,6 +59,7 @@ export default {
             }, 1);
             this.preview_url = imgSrc;
             this.$emit('getCover', file);
+            this.$emit('hasImage', true);
         },
         showCover(){
             let i = 0;
@@ -95,17 +95,17 @@ export default {
                     responseType: 'json'
                 })
                 .then(response=>{
-                    return;
-                    alert("OK");
+                    this.$emit('removeCover', '');
                 })
                 .catch(error=>{
                     alert("删除图片失败！");
                     
-                })
+                });
             }
-            this.cover_url = '';
-            this.$emit('getCover', false);
+            this.$emit('getCover', '');
+            this.$emit('hasImage', false);
             this.heightStyle = {'height': '160px'};
+            this.$refs.image.value = null;
         },
     }
 }
