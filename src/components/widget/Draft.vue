@@ -64,7 +64,7 @@ export default {
                 params:{
                     'author': uid,
                     'status': 'd',
-                    }
+                }
             })
             .then(response=>{
                 this.article_list = response.data;
@@ -77,9 +77,7 @@ export default {
         articleEdit(id){
             this.$router.push({
                 name: 'ArticleEdit',
-                params: {
-                    id: id                   
-                }
+                params: {id: id}
             })
         },
     }

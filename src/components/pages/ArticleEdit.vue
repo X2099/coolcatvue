@@ -6,7 +6,7 @@
 
     <div class="sub_menu">
         <div class="button">
-            <label id="upload_button" :style="cover_url!=''?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
+            <label id="upload_button" :style="cover_url!=''&&cover_url!=null?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
                 <p><i class="el-icon-picture" style="font-size:20px"></i></p>
             </label>
         </div>
@@ -25,8 +25,7 @@
     <div class="body">               
         <mavon-editor placeholder="此处输入正文..." v-model="body" ref="md" @imgAdd="$imgAdd" @imgDel="$imgDel" @change="change" style="height:100%"/>                       
     </div>
-    <PubMenu id="pub_menu" :editing_article_id=id :editing_title=title :editing_body=body :editing_category=category 
-    :editing_tags=tags :editing_cover_image=cover_image v-show="menu_show"></PubMenu>
+    <PubMenu id="pub_menu" :article_id=id :title=title :body=body :edited_category=category :edited_tags=tags :cover_image=cover_image v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
     <UploadImage id="upload_menu" :cover_url=cover_url :article_id=id v-show="upload_show" @getCover="getCover"></UploadImage>
 </div>   
@@ -80,7 +79,6 @@
             getArticle() {
                 this.id = this.$route.params.id;
                 if(this.id){
-                    this.category = this.$route.params.category;
                     this.axios.get(cons.apis + 'api/articles/' + this.id + '/',{
                     responseType: 'json'
                     })

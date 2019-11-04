@@ -7,8 +7,6 @@
             <p>您还未添加任何分类!</p>
         </div>
         <div v-else class="nonempty">
-            {{ tags }}
-            {{ category }}
             <div v-for="(cat,index) in category_list" :key="index">
                 <label :style="category==cat.id?'color:dodgerblue':''" class="parent">
                 <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}                                       
@@ -65,15 +63,11 @@ let uid = localStorage.uid;
 
 export default {
     name: "",
-    props: ['editing_article_id', 'editing_title', 'editing_body', 'editing_category', 'editing_tags', 'editing_cover_image'],
+    props: ['article_id', 'title', 'body', 'edited_category', 'edited_tags', 'cover_image'],
     data() {
         return{
-            article_id: this.editing_article_id,
-            title: this.editing_title,
-            body: this.editing_body,
-            category: this.editing_category,
-            tags: this.editing_tags,
-            cover_image: this.editing_cover_image,
+            category: '', // 文章分类
+            tags: this.edited_tags, // 文章标签
             status: 'p', // 文章类型（p：发布，d：草稿）
             category_list: [], // 分类数据
             tag_list: [], // 标签数据
@@ -84,10 +78,15 @@ export default {
             timer: null, // 清除错误信息定时器   
         }
     },
+    watch: {
+        'edited_category':function(newValue){
+            this.category = newValue;
+        }
+    },
     mounted(){
         this.authenticate();
-        this.getCategories();
         this.getTags();
+        this.getCategories();
     }, 
     methods:{
         // 验证是否登录
