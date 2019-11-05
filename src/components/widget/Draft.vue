@@ -7,7 +7,7 @@
             <h4 class="draft">草稿专栏（{{ article_list.length }}）</h4>      
             <div v-for="(article,index) in article_list" :key="index" class="article">
                 <div class="cover">
-                    <img :src="article.cover_image" v-if="article.cover_image" />
+                    <img :src="url + article.cover_image" v-if="article.cover_image" />
                     <img src="static/images/logo.jpg" v-else />                
                 </div> 
                 <div  class="intro">                    
@@ -42,7 +42,8 @@ export default {
     },
     data(){
         return {
-            article_list: []
+            article_list: [],
+            url: cons.apis,
         }
     },
     filters:{

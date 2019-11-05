@@ -29,6 +29,7 @@ export default {
             heightStyle : {},
             height: '',
             width: '',
+            url: cons.apis,
         }
     },
     mounted() {

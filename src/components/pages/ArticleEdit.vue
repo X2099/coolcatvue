@@ -96,6 +96,7 @@
                         this.category = response.data.category.id;
                         this.cover_url = response.data.cover_image;
                         if(this.cover_url!=''&&this.cover_url!=null){
+                            this.cover_url = cons.apis + this.cover_url;
                             this.has_image = true;
                         }
                         let tags = response.data.tags;
