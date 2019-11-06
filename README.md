@@ -1,4 +1,4 @@
-# CatManVue
+# coolcat
 
 > A Vue.js project
 
