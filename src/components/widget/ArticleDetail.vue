@@ -19,6 +19,7 @@
             :scrollStyle=true
             :ishljs=true
             style="position:inherit"
+            codeStyle="agate"
             ></mavon-editor>
     </div>
 </div>
@@ -49,7 +50,7 @@ export default {
     },
     filters:{
         formatDate:function(val){
-            return moment(val).format("YYYY年DD月MM日");
+            return moment(val).format("YYYY年MM月DD日");
         }
     },
     created() {
