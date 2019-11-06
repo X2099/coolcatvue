@@ -1,9 +1,9 @@
 <template>
     <div ref="header" class="forehead">
-        <div class="logo">
+        <!-- <div class="logo">
             <img src="../../assets/imgs/logo.png"/>
-        </div>
-        <div class="user">
+        </div> -->
+        <!-- <div class="user">
             <div class="profile" v-if="username">
                 <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
             </div>   
@@ -12,14 +12,28 @@
                 <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
                 <label @click="showLogin=true">登录</label>
             </div>
-        </div>
+        </div> -->
+
         <div class="nav">
+            <div class="logo">
+                <img src="../../assets/imgs/logo.png"/>
+            </div>
         <ul>
             <li><label @click="index">首页</label></li>
             <li><label @click="articles">我的文章</label></li>
             <li><label @click="edit">写文章</label></li>
             <li>留言板</li>
         </ul>
+            <div class="user">
+                <div class="profile" v-if="username">
+                    <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
+                </div>   
+                <div class="operate" v-else>        
+                    <label class="register"><label @click="showRegister=true">注册</label></label>
+                    <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
+                    <label @click="showLogin=true">登录</label>
+                </div>
+            </div>
         </div>
         <HeaderMenu id="user_menu" v-show="usermenu_show"></HeaderMenu>
         <Register @closeRegister="closeRegister" @goLogin="goLogin" v-if="showRegister"></Register>
@@ -124,16 +138,17 @@ export default {
 }
 .logo img{
     height: 40px;
-    margin: 2.5px 35%;
+    margin: 2.5px auto;
+    right: 0;
     cursor: crosshair;
 }
 .nav{
-    margin: 0 10%;
+    margin: 0 20%;
 }
 .nav li{
     list-style: none;
     float: left;
-    width: 25%;
+    width: 20%;
     text-align: center;
     line-height: 45px;
 }
@@ -165,7 +180,7 @@ export default {
 .user .profile img{
     float: right;
     cursor: default;
-    margin: 7.5px 18px 7.5px auto;
+    margin: 7.5px auto;
     height: 30px;
     cursor: pointer;
     background: #ffffff;

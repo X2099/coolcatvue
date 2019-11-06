@@ -28,15 +28,14 @@ export default {
 position: absolute;
 z-index: 3;
 top: 45px;
-right: 33px;
+right: 20%;
 width: 150px;
 height: 450px;
 color: gray;
 background: #ffffff;
-opacity: 0.9;
-filter: alpha=(opacity(100));
-border-right: none;
 cursor: pointer;
+border: 1px solid rgb(190, 193, 194);
+border-radius: 3.5px;
 }
 .option{
 margin: 20% 10%;

@@ -93,7 +93,6 @@ export default {
 .theme .draft{
     margin: 0% 20%;
     padding: 2% 8%;
-    background: lightblue;
     background: #ffffff;
     margin-bottom: 1px;
 }
