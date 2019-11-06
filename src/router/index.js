@@ -5,6 +5,7 @@ import ArticleEdit from '@/components/pages/ArticleEdit'
 import Article from '@/components/pages/Article'
 import MyArticles from '@/components/pages/MyArticles'
 import Drafts from '@/components/pages/Drafts'
+import Message from '@/components/pages/Message'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/drafts',
       name: 'Drafts',
       component: Drafts
+    },
+    {
+      path: '/leavingmsg',
+      name: 'Message',
+      component: Message
     }
   ]
 })

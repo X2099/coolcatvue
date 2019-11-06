@@ -5,7 +5,7 @@
         </div>
         <div v-for="(article,index) in article_list" :key="index" class="article">
             <div class="cover">
-                <img :src="article.cover_image" v-if="article.cover_image" @click="articleDetail(article.id)" />
+                <img :src="url + article.cover_image" v-if="article.cover_image" @click="articleDetail(article.id)" />
                 <img src="static/images/cover_article.jpg" v-else @click="articleDetail(article.id)" />
             </div> 
             <div  class="intro">
@@ -42,7 +42,8 @@ export default {
     },
     data(){
         return {
-            article_list: []
+            article_list: [],
+            url: cons.apis,
         }
     },
     filters:{

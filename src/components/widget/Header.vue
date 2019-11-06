@@ -1,19 +1,5 @@
 <template>
     <div ref="header" class="forehead">
-        <!-- <div class="logo">
-            <img src="../../assets/imgs/logo.png"/>
-        </div> -->
-        <!-- <div class="user">
-            <div class="profile" v-if="username">
-                <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
-            </div>   
-            <div class="operate" v-else>        
-                <label class="register"><label @click="showRegister=true">注册</label></label>
-                <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
-                <label @click="showLogin=true">登录</label>
-            </div>
-        </div> -->
-
         <div class="nav">
             <div class="logo">
                 <img src="../../assets/imgs/logo.png"/>
@@ -22,7 +8,7 @@
             <li><label @click="index">首页</label></li>
             <li><label @click="articles">我的文章</label></li>
             <li><label @click="edit">写文章</label></li>
-            <li>留言板</li>
+            <li><label @click="leavingmsg">留言板</label></li>
         </ul>
             <div class="user">
                 <div class="profile" v-if="username">
@@ -113,6 +99,10 @@ export default {
             }else{               
                 this.showLogin = true;
             }
+        },
+        // 留言板
+        leavingmsg(){
+            this.$router.push({path: '/leavingmsg'}).catch(err => {err});
         },
     }
 }
