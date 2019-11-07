@@ -1,8 +1,8 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
-        <Header :show.sync="usermenu_show"></Header>
-        <MsgShow></MsgShow>
-        <MsgEdit></MsgEdit>       
+    <div class="main_wrap" @click="hideMenu" ref="main_wrap">   
+        <Header :show.sync="usermenu_show"></Header>  
+        <MsgEdit></MsgEdit>
+        <MsgShow></MsgShow>       
     </div>
 </template>
 

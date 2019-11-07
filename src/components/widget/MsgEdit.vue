@@ -1,87 +1,131 @@
-
 <template>
-    <div class="edit_container">
-        <!-- <p>想说点什么？</p> -->
-        <quill-editor
-            class="editor" 
-            v-model="content" 
-            ref="myQuillEditor" 
-            :options="editorOption" 
-            @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)">
-        </quill-editor>
+  <div class="editor_wrap">
+    <br>
+    <quill-editor 
+      class="editor"
+      v-model="content"
+      ref="myQuillEditor" 
+      :options="editorOption">
+    </quill-editor>
+    <div class="button">
+      <label>留言</label>
     </div>
+  </div>
 </template>
+
 <script>
-import { quillEditor } from "vue-quill-editor"; //调用编辑器
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
+// 工具栏配置
+const toolbarOptions = [
+  ["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线
+  ["blockquote", "code-block"], // 引用  代码块
+  [{ header: 1 }, { header: 2 }], // 1、2 级标题
+  [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表
+  [{ script: "sub" }, { script: "super" }], // 上标/下标
+  [{ indent: "-1" }, { indent: "+1" }], // 缩进
+  [{ size: ["small", false, "large", "huge"] }], // 字体大小
+  [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题
+  [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
+  [{ align: [] }], // 对齐方式
+  ["clean"], // 清除文本格式
+];
+
+import { quillEditor } from "vue-quill-editor";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 
 export default {
-    components: {
-        quillEditor
-    },
-    data() {
-        return {
-            content: '',
-            editorOption: {
-              placeholder: "您想说点什么？",
-              modules: {
-                toolbar: [
-                  ['bold', 'italic', 'underline', 'strike'],
-                  ['blockquote', 'code-block'],
-                  [{ 'header': 1 }, { 'header': 2 }],
-                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                  [{ 'script': 'sub' }, { 'script': 'super' }],
-                  [{ 'indent': '-1' }, { 'indent': '+1' }],
-                  [{ 'direction': 'rtl' }],
-                  [{ 'size': ['small', false, 'large', 'huge'] }],
-                  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                  // [{ 'font': [] }],
-                  [{ 'color': [] }, { 'background': [] }],
-                  [{ 'align': [] }],
-                  ['clean'],
-                  // ['link', 'image', 'video']
-                ],
-                history: {
-                  delay: 1000,
-                  maxStack: 50,
-                  userOnly: false
-                },
-                imageDrop: true,
-                imageResize: {
-                  displayStyles: {
-                    backgroundColor: 'black',
-                    border: 'none',
-                    color: 'white'
-                  },
-                  modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
-                }
-              }
-          }
-        }
-    },
-    methods: {
-        onEditorReady(editor) { // 准备编辑器
- 
-        },
-        onEditorBlur(){}, // 失去焦点事件
-        onEditorFocus(){}, // 获得焦点事件
-        onEditorChange(){}, // 内容改变事件
-    },
-    computed: {
-        editor() {
-            return this.$refs.myQuillEditor.quill;
-        },
-    }
-}
-</script>
+  components: {
+    quillEditor
+  },
 
-<style scoped>
-.edit_container {
+  data() {
+    return {
+      content: this.value,
+      quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
+      editorOption: {
+        placeholder: "",
+        theme: "snow", // or 'bubble'
+        placeholder: "想说点什么呢？",
+        modules: {
+          toolbar: { container: toolbarOptions, }
+        }
+      },
+    };
+  },
+  methods: {
+  }
+};
+</script> 
+
+<style>
+.editor_wrap {
   background: #ffffff;
   width: 60%;
-  margin: auto 20%;
+  height: 140px;
+  margin: 20px 20% auto;
+}
+.editor_wrap .button {
+  float: right;
+  margin: 5px 5%;
+  background: #ffffff;
+  font-size: 12px;
+  color: grey;
+  border: 1px solid grey;
+  padding: 2.5px 15px;
+}
+.editor {
+  /* line-height: normal !important; */
+  margin: auto 5%; 
+}
+.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+    border-right: 0px;
+    content: '保存';
+    padding-right: 0px;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: '14px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  content: '10px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  content: '18px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  content: '32px';
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  content: '文本';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+  content: '标题1';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+  content: '标题2';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+  content: '标题3';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
+  content: '标题4';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
+  content: '标题5';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
+  content: '标题6';
 }
 </style>

@@ -1,23 +1,28 @@
 <template>
-    <div class="editor_wrap">
-        <div style="clear:both">
-        <p><br></p>
-        </div>
-        <quill-editor
+    <div class="main_wrap">
+        <!-- <quill-editor
             class="editor"
             v-model="content"
             ref="myQuillEditor"
             :options="editorOption"
             @focus="onEditorFocus($event)">
-        </quill-editor>
+        </quill-editor> -->
+
+        <div class="ql-container ql-snow">
+            <div class="ql-editor" v-html="content">
+        </div>
+        </div>
     </div>
+
+   
+
 </template>
 
 <script>
 // 工具栏配置
 const toolbarOptions = [];
 
-import { quillEditor } from "vue-quill-editor";
+// import { quillEditor } from "vue-quill-editor";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
@@ -28,7 +33,7 @@ export default {
         value: null
     },
     components: {
-        quillEditor
+        // quillEditor
     },
     watch: {
         value(val) {
@@ -42,7 +47,8 @@ export default {
     },
     data() {
         return {
-            content: this.value,
+            // content: this.value,
+            content: `<p class="ql-indent-1"><u style="color: rgb(194, 133, 255);">这是我的留言，好好学习，天天向上！</u></p>`,
             editorOption: {
                 theme: "bubble", 
                 placeholder: "",
@@ -60,24 +66,16 @@ export default {
             // 富文本获得焦点时的事件
             editor.enable(false); // 在获取焦点的时候禁用
         },
-        // onEditorReady(editor) { // 准备编辑器
-        //     editor.enable(false);
-        // },
-        // onEditorBlur(){
-        //     editor.enable(false);
-        // }, // 失去焦点事件
-        // // onEditorFocus(){}, // 获得焦点事件
-        // onEditorChange(){
-        //     editor.enable(false);
-        // }, // 内容改变事件
     }
 };
 </script> 
 
 <style scoped>
-.editor {
+.main_wrap {   
+    /* background: yellowgreen; */
     background: #ffffff;
     width: 60%;
-    margin: auto 20%;
+    margin: 2.5px 20%;
+    max-height: 50px;
 }
 </style>
