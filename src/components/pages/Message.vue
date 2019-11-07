@@ -1,13 +1,15 @@
 <template>
     <div class="main_wrap" @click="hideMenu" ref="main_wrap">
         <Header :show.sync="usermenu_show"></Header>
-        <MsgShow :style="this.heightStyle"></MsgShow>
+        <MsgShow></MsgShow>
+        <MsgEdit></MsgEdit>       
     </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import MsgShow from '@/components/widget/MsgShow'
+import MsgEdit from '@/components/widget/MsgEdit'
 let uid = localStorage.uid;
 let token = localStorage.token;
 
@@ -15,6 +17,7 @@ export default {
     components:{
         Header,
         MsgShow,
+        MsgEdit,
     },
     data() {
         return {
