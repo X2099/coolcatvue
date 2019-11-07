@@ -1,21 +1,9 @@
 <template>
     <div class="main_wrap">
-        <!-- <quill-editor
-            class="editor"
-            v-model="content"
-            ref="myQuillEditor"
-            :options="editorOption"
-            @focus="onEditorFocus($event)">
-        </quill-editor> -->
-
-        <div class="ql-container ql-snow">
-            <div class="ql-editor" v-html="content">
-        </div>
+        <div class="ql-container ql-snow" style="border: none;">
+            <div class="ql-editor" v-html="content"></div>
         </div>
     </div>
-
-   
-
 </template>
 
 <script>
@@ -63,7 +51,6 @@ export default {
     },
     methods: {
         onEditorFocus(editor) {
-            // 富文本获得焦点时的事件
             editor.enable(false); // 在获取焦点的时候禁用
         },
     }
@@ -77,5 +64,6 @@ export default {
     width: 60%;
     margin: 2.5px 20%;
     max-height: 50px;
+    border: none;
 }
 </style>

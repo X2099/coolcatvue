@@ -1,6 +1,6 @@
 <template>
   <div class="editor_wrap">
-    <br>
+    <!-- <br> -->
     <quill-editor 
       class="editor"
       v-model="content"
@@ -45,8 +45,8 @@ export default {
       quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
       editorOption: {
         placeholder: "",
-        theme: "snow", // or 'bubble'
-        placeholder: "想说点什么呢？",
+        theme: "snow",
+        placeholder: "留言功能正在开发中...",
         modules: {
           toolbar: { container: toolbarOptions, }
         }
@@ -62,7 +62,7 @@ export default {
 .editor_wrap {
   background: #ffffff;
   width: 60%;
-  height: 140px;
+  height: 150px;
   margin: 20px 20% auto;
 }
 .editor_wrap .button {
@@ -71,12 +71,12 @@ export default {
   background: #ffffff;
   font-size: 12px;
   color: grey;
-  border: 1px solid grey;
+  border: 1px solid #ccc;
   padding: 2.5px 15px;
 }
 .editor {
-  /* line-height: normal !important; */
-  margin: auto 5%; 
+  margin: auto 5%;
+  padding-top: 30px; 
 }
 .ql-snow .ql-tooltip.ql-editing a.ql-action::after {
     border-right: 0px;
