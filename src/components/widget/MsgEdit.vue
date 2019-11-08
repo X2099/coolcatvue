@@ -54,7 +54,7 @@ export default {
       content: '',
       editorOption: {
         theme: "snow",
-        placeholder: "留言功能正在开发中...",
+        placeholder: "想说点什么呢...",
         modules: {
           toolbar: { container: toolbarOptions, }
         }

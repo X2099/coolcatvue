@@ -4,8 +4,8 @@
             <div class="avatar">
                 <img src="static/images/author.png"/>
                 <div class="profile">
-                    <label>&nbsp;小鱼儿&nbsp;</label>
-                    <label>2018.10.26</label>
+                    <label>{{ msg.author_name }}&nbsp;</label>
+                    <label>{{ msg.create_time | FromNow }}</label>
                 </div>
             </div>
             <div class="ql-editor" v-html="msg.body"></div>
@@ -15,6 +15,8 @@
 
 <script>
 import cons from '@/components/constent'
+import moment from "moment"
+import 'moment/locale/zh-cn'
 
 export default {
     props: {
@@ -31,6 +33,12 @@ export default {
             content: `<p class="ql-indent-1"><u style="color: rgb(194, 133, 255);">这是我的留言，好好学习，天天向上！</u></p>`,
             msgs: []
         };
+    },
+    filters:{
+        FromNow:function(val){
+            // return moment(val).format("YYYY年MM月DD日 A h:mm:ss");
+            return moment(val).fromNow();
+        }
     },
     mounted() {
         this.getLeavingMsgs();
