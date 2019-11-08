@@ -2,7 +2,7 @@
 <div class="main_wrap">
     <div class="title">
         <div :style="imgSytle" class="avatar">
-            <img :style="imgSytle" src="static/images/author.png" @click="usermenu_show=!usermenu_show"/>
+            <img :style="imgSytle" src="static/images/author.png" />
         </div>
         <div class="profile" ref="profile">
             <p class="username">{{ author.username }}</p>

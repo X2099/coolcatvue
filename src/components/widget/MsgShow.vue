@@ -1,69 +1,80 @@
 <template>
     <div class="main_wrap">
-        <div class="ql-container ql-snow" style="border: none;">
-            <div class="ql-editor" v-html="content"></div>
+        <div class="ql-container ql-snow" v-for="(msg,index) in msgs" :key="index">
+            <div class="avatar">
+                <img src="static/images/author.png"/>
+                <div class="profile">
+                    <label>&nbsp;小鱼儿&nbsp;</label>
+                    <label>2018.10.26</label>
+                </div>
+            </div>
+            <div class="ql-editor" v-html="msg.body"></div>
         </div>
     </div>
 </template>
 
 <script>
-// 工具栏配置
-const toolbarOptions = [];
-
-// import { quillEditor } from "vue-quill-editor";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
+import cons from '@/components/constent'
 
 export default {
     props: {
         /*编辑器的内容*/
         value: null
     },
-    components: {
-        // quillEditor
-    },
     watch: {
         value(val) {
-          this.content = val;
+          this.content = val;      
         }
-    },
-    computed: {
-      editor() {
-        return this.$refs.myQuillEditor.quill;
-      }
     },
     data() {
         return {
-            // content: this.value,
             content: `<p class="ql-indent-1"><u style="color: rgb(194, 133, 255);">这是我的留言，好好学习，天天向上！</u></p>`,
-            editorOption: {
-                theme: "bubble", 
-                placeholder: "",
-                modules: {
-                    toolbar: {
-                        container: toolbarOptions,
-                        handlers: {}
-                    }
-                }
-            }
+            msgs: []
         };
     },
+    mounted() {
+        this.getLeavingMsgs();
+    },
     methods: {
-        onEditorFocus(editor) {
-            editor.enable(false); // 在获取焦点的时候禁用
-        },
+        getLeavingMsgs() {
+            this.axios.get(cons.apis + 'api/leavingmsgs/')
+            .then(response=>{
+                this.msgs = response.data
+            })
+            .catch(error=>{
+                alert("获取留言失败");
+            })
+        }
     }
 };
 </script> 
 
 <style scoped>
-.main_wrap {   
-    /* background: yellowgreen; */
+.main_wrap {
     background: #ffffff;
     width: 60%;
-    margin: 2.5px 20%;
-    max-height: 50px;
+    margin: auto 20%;
+}
+.main_wrap >>> .ql-container {
+    background: #ffffff;
+    margin: 20px 100px;
     border: none;
+    /* border: 1px solid #ccc; */
+}
+.main_wrap .avatar {
+    /* background: yellowgreen; */
+    height: 30px;
+}
+.main_wrap .avatar img {
+    height: 30px;
+    background: #e4e2e2;
+    border-radius: 50%;
+    float: left;
+    margin: auto 10px;
+}
+.main_wrap .avatar .profile {
+    height: 30px;
+    line-height: 30px;
+    float: left;
 }
 </style>

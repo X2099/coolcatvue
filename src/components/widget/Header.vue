@@ -38,7 +38,7 @@ let token = localStorage.token;
 
 
 export default {
-    props: ['show'],
+    props: ['show', 'toLogin'],
     components: {
             HeaderMenu,
             Register,
@@ -60,6 +60,9 @@ export default {
         },
         show: function(newValue, oldValue){
             this.usermenu_show = newValue;
+        },
+        toLogin: function(val){   
+            this.showLogin = val;
         }
     },
     methods: {
@@ -70,6 +73,8 @@ export default {
         // 关闭登录窗
         closeLogin(val){
             this.showLogin = val;
+            // 重置留言板登录按钮
+            this.$emit("resetLogin", false);
         },
         // 从登录到注册
         goRegister(val){

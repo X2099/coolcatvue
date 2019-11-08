@@ -1,14 +1,12 @@
 <template>
     <div class="main_wrap" @click="hideMenu" ref="main_wrap">   
-        <Header :show.sync="usermenu_show"></Header>  
-        <MsgEdit></MsgEdit>
-        <MsgShow></MsgShow>       
+        <Header :show.sync="usermenu_show" :toLogin="toLogin" @resetLogin="resetLogin"></Header>  
+        <MsgEdit @goLogin="goLogin" :style="this.heightStyle"></MsgEdit>
     </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import MsgShow from '@/components/widget/MsgShow'
 import MsgEdit from '@/components/widget/MsgEdit'
 let uid = localStorage.uid;
 let token = localStorage.token;
@@ -16,13 +14,13 @@ let token = localStorage.token;
 export default {
     components:{
         Header,
-        MsgShow,
         MsgEdit,
     },
     data() {
         return {
             usermenu_show: false,
             heightStyle: {},
+            toLogin: false,
         }
     },
     mounted() {
@@ -51,6 +49,14 @@ export default {
                 'height': height - 45 + 'px',
             }
         },
+        // 去登录
+        goLogin(val) {
+            this.toLogin = true;
+        },
+        // 重置去登录
+        resetLogin() {
+            this.toLogin = false;
+        }
     }
 }
 </script>

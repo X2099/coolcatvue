@@ -51,6 +51,7 @@ export default {
 .main_wrap{
     overflow-y: hidden;
     position: absolute;
+    /* position: relative; */
     width: 100%;
     height: 100%;
     background: #f5f5f5;
