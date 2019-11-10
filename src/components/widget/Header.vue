@@ -127,9 +127,10 @@ export default {
     user-select: none;
 }
 .logo{
-    width: 10%;
+    width: 15%;
     float: left;
     height: 100%;
+    /* background: gold; */
 }
 .logo img{
     height: 40px;
@@ -143,7 +144,7 @@ export default {
 .nav li{
     list-style: none;
     float: left;
-    width: 20%;
+    width: 17.5%;
     text-align: center;
     line-height: 45px;
 }
@@ -151,14 +152,16 @@ export default {
     cursor: pointer;
 }
 .user{
-    width: 10%;
+    width: 15%;
     float: right;
     height: 100%;
+    /* background: burlywood; */
 }
 .user .operate label{
     float: right;
     line-height: 45px;     
     font-size: 14px;
+    /* font-size: 10px; */
     font-weight: 10;
     cursor: pointer;
 }

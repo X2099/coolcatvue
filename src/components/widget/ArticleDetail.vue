@@ -19,8 +19,7 @@
             :scrollStyle=true
             :ishljs=true
             style="position:inherit"
-            codeStyle="agate"
-            ></mavon-editor>
+            codeStyle="agate"></mavon-editor>
     </div>
 </div>
 </template>
@@ -96,7 +95,7 @@ export default {
                 this.tags = res.tags;
             })
             .catch(error=>{
-                // alert("获取数据失败！")
+                alert("获取数据失败！")
             })
         },
     },
@@ -112,6 +111,9 @@ export default {
     height: 15%;
     background: #fbfbfb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 .title .avatar{
