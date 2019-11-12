@@ -12,39 +12,39 @@
 
 <script>
 export default {
-    methods:{
-        fnLogout(){
-            sessionStorage.clear();
-            localStorage.clear();
-            this.$router.push({path:'/'});
-            location.reload();
-        },
-    }    
+  methods: {
+    fnLogout () {
+      sessionStorage.clear()
+      localStorage.clear()
+      this.$router.push({path: '/'})
+      location.reload()
+    }
+  }
 }
 </script>
 
 <style scoped>
 .main_wrap{
-position: absolute;
-z-index: 3;
-top: 45px;
-right: 20%;
-width: 150px;
-height: 450px;
-color: gray;
-background: #ffffff;
-cursor: pointer;
-border: 1px solid rgb(190, 193, 194);
-border-radius: 3.5px;
+  position: absolute;
+  z-index: 3;
+  top: 45px;
+  right: 20%;
+  width: 150px;
+  height: 450px;
+  color: gray;
+  background: #ffffff;
+  cursor: pointer;
+  border: 1px solid rgb(190, 193, 194);
+  border-radius: 3.5px;
 }
 .option{
-margin: 20% 10%;
-font-size: 16px;
-color: rgb(138, 144, 145);
+  margin: 20% 10%;
+  font-size: 16px;
+  color: rgb(138, 144, 145);
 }
 
 .option a{
-color: rgb(138, 144, 145);
-text-decoration: none;
+  color: rgb(138, 144, 145);
+  text-decoration: none;
 }
 </style>

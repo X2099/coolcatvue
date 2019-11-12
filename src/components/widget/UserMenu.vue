@@ -14,26 +14,26 @@
 
 <style scoped>
 .main_wrap{
-position: absolute;
-z-index: 2;
-top: 6%;
-right: 0;
-width: 150px;
-height: 450px;
-color: gray;
-background: #ffffff;
-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-border-right: none;
-border-radius: 2%;
+    position: absolute;
+    z-index: 2;
+    top: 6%;
+    right: 0;
+    width: 150px;
+    height: 450px;
+    color: gray;
+    background: #ffffff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-right: none;
+    border-radius: 2%;
 }
 .option{
-margin: 20% 10%;
-font-size: 16px;
-color: rgb(138, 144, 145);
-cursor: pointer;
+    margin: 20% 10%;
+    font-size: 16px;
+    color: rgb(138, 144, 145);
+    cursor: pointer;
 }
 .option a{
-color: rgb(138, 144, 145);
-text-decoration: none;
+    color: rgb(138, 144, 145);
+    text-decoration: none;
 }
 </style>

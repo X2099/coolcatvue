@@ -12,9 +12,9 @@
         </ul>
             <div class="user">
                 <div class="profile" v-if="username">
-                    <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />           
-                </div>   
-                <div class="operate" v-else>        
+                    <img id="user_img" src="../../assets/imgs/avatar.png" @click="usermenu_show=!usermenu_show" />
+                </div>
+                <div class="operate" v-else>
                     <label class="register"><label @click="showRegister=true">注册</label></label>
                     <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
                     <label @click="showLogin=true">登录</label>
@@ -32,162 +32,160 @@ import Register from '@/components/widget/Register'
 import Login from '@/components/widget/Login'
 import HeaderMenu from '@/components/widget/HeaderMenu'
 
-let uid = localStorage.uid;
-let token = localStorage.token;
-
-
+let uid = localStorage.uid
+let token = localStorage.token
 
 export default {
-    props: ['show', 'toLogin'],
-    components: {
-            HeaderMenu,
-            Register,
-            Login,
-        },
-    data(){
-        return{
-            username: localStorage.username,
-            usermenu_show: false,
-            middleSytle: {}, // 动态设置li标签样式
-            imgSytle: {}, // 动态设置img标签样式
-            showLogin: false, // 显示登录窗
-            showRegister: false, // 显示注册窗
-        }
-    },
-    watch: {
-        usermenu_show: function(newValue, oldValue){
-            this.$emit('update:show', newValue);
-        },
-        show: function(newValue, oldValue){
-            this.usermenu_show = newValue;
-        },
-        toLogin: function(val){   
-            this.showLogin = val;
-        }
-    },
-    methods: {
-        // 关闭注册窗
-        closeRegister(val){
-            this.showRegister = val;
-        },
-        // 关闭登录窗
-        closeLogin(val){
-            this.showLogin = val;
-            // 重置留言板登录按钮
-            this.$emit("resetLogin", false);
-        },
-        // 从登录到注册
-        goRegister(val){
-            this.showLogin = false;
-            this.showRegister = val;
-        },
-        goLogin(val){
-            this.showRegister = false;
-            this.showLogin = val;
-        },
-        // 首页
-        index(){
-            this.$router.push({path: '/'}).catch(err => {err});
-        },
-        // 我的文章页
-        articles(){           
-            if(uid&&token){           
-                this.$router.push({path:'/articles'}).catch(err => {err});
-            }else{               
-                this.showLogin = true;
-            }
-        },
-        // 文章编辑页
-        edit(){           
-            if(uid&&token){           
-                this.$router.push({path:'/edit'}).catch(err => {err});
-            }else{               
-                this.showLogin = true;
-            }
-        },
-        // 留言板
-        leavingmsg(){
-            this.$router.push({path: '/leavingmsg'}).catch(err => {err});
-        },
+  props: ['show', 'toLogin'],
+  components: {
+    HeaderMenu,
+    Register,
+    Login
+  },
+  data () {
+    return {
+      username: localStorage.username,
+      usermenu_show: false,
+      middleSytle: {}, // 动态设置li标签样式
+      imgSytle: {}, // 动态设置img标签样式
+      showLogin: false, // 显示登录窗
+      showRegister: false // 显示注册窗
     }
+  },
+  watch: {
+    usermenu_show: function (newValue, oldValue) {
+      this.$emit('update:show', newValue)
+    },
+    show: function (newValue, oldValue) {
+      this.usermenu_show = newValue
+    },
+    toLogin: function (val) {
+      this.showLogin = val
+    }
+  },
+  methods: {
+    // 关闭注册窗
+    closeRegister (val) {
+      this.showRegister = val
+    },
+    // 关闭登录窗
+    closeLogin (val) {
+      this.showLogin = val
+      // 重置留言板登录按钮
+      this.$emit('resetLogin', false)
+    },
+    // 从登录到注册
+    goRegister (val) {
+      this.showLogin = false
+      this.showRegister = val
+    },
+    goLogin (val) {
+      this.showRegister = false
+      this.showLogin = val
+    },
+    // 首页
+    index () {
+      this.$router.push({path: '/'}).catch(err => { alert(err) })
+    },
+    // 我的文章页
+    articles () {
+      if (uid && token) {
+        this.$router.push({path: '/articles'}).catch(err => { alert(err) })
+      } else {
+        this.showLogin = true
+      }
+    },
+    // 文章编辑页
+    edit () {
+      if (uid && token) {
+        this.$router.push({path: '/edit'}).catch(err => { alert(err) })
+      } else {
+        this.showLogin = true
+      }
+    },
+    // 留言板
+    leavingmsg () {
+      this.$router.push({path: '/leavingmsg'}).catch(err => { alert(err) })
+    }
+  }
 }
 </script>
 
 <style>
 .forehead{
-    z-index: 1;
-    width: 100%;
-    height: 45px;
-    background: #4F4F4F;
-    color: #f5f5f5;
-    cursor: text;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  z-index: 1;
+  width: 100%;
+  height: 45px;
+  background: #4F4F4F;
+  color: #f5f5f5;
+  cursor: text;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .logo{
-    width: 15%;
-    float: left;
-    height: 100%;
-    /* background: gold; */
+  width: 15%;
+  float: left;
+  height: 100%;
+  /* background: gold; */
 }
 .logo img{
-    height: 40px;
-    margin: 2.5px auto;
-    right: 0;
-    cursor: crosshair;
+  height: 40px;
+  margin: 2.5px auto;
+  right: 0;
+  cursor: crosshair;
 }
 .nav{
-    margin: 0 20%;
+  margin: 0 20%;
 }
 .nav li{
-    list-style: none;
-    float: left;
-    width: 17.5%;
-    text-align: center;
-    line-height: 45px;
+  list-style: none;
+  float: left;
+  width: 17.5%;
+  text-align: center;
+  line-height: 45px;
 }
 .nav li label{
-    cursor: pointer;
+  cursor: pointer;
 }
 .user{
-    width: 15%;
-    float: right;
-    height: 100%;
-    /* background: burlywood; */
+  width: 15%;
+  float: right;
+  height: 100%;
+  /* background: burlywood; */
 }
 .user .operate label{
-    float: right;
-    line-height: 45px;     
-    font-size: 14px;
-    /* font-size: 10px; */
-    font-weight: 10;
-    cursor: pointer;
+  float: right;
+  line-height: 45px;
+  font-size: 14px;
+  /* font-size: 10px; */
+  font-weight: 10;
+  cursor: pointer;
 }
-.user .operate label:hover{  
-    color: dodgerblue;
+.user .operate label:hover{
+  color: dodgerblue;
 }
-.user .operate .welcome:hover{  
-    color: Gold;
-    cursor: text;
+.user .operate .welcome:hover{
+  color: Gold;
+  cursor: text;
 }
 .user .operate .register{
-    margin-right: 15%;
+  margin-right: 15%;
 }
 .user .profile img{
-    float: right;
-    cursor: default;
-    margin: 7.5px auto;
-    height: 30px;
-    cursor: pointer;
-    background: #ffffff;
-    border-radius: 50%;
-    opacity: 0.9;
-    filter: alpha=(opacity(100));
+  float: right;
+  cursor: default;
+  margin: 7.5px auto;
+  height: 30px;
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0.9;
+  filter: alpha=(opacity(100));
 }
 .user .profile img:hover{
-    opacity: 1;
-    filter: alpha=(opacity(80));
-    }
+  opacity: 1;
+  filter: alpha=(opacity(80));
+  }
 </style>
