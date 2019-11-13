@@ -85,12 +85,12 @@ export default {
     },
     // 首页
     index () {
-      this.$router.push({path: '/'}).catch(err => { alert(err) })
+      this.$router.push({path: '/'}).catch(() => { })
     },
     // 我的文章页
     articles () {
       if (uid && token) {
-        this.$router.push({path: '/articles'}).catch(err => { alert(err) })
+        this.$router.push({path: '/articles'}).catch(() => { })
       } else {
         this.showLogin = true
       }
@@ -98,14 +98,14 @@ export default {
     // 文章编辑页
     edit () {
       if (uid && token) {
-        this.$router.push({path: '/edit'}).catch(err => { alert(err) })
+        this.$router.push({path: '/edit'}).catch(() => { })
       } else {
         this.showLogin = true
       }
     },
     // 留言板
     leavingmsg () {
-      this.$router.push({path: '/leavingmsg'}).catch(err => { alert(err) })
+      this.$router.push({path: '/leavingmsg'}).catch(() => { })
     }
   }
 }
