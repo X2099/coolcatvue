@@ -5,8 +5,8 @@
                 <img src="../../assets/imgs/logo.png"/>
             </div>
         <ul>
-            <li><label @click="index">首页</label></li>
-            <li><label @click="articles">我的文章</label></li>
+            <li @click="index">首页</li>
+            <li @click="articles">我的文章</li>
             <li><label @click="edit">写文章</label></li>
             <li><label @click="leavingmsg">留言板</label></li>
         </ul>
