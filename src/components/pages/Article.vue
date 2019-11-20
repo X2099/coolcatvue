@@ -1,5 +1,6 @@
  <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
+    <!-- <div class="main_wrap" @click="hideMenu" ref="main_wrap"> -->
+    <div class="main_wrap" ref="main_wrap">
         <Header :show.sync="usermenu_show"></Header>
         <ArticleDetail :style="this.heightStyle"></ArticleDetail>
     </div>
@@ -48,11 +49,11 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
-  overflow-y: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-}
+  .main_wrap{
+    overflow-y: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+  }
 </style>

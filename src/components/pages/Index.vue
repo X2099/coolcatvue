@@ -1,5 +1,6 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
+    <div class="main_wrap" ref="main_wrap">
+    <!-- <div class="main_wrap" @click="hideMenu" ref="main_wrap"> -->
         <Header :show.sync="usermenu_show"></Header>
         <ArticleList :style="this.heightStyle"></ArticleList>
     </div>
@@ -8,9 +9,9 @@
 <script>
 import Header from '@/components/widget/Header'
 import ArticleList from '@/components/widget/ArticleList'
-let uid = localStorage.uid
-let token = localStorage.token
-
+// let uid = localStorage.uid
+// let token = localStorage.token
+let {uid, token} = localStorage
 export default {
   components: {
     Header,

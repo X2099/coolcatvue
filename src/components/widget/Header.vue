@@ -5,10 +5,10 @@
                 <img src="../../assets/imgs/logo.png"/>
             </div>
         <ul>
-            <li @click="index">首页</li>
-            <li @click="articles">我的文章</li>
-            <li><label @click="edit">写文章</label></li>
-            <li><label @click="leavingmsg">留言板</label></li>
+            <li><span @click="index">首页</span></li>
+            <li><span @click="articles">我的文章</span></li>
+            <li><span @click="edit">写文章</span></li>
+            <li><span @click="leavingmsg">留言板</span></li>
         </ul>
             <div class="user">
                 <div class="profile" v-if="username">
@@ -112,80 +112,80 @@ export default {
 </script>
 
 <style>
-.forehead{
-  z-index: 1;
-  width: 100%;
-  height: 45px;
-  background: #4F4F4F;
-  color: #f5f5f5;
-  cursor: text;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.logo{
-  width: 15%;
-  float: left;
-  height: 100%;
-  /* background: gold; */
-}
-.logo img{
-  height: 40px;
-  margin: 2.5px auto;
-  right: 0;
-  cursor: crosshair;
-}
-.nav{
-  margin: 0 20%;
-}
-.nav li{
-  list-style: none;
-  float: left;
-  width: 17.5%;
-  text-align: center;
-  line-height: 45px;
-}
-.nav li label{
-  cursor: pointer;
-}
-.user{
-  width: 15%;
-  float: right;
-  height: 100%;
-  /* background: burlywood; */
-}
-.user .operate label{
-  float: right;
-  line-height: 45px;
-  font-size: 14px;
-  /* font-size: 10px; */
-  font-weight: 10;
-  cursor: pointer;
-}
-.user .operate label:hover{
-  color: dodgerblue;
-}
-.user .operate .welcome:hover{
-  color: Gold;
-  cursor: text;
-}
-.user .operate .register{
-  margin-right: 15%;
-}
-.user .profile img{
-  float: right;
-  cursor: default;
-  margin: 7.5px auto;
-  height: 30px;
-  cursor: pointer;
-  background: #ffffff;
-  border-radius: 50%;
-  opacity: 0.9;
-  filter: alpha=(opacity(100));
-}
-.user .profile img:hover{
-  opacity: 1;
-  filter: alpha=(opacity(80));
+  .forehead{
+    z-index: 1;
+    width: 100%;
+    height: 45px;
+    background: #4F4F4F;
+    color: #f5f5f5;
+    cursor: text;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .logo{
+    width: 15%;
+    float: left;
+    height: 100%;
+    /* background: gold; */
+  }
+  .logo img{
+    height: 40px;
+    margin: 2.5px auto;
+    right: 0;
+    cursor: crosshair;
+  }
+  .nav{
+    margin: 0 20%;
+  }
+  .nav li{
+    list-style: none;
+    float: left;
+    width: 17.5%;
+    text-align: center;
+    line-height: 45px;
+  }
+  .nav li span{
+    cursor: pointer;
+  }
+  .user{
+    width: 15%;
+    float: right;
+    height: 100%;
+    /* background: burlywood; */
+  }
+  .user .operate label{
+    float: right;
+    line-height: 45px;
+    font-size: 14px;
+    /* font-size: 10px; */
+    font-weight: 10;
+    cursor: pointer;
+  }
+  .user .operate label:hover{
+    color: dodgerblue;
+  }
+  .user .operate .welcome:hover{
+    color: Gold;
+    cursor: text;
+  }
+  .user .operate .register{
+    margin-right: 15%;
+  }
+  .user .profile img{
+    float: right;
+    cursor: default;
+    margin: 7.5px auto;
+    height: 30px;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: alpha=(opacity(100));
+  }
+  .user .profile img:hover{
+    opacity: 1;
+    filter: alpha=(opacity(80));
   }
 </style>

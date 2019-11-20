@@ -1,5 +1,6 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
+    <div class="main_wrap" ref="main_wrap">
+    <!-- <div class="main_wrap" @click="hideMenu" ref="main_wrap"> -->
         <Header :show.sync="usermenu_show"></Header>
         <ArticleListOwn :style="this.heightStyle"></ArticleListOwn>
     </div>

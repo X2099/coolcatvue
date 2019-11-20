@@ -10,7 +10,7 @@
             </div>
             <div  class="intro">
                 <p>{{ article.pub_time | FromNow }}</p>
-                <p><label class="title" @click="articleDetail(article.id)">{{ article.title }}</label></p>
+                <p class="title" @click="articleDetail(article.id)">{{ article.title }}</p>
                 <p>
                     <label class="category">分类：{{ article.category.name }}</label>
                     <label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
@@ -93,8 +93,8 @@ export default {
 
 <style scoped>
 .main_wrap{
-  overflow-y: auto;
-  height: 94%;
+        overflow-y: auto;
+        height: 94%;
 }
 .article{
   margin: 0% 20%;
