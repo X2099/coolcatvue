@@ -4,7 +4,7 @@
             <p><br></p>
         </div>
         <div v-for="(article,index) in article_list" :key="index" class="article">
-            <div  class="intro">
+            <div class="intro">
                 <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
                 <p class="title" @click="articleDetail(article.id)">{{ article.title }}</p>
                 <p><label class="tag" v-for="(tag, index) in article.tags" :key="index">{{ tag.name }} </label></p>

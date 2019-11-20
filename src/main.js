@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'babel-polyfill' // 兼容IE浏览器
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

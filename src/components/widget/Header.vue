@@ -5,8 +5,12 @@
                 <img src="../../assets/imgs/logo.png"/>
             </div>
         <ul>
-            <li><span @click="index">首页</span></li>
+            <!-- <li><span @click="index">首页</span></li>
             <li><span @click="articles">我的文章</span></li>
+            <li><span @click="edit">写文章</span></li>
+            <li><span @click="leavingmsg">留言板</span></li> -->
+            <li><router-link to='/'>首页</router-link></li>
+            <li><router-link to='/articles'>我的文章</router-link></li>
             <li><span @click="edit">写文章</span></li>
             <li><span @click="leavingmsg">留言板</span></li>
         </ul>

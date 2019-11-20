@@ -10,16 +10,19 @@
         </div>
     </div>
     <div class="article">
-        <mavon-editor class="md"
-            :value=body
-            :subfield=false
+      <!-- <mavon-editor placeholder="此处输入正文..." codeStyle="agate" v-model="body" :subfield='false' ref="md" style="height:100%"/> -->
+        <!-- <mavon-editor class="md"
+            :value='body'
+            :subfield='false'
             :defaultOpen="'preview'"
-            :toolbarsFlag=false
-            :editable=false
-            :scrollStyle=true
-            :ishljs=true
+            :toolbarsFlag='false'
+            :editable='false'
+            :scrollStyle='true'
+            :ishljs='true'
             style="position:inherit"
-            codeStyle="agate"></mavon-editor>
+            codeStyle="agate"></mavon-editor> -->
+    <!-- <mavon-editor placeholder="此处输入正文..." codeStyle="agate" :value="body" ref="md" @imgAdd="$imgAdd" @imgDel="$imgDel" @change="change" style="height:100%"/> -->
+          <mavon-editor />
     </div>
 </div>
 </template>
@@ -89,6 +92,7 @@ export default {
         let res = response.data
         this.article = res
         this.body = '# ' + res.title + '\n\n' + res.body
+        // alert(this.body)
         this.author = res.author
         this.category = res.category
         this.tags = res.tags
