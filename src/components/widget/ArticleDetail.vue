@@ -10,7 +10,17 @@
         </div>
     </div>
     <div class="article">
-      <!-- <mavon-editor placeholder="此处输入正文..." codeStyle="agate" v-model="body" :subfield='false' ref="md" style="height:100%"/> -->
+        <mavon-editor class="md"
+            :value='body'
+            :subfield='false'
+            :defaultOpen="'preview'"
+            :toolbarsFlag='false'
+            :editable='false'
+            :scrollStyle='true'
+            :ishljs='true'
+            codeStyle="agate"
+            style="height:100%" ></mavon-editor>
+
         <!-- <mavon-editor class="md"
             :value='body'
             :subfield='false'
@@ -21,22 +31,23 @@
             :ishljs='true'
             style="position:inherit"
             codeStyle="agate"></mavon-editor> -->
-    <!-- <mavon-editor placeholder="此处输入正文..." codeStyle="agate" :value="body" ref="md" @imgAdd="$imgAdd" @imgDel="$imgDel" @change="change" style="height:100%"/> -->
-          <mavon-editor />
     </div>
 </div>
 </template>
 
 <script>
+import ArticleEdit from '@/components/pages/ArticleEdit'
+
 import {mavonEditor} from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import moment from 'moment'
-import 'moment/locale/zh-cn'
+// import 'moment/locale/zh-cn'
 import cons from '@/components/constent'
 
 export default {
   components: {
-    mavonEditor
+    mavonEditor,
+    ArticleEdit
   },
   data () {
     return {
@@ -68,39 +79,40 @@ export default {
       this.setStyle()
     }
   },
-  methods: {
-    // 设置样式
-    setStyle () {
-      this.height = window.getComputedStyle(this.$refs.profile).height
-      this.imgSytle = {
-        'height': this.height
-      }
-    },
-    // 接收参数
-    getArticleId () {
-      this.id = this.$route.params.id
-      if (!this.id) {
-        this.id = parseInt(sessionStorage.getItem('id'))
-        sessionStorage.clear()
-      }
-    },
-    // 获取文章
-    getArticle () {
-      this.axios.get(cons.apis + 'api/articles/' + this.id + '/', {
-        responseType: 'json'
-      }).then(response => {
-        let res = response.data
-        this.article = res
-        this.body = '# ' + res.title + '\n\n' + res.body
-        // alert(this.body)
-        this.author = res.author
-        this.category = res.category
-        this.tags = res.tags
-      }).catch(() => {
-        alert('获取数据失败！')
-      })
-    }
-  }
+  methods:{
+      // 设置样式
+      setStyle(){
+          this.height = window.getComputedStyle(this.$refs.profile).height;
+          this.imgSytle = {
+              'height': this.height,
+          };
+      },
+      // 接收参数
+      getArticleId() {
+          this.id = this.$route.params.id;
+          if(!this.id){
+              this.id = parseInt(sessionStorage.getItem('id'));
+              sessionStorage.clear();
+          }
+      },
+      // 获取文章
+      getArticle(){
+          this.axios.get(cons.apis + 'api/articles/' + this.id + '/',{
+          responseType: 'json'
+          })
+          .then(response=>{
+              let res = response.data
+              this.article = res;
+              this.body = '# ' + res.title + '\n\n' + res.body;
+              this.author = res.author;
+              this.category = res.category;
+              this.tags = res.tags;
+          })
+          .catch(error=>{
+              // alert("获取数据失败！")
+          })
+      },
+  },
 }
 </script>
 
@@ -147,8 +159,10 @@ export default {
   filter: alpha=(opacity(100));
 }
 .article{
-  overflow-y: auto;
-  clear:both;
+  /* overflow-y: auto; */
+  /* clear:both; */
+  /* width: 100%; */
+  height: 100%;
 }
 .main_wrap .article .md{
   margin: 0 20% 2% 20%;
