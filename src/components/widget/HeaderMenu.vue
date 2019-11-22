@@ -1,13 +1,23 @@
 <template>
-<div id="user_menu" class="main_wrap">
-    <div class="option"><router-link to='/articles'>我的文章</router-link></div>
-    <div class="option"><router-link to='/drafts'>我的草稿</router-link></div>
-    <div class="option"><router-link to='/'>我的主页</router-link></div>
-    <div class="option"><router-link to='/'>管理</router-link></div>
+  <div id="user_menu"
+       class="main_wrap">
+    <div class="option">
+      <router-link to='/articles'>我的文章</router-link>
+    </div>
+    <div class="option">
+      <router-link to='/drafts'>我的草稿</router-link>
+    </div>
+    <div class="option">
+      <router-link to='/'>我的主页</router-link>
+    </div>
+    <div class="option">
+      <router-link to='/'>管理</router-link>
+    </div>
     <div class="option">设置</div>
-    <div class="option" @click="fnLogout">退出</div>
+    <div class="option"
+         @click="fnLogout">退出</div>
     <div class="option">关于</div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +26,7 @@ export default {
     fnLogout () {
       sessionStorage.clear()
       localStorage.clear()
-      this.$router.push({path: '/'})
+      this.$router.push({ path: '/' })
       location.reload()
     }
   }
@@ -24,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   position: absolute;
   z-index: 3;
   top: 45px;
@@ -37,13 +47,13 @@ export default {
   border: 1px solid rgb(190, 193, 194);
   border-radius: 3.5px;
 }
-.option{
+.option {
   margin: 20% 10%;
   font-size: 16px;
   color: rgb(138, 144, 145);
 }
 
-.option a{
+.option a {
   color: rgb(138, 144, 145);
   text-decoration: none;
 }

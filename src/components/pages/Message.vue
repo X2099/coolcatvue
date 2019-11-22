@@ -1,8 +1,13 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
-        <Header :show.sync="usermenu_show" :toLogin="toLogin" @resetLogin="resetLogin"></Header>
-        <MsgEdit @goLogin="goLogin" :style="this.heightStyle"></MsgEdit>
-    </div>
+  <div class="main_wrap"
+       @click="hideMenu"
+       ref="main_wrap">
+    <Header :show.sync="usermenu_show"
+            :toLogin="toLogin"
+            @resetLogin="resetLogin"></Header>
+    <MsgEdit @goLogin="goLogin"
+             :style="this.heightStyle"></MsgEdit>
+  </div>
 </template>
 
 <script>
@@ -61,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   overflow-y: hidden;
   position: absolute;
   width: 100%;

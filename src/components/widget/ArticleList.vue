@@ -1,23 +1,32 @@
 <template>
-    <div class="main_wrap">
-        <div style="clear:both">
-            <p><br></p>
-        </div>
-        <div v-for="(article,index) in article_list" :key="index" class="article">
-            <div class="intro">
-                <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
-                <p class="title" @click="articleDetail(article.id)">{{ article.title }}</p>
-                <p><label class="tag" v-for="(tag, index) in article.tags" :key="index">{{ tag.name }} </label></p>
-            </div>
-            <div class="cover">
-                <img :src="url + article.cover_image" v-if="article.cover_image" @click="articleDetail(article.id)" />
-                <img src="static/images/article.jpg" v-else @click="articleDetail(article.id)" />
-            </div>
-        </div>
-        <div style="clear:both">
-            <p><br></p>
-        </div>
+  <div class="main_wrap">
+    <div style="clear:both">
+      <p><br></p>
     </div>
+    <div v-for="(article,index) in article_list"
+         :key="index"
+         class="article">
+      <div class="intro">
+        <p>{{ article.author.username }} • {{ article.pub_time | FromNow }} • {{ article.category.name }}</p>
+        <p class="title"
+           @click="articleDetail(article.id)">{{ article.title }}</p>
+        <p><label class="tag"
+                 v-for="(tag, index) in article.tags"
+                 :key="index">{{ tag.name }} </label></p>
+      </div>
+      <div class="cover">
+        <img :src="url + article.cover_image"
+             v-if="article.cover_image"
+             @click="articleDetail(article.id)" />
+        <img src="static/images/article.jpg"
+             v-else
+             @click="articleDetail(article.id)" />
+      </div>
+    </div>
+    <div style="clear:both">
+      <p><br></p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -66,13 +75,13 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   overflow-y: auto;
 }
-.article{
+.article {
   margin: 0% 20%;
 }
-.article .intro{
+.article .intro {
   float: left;
   width: 50%;
   height: 100px;
@@ -80,21 +89,21 @@ export default {
   margin: 1px auto;
   padding: 4% 0 4% 10%;
 }
-.article .intro p{
+.article .intro p {
   color: gray;
   margin: 2% auto;
   font-size: 13px;
 }
-.article .intro .title{
+.article .intro .title {
   font-size: 20px;
   color: black;
   font-weight: bold;
   cursor: pointer;
 }
-.article .intro .title:hover{
+.article .intro .title:hover {
   text-decoration: underline;
 }
-.article .cover{
+.article .cover {
   float: left;
   margin: 1px auto;
   width: 40%;
@@ -102,7 +111,7 @@ export default {
   padding: 4% 0;
   background: #ffffff;
 }
-.article .cover img{
+.article .cover img {
   height: 100px;
   cursor: pointer;
 }

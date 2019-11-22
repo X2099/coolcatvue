@@ -1,59 +1,97 @@
 <template>
-<div class="main_wrap">
+  <div class="main_wrap">
     <h1>发布文章</h1>
     <div class="category">
-        <h2>分类</h2>
-        <div class="empty" v-if="category_list.length<=0">
-            <p>您还未添加任何分类!</p>
+      <h2>分类</h2>
+      <div class="empty"
+           v-if="category_list.length<=0">
+        <p>您还未添加任何分类!</p>
+      </div>
+      <div v-else
+           class="nonempty">
+        <div v-for="(cat,index) in category_list"
+             :key="index">
+          <label :style="category==cat.id?'color:dodgerblue':''"
+                 class="parent">
+            <input type="radio"
+                   v-model="category"
+                   :value="cat.id"
+                   style="visibility:hidden;width:0">{{ cat.name }}
+          </label>
+          <label v-for="(sub_cat,index) in cat.subs"
+                 :key="index"
+                 :style="category==sub_cat.id?'color:dodgerblue':''"
+                 class="sub">
+            <input type="radio"
+                   v-model="category"
+                   :value="sub_cat.id"
+                   style="visibility:hidden;width:0">{{ sub_cat.name }}
+          </label>
         </div>
-        <div v-else class="nonempty">
-            <div v-for="(cat,index) in category_list" :key="index">
-                <label :style="category==cat.id?'color:dodgerblue':''" class="parent">
-                <input type="radio" v-model="category" :value="cat.id" style="visibility:hidden;width:0">{{ cat.name }}
-                </label>
-                <label v-for="(sub_cat,index) in cat.subs" :key="index" :style="category==sub_cat.id?'color:dodgerblue':''" class="sub">
-                <input type="radio" v-model="category" :value="sub_cat.id" style="visibility:hidden;width:0">{{ sub_cat.name }}
-                </label>
-            </div>
-        </div>
-        <!-- 去除以上浮动 -->
-        <div style="clear: both;"></div>
-        <div class="add_category">
-            <select v-model="parent" :style="parent?'color:dodgerblue':''">
-                <option seleted ="seleted" value=''>所属分类</option>
-                <option :value="cat.id" v-for="(cat,index) in category_list" :key="index">{{ cat.name }}</option>
-            </select>
-            <input type="text" placeholder="添加1个分类..." autocomplete="off" class="add_input" v-model="cat">
-            <input type="submit" value="☑" class="add_submit" @click="addCategory">
-        </div>
+      </div>
+      <!-- 去除以上浮动 -->
+      <div style="clear: both;"></div>
+      <div class="add_category">
+        <select v-model="parent"
+                :style="parent?'color:dodgerblue':''">
+          <option seleted="seleted"
+                  value=''>所属分类</option>
+          <option :value="cat.id"
+                  v-for="(cat,index) in category_list"
+                  :key="index">{{ cat.name }}</option>
+        </select>
+        <input type="text"
+               placeholder="添加1个分类..."
+               autocomplete="off"
+               class="add_input"
+               v-model="cat">
+        <input type="submit"
+               value="☑"
+               class="add_submit"
+               @click="addCategory">
+      </div>
     </div>
     <div class="tag">
-        <h2>标签</h2>
-        <div class="empty" v-if="tag_list.length<=0">
-            <p>您还未添加任何标签!</p>
-        </div>
-        <div v-else>
-            <div v-for="(tag,index) in tag_list" :key="index" >
-            <label :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
-            <input type="checkbox" v-model="tags" :value="tag.id" style="visibility:hidden;width:0">
+      <h2>标签</h2>
+      <div class="empty"
+           v-if="tag_list.length<=0">
+        <p>您还未添加任何标签!</p>
+      </div>
+      <div v-else>
+        <div v-for="(tag,index) in tag_list"
+             :key="index">
+          <label :style="tags.indexOf(tag.id)>=0?'color:dodgerblue':''">
+            <input type="checkbox"
+                   v-model="tags"
+                   :value="tag.id"
+                   style="visibility:hidden;width:0">
             {{ tag.name }}
-            </label>
-            </div>
+          </label>
         </div>
-        <div class="add_tag">
-            <input type="text" placeholder="添加1个标签..." autocomplete="off" class="add_input" v-model="tag">
-            <input type="submit" value="☑" class="add_submit" @click="addTag">
-        </div>
+      </div>
+      <div class="add_tag">
+        <input type="text"
+               placeholder="添加1个标签..."
+               autocomplete="off"
+               class="add_input"
+               v-model="tag">
+        <input type="submit"
+               value="☑"
+               class="add_submit"
+               @click="addTag">
+      </div>
     </div>
     <div class="submit">
-        <button class="draft" @click="status='d';createArticle()">保存为草稿</button>
-        <button @click="createArticle">确认并发布</button>
+      <button class="draft"
+              @click="status='d';createArticle()">保存为草稿</button>
+      <button @click="createArticle">确认并发布</button>
     </div>
 
     <div class="error">
-        <p v-for="(errmsg,index) in error_list" :key="index">{{ errmsg }}</p>
+      <p v-for="(errmsg,index) in error_list"
+         :key="index">{{ errmsg }}</p>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -93,7 +131,7 @@ export default {
     authenticate () {
       if (!(uid && token)) {
         alert('请先确认您已登录！')
-        this.$router.push({path: '/'})
+        this.$router.push({ path: '/' })
       }
     },
     // 获取文章分类
@@ -240,9 +278,9 @@ export default {
           })
           .then(response => {
             if (this.status === 'p') {
-              this.$router.push({path: '/articles'})
+              this.$router.push({ path: '/articles' })
             } else {
-              this.$router.push({path: '/drafts'})
+              this.$router.push({ path: '/drafts' })
             }
           })
           .catch(() => {
@@ -260,9 +298,9 @@ export default {
           })
           .then(response => {
             if (this.status === 'p') {
-              this.$router.push({path: '/articles'})
+              this.$router.push({ path: '/articles' })
             } else {
-              this.$router.push({path: '/drafts'})
+              this.$router.push({ path: '/drafts' })
             }
           })
           .catch(() => {
@@ -288,7 +326,7 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   z-index: 2;
   top: 6%;
   right: 6.25%;
@@ -301,42 +339,45 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-h1{
+h1 {
   margin: 6% auto auto 10%;
   font-size: 18px;
 }
-.category, .tag{
+.category,
+.tag {
   clear: both;
   margin: 5% 10% auto 10%;
   font-size: 13px;
 }
-h2{
+h2 {
   margin: 2.5% auto;
   font-size: 16px;
   font-weight: 500;
 }
-.empty{
+.empty {
   margin: 5% auto;
 }
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-color: rgb(173, 171, 171);
-font-size: 12px;
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgb(173, 171, 171);
+  font-size: 12px;
 }
-.add_category, .add_tag{
+.add_category,
+.add_tag {
   width: 100%;
 }
-.add_category select{
+.add_category select {
   margin-bottom: 1%;
   outline: none;
   font-size: 12px;
-  font-family: 'simsun';
+  font-family: "simsun";
   height: 22px;
   color: slategray;
 }
-.add_category option{
+.add_category option {
   color: slategray;
 }
-.add_input{
+.add_input {
   width: 90%;
   font-size: 12px;
   padding-bottom: 2%;
@@ -346,7 +387,7 @@ font-size: 12px;
   background: #fbfbfb;
   border-bottom: 1px solid slategray;
 }
-.add_submit{
+.add_submit {
   font-size: 14px;
   border: none;
   outline: none;
@@ -354,11 +395,11 @@ font-size: 12px;
   background: #fbfbfb;
   cursor: pointer;
 }
-.nonempty{
+.nonempty {
   margin-bottom: 3%;
   float: left;
 }
-.category .parent{
+.category .parent {
   float: left;
   margin-right: 5%;
   margin-bottom: 1%;
@@ -366,20 +407,20 @@ font-size: 12px;
   font-weight: bold;
   cursor: pointer;
 }
-.category .sub{
+.category .sub {
   float: left;
   margin-right: 5%;
   margin-bottom: 1%;
   font-size: 12px;
   cursor: pointer;
 }
-.category .parent:hover{
+.category .parent:hover {
   color: dodgerblue;
 }
-.category .sub:hover{
+.category .sub:hover {
   color: dodgerblue;
 }
-.tag label{
+.tag label {
   font-size: 12px;
   min-width: 26%;
   float: left;
@@ -388,15 +429,15 @@ font-size: 12px;
   cursor: pointer;
   border: 1px solid rgb(202, 195, 195);
 }
-.tag label:hover{
+.tag label:hover {
   color: dodgerblue;
 }
-.submit{
+.submit {
   margin: 6% 10% 8% 10%;
   font-size: 16px;
   text-align: center;
 }
-.submit button{
+.submit button {
   text-align: center;
   padding: 1% 8%;
   color: dodgerblue;
@@ -406,27 +447,27 @@ font-size: 12px;
   outline: none;
   cursor: pointer;
 }
-.submit .draft{
+.submit .draft {
   color: LightGray;
   border: 1px solid LightGray;
   padding: 1% 8%;
 }
-.submit .draft:hover{
+.submit .draft:hover {
   color: Grey;
   border: 1px solid Grey;
 }
-.error{
+.error {
   z-index: 3;
   top: 0%;
   right: 0%;
   width: 50%;
   position: absolute;
 }
-.error p{
+.error p {
   margin: 5%;
   padding: 2.5% 5%;
-  font-size:12px;
-  color:#f00;
+  font-size: 12px;
+  color: #f00;
   border: 0.5px solid red;
   background: LavenderBlush;
 }

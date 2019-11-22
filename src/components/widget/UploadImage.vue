@@ -1,18 +1,34 @@
 <template>
-<div>
-    <div class="remove" v-if="cover_url||preview_url">
-        <div id="remove">
-            <i class="el-icon-delete-solid" @click=removeFile></i>
-        </div>
+  <div>
+    <div class="remove"
+         v-if="cover_url||preview_url">
+      <div id="remove">
+        <i class="el-icon-delete-solid"
+           @click=removeFile></i>
+      </div>
     </div>
-    <div class="main_wrap" :style="heightStyle">
-        <h1>添加文章封面</h1>
-        <img ref="cover" :src="cover_url" v-show="cover_url" />
-        <img ref="preview" :src="preview_url" v-show="preview_url" />
-        <input class="dummy" type="button" value="点击此处添加图片" @click="addFile" v-show="!cover_url&&!preview_url" />
-        <input id="hiddenFile" type="file" ref="image" style="display:none" @change="uploadFile()" accept="image/gif,image/jpeg,image/jpg,image/png" />
+    <div class="main_wrap"
+         :style="heightStyle">
+      <h1>添加文章封面</h1>
+      <img ref="cover"
+           :src="cover_url"
+           v-show="cover_url" />
+      <img ref="preview"
+           :src="preview_url"
+           v-show="preview_url" />
+      <input class="dummy"
+             type="button"
+             value="点击此处添加图片"
+             @click="addFile"
+             v-show="!cover_url&&!preview_url" />
+      <input id="hiddenFile"
+             type="file"
+             ref="image"
+             style="display:none"
+             @change="uploadFile()"
+             accept="image/gif,image/jpeg,image/jpg,image/png" />
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -54,7 +70,7 @@ export default {
         let height = sessionStorage.getItem('height')
         let width = sessionStorage.getItem('width')
         if (height != null && width != null) {
-          this.heightStyle = {'height': 250 * height / width + 70 + 'px'}
+          this.heightStyle = { 'height': 250 * height / width + 70 + 'px' }
           sessionStorage.clear()
           clearInterval(timer)
         };
@@ -78,7 +94,7 @@ export default {
           }
         }
         if (i >= 3 || (height != null && width != null)) {
-          this.heightStyle = {'height': 250 * height / width + 70 + 'px'}
+          this.heightStyle = { 'height': 250 * height / width + 70 + 'px' }
           sessionStorage.clear()
           clearInterval(timer)
         }
@@ -105,7 +121,7 @@ export default {
       }
       this.$emit('getCover', '')
       this.$emit('hasImage', false)
-      this.heightStyle = {'height': '160px'}
+      this.heightStyle = { 'height': '160px' }
       this.$refs.image.value = null
     }
   }
@@ -113,7 +129,7 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   position: fixed;
   z-index: 2;
   top: 6%;
@@ -126,17 +142,17 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-.remove{
+.remove {
   position: absolute;
   position: fixed;
   z-index: 3;
   top: 6%;
   right: 21%;
 }
-#remove{
+#remove {
   margin: 45px 25px 0 0;
 }
-#remove i{
+#remove i {
   margin: 10px 10px 0 0;
   padding: 5px 3px;
   font-size: 18px;
@@ -145,28 +161,28 @@ export default {
   opacity: 0.7;
   cursor: pointer;
 }
-#remove i:hover{
+#remove i:hover {
   opacity: 1;
 }
-.main_wrap img{
+.main_wrap img {
   width: 250px;
-  background: #B5B5B5;
+  background: #b5b5b5;
   margin: auto 25px;
 }
 
-.main_wrap h1{
+.main_wrap h1 {
   font-size: 18px;
   line-height: 25px;
   text-align: center;
   margin: 10px auto;
   color: DarkGrey;
 }
-.main_wrap .dummy{
+.main_wrap .dummy {
   width: 250px;
   height: 90px;
   margin: auto 25px;
   font-size: 16px;
-  color: #B5B5B5;
+  color: #b5b5b5;
   border: none;
   outline: medium;
 }

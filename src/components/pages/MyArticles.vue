@@ -1,8 +1,10 @@
 <template>
-    <div class="main_wrap" @click="hideMenu" ref="main_wrap">
-        <Header :show.sync="usermenu_show"></Header>
-        <ArticleListOwn :style="this.heightStyle"></ArticleListOwn>
-    </div>
+  <div class="main_wrap"
+       @click="hideMenu"
+       ref="main_wrap">
+    <Header :show.sync="usermenu_show"></Header>
+    <ArticleListOwn :style="this.heightStyle"></ArticleListOwn>
+  </div>
 </template>
 
 <script>
@@ -48,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   overflow-y: hidden;
   position: absolute;
   /* position: relative; */

@@ -1,16 +1,19 @@
 <template>
-    <div class="main_wrap">
-        <div class="ql-container ql-snow" v-for="(msg,index) in msgs" :key="index">
-            <div class="avatar">
-                <img src="static/images/author.png"/>
-                <div class="profile">
-                    <label>{{ msg.author_name }}&nbsp;</label>
-                    <label>{{ msg.create_time | FromNow }}</label>
-                </div>
-            </div>
-            <div class="ql-editor" v-html="msg.body"></div>
+  <div class="main_wrap">
+    <div class="ql-container ql-snow"
+         v-for="(msg,index) in msgs"
+         :key="index">
+      <div class="avatar">
+        <img src="static/images/author.png" />
+        <div class="profile">
+          <label>{{ msg.author_name }}&nbsp;</label>
+          <label>{{ msg.create_time | FromNow }}</label>
         </div>
+      </div>
+      <div class="ql-editor"
+           v-html="msg.body"></div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -30,7 +33,7 @@ export default {
   },
   data () {
     return {
-      content: `<p class="ql-indent-1"><u style="color: rgb(194, 133, 255);">这是我的留言，好好学习，天天向上！</u></p>`,
+      content: '',
       msgs: []
     }
   },

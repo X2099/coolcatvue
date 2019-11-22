@@ -13,39 +13,28 @@
       </div>
     </div>
     <div class="article">
-      <!-- <mavon-editor class="md"
-                    v-model="body"
-                    :subfield="false"
-                    :boxShadow="false"
-                    defaultOpen="preview"
-                    :toolbarsFlag="false" /> -->
       <mavon-editor class="md"
-                    :value='body'
-                    :subfield='false'
+                    :value=body
+                    :subfield=false
                     :defaultOpen="'preview'"
-                    :toolbarsFlag='false'
-                    :editable='false'
-                    :scrollStyle='false'
-                    :ishljs='true'
-                    codeStyle="agate"
-                    style="height:100%"></mavon-editor>
+                    :toolbarsFlag=false
+                    :editable=false
+                    :scrollStyle=true
+                    :ishljs=true
+                    style="position:inherit"
+                    codeStyle="agate"></mavon-editor>
     </div>
   </div>
 </template>
-
 <script>
-import ArticleEdit from '@/components/pages/ArticleEdit'
-
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import moment from 'moment'
-// import 'moment/locale/zh-cn'
+import 'moment/locale/zh-cn'
 import cons from '@/components/constent'
-
 export default {
   components: {
-    mavonEditor,
-    ArticleEdit
+    mavonEditor
   },
   data () {
     return {
@@ -82,7 +71,7 @@ export default {
     setStyle () {
       this.height = window.getComputedStyle(this.$refs.profile).height
       this.imgSytle = {
-        height: this.height
+        'height': this.height
       }
     },
     // 接收参数
@@ -95,10 +84,9 @@ export default {
     },
     // 获取文章
     getArticle () {
-      this.axios
-        .get(cons.apis + 'api/articles/' + this.id + '/', {
-          responseType: 'json'
-        })
+      this.axios.get(cons.apis + 'api/articles/' + this.id + '/', {
+        responseType: 'json'
+      })
         .then(response => {
           let res = response.data
           this.article = res
@@ -131,12 +119,10 @@ export default {
   float: left;
   margin-top: 5%;
   margin-left: 1.65em;
-  /* background: greenyellow; */
 }
 .title .profile {
   float: left;
   margin: 5% 0 0 2%;
-  /* background: lightcyan; */
 }
 .title .profile .username {
   font-weight: bold;
@@ -156,7 +142,8 @@ export default {
   filter: alpha=(opacity(100));
 }
 .article {
-  height: 100%;
+  overflow-y: auto;
+  clear: both;
 }
 .main_wrap .article .md {
   margin: 0 20% 2% 20%;

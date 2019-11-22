@@ -1,20 +1,24 @@
 <template>
-<div class="main_wrap">
-  <div style="clear:both">
+  <div class="main_wrap">
+    <div style="clear:both">
       <p><br></p>
-  </div>
-  <div class="editor_wrap">
-    <quill-editor class="editor" v-model="content" :options="editorOption"></quill-editor>
-  </div>
-  <div class="button">
-    <label class="submit" v-if="isSigned" @click="createMsg">留言</label>
-    <label v-else><span @click="goLogin">登录</span>后可留言</label>
-  </div>
-  <MsgShow></MsgShow>
-  <div style="clear:both">
+    </div>
+    <div class="editor_wrap">
+      <quill-editor class="editor"
+                    v-model="content"
+                    :options="editorOption"></quill-editor>
+    </div>
+    <div class="button">
+      <label class="submit"
+             v-if="isSigned"
+             @click="createMsg">留言</label>
+      <label v-else><span @click="goLogin">登录</span>后可留言</label>
+    </div>
+    <MsgShow></MsgShow>
+    <div style="clear:both">
       <p><br></p>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -132,59 +136,113 @@ export default {
   cursor: pointer;
   letter-spacing: 2.5px;
 }
-.button span{
+.button span {
   color: #4f4f4f;
   cursor: pointer;
   letter-spacing: 2.5px;
 }
-.button span:hover{
+.button span:hover {
   color: dodgerblue;
 }
-.button .submit:hover{
+.button .submit:hover {
   color: dodgerblue;
 }
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item::before {
-  content: '14px';
+  content: "14px";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
-  content: '10px';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-label[data-value="small"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-item[data-value="small"]::before {
+  content: "10px";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
-  content: '18px';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-label[data-value="large"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-item[data-value="large"]::before {
+  content: "18px";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
-  content: '32px';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-label[data-value="huge"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-size
+  .ql-picker-item[data-value="huge"]::before {
+  content: "32px";
 }
 .editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label::before,
 .editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: '文本';
+  content: "文本";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-  content: '标题1';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="1"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="1"]::before {
+  content: "标题1";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-  content: '标题2';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="2"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="2"]::before {
+  content: "标题2";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-  content: '标题3';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="3"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="3"]::before {
+  content: "标题3";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-  content: '标题4';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="4"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="4"]::before {
+  content: "标题4";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-  content: '标题5';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="5"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="5"]::before {
+  content: "标题5";
 }
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
-.editor_wrap >>> .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-  content: '标题6';
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-value="6"]::before,
+.editor_wrap
+  >>> .ql-snow
+  .ql-picker.ql-header
+  .ql-picker-item[data-value="6"]::before {
+  content: "标题6";
 }
 </style>

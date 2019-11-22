@@ -1,27 +1,37 @@
 <template>
-    <div class="main_wrap">
-        <div style="clear:both">
-            <p><br></p>
-        </div>
-        <div v-for="(article,index) in article_list" :key="index" class="article">
-            <div class="cover">
-                <img :src="url + article.cover_image" v-if="article.cover_image" @click="articleDetail(article.id)" />
-                <img src="static/images/cover_article.jpg" v-else @click="articleDetail(article.id)" />
-            </div>
-            <div  class="intro">
-                <p>{{ article.pub_time | FromNow }}</p>
-                <p class="title" @click="articleDetail(article.id)">{{ article.title }}</p>
-                <p>
-                    <label class="category">分类：{{ article.category.name }}</label>
-                    <label class="tag" v-for="(tag,index) in article.tags" :key="index">{{ tag.name }} </label>
-                </p>
-                <p><span class="edit" @click="articleEdit(article.id)">编辑</span></p>
-            </div>
-        </div>
-        <div style="clear:both">
-            <p><br></p>
-        </div>
+  <div class="main_wrap">
+    <div style="clear:both">
+      <p><br></p>
     </div>
+    <div v-for="(article,index) in article_list"
+         :key="index"
+         class="article">
+      <div class="cover">
+        <img :src="url + article.cover_image"
+             v-if="article.cover_image"
+             @click="articleDetail(article.id)" />
+        <img src="static/images/cover_article.jpg"
+             v-else
+             @click="articleDetail(article.id)" />
+      </div>
+      <div class="intro">
+        <p>{{ article.pub_time | FromNow }}</p>
+        <p class="title"
+           @click="articleDetail(article.id)">{{ article.title }}</p>
+        <p>
+          <label class="category">分类：{{ article.category.name }}</label>
+          <label class="tag"
+                 v-for="(tag,index) in article.tags"
+                 :key="index">{{ tag.name }} </label>
+        </p>
+        <p><span class="edit"
+                @click="articleEdit(article.id)">编辑</span></p>
+      </div>
+    </div>
+    <div style="clear:both">
+      <p><br></p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,13 +65,13 @@ export default {
     authenticate () {
       if (!(uid && token)) {
         alert('请先确认您已登录！')
-        this.$router.push({path: '/'})
+        this.$router.push({ path: '/' })
       }
     },
     getArticles () {
       if (uid) {
         this.axios.get(cons.apis + 'api/articles/', {
-          params: {'author': uid}
+          params: { 'author': uid }
         }).then(response => {
           this.article_list = response.data
         }).catch(() => {
@@ -92,14 +102,14 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
-        overflow-y: auto;
-        height: 94%;
+.main_wrap {
+  overflow-y: auto;
+  height: 94%;
 }
-.article{
+.article {
   margin: 0% 20%;
 }
-.article .intro{
+.article .intro {
   float: left;
   width: 50%;
   height: 100px;
@@ -108,31 +118,31 @@ export default {
   padding: 4% 0;
   /* background: yellowgreen; */
 }
-.article .intro p{
+.article .intro p {
   color: gray;
   margin: 1% auto;
   font-size: 13px;
   cursor: default;
 }
-.article .intro .title{
+.article .intro .title {
   font-size: 20px;
   color: black;
   font-weight: bold;
   cursor: pointer;
 }
-.article .intro .title:hover{
+.article .intro .title:hover {
   color: dodgerblue;
 }
-.article .intro .category{
+.article .intro .category {
   font-weight: 600;
 }
-.article .intro .edit{
+.article .intro .edit {
   font-weight: 100;
   cursor: pointer;
   text-decoration: underline;
   color: dodgerblue;
 }
-.article .cover{
+.article .cover {
   float: left;
   margin: 1px auto;
   width: 25%;
@@ -140,7 +150,7 @@ export default {
   padding: 4% 0 4% 25%;
   background: #ffffff;
 }
-.article .cover img{
+.article .cover img {
   height: 100px;
   cursor: pointer;
 }

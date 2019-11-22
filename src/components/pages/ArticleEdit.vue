@@ -1,33 +1,69 @@
 <template>
-<div class="main_wrap" @click="hideMenu">
+  <div class="main_wrap"
+       @click="hideMenu">
     <div class="title">
-        <input type="text" name="title" placeholder="此处输入文章标题..." autocomplete="off" class="input_txt" v-model="title">
+      <input type="text"
+             name="title"
+             placeholder="此处输入文章标题..."
+             autocomplete="off"
+             class="input_txt"
+             v-model="title">
     </div>
     <div class="sub_menu">
-        <div class="button">
-            <label id="upload_button" :style="has_image?'color:dodgerblue;font-weight:bold':''" @click="upload_show=!upload_show">
-                <p><i class="el-icon-picture" style="font-size:20px"></i></p>
-            </label>
-        </div>
-        <div class="button">
-            <label><p>•••</p></label>
-        </div>
-        <div class="button">
-            <label>
-            <p id="pub_button" @click="menu_show=!menu_show">{{ menu_show?'▴ ':'▾ ' }}发布</p>
-            </label>
-        </div>
-        <div class="user" v-if="username">
-            <img src="../../assets/imgs/avatar.png" id="user_img" @click="usermenu_show=!usermenu_show"/>
-        </div>
+      <div class="button">
+        <label id="upload_button"
+               :style="has_image?'color:dodgerblue;font-weight:bold':''"
+               @click="upload_show=!upload_show">
+          <p><i class="el-icon-picture"
+               style="font-size:20px"></i></p>
+        </label>
+      </div>
+      <div class="button">
+        <label>
+          <p>•••</p>
+        </label>
+      </div>
+      <div class="button">
+        <label>
+          <p id="pub_button"
+             @click="menu_show=!menu_show">{{ menu_show?'▴ ':'▾ ' }}发布</p>
+        </label>
+      </div>
+      <div class="user"
+           v-if="username">
+        <img src="../../assets/imgs/avatar.png"
+             id="user_img"
+             @click="usermenu_show=!usermenu_show" />
+      </div>
     </div>
     <div class="body">
-        <mavon-editor placeholder="此处输入正文..." codeStyle="agate" :value="body" ref="md" @imgAdd="$imgAdd" @imgDel="$imgDel" @change="change" style="height:100%"/>
+      <mavon-editor placeholder="此处输入正文..."
+                    codeStyle="agate"
+                    :value="body"
+                    ref="md"
+                    @imgAdd="$imgAdd"
+                    @imgDel="$imgDel"
+                    @change="change"
+                    style="height:100%" />
     </div>
-    <PubMenu id="pub_menu" :article_id=id :title=title :body=body :edited_category=category :edited_tags=tags :cover_image=cover_image v-show="menu_show"></PubMenu>
-    <UserMenu id="user_menu" v-show="usermenu_show"></UserMenu>
-    <UploadImage id="upload_menu" :cover_url=cover_url :article_id=id v-show="upload_show" @getCover="getCover" @hasImage="hasImage" @removeCover="removeCover"></UploadImage>
-</div>
+    <PubMenu id="pub_menu"
+             :article_id=id
+             :title=title
+             :body=body
+             :edited_category=category
+             :edited_tags=tags
+             :cover_image=cover_image
+             v-show="menu_show"></PubMenu>
+    <UserMenu id="user_menu"
+              v-show="usermenu_show"></UserMenu>
+    <UploadImage id="upload_menu"
+                 :cover_url=cover_url
+                 :article_id=id
+                 v-show="upload_show"
+                 @getCover="getCover"
+                 @hasImage="hasImage"
+                 @removeCover="removeCover"></UploadImage>
+  </div>
 </template>
 
 <script>
@@ -183,19 +219,19 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap{
+.main_wrap {
   position: fixed;
   width: 100%;
   height: 100%;
   background: #f5f5f5;
 }
-.title{
+.title {
   width: 75%;
   height: 6%;
   float: left;
   background: #ffffff;
 }
-.title .input_txt{
+.title .input_txt {
   float: left;
   width: 90%;
   height: 100%;
@@ -203,10 +239,10 @@ export default {
   font-size: 24px;
   line-height: 100%;
   font-weight: bold;
-  border:none;
-  outline:none;
+  border: none;
+  outline: none;
 }
-.sub_menu{
+.sub_menu {
   float: left;
   width: 25%;
   height: 6%;
@@ -216,7 +252,7 @@ export default {
   -ms-user-select: none;
   user-select: none;
 }
-.sub_menu .button{
+.sub_menu .button {
   display: table;
   overflow: hidden;
   float: left;
@@ -227,19 +263,19 @@ export default {
   color: rgb(138, 144, 145);
   text-align: center;
 }
-.sub_menu .button label{
+.sub_menu .button label {
   vertical-align: middle;
   display: table-cell;
 }
-.sub_menu .button p{
+.sub_menu .button p {
   cursor: pointer;
 }
-#pub_button{
-  color:dodgerblue;
-  font-size:16px
+#pub_button {
+  color: dodgerblue;
+  font-size: 16px;
 }
-.sub_menu .user img{
-  position:fixed;
+.sub_menu .user img {
+  position: fixed;
   top: 1%;
   right: 1.1%;
   float: left;
@@ -249,11 +285,11 @@ export default {
   opacity: 1;
   filter: alpha=(opacity(100));
 }
-.sub_menu img:hover{
+.sub_menu img:hover {
   opacity: 0.8;
   filter: alpha=(opacity(80));
-    }
-.body{
+}
+.body {
   float: right;
   position: relative;
   z-index: 1;
