@@ -111,7 +111,7 @@ export default {
   margin-top: -156px;
   margin-left: -165px;
   overflow: hidden;
-  user-select: none;
+  /* user-select: none; */
 }
 .login_form .nav {
   text-align: center;

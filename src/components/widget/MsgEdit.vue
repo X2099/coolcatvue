@@ -12,7 +12,7 @@
       <label class="submit"
              v-if="isSigned"
              @click="createMsg">留言</label>
-      <label v-else><span @click="goLogin">登录</span>后可留言</label>
+      <div v-else><span @click="goLogin">登录</span>后可留言</div>
     </div>
     <MsgShow></MsgShow>
     <div style="clear:both">
@@ -121,10 +121,10 @@ export default {
   font-size: 12px;
   color: grey;
   padding: 10px 100px;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
   text-align: right;
 }
 .button label {
