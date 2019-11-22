@@ -2,13 +2,13 @@
   <div id="user_menu"
        class="main_wrap">
     <div class="option">
+      <router-link to='/'>我的主页</router-link>
+    </div>
+    <div class="option">
       <router-link to='/articles'>我的文章</router-link>
     </div>
     <div class="option">
       <router-link to='/drafts'>我的草稿</router-link>
-    </div>
-    <div class="option">
-      <router-link to='/'>我的主页</router-link>
     </div>
     <div class="option">
       <router-link to='/'>管理</router-link>

@@ -1,13 +1,16 @@
 <template>
   <div class="main_wrap">
     <div class="option">
+      <router-link to='/drafts'>草稿箱</router-link>
+    </div>
+    <div class="option">
+      <router-link to='/leavingmsg'>留言板</router-link>
+    </div>
+    <div class="option">
+      <router-link to='/leavingmsg'>我的主页</router-link>
+    </div>
+    <div class="option">
       <router-link to='/articles'>我的文章</router-link>
-    </div>
-    <div class="option">
-      <router-link to='/drafts'>我的草稿</router-link>
-    </div>
-    <div class="option">
-      <router-link to='/'>我的主页</router-link>
     </div>
     <div class="option">管理</div>
     <div class="option">设置</div>

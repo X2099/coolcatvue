@@ -81,7 +81,7 @@ export default {
     },
     // 创建留言
     createMsg () {
-      if (uid && token) {
+      if (this.content !== '' && uid && token) {
         let msgForm = new FormData()
         msgForm.append('body', this.content)
         msgForm.append('author', uid)
@@ -95,7 +95,7 @@ export default {
           })
           .then(response => {
             this.content = ''
-            alert('留言成功')
+            this.$router.go(0)
           })
           .catch(() => {
             alert('留言失败')
@@ -116,7 +116,7 @@ export default {
   background: #ffffff;
 }
 .main_wrap .button {
-  margin: auto 20% 1.5px 20%;
+  margin: auto 20%;
   background: #ffffff;
   font-size: 12px;
   color: grey;

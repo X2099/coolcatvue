@@ -21,7 +21,7 @@
         <div class="operate"
              v-else>
           <label class="register"><label @click="showRegister=true">注册</label></label>
-          <label class="welcome">&nbsp;&nbsp;☺&nbsp;&nbsp;</label>
+          <label class="welcome">&nbsp;☺&nbsp;</label>
           <label @click="showLogin=true">登录</label>
         </div>
       </div>
