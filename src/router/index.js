@@ -6,6 +6,7 @@ import Article from '@/components/pages/Article'
 import MyArticles from '@/components/pages/MyArticles'
 import Drafts from '@/components/pages/Drafts'
 import Message from '@/components/pages/Message'
+import Home from '@/components/pages/Home'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
     },
     {
       path: '/edit',

@@ -126,9 +126,11 @@ export default {
   z-index: 1;
   width: 100%;
   height: 45px;
-  background: #4f4f4f;
-  color: #f5f5f5;
+  color: dodgerblue;
+  font-weight: bold;
+  font-size: 18px;
   cursor: text;
+  box-shadow: 0 2px 12px 0 rgba(252, 157, 154, 0.25);
 }
 .logo {
   width: 15%;

@@ -2,7 +2,7 @@
   <div id="user_menu"
        class="main_wrap">
     <div class="option">
-      <router-link to='/'>我的主页</router-link>
+      <router-link to='/home'>我的主页</router-link>
     </div>
     <div class="option">
       <router-link to='/articles'>我的文章</router-link>

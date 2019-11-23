@@ -3,20 +3,19 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="usermenu_show"></Header>
-    <ArticleList :style="this.heightStyle"></ArticleList>
+    <MyProfile :style="this.heightStyle" />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import ArticleList from '@/components/widget/ArticleList'
-// let uid = localStorage.uid
-// let token = localStorage.token
+import MyProfile from '@/components/widget/MyProfile'
+
 let { uid, token } = localStorage
 export default {
   components: {
     Header,
-    ArticleList
+    MyProfile
   },
   data () {
     return {

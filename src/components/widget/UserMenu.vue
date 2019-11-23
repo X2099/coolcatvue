@@ -7,7 +7,7 @@
       <router-link to='/leavingmsg'>留言板</router-link>
     </div>
     <div class="option">
-      <router-link to='/leavingmsg'>我的主页</router-link>
+      <router-link to='/home'>我的主页</router-link>
     </div>
     <div class="option">
       <router-link to='/articles'>我的文章</router-link>
