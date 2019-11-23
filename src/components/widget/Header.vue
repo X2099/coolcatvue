@@ -126,12 +126,17 @@ export default {
   z-index: 1;
   width: 100%;
   height: 45px;
-  color: dodgerblue;
+  background: #409eff;
+  color: #f5f5f5;
   font-weight: bold;
   font-size: 18px;
   cursor: text;
-  box-shadow: 0 2px 12px 0 rgba(252, 157, 154, 0.25);
+  box-shadow: 0 2px 12px 0 rgba(252, 157, 154, 0.75);
 }
+/* .forehead:hover {
+  background: #4f4f4f;
+  color: #f5f5f5;
+} */
 .logo {
   width: 15%;
   float: left;

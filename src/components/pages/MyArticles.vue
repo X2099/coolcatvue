@@ -53,10 +53,8 @@ export default {
 .main_wrap {
   overflow-y: hidden;
   position: absolute;
-  /* position: relative; */
   width: 100%;
   height: 100%;
-  background: #f5f5f5;
   background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png");
 }
 </style>

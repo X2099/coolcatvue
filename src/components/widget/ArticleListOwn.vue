@@ -113,10 +113,8 @@ export default {
   float: left;
   width: 50%;
   height: 100px;
-  background: #ffffff;
-  margin: 1px auto;
+  background: #f2f6fc;
   padding: 4% 0;
-  /* background: yellowgreen; */
 }
 .article .intro p {
   color: gray;
@@ -144,11 +142,10 @@ export default {
 }
 .article .cover {
   float: left;
-  margin: 1px auto;
   width: 25%;
   height: 100px;
   padding: 4% 0 4% 25%;
-  background: #ffffff;
+  background: #f2f6fc;
 }
 .article .cover img {
   height: 100px;

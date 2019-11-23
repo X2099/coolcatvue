@@ -1,5 +1,6 @@
 <template>
-  <div class="main_wrap">
+  <div class="main_wrap"
+       v-show="show">
     <div style="clear:both">
       <p><br></p>
     </div>
@@ -51,7 +52,8 @@ export default {
   data () {
     return {
       article_list: [],
-      url: cons.apis
+      url: cons.apis,
+      show: false
     }
   },
   filters: {
@@ -76,6 +78,7 @@ export default {
         }
       }).then(response => {
         this.article_list = response.data
+        this.show = true
       }).catch(() => {
         alert('获取文章数据失败！')
       })
@@ -99,8 +102,7 @@ export default {
 .theme .draft {
   margin: 0% 20%;
   padding: 2% 8%;
-  background: #ffffff;
-  margin-bottom: 1px;
+  background: #f2f6fc;
 }
 .article {
   margin: 0% 20%;
@@ -109,7 +111,7 @@ export default {
   float: left;
   width: 50%;
   height: 100px;
-  background: #ffffff;
+  background: #f2f6fc;
   padding: 2% 0;
 }
 .article .intro p {
@@ -144,7 +146,7 @@ export default {
   width: 25%;
   height: 100px;
   padding: 2% 0 2% 25%;
-  background: #ffffff;
+  background: #f2f6fc;
 }
 .article .cover img {
   height: 100px;

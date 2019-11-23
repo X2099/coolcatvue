@@ -72,9 +72,7 @@ export default {
 .title {
   margin: 2% 20% 0 20%;
   height: 25%;
-  background: #fbfbfb;
-  /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: #f2f6fc;
 }
 .title .avatar {
   float: left;

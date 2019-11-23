@@ -85,8 +85,7 @@ export default {
   float: left;
   width: 50%;
   height: 100px;
-  background: rgb(250, 250, 250);
-  margin: 1px auto;
+  background: #f2f6fc;
   padding: 4% 0 4% 10%;
 }
 .article .intro p {
@@ -105,11 +104,10 @@ export default {
 }
 .article .cover {
   float: left;
-  margin: 1px auto;
   width: 40%;
   height: 100px;
   padding: 4% 0;
-  background: rgb(250, 250, 250);
+  background: #f2f6fc;
 }
 .article .cover img {
   height: 100px;
