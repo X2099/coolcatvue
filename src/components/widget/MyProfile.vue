@@ -8,22 +8,21 @@
       </div>
       <div class="profile"
            ref="profile">
-        <p class="username">{{ username }}</p>
+        <p class="username">王国强</p>
       </div>
     </div>
   </div>
 </template>
 <script>
 import cons from '@/components/constent'
-let { uid, token } = localStorage
+// let { uid, token } = localStorage
 
 export default {
   components: {
   },
   data () {
     return {
-      username: '王国强',
-      avatar: '',
+      // username: '王国强',
     }
   },
   mounted () {
