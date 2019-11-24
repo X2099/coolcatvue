@@ -113,7 +113,7 @@ export default {
   float: left;
   width: 50%;
   height: 100px;
-  background: #f2f6fc;
+  background: #ffffff;
   padding: 4% 0;
 }
 .article .intro p {
@@ -145,7 +145,7 @@ export default {
   width: 25%;
   height: 100px;
   padding: 4% 0 4% 25%;
-  background: #f2f6fc;
+  background: #ffffff;
 }
 .article .cover img {
   height: 100px;

@@ -9,6 +9,7 @@
       <div class="profile"
            ref="profile">
         <p class="username">王国强</p>
+        <p class="details">查看详细资料</p>
       </div>
     </div>
   </div>
@@ -72,6 +73,8 @@ export default {
 .title {
   margin: 2% 20% 0 20%;
   height: 25%;
+
+  background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png");
   background: #f2f6fc;
 }
 .title .avatar {
@@ -85,9 +88,12 @@ export default {
 }
 .title .profile .username {
   font-weight: bold;
-  margin-bottom: 2%;
+  margin-bottom: 10%;
   font-size: 30px;
   cursor: pointer;
+}
+.title .profile .details {
+  margin-top: 15%;
 }
 .title .profile .info {
   font-size: 14px;

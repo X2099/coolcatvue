@@ -22,7 +22,6 @@
                     :editable=false
                     :scrollStyle=true
                     :ishljs=true
-                    previewBackground="#f2f6fc"
                     style="position:inherit"
                     codeStyle="agate"></mavon-editor>
     </div>
@@ -112,7 +111,7 @@ export default {
 .title {
   margin: 2% 20% 0 20%;
   height: 15%;
-  background: #f2f6fc;
+  background: #fbfbfb;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   -webkit-user-select: none;
   -moz-user-select: none;

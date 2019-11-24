@@ -102,7 +102,7 @@ export default {
 .theme .draft {
   margin: 0% 20%;
   padding: 2% 8%;
-  background: #f2f6fc;
+  background: #ffffff;
 }
 .article {
   margin: 0% 20%;
@@ -111,7 +111,7 @@ export default {
   float: left;
   width: 50%;
   height: 100px;
-  background: #f2f6fc;
+  background: #ffffff;
   padding: 2% 0;
 }
 .article .intro p {
@@ -146,7 +146,7 @@ export default {
   width: 25%;
   height: 100px;
   padding: 2% 0 2% 25%;
-  background: #f2f6fc;
+  background: #ffffff;
 }
 .article .cover img {
   height: 100px;
