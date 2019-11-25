@@ -3,19 +3,19 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="usermenu_show"></Header>
-    <MyProfile :style="this.heightStyle" />
+    <UserEdit :style="this.heightStyle" />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import MyProfile from '@/components/widget/MyProfile'
+import UserEdit from '@/components/widget/UserEdit'
 
 let { uid, token } = localStorage
 export default {
   components: {
     Header,
-    MyProfile
+    UserEdit
   },
   data () {
     return {

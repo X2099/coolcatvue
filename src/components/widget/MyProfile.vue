@@ -1,117 +1,118 @@
 <template>
   <div class="main_wrap">
     <div class="title">
-      <div :style="imgSytle"
-           class="avatar">
-        <img :style="imgSytle"
-             src="static/images/author.png" />
+      <div class="avatar">
+        <img src="static/images/author.png" />
       </div>
-      <div class="profile"
-           ref="profile">
-        <p class="username">王国强</p>
-        <p class="details">查看详细资料</p>
+      <div class="profile">
+        <div class="look">
+          <p class="username">{{ username }}</p>
+          <p class="detail"><span @click="look=!look">{{ look?'∧':'∨' }}</span>查看详细资料</p>
+        </div>
+        <div class="edit">
+          <router-link to='/profile/edit'>编辑个人资料</router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import cons from '@/components/constent'
-// let { uid, token } = localStorage
+let { uid, token } = localStorage
 
 export default {
   components: {
   },
   data () {
     return {
-      // username: '王国强',
+      username: '',
+      look: false
     }
   },
   mounted () {
+    this.getProfile()
+  },
+  updated () {
 
   },
-  // filters: {
-  //   formatDate: function (val) {
-  //     return moment(val).format('YYYY年MM月DD日')
-  //   }
-  // },
-  updated () {
-    if (this.height == null) {
-      this.setStyle()
-    }
-  },
   methods: {
-    // 设置样式
-    setStyle () {
-      this.height = window.getComputedStyle(this.$refs.profile).height
-      this.imgSytle = {
-        'height': this.height
-      }
-    },
     // 获取用户资料
     getProfile () {
-      this.axios.get(cons.apis + 'api/articles/' + this.id + '/', {
+      this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
         responseType: 'json'
       })
         .then(response => {
-          let res = response.data
-          this.article = res
-          this.body = '# ' + res.title + '\n\n' + res.body
-          this.author = res.author
-          this.category = res.category
-          this.tags = res.tags
+          this.username = response.data.username
         })
-        .catch(() => { alert('获取数据失败！') })
+        .catch(() => { alert('获取用户资料失败！') })
     }
   }
 }
 </script>
 
-<style scoped>
+<style  scoped>
 .main_wrap {
   overflow-y: auto;
 }
 .title {
   margin: 2% 20% 0 20%;
-  height: 25%;
-
-  background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png");
-  background: #f2f6fc;
+  padding: 2%;
+  background: #ffffff;
+  font-size: 0; /* 消除div之间的间隙 */
+  /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
 }
 .title .avatar {
-  float: left;
-  margin-top: 5%;
-  margin-left: 1.65em;
+  width: 10%;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.avatar img {
+  width: 100%;
+  background: #c0c4cc;
+  border-radius: 5px;
 }
 .title .profile {
-  float: left;
-  margin: 5% 0 0 2%;
-}
-.title .profile .username {
-  font-weight: bold;
-  margin-bottom: 10%;
-  font-size: 30px;
-  cursor: pointer;
-}
-.title .profile .details {
-  margin-top: 15%;
-}
-.title .profile .info {
+  width: 80%;
+  display: inline-block;
   font-size: 14px;
-  font-weight: 100;
-  letter-spacing: 1px;
 }
-.title .avatar img {
+.profile .look {
+  width: 80%;
+  padding-left: 20px;
+  display: inline-block;
+}
+.profile .look .username {
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: solid;
+}
+.profile .look .detail {
+  color: #909399;
   cursor: pointer;
-  background: #e4e2e2;
-  border-radius: 5%;
-  opacity: 0.9;
-  filter: alpha=(opacity(100));
 }
-.article {
-  overflow-y: auto;
-  clear: both;
+.profile .look .detail span {
+  margin-right: 10px;
 }
-.main_wrap .article .md {
-  margin: 0 20% 2% 20%;
+.profile .edit {
+  height: 20%;
+  display: inline-block;
+  font-size: 14px;
+}
+.profile .edit .editButton {
+  color: dodgerblue;
+  border: 1px solid dodgerblue;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.profile .edit a {
+  color: dodgerblue;
+  border: 1px solid dodgerblue;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: dodgerblue;
+  text-decoration: none;
 }
 </style>

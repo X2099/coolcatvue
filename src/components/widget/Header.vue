@@ -127,9 +127,10 @@ export default {
   width: 100%;
   height: 45px;
   background: #4f4f4f;
+  /* background: url("https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg"); */
   color: #f5f5f5;
-  font-weight: bold;
   font-size: 18px;
+  font-family: "KaiTi";
 }
 
 .logo {

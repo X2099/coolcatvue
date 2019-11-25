@@ -7,6 +7,7 @@ import MyArticles from '@/components/pages/MyArticles'
 import Drafts from '@/components/pages/Drafts'
 import Message from '@/components/pages/Message'
 import Home from '@/components/pages/Home'
+import ProfileEdit from '@/components/pages/ProfileEdit'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/leavingmsg',
       name: 'Message',
       component: Message
+    },
+    {
+      path: '/profile/edit',
+      name: 'ProfileEdit',
+      component: ProfileEdit
     }
   ]
 })
