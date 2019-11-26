@@ -10,7 +10,7 @@
           <p class="detail"><span @click="look=!look">{{ look?'∧':'∨' }}</span>查看详细资料</p>
         </div>
         <div class="edit">
-          <router-link to='/profile/edit'>编辑个人资料</router-link>
+          <router-link to='/profile'>编辑个人资料</router-link>
         </div>
       </div>
     </div>

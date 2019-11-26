@@ -50,7 +50,7 @@ export default new Router({
       component: Message
     },
     {
-      path: '/profile/edit',
+      path: '/profile',
       name: 'ProfileEdit',
       component: ProfileEdit
     }
