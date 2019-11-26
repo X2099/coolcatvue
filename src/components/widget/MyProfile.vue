@@ -75,14 +75,16 @@ export default {
   border-radius: 5px;
 }
 .title .profile {
-  width: 80%;
+  width: 90%;
   display: inline-block;
-  font-size: 14px;
+  font-size: 0;
+  background: yellowgreen;
 }
 .profile .look {
-  width: 80%;
+  width: 50%;
   padding-left: 20px;
   display: inline-block;
+  background: black;
 }
 .profile .look .username {
   margin-bottom: 20px;
@@ -97,9 +99,11 @@ export default {
   margin-right: 10px;
 }
 .profile .edit {
+  width: 46.5%;
   height: 20%;
   display: inline-block;
   font-size: 14px;
+  background: lawngreen;
 }
 .profile .edit .editButton {
   color: dodgerblue;
