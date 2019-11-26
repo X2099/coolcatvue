@@ -17,7 +17,7 @@
              v-if="editUsername"><label>用户名</label>
             <input type="text"
                    v-model="username"
-                   :class="usernameInput?'input':''"
+                   :class="usernameInput?'input':'outside'"
                    @blur="usernameInput=!usernameInput"
                    @focus="usernameInput=!usernameInput" />
             <span class="save"
@@ -36,10 +36,10 @@
              v-if="editGender"><label>性别</label>
             <input type="radio"
                    value=0
-                   v-model="gender" />男
+                   v-model="gender" /><span class="radio">男</span>
             <input type="radio"
                    value=1
-                   v-model="gender" />女
+                   v-model="gender" /><span class="radio">女</span>
             <span class="save"
                   @click="updateProfile('gender',gender)">保存</span>
             <span class="cancel"
@@ -77,7 +77,7 @@
              v-if="editMobile"><label>手机</label>
             <input type="text"
                    v-model="mobile"
-                   :class="mobileInput?'input':''"
+                   :class="mobileInput?'input':'outside'"
                    @blur="mobileInput=!mobileInput"
                    @focus="mobileInput=!mobileInput" />
             <span class="save"
@@ -97,7 +97,7 @@
              v-if="editEmail"><label>邮箱</label>
             <input type="text"
                    v-model="email"
-                   :class="emailInput?'input':''"
+                   :class="emailInput?'input':'outside'"
                    @blur="emailInput=!emailInput"
                    @focus="emailInput=!emailInput" />
             <span class="save"
@@ -239,7 +239,7 @@ export default {
 }
 .profile .username {
   margin: auto 10%;
-  padding-top: 8.5%;
+  padding-top: 4.5%;
   font-size: 30px;
 }
 .profile .gender,
@@ -247,13 +247,11 @@ export default {
 .mobile,
 .email {
   margin: auto 10%;
-  padding-top: 5%;
+  padding-top: 3.5%;
   font-size: 30px;
-  /* font-weight: bold; */
 }
 .profile label {
   width: 10%;
-  /* background: gold; */
   display: inline-block;
 }
 .username .show {
@@ -261,9 +259,9 @@ export default {
   font-weight: 400;
 }
 .edit {
-  margin-bottom: 30px;
+  margin-bottom: 3%;
 }
-.edit input[type="text"] {
+.edit .outside {
   height: 35px;
   border-radius: 3px;
   border: 1px solid #dcdfe6;
@@ -271,12 +269,17 @@ export default {
   outline: none;
 }
 .edit .input {
+  height: 35px;
+  border-radius: 3px;
+  text-indent: 10px;
+  outline: none;
   border: 1px solid #409eff;
 }
-.edit span {
-  margin-left: 5%;
+.edit .radio {
+  margin: auto 5% auto 10px;
 }
 .edit .save {
+  margin-left: 5%;
   padding: 5px 10px;
   background: #409eff;
   color: white;
@@ -287,6 +290,7 @@ export default {
   background: dodgerblue;
 }
 .edit .cancel {
+  margin-left: 5%;
   padding: 5px 10px;
   background: #c0c4cc;
   color: white;
@@ -318,6 +322,7 @@ export default {
 .el-icon-camera:hover,
 .el-button:hover {
   color: dodgerblue;
+  background: #ffffff;
 }
 .el-date-picker {
   height: 25px;
