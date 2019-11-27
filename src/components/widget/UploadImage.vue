@@ -52,7 +52,6 @@ export default {
     this.showCover()
   },
   methods: {
-
     addFile () {
       document.getElementById('hiddenFile').click()
     },

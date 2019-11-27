@@ -2,8 +2,17 @@
   <div class="main_wrap">
     <div class="background">
       <div class="avatar">
-        <img src="static/images/author.png" />
-        <i class="el-icon-camera"></i>
+        <img ref="avatar"
+             :src="avatar" />
+        <div class="dummy"
+             @click="addFile"><i class="el-icon-camera"></i>
+        </div>
+        <input id="hiddenFile"
+               type="file"
+               ref="image"
+               style="display:none"
+               @change="upload()"
+               accept="image/gif,image/jpeg,image/jpg,image/png" />
       </div>
     </div>
 
@@ -138,6 +147,7 @@ export default {
       usernameInput: false,
       mobileInput: false,
       emailInput: false,
+      avatar: null,
       username: '',
       gender: null,
       birthday: null,
@@ -147,8 +157,38 @@ export default {
   },
   mounted () {
     this.getProfile()
+    this.setAvatar()
   },
   methods: {
+    // 设置头像宽高
+    setAvatar () {
+      let avatar = this.$refs.avatar
+      let width = avatar.width
+      avatar.height = width
+    },
+    // 添加图片
+    addFile () {
+      document.getElementById('hiddenFile').click()
+    },
+    // 上传头像
+    upload () {
+      let file = this.$refs.image.files[0]
+      let imgSrc = URL.createObjectURL(file)
+      let img = new Image()
+      img.src = imgSrc
+      let Form = new FormData()
+      Form.append('avatar', file)
+      this.axios.patch(cons.apis + 'api/auth/avatar/', Form, {
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json'
+      }).then(response => {
+        this.$router.go(0)
+      }).catch(() => {
+        alert('失败')
+      })
+    },
     // 获取用户资料
     getProfile () {
       this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
@@ -168,6 +208,7 @@ export default {
           }
           this.mobile = profile.mobile
           this.email = profile.email
+          this.avatar = cons.apis + profile.avatar
         })
         .catch(() => { alert('获取用户资料失败！') })
     },
@@ -200,7 +241,6 @@ export default {
   margin: auto 20%;
   padding: auto 2%;
   background: #ffffff;
-  /* font-family: "KaiTi"; */
 }
 .background {
   height: 15%;
@@ -225,17 +265,18 @@ export default {
   position: absolute;
   top: 8%;
   left: 25.5%;
-  height: 15%;
+  width: 7.5%;
 }
 .avatar img {
-  height: 100%;
+  width: 100%;
   background: #c0c4cc;
   border-radius: 7.5px;
   border: 5px solid #ffffff;
 }
-.body .profile {
-  /* width: 80%; */
-  font-size: 14px;
+.avatar .dummy {
+  position: absolute;
+  top: 80%;
+  left: 110%;
 }
 .profile .username {
   margin: auto 10%;

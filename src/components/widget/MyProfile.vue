@@ -1,17 +1,18 @@
 <template>
   <div class="main_wrap">
-    <div class="title">
+    <div class="background"></div>
+    <div class="profile">
       <div class="avatar">
-        <img src="static/images/author.png" />
+        <img ref="avatar"
+             :src="avatar" />
       </div>
-      <div class="profile">
-        <div class="look">
-          <p class="username">{{ username }}</p>
-          <p class="detail"><span @click="look=!look">{{ look?'∧':'∨' }}</span>查看详细资料</p>
-        </div>
-        <div class="edit">
-          <router-link to='/profile'>编辑个人资料</router-link>
-        </div>
+      <div class="look">
+        <p class="username">{{ username }}</p>
+        <p class="detail"
+           @click="look=!look"><span>{{ look?'∧':'∨' }}</span>查看详细资料</p>
+      </div>
+      <div class="edit">
+        <router-link to='/profile'>编辑个人资料</router-link>
       </div>
     </div>
   </div>
@@ -25,17 +26,25 @@ export default {
   },
   data () {
     return {
+      avatar: null,
       username: '',
       look: false
     }
   },
   mounted () {
     this.getProfile()
+    this.setAvatar()
   },
   updated () {
 
   },
   methods: {
+    // 设置头像宽高
+    setAvatar () {
+      let avatar = this.$refs.avatar
+      let height = avatar.height
+      avatar.width = height
+    },
     // 获取用户资料
     getProfile () {
       this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
@@ -45,7 +54,9 @@ export default {
         responseType: 'json'
       })
         .then(response => {
-          this.username = response.data.username
+          let profile = response.data
+          this.username = profile.username
+          this.avatar = cons.apis + profile.avatar
         })
         .catch(() => { alert('获取用户资料失败！') })
     }
@@ -56,65 +67,69 @@ export default {
 <style  scoped>
 .main_wrap {
   overflow-y: auto;
+  margin-top: 10px;
 }
-.title {
-  margin: 2% 20% 0 20%;
-  padding: 2%;
+.background {
+  height: 15%;
+  margin: auto 20%;
+  display: block;
+  background: #c0c4cc;
+}
+.profile {
+  height: 15%;
+  margin: auto 20%;
+  padding: auto 2%;
   background: #ffffff;
   font-size: 0; /* 消除div之间的间隙 */
-  /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
 }
-.title .avatar {
-  width: 10%;
+.profile .avatar {
+  height: 15%;
+  top: 7.5%;
+  left: 22%;
+  position: absolute;
   display: inline-block;
   vertical-align: bottom;
 }
 .avatar img {
-  width: 100%;
-  background: #c0c4cc;
+  height: 100%;
+  background: tan;
   border-radius: 5px;
+  border: 5px solid #ffffff;
 }
-.title .profile {
-  width: 90%;
+.look {
+  width: 45%;
+  margin-left: 15%;
   display: inline-block;
-  font-size: 0;
-  background: yellowgreen;
+  /* background: purple; */
 }
-.profile .look {
-  width: 50%;
-  padding-left: 20px;
-  display: inline-block;
-  background: black;
-}
-.profile .look .username {
-  margin-bottom: 20px;
-  font-size: 30px;
+.look .username {
+  padding-left: 5%;
+  font-size: 35px;
   font-weight: solid;
 }
-.profile .look .detail {
+.look .detail {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5%;
+  font-size: 14px;
   color: #909399;
   cursor: pointer;
 }
-.profile .look .detail span {
+.look .detail span {
   margin-right: 10px;
 }
-.profile .edit {
-  width: 46.5%;
-  height: 20%;
+.edit {
+  width: 40%;
   display: inline-block;
+  /* background: lawngreen; */
+  text-align: right;
+}
+.edit a {
+  margin-right: 10%;
+  padding: 5px 10px;
+  color: dodgerblue;
+  border: 1px solid dodgerblue;
   font-size: 14px;
-  background: lawngreen;
-}
-.profile .edit .editButton {
-  color: dodgerblue;
-  border: 1px solid dodgerblue;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-.profile .edit a {
-  color: dodgerblue;
-  border: 1px solid dodgerblue;
-  padding: 5px 10px;
   cursor: pointer;
   color: dodgerblue;
   text-decoration: none;

@@ -15,7 +15,7 @@
         <div class="profile"
              v-if="username">
           <img id="user_img"
-               src="../../assets/imgs/avatar.png"
+               :src="avatar"
                @click="usermenu_show=!usermenu_show" />
         </div>
         <div class="operate"
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import cons from '@/components/constent'
 import Register from '@/components/widget/Register'
 import Login from '@/components/widget/Login'
 import HeaderMenu from '@/components/widget/HeaderMenu'
@@ -59,7 +60,8 @@ export default {
       middleSytle: {}, // 动态设置li标签样式
       imgSytle: {}, // 动态设置img标签样式
       showLogin: false, // 显示登录窗
-      showRegister: false // 显示注册窗
+      showRegister: false, // 显示注册窗
+      avatar: null // 头像
     }
   },
   watch: {
@@ -73,7 +75,23 @@ export default {
       this.showLogin = val
     }
   },
+  mounted () {
+    this.getProfile()
+  },
   methods: {
+    // 获取用户资料
+    getProfile () {
+      this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json'
+      })
+        .then(response => {
+          this.avatar = cons.apis + response.data.avatar
+        })
+        .catch(() => { alert('获取用户资料失败！') })
+    },
     // 关闭注册窗
     closeRegister (val) {
       this.showRegister = val
@@ -127,12 +145,10 @@ export default {
   width: 100%;
   height: 45px;
   background: #4f4f4f;
-  /* background: url("https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg"); */
   color: #f5f5f5;
   font-size: 18px;
   font-family: "KaiTi";
 }
-
 .logo {
   width: 15%;
   float: left;
@@ -179,10 +195,11 @@ export default {
   margin-right: 15%;
 }
 .user .profile img {
+  height: 33px;
+  width: 33px;
   float: right;
   cursor: default;
-  margin: 7.5px auto;
-  height: 30px;
+  margin: 6px auto;
   cursor: pointer;
   background: #ffffff;
   border-radius: 50%;
