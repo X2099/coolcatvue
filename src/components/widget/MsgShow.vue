@@ -4,9 +4,9 @@
          v-for="(msg,index) in msgs"
          :key="index">
       <div class="avatar">
-        <img src="static/images/author.png" />
+        <img :src="cons.apis + msg.author_info.avatar" />
         <div class="profile">
-          <label>{{ msg.author_name }}&nbsp;</label>
+          <label>{{ msg.author_info.name }}&nbsp;</label>
           <label>{{ msg.create_time | FromNow }}</label>
         </div>
       </div>
@@ -34,7 +34,8 @@ export default {
   data () {
     return {
       content: '',
-      msgs: []
+      msgs: [],
+      cons
     }
   },
   filters: {
@@ -74,10 +75,11 @@ export default {
 }
 .main_wrap .avatar {
   /* background: yellowgreen; */
-  height: 30px;
+  height: 35px;
 }
 .main_wrap .avatar img {
-  height: 30px;
+  height: 35px;
+  width: 35px;
   background: #e4e2e2;
   border-radius: 50%;
   float: left;

@@ -81,16 +81,18 @@ export default {
   methods: {
     // 获取用户资料
     getProfile () {
-      this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
-        headers: {
-          'Authorization': 'JWT ' + token
-        },
-        responseType: 'json'
-      })
-        .then(response => {
-          this.avatar = cons.apis + response.data.avatar
+      if (uid && token) {
+        this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
+          headers: {
+            'Authorization': 'JWT ' + token
+          },
+          responseType: 'json'
         })
-        .catch(() => { alert('获取用户资料失败！') })
+          .then(response => {
+            this.avatar = cons.apis + response.data.avatar
+          })
+          .catch(() => { alert('获取用户资料失败！') })
+      }
     },
     // 关闭注册窗
     closeRegister (val) {

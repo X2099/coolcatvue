@@ -251,7 +251,7 @@ export default {
 .body .back {
   padding: 15px 10% 0 0;
   text-align: right;
-  font-size: 14.5px;
+  font-size: 14px;
   cursor: pointer;
 }
 .body .back a {
@@ -322,6 +322,7 @@ export default {
 .edit .save {
   margin-left: 5%;
   padding: 5px 10px;
+  font-size: 12px;
   background: #409eff;
   color: white;
   border-radius: 3px;
@@ -333,6 +334,7 @@ export default {
 .edit .cancel {
   margin-left: 5%;
   padding: 5px 10px;
+  font-size: 12px;
   background: #c0c4cc;
   color: white;
   border-radius: 3px;

@@ -31,7 +31,8 @@
       </div>
       <div class="user"
            v-if="username">
-        <img src="../../assets/imgs/avatar.png"
+        <img :src="avatar"
+             ref="avatar"
              id="user_img"
              @click="usermenu_show=!usermenu_show" />
       </div>
@@ -75,7 +76,7 @@ import 'mavon-editor/dist/css/index.css'
 import cons from '@/components/constent'
 // import { error } from 'util'
 let token = localStorage.token
-// let uid = localStorage.uid
+let uid = localStorage.uid
 export default {
   name: '',
   props: [],
@@ -87,10 +88,13 @@ export default {
   },
   mounted () {
     this.getArticle()
+    this.getProfile()
+    this.setAvatar()
   },
   data () {
     return {
       username: localStorage.username, // 登录用户
+      avatar: null, // 用户头像
       id: '', // 文章id
       title: '', // 文章标题
       body: '', // 文章正文
@@ -107,6 +111,12 @@ export default {
     }
   },
   methods: {
+    // 设置头像宽高
+    setAvatar () {
+      let avatar = this.$refs.avatar
+      let height = avatar.height
+      avatar.width = height
+    },
     // 上传图片
     getCover (file) {
       this.cover_image = file
@@ -118,6 +128,19 @@ export default {
     // 删除图片
     removeCover (value) {
       this.cover_url = value
+    },
+    // 获取用户资料
+    getProfile () {
+      this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json'
+      })
+        .then(response => {
+          this.avatar = cons.apis + response.data.avatar
+        })
+        .catch(() => { alert('获取用户资料失败！') })
     },
     // 获取被编辑文章数据
     getArticle () {
@@ -165,7 +188,8 @@ export default {
         {
           headers: {
             'authorization': 'JWT ' + token,
-            'Content-Type': 'multipart/form-data' }
+            'Content-Type': 'multipart/form-data'
+          }
         })
         .then(response => {
 

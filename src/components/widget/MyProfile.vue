@@ -92,7 +92,6 @@ export default {
 }
 .avatar img {
   height: 100%;
-  background: tan;
   border-radius: 5px;
   border: 5px solid #ffffff;
 }
@@ -100,18 +99,17 @@ export default {
   width: 45%;
   margin-left: 15%;
   display: inline-block;
-  /* background: purple; */
 }
 .look .username {
-  padding-left: 5%;
-  font-size: 35px;
+  padding: 1% 0 0 5%;
+  font-size: 30px;
   font-weight: solid;
 }
 .look .detail {
   height: 30px;
   line-height: 30px;
   padding-left: 5%;
-  font-size: 14px;
+  font-size: 12px;
   color: #909399;
   cursor: pointer;
 }
@@ -121,7 +119,6 @@ export default {
 .edit {
   width: 40%;
   display: inline-block;
-  /* background: lawngreen; */
   text-align: right;
 }
 .edit a {
