@@ -148,8 +148,8 @@ export default {
   height: 45px;
   background: #4f4f4f;
   color: #f5f5f5;
-  font-size: 18px;
-  font-family: "KaiTi";
+  font-size: 15px;
+  font-family: "Microsoft YaHei";
 }
 .logo {
   width: 15%;
