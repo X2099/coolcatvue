@@ -1,7 +1,7 @@
 <template>
   <div ref="header"
        class="forehead">
-    <div class="nav">
+    <div :class="[isSmall?'navSmall':'nav']">
       <div class="logo">
         <img src="../../assets/imgs/logo.png" />
       </div>
@@ -61,7 +61,8 @@ export default {
       imgSytle: {}, // 动态设置img标签样式
       showLogin: false, // 显示登录窗
       showRegister: false, // 显示注册窗
-      avatar: null // 头像
+      avatar: null, // 头像
+      isSmall: false // 是否是小屏幕
     }
   },
   watch: {
@@ -77,8 +78,17 @@ export default {
   },
   mounted () {
     this.getProfile()
+    this.adaptive()
   },
   methods: {
+    // 适配不同终端
+    adaptive () {
+      let width = this.$refs.header.offsetWidth
+      if (width <= 500) {
+        // alert('OK')
+        this.isSmall = true
+      }
+    },
     // 获取用户资料
     getProfile () {
       if (uid && token) {
@@ -144,47 +154,50 @@ export default {
 <style>
 .forehead {
   z-index: 1;
-  width: 100%;
-  height: 45px;
+  height: 4rem;
   background: #4f4f4f;
   color: #f5f5f5;
-  font-size: 15px;
   font-family: "Microsoft YaHei";
 }
 .logo {
   width: 15%;
   float: left;
   height: 100%;
+  background: yellowgreen;
 }
 .logo img {
-  height: 40px;
-  margin: 2.5px auto;
-  right: 0;
+  height: 3rem;
+  margin: 0.5rem auto;
   cursor: crosshair;
 }
 .nav {
   margin: 0 20%;
 }
-.nav li {
+.navSmall {
+  margin: auto;
+}
+li {
   list-style: none;
   float: left;
   width: 17.5%;
   text-align: center;
-  line-height: 45px;
+  line-height: 4rem;
+  background: lightblue;
 }
-.nav li span {
+li span {
+  font-size: 1.4rem;
   cursor: pointer;
 }
 .user {
   width: 15%;
   float: right;
   height: 100%;
+  background: purple;
 }
 .user .operate label {
   float: right;
-  line-height: 45px;
-  font-size: 14px;
-  font-weight: 10;
+  line-height: 4rem;
+  font-size: 0.1rem;
   cursor: pointer;
 }
 .user .operate label:hover {
@@ -197,11 +210,10 @@ export default {
   margin-right: 15%;
 }
 .user .profile img {
-  height: 33px;
-  width: 33px;
+  height: 2.6rem;
+  width: 2.6rem;
   float: right;
-  cursor: default;
-  margin: 6px auto;
+  margin: 0.7rem auto;
   cursor: pointer;
   background: #ffffff;
   border-radius: 50%;

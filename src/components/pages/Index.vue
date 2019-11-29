@@ -2,16 +2,14 @@
   <div class="main_wrap"
        @click="hideMenu"
        ref="main_wrap">
-    <Header :show.sync="usermenu_show"></Header>
-    <ArticleList :style="this.heightStyle"></ArticleList>
+    <Header :show.sync="usermenuShow"></Header>
+    <ArticleList></ArticleList>
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import ArticleList from '@/components/widget/ArticleList'
-// let uid = localStorage.uid
-// let token = localStorage.token
 let { uid, token } = localStorage
 export default {
   components: {
@@ -37,7 +35,7 @@ export default {
         let outElm2 = !elm2.contains(event.target)
         if (elm1 && elm2) {
           if (outElm1 && outElm2) {
-            this.usermenu_show = false
+            this.usermenuShow = false
           }
         }
       }

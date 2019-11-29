@@ -2,24 +2,27 @@
   <div class="main_wrap"
        @click="hideMenu"
        ref="main_wrap">
-    <Header :show.sync="usermenu_show"></Header>
-    <MyProfile :style="this.heightStyle" />
+    <Header :show.sync="usermenuShow"></Header>
+    <UserProfile></UserProfile>
+    <UserStatus></UserStatus>
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
-import MyProfile from '@/components/widget/MyProfile'
+import UserProfile from '@/components/widget/UserProfile'
+import UserStatus from '@/components/widget/UserStatus'
 
 let { uid, token } = localStorage
 export default {
   components: {
     Header,
-    MyProfile
+    UserProfile,
+    UserStatus
   },
   data () {
     return {
-      usermenu_show: false,
+      usermenuShow: false,
       heightStyle: {}
     }
   },
@@ -36,7 +39,7 @@ export default {
         let outElm2 = !elm2.contains(event.target)
         if (elm1 && elm2) {
           if (outElm1 && outElm2) {
-            this.usermenu_show = false
+            this.usermenuShow = false
           }
         }
       }
@@ -55,10 +58,10 @@ export default {
 <style scoped>
 .main_wrap {
   overflow-y: hidden;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   height: 100%;
   background: #f5f5f5;
-  /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
+  /* min-height: 1200px; */
 }
 </style>
