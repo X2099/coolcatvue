@@ -16,13 +16,17 @@
              v-if="username">
           <img id="user_img"
                :src="avatar"
+               :class="[isSmall?'avatarSmall':'']"
                @click="usermenu_show=!usermenu_show" />
         </div>
         <div class="operate"
              v-else>
-          <label class="register"><label @click="showRegister=true">注册</label></label>
-          <label class="welcome">✦</label>
-          <label @click="showLogin=true">登录</label>
+          <label class="register"><label @click="showRegister=true"
+                   v-if="!isSmall">注册</label></label>
+          <label class="welcome"
+                 v-if="!isSmall">✦</label>
+          <label @click="showLogin=true"
+                 :class="[isSmall?'userSmall':'avatarLarge']">登录</label>
         </div>
       </div>
     </div>
@@ -159,22 +163,22 @@ export default {
   color: #f5f5f5;
   font-family: "Microsoft YaHei";
 }
-.logo {
-  width: 15%;
-  float: left;
-  height: 100%;
-  background: yellowgreen;
-}
-.logo img {
-  height: 3rem;
-  margin: 0.5rem auto;
-  cursor: crosshair;
-}
 .nav {
   margin: 0 20%;
 }
 .navSmall {
   margin: auto;
+}
+.logo {
+  width: 15%;
+  float: left;
+  height: 100%;
+  /* background: yellowgreen; */
+}
+.logo img {
+  height: 3rem;
+  margin: 0.5rem 10%;
+  cursor: crosshair;
 }
 li {
   list-style: none;
@@ -182,7 +186,6 @@ li {
   width: 17.5%;
   text-align: center;
   line-height: 4rem;
-  background: lightblue;
 }
 li span {
   font-size: 1.4rem;
@@ -192,13 +195,16 @@ li span {
   width: 15%;
   float: right;
   height: 100%;
-  background: purple;
+  /* background: purple; */
 }
 .user .operate label {
   float: right;
   line-height: 4rem;
-  font-size: 0.1rem;
+  font-size: 1.3rem;
   cursor: pointer;
+}
+.userSmall {
+  margin-right: 20%;
 }
 .user .operate label:hover {
   color: dodgerblue;
@@ -207,18 +213,23 @@ li span {
   color: Gold;
 }
 .user .operate .register {
-  margin-right: 15%;
+  margin-right: 7.5%;
 }
 .user .profile img {
   height: 2.6rem;
   width: 2.6rem;
   float: right;
-  margin: 0.7rem auto;
   cursor: pointer;
   background: #ffffff;
   border-radius: 50%;
   opacity: 0.9;
   filter: alpha=(opacity(100));
+}
+.user .profile .avatarLarge {
+  margin: 0.7rem auto;
+}
+.user .profile .avatarSmall {
+  margin: 0.7rem 15%;
 }
 .user .profile img:hover {
   opacity: 1;
