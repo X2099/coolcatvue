@@ -7,11 +7,23 @@
              src="../../assets/imgs/logo.png"
              @click="index" />
       </div>
-      <div class="list">
-        <span @click="index">首页</span>
-        <span @click="articles">我的文章</span>
-        <span @click="edit">写文章</span>
-        <span @click="leavingmsg">留言板</span>
+      <div class="option">
+        <div class="list large">
+          <span @click="index">首页</span>
+          <span @click="articles">我的文章</span>
+          <span @click="edit">写文章</span>
+          <span @click="leavingmsg">留言板</span>
+        </div>
+        <div class="list small">
+          <span @click="listShow=!listShow">首页 ▾</span>
+          <div class="listSmall"
+               v-if="listShow">
+            <span @click="index">首页</span>
+            <span @click="articles">我的文章</span>
+            <span @click="edit">写文章</span>
+            <span @click="leavingmsg">留言板</span>
+          </div>
+        </div>
         <div class="search">
           <input type="text"
                  placeholder="CoolCat搜索" />
@@ -31,8 +43,7 @@
           <label class="register"
                  @click="showRegister=true">注册</label>
           <label class="welcome">✦</label>
-          <label class="login"
-                 @click="showLogin=true">登录</label>
+          <label @click="showLogin=true">登录</label>
         </div>
       </div>
     </div>
@@ -72,7 +83,8 @@ export default {
       showLogin: false, // 显示登录窗
       showRegister: false, // 显示注册窗
       avatar: null, // 头像
-      search: '' // 搜索字段
+      search: '', // 搜索字段
+      listShow: false
     }
   },
   watch: {
@@ -159,16 +171,16 @@ export default {
   color: #f5f5f5;
 }
 .nav {
-  margin: 0 20%;
+  margin: 0 15%;
   font-size: 0;
 }
 .nav .logo {
   width: 15%;
   height: 100%;
   display: inline-block;
-  /* background: burlywood; */
+  /* background: red; */
 }
-.nav .list {
+.nav .option {
   width: 70%;
   display: inline-block;
   font-size: 0;
@@ -179,6 +191,7 @@ export default {
   width: 15%;
   display: inline-block;
   height: 100%;
+  /* background: gold; */
 }
 .nav .logo img {
   height: 2.4rem;
@@ -189,32 +202,41 @@ export default {
 .logo .screenLogo {
   margin: 0.8rem auto;
 }
-.nav .list span {
-  width: 18%;
+.option .list {
+  width: 72%;
+  font-size: 0;
+  display: inline-block;
+}
+.option .list span {
+  width: 25%;
   text-align: center;
   display: inline-block;
   line-height: 4rem;
   font-size: 1.4rem;
   cursor: pointer;
+  background: #4f4f4f;
   /* background: rebeccapurple; */
 }
-.nav .list .search {
+.option .list .listSmall {
+  width: 25%;
+}
+.option .small {
+  display: none;
+}
+.option .search {
   width: 28%;
   display: inline-block;
   /* background: yellowgreen; */
   vertical-align: top;
 }
-.nav .list .search input {
+.option .search input {
   width: 70%;
-  height: 2rem;
-  margin: 1rem auto;
+  height: 2.4rem;
+  margin: 0.7rem 0;
   border-radius: 0.2rem;
   border: 1px solid #dcdfe6;
   text-indent: 1rem;
   outline: none;
-}
-.nav .list .search input:hover {
-  border: 1px solid dodgerblue;
 }
 .user .operate label {
   float: right;
@@ -224,6 +246,9 @@ export default {
 }
 .user .operate label:hover {
   color: dodgerblue;
+}
+.user .welcome {
+  margin: auto 5%;
 }
 .user .operate .welcome:hover {
   color: Gold;
@@ -256,21 +281,40 @@ export default {
   .nav {
     margin: auto;
   }
+  .nav .option {
+    width: 60%;
+  }
+  .nav .user {
+    width: 25%;
+  }
   .logo .screenLogo {
     margin: 0.8rem auto 0.8rem 1rem;
   }
   .user .profile .screenAvatar {
     margin: 0.8rem 1rem;
   }
-  .user .operate .register,
-  .welcome {
+  .option .list {
+    position: absolute;
+    left: 15%;
+    width: 100%;
+    height: 4rem;
+    z-index: 1;
+  }
+  .option .list span {
+    display: block;
+    width: 21%;
+    text-align: left;
+    text-indent: 1.4rem;
+  }
+  .option .large {
     display: none;
   }
-  .user .operate .login {
-    padding-right: 1rem;
+  .option .small {
+    display: block;
   }
-  .nav .list span {
-    display: none;
+  .option .search {
+    margin-left: 35%;
+    width: 65%;
   }
 }
 </style>
