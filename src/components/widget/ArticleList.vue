@@ -1,8 +1,5 @@
 <template>
   <div class="main_wrap">
-    <div style="clear:both">
-      <p><br></p>
-    </div>
     <div v-for="(article,index) in article_list"
          :key="index"
          class="article">
@@ -22,9 +19,6 @@
              v-else
              @click="articleDetail(article.id)" />
       </div>
-    </div>
-    <div style="clear:both">
-      <p><br></p>
     </div>
   </div>
 </template>
@@ -79,22 +73,22 @@ export default {
   overflow-y: auto;
 }
 .article {
-  margin: 0% 20%;
+  margin: 2rem 20%;
 }
 .article .intro {
   float: left;
   width: 50%;
-  height: 100px;
+  height: 10rem;
   background: #ffffff;
   padding: 4% 0 4% 10%;
 }
 .article .intro p {
   color: gray;
   margin: 2% auto;
-  font-size: 13px;
+  font-size: 1.3rem;
 }
 .article .intro .title {
-  font-size: 20px;
+  font-size: 2rem;
   color: black;
   font-weight: bold;
   cursor: pointer;
@@ -105,12 +99,27 @@ export default {
 .article .cover {
   float: left;
   width: 40%;
-  height: 100px;
+  height: 10rem;
   padding: 4% 0;
   background: #ffffff;
 }
 .article .cover img {
-  height: 100px;
+  width: 80%;
   cursor: pointer;
+}
+@media screen and (max-width: 700px) {
+  .article {
+    margin: 1rem 0;
+  }
+  .article .intro {
+    float: left;
+    width: 100%;
+    /* height: 10rem; */
+    background: #ffffff;
+    padding: 0 4%;
+  }
+  .article .cover {
+    display: none;
+  }
 }
 </style>

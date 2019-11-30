@@ -1,37 +1,43 @@
 <template>
   <div ref="header"
        class="forehead">
-    <div :class="[isSmall?'navSmall':'nav']">
+    <div class="nav">
       <div class="logo">
-        <img src="../../assets/imgs/logo.png" />
+        <img class="screenLogo"
+             src="../../assets/imgs/logo.png"
+             @click="index" />
       </div>
-      <ol>
-        <li><span @click="index">首页</span></li>
-        <li><span @click="articles">我的文章</span></li>
-        <li><span @click="edit">写文章</span></li>
-        <li><span @click="leavingmsg">留言板</span></li>
-      </ol>
+      <div class="list">
+        <span @click="index">首页</span>
+        <span @click="articles">我的文章</span>
+        <span @click="edit">写文章</span>
+        <span @click="leavingmsg">留言板</span>
+        <div class="search">
+          <input type="text"
+                 placeholder="CoolCat搜索" />
+          <i class="el-icon-search"></i>
+        </div>
+      </div>
       <div class="user">
         <div class="profile"
              v-if="username">
           <img id="user_img"
+               class="avatar screenAvatar"
                :src="avatar"
-               :class="[isSmall?'avatarSmall':'']"
-               @click="usermenu_show=!usermenu_show" />
+               @click="usermenuShow=!usermenuShow" />
         </div>
         <div class="operate"
              v-else>
-          <label class="register"><label @click="showRegister=true"
-                   v-if="!isSmall">注册</label></label>
-          <label class="welcome"
-                 v-if="!isSmall">✦</label>
-          <label @click="showLogin=true"
-                 :class="[isSmall?'userSmall':'avatarLarge']">登录</label>
+          <label class="register"
+                 @click="showRegister=true">注册</label>
+          <label class="welcome">✦</label>
+          <label class="login"
+                 @click="showLogin=true">登录</label>
         </div>
       </div>
     </div>
     <HeaderMenu id="user_menu"
-                v-show="usermenu_show"></HeaderMenu>
+                v-show="usermenuShow"></HeaderMenu>
     <Register @closeRegister="closeRegister"
               @goLogin="goLogin"
               v-if="showRegister"></Register>
@@ -59,22 +65,22 @@ export default {
   },
   data () {
     return {
-      username: localStorage.username,
-      usermenu_show: false,
+      username: uid && token,
+      usermenuShow: false,
       middleSytle: {}, // 动态设置li标签样式
       imgSytle: {}, // 动态设置img标签样式
       showLogin: false, // 显示登录窗
       showRegister: false, // 显示注册窗
       avatar: null, // 头像
-      isSmall: false // 是否是小屏幕
+      search: '' // 搜索字段
     }
   },
   watch: {
-    usermenu_show: function (newValue, oldValue) {
+    usermenuShow: function (newValue, oldValue) {
       this.$emit('update:show', newValue)
     },
     show: function (newValue, oldValue) {
-      this.usermenu_show = newValue
+      this.usermenuShow = newValue
     },
     toLogin: function (val) {
       this.showLogin = val
@@ -82,17 +88,8 @@ export default {
   },
   mounted () {
     this.getProfile()
-    this.adaptive()
   },
   methods: {
-    // 适配不同终端
-    adaptive () {
-      let width = this.$refs.header.offsetWidth
-      if (width <= 500) {
-        // alert('OK')
-        this.isSmall = true
-      }
-    },
     // 获取用户资料
     getProfile () {
       if (uid && token) {
@@ -157,54 +154,73 @@ export default {
 
 <style>
 .forehead {
-  z-index: 1;
   height: 4rem;
   background: #4f4f4f;
   color: #f5f5f5;
-  font-family: "Microsoft YaHei";
 }
 .nav {
   margin: 0 20%;
+  font-size: 0;
 }
-.navSmall {
-  margin: auto;
-}
-.logo {
+.nav .logo {
   width: 15%;
-  float: left;
   height: 100%;
-  /* background: yellowgreen; */
+  display: inline-block;
+  /* background: burlywood; */
 }
-.logo img {
-  height: 3rem;
-  margin: 0.5rem 10%;
+.nav .list {
+  width: 70%;
+  display: inline-block;
+  font-size: 0;
+  vertical-align: top;
+  /* background: tan; */
+}
+.nav .user {
+  width: 15%;
+  display: inline-block;
+  height: 100%;
+}
+.nav .logo img {
+  height: 2.4rem;
   cursor: crosshair;
+  background: #ffffff;
+  border-radius: 50%;
 }
-li {
-  list-style: none;
-  float: left;
-  width: 17.5%;
+.logo .screenLogo {
+  margin: 0.8rem auto;
+}
+.nav .list span {
+  width: 18%;
   text-align: center;
+  display: inline-block;
   line-height: 4rem;
-}
-li span {
   font-size: 1.4rem;
   cursor: pointer;
+  /* background: rebeccapurple; */
 }
-.user {
-  width: 15%;
-  float: right;
-  height: 100%;
-  /* background: purple; */
+.nav .list .search {
+  width: 28%;
+  display: inline-block;
+  /* background: yellowgreen; */
+  vertical-align: top;
+}
+.nav .list .search input {
+  width: 70%;
+  height: 2rem;
+  margin: 1rem auto;
+  border-radius: 0.2rem;
+  border: 1px solid #dcdfe6;
+  text-indent: 1rem;
+  outline: none;
+}
+.nav .list .search input:hover {
+  border: 1px solid dodgerblue;
 }
 .user .operate label {
   float: right;
   line-height: 4rem;
   font-size: 1.3rem;
   cursor: pointer;
-}
-.userSmall {
-  margin-right: 20%;
 }
 .user .operate label:hover {
   color: dodgerblue;
@@ -215,9 +231,9 @@ li span {
 .user .operate .register {
   margin-right: 7.5%;
 }
-.user .profile img {
-  height: 2.6rem;
-  width: 2.6rem;
+.user .profile .avatar {
+  height: 2.4rem;
+  width: 2.4rem;
   float: right;
   cursor: pointer;
   background: #ffffff;
@@ -225,14 +241,36 @@ li span {
   opacity: 0.9;
   filter: alpha=(opacity(100));
 }
-.user .profile .avatarLarge {
-  margin: 0.7rem auto;
-}
-.user .profile .avatarSmall {
-  margin: 0.7rem 15%;
+.user .profile .screenAvatar {
+  margin: 0.8rem 0;
 }
 .user .profile img:hover {
   opacity: 1;
   filter: alpha=(opacity(80));
+}
+.el-icon-search {
+  padding-left: 1rem;
+  font-size: 1.4rem;
+}
+@media screen and (max-width: 700px) {
+  .nav {
+    margin: auto;
+  }
+  .logo .screenLogo {
+    margin: 0.8rem auto 0.8rem 1rem;
+  }
+  .user .profile .screenAvatar {
+    margin: 0.8rem 1rem;
+  }
+  .user .operate .register,
+  .welcome {
+    display: none;
+  }
+  .user .operate .login {
+    padding-right: 1rem;
+  }
+  .nav .list span {
+    display: none;
+  }
 }
 </style>
