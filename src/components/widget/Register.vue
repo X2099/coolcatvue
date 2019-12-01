@@ -55,7 +55,7 @@
                class="input_sub"
                @click="fnRegister">
       </form>
-      <div class="nav">
+      <div class="navLogin">
         <a @click="goLogin">已有账号登录</a>
       </div>
     </div>
@@ -234,8 +234,8 @@ export default {
   z-index: 2;
   width: 100%;
   height: 100%;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   background: #4f4f4f;
   opacity: 0.3;
   filter: alpha=(opacity(100));
@@ -243,39 +243,39 @@ export default {
 .register_form {
   position: fixed;
   z-index: 2;
-  width: 330px;
-  height: 490px;
+  width: 33rem;
+  height: 49rem;
   background: #fff;
   left: 50%;
   top: 50%;
-  margin-top: -246px;
-  margin-left: -165px;
+  margin-top: -24.6rem;
+  margin-left: -16.5rem;
   overflow: hidden;
 }
-.register_form .nav {
+.register_form .navLogin {
   text-align: center;
-  margin-top: 15px;
-  font-size: 13px;
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
   color: rgb(63, 67, 68);
 }
-.register_form .nav a {
+.register_form .navLogin a {
   text-decoration: none;
   margin: 0 10px;
   color: rgb(63, 67, 68);
   cursor: pointer;
 }
 .register_form .error_tip {
-  height: 20px;
-  width: 250px;
-  font-size: 10px;
-  line-height: 20px;
+  height: 2rem;
+  width: 25rem;
+  font-size: 1rem;
+  line-height: 2rem;
   margin: auto;
   color: #f00;
 }
 .register_form h1 {
-  line-height: 72px;
-  margin: auto 30px;
-  font-size: 18px;
+  line-height: 7.2rem;
+  margin: auto 3rem;
+  font-size: 1.8rem;
 }
 .register_form .register_title {
   float: left;
@@ -289,20 +289,20 @@ export default {
 .input_txt {
   display: block;
   margin: auto;
-  width: 270px;
-  height: 32px;
+  width: 27rem;
+  height: 3.2rem;
   border: 1px solid #d0d0d0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   outline: none;
-  text-indent: 10px;
+  text-indent: 1rem;
 }
 .input_sub {
   display: block;
-  margin: 10px auto 0;
-  width: 270px;
-  height: 32px;
-  border: 0px;
-  border-radius: 4px;
+  margin: 1rem auto 0;
+  width: 27rem;
+  height: 3.2rem;
+  border: 0;
+  border-radius: 0.4rem;
   /* background: dodgerblue; */
   background: #4f4f4f;
   color: #fff;
@@ -312,5 +312,10 @@ export default {
 .input_sub:hover {
   opacity: 0.75;
   filter: alpha=(opacity(100));
+}
+@media screen and (max-width: 700px) {
+  .input_sub {
+    background: teal;
+  }
 }
 </style>

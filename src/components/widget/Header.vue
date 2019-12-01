@@ -3,24 +3,22 @@
        class="forehead">
     <div class="nav">
       <div class="logo">
-        <img class="screenLogo"
-             src="../../assets/imgs/logo.png"
+        <img src="../../assets/imgs/logo.png"
              @click="index" />
       </div>
       <div class="option">
-        <div class="list large">
+        <div class="listLarge">
           <span @click="index">首页</span>
           <span @click="articles">我的文章</span>
           <span @click="edit">写文章</span>
           <span @click="leavingmsg">留言板</span>
         </div>
-        <div class="list small">
+        <div class="listSmall">
           <span @click="listShow=!listShow">首页 ▾</span>
-          <div class="listSmall"
-               v-if="listShow">
+          <div v-if="listShow">
             <span @click="index">首页</span>
-            <span @click="articles">我的文章</span>
             <span @click="edit">写文章</span>
+            <span @click="articles">我的文章</span>
             <span @click="leavingmsg">留言板</span>
           </div>
         </div>
@@ -34,7 +32,6 @@
         <div class="profile"
              v-if="username">
           <img id="user_img"
-               class="avatar screenAvatar"
                :src="avatar"
                @click="usermenuShow=!usermenuShow" />
         </div>
@@ -195,32 +192,26 @@ export default {
 }
 .nav .logo img {
   height: 2.4rem;
+  margin: 0.8rem auto;
   cursor: crosshair;
   background: #ffffff;
   border-radius: 50%;
 }
-.logo .screenLogo {
-  margin: 0.8rem auto;
-}
-.option .list {
+.option .listLarge {
   width: 72%;
   font-size: 0;
   display: inline-block;
 }
-.option .list span {
+.option .listLarge span {
   width: 25%;
   text-align: center;
   display: inline-block;
   line-height: 4rem;
   font-size: 1.4rem;
   cursor: pointer;
-  background: #4f4f4f;
   /* background: rebeccapurple; */
 }
-.option .list .listSmall {
-  width: 25%;
-}
-.option .small {
+.option .listSmall {
   display: none;
 }
 .option .search {
@@ -234,6 +225,7 @@ export default {
   height: 2.4rem;
   margin: 0.7rem 0;
   border-radius: 0.2rem;
+  font-size: 1.2rem;
   border: 1px solid #dcdfe6;
   text-indent: 1rem;
   outline: none;
@@ -256,9 +248,10 @@ export default {
 .user .operate .register {
   margin-right: 7.5%;
 }
-.user .profile .avatar {
+.user .profile img {
   height: 2.4rem;
   width: 2.4rem;
+  margin: 0.8rem 0;
   float: right;
   cursor: pointer;
   background: #ffffff;
@@ -266,51 +259,55 @@ export default {
   opacity: 0.9;
   filter: alpha=(opacity(100));
 }
-.user .profile .screenAvatar {
-  margin: 0.8rem 0;
-}
 .user .profile img:hover {
   opacity: 1;
   filter: alpha=(opacity(80));
 }
 .el-icon-search {
+  line-height: 2.4rem;
+  margin-top: 0.7rem;
   padding-left: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  /* background: yellowgreen; */
 }
 @media screen and (max-width: 700px) {
   .nav {
     margin: auto;
+    background: teal;
+    /* background: indianred; */
   }
   .nav .option {
     width: 60%;
+    /* background: indianred; */
   }
   .nav .user {
     width: 25%;
   }
-  .logo .screenLogo {
-    margin: 0.8rem auto 0.8rem 1rem;
-  }
-  .user .profile .screenAvatar {
+  .nav .logo img {
     margin: 0.8rem 1rem;
   }
-  .option .list {
-    position: absolute;
-    left: 15%;
-    width: 100%;
-    height: 4rem;
-    z-index: 1;
+  .user .profile img {
+    margin: 0.8rem 1rem;
   }
-  .option .list span {
-    display: block;
-    width: 21%;
-    text-align: left;
-    text-indent: 1.4rem;
-  }
-  .option .large {
+  .option .listLarge {
     display: none;
   }
-  .option .small {
+  .option .listSmall {
+    position: absolute;
+    left: 15%;
+    height: 4rem;
+    z-index: 1;
     display: block;
+    width: 21%;
+  }
+  .option .listSmall span {
+    line-height: 4rem;
+    font-size: 1.4rem;
+    display: block;
+    width: 100%;
+    text-align: left;
+    text-indent: 1rem;
+    background: teal;
   }
   .option .search {
     margin-left: 35%;

@@ -81,6 +81,7 @@ export default {
   height: 10rem;
   background: #ffffff;
   padding: 4% 0 4% 10%;
+  margin-bottom: 0.1rem;
 }
 .article .intro p {
   color: gray;
@@ -102,9 +103,10 @@ export default {
   height: 10rem;
   padding: 4% 0;
   background: #ffffff;
+  margin-bottom: 0.1rem;
 }
 .article .cover img {
-  width: 80%;
+  height: 100%;
   cursor: pointer;
 }
 @media screen and (max-width: 700px) {
@@ -112,11 +114,9 @@ export default {
     margin: 1rem 0;
   }
   .article .intro {
-    float: left;
-    width: 100%;
-    /* height: 10rem; */
+    width: 90%;
     background: #ffffff;
-    padding: 0 4%;
+    padding: 0 5%;
   }
   .article .cover {
     display: none;

@@ -245,4 +245,14 @@ export default {
   .ql-picker-item[data-value="6"]::before {
   content: "标题6";
 }
+@media screen and (max-width: 700px) {
+  .editor_wrap {
+    margin: 1rem 0 0 0;
+    padding: 0;
+  }
+  .main_wrap .button {
+    margin: 0;
+    padding: 1rem 1rem 0 0;
+  }
+}
 </style>

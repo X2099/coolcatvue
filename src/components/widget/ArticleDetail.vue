@@ -152,4 +152,13 @@ export default {
   margin: 0 20% 2% 20%;
   background: #f2f6fc;
 }
+@media screen and (max-width: 700px) {
+  .title {
+    margin: 1rem 0 0 0;
+  }
+  .main_wrap .article .md {
+    margin: 0;
+    background: #f2f6fc;
+  }
+}
 </style>

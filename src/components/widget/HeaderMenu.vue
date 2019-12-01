@@ -37,24 +37,37 @@ export default {
 .main_wrap {
   position: absolute;
   z-index: 3;
-  top: 45px;
+  top: 4rem;
   right: 20%;
-  width: 150px;
-  height: 450px;
+  width: 15rem;
+  height: 45rem;
   color: gray;
   background: #ffffff;
   cursor: pointer;
   border: 1px solid rgb(190, 193, 194);
-  border-radius: 3.5px;
+  border-radius: 0.35rem;
 }
 .option {
   margin: 20% 10%;
-  font-size: 16px;
+  /* font-size: 1.6rem; */
   color: rgb(138, 144, 145);
+  font-size: 1.4rem;
 }
-
 .option a {
   color: rgb(138, 144, 145);
   text-decoration: none;
+  font-size: 1.4rem;
+}
+@media screen and (max-width: 700px) {
+  .main_wrap {
+    top: 4rem;
+    right: 0;
+    width: 10rem;
+    height: 25rem;
+  }
+  .option {
+    margin: 10% 10%;
+    color: rgb(138, 144, 145);
+  }
 }
 </style>

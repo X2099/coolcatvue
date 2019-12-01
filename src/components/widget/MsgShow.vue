@@ -90,4 +90,14 @@ export default {
   line-height: 30px;
   float: left;
 }
+@media screen and (max-width: 700px) {
+  .main_wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .main_wrap >>> .ql-container {
+    margin: 2rem 0;
+  }
+}
 </style>

@@ -26,7 +26,7 @@
                class="input_sub"
                @click="fnLogin">
       </form>
-      <div class="nav">没有账号？<a @click="goRegister">注册</a></div>
+      <div class="navReg">没有账号？<a @click="goRegister">注册</a></div>
     </div>
   </div>
 </template>
@@ -94,8 +94,8 @@ export default {
   z-index: 2;
   width: 100%;
   height: 100%;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   background: #4f4f4f;
   opacity: 0.3;
   filter: alpha=(opacity(100));
@@ -103,40 +103,40 @@ export default {
 .login_form {
   position: fixed;
   z-index: 2;
-  width: 330px;
-  height: 312px;
+  width: 32rem;
+  height: 30rem;
   background: #fff;
+  top: auto;
   left: 50%;
   top: 50%;
-  margin-top: -156px;
-  margin-left: -165px;
+  margin-top: -15rem;
+  margin-left: -16rem;
   overflow: hidden;
-  /* user-select: none; */
 }
-.login_form .nav {
+.login_form .navReg {
   text-align: center;
-  margin-top: 15px;
-  font-size: 13px;
+  margin-top: 1.5rem;
+  font-size: 1rem;
   color: #4f4f4f;
 }
-.login_form .nav a {
+.login_form .navReg a {
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 1rem;
   color: #4f4f4f;
   cursor: pointer;
 }
 .login_form .error_tip {
   position: absolute;
-  font-size: 10px;
+  font-size: 1rem;
   color: #f00;
-  bottom: 120px;
+  bottom: 12rem;
   left: 50%;
   transform: translate(-50%);
 }
 .login_form h1 {
-  line-height: 72px;
-  margin: auto 30px;
-  font-size: 18px;
+  line-height: 7rem;
+  margin: auto 3rem;
+  font-size: 1.8rem;
 }
 .login_form .login_title {
   float: left;
@@ -149,21 +149,21 @@ export default {
 }
 .input_txt {
   display: block;
-  margin: 20px auto 0;
-  width: 270px;
-  height: 32px;
+  margin: 2rem auto 0;
+  width: 27rem;
+  height: 3.2rem;
   border: 1px solid #d0d0d0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   outline: none;
-  text-indent: 10px;
+  text-indent: 1rem;
 }
 .input_sub {
   display: block;
-  margin: 40px auto 0;
-  width: 270px;
-  height: 32px;
-  border: 0px;
-  border-radius: 4px;
+  margin: 4rem auto 0;
+  width: 27rem;
+  height: 3.2rem;
+  border: 0;
+  border-radius: 0rem;
   background: #4f4f4f;
   color: #fff;
   cursor: pointer;
@@ -172,5 +172,10 @@ export default {
 .input_sub:hover {
   opacity: 0.75;
   filter: alpha=(opacity(100));
+}
+@media screen and (max-width: 700px) {
+  .input_sub {
+    background: teal;
+  }
 }
 </style>
