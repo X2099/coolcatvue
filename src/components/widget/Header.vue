@@ -14,8 +14,10 @@
           <span @click="leavingmsg">留言板</span>
         </div>
         <div class="listSmall">
-          <span @click="listShow=!listShow">首页 ▾</span>
-          <div v-if="listShow">
+          <span id="smallButton"
+                @click="switchMenu('list')">首页 ▾</span>
+          <div id="smallList"
+               v-show="showSwitch.listShow">
             <span @click="index">首页</span>
             <span @click="edit">写文章</span>
             <span @click="articles">我的文章</span>
@@ -31,9 +33,9 @@
       <div class="user">
         <div class="profile"
              v-if="username">
-          <img id="user_img"
+          <img id="userImg"
                :src="avatar"
-               @click="usermenuShow=!usermenuShow" />
+               @click="switchMenu('user')" />
         </div>
         <div class="operate"
              v-else>
@@ -44,8 +46,8 @@
         </div>
       </div>
     </div>
-    <HeaderMenu id="user_menu"
-                v-show="usermenuShow"></HeaderMenu>
+    <HeaderMenu id="userMenu"
+                v-show="showSwitch.usermenuShow"></HeaderMenu>
     <Register @closeRegister="closeRegister"
               @goLogin="goLogin"
               v-if="showRegister"></Register>
@@ -74,14 +76,13 @@ export default {
   data () {
     return {
       username: uid && token,
-      usermenuShow: false,
+      showSwitch: { usermenuShow: false, listShow: false },
       middleSytle: {}, // 动态设置li标签样式
       imgSytle: {}, // 动态设置img标签样式
       showLogin: false, // 显示登录窗
       showRegister: false, // 显示注册窗
       avatar: null, // 头像
-      search: '', // 搜索字段
-      listShow: false
+      search: '' // 搜索字段
     }
   },
   watch: {
@@ -89,7 +90,7 @@ export default {
       this.$emit('update:show', newValue)
     },
     show: function (newValue, oldValue) {
-      this.usermenuShow = newValue
+      this.showSwitch = newValue
     },
     toLogin: function (val) {
       this.showLogin = val
@@ -99,6 +100,15 @@ export default {
     this.getProfile()
   },
   methods: {
+    // 显示或隐藏菜单
+    switchMenu (button) {
+      if (button === 'user') {
+        this.showSwitch.usermenuShow = !this.showSwitch.usermenuShow
+      } else if (button === 'list') {
+        this.showSwitch.listShow = !this.showSwitch.listShow
+      }
+      this.$emit('update:show', this.showSwitch)
+    },
     // 获取用户资料
     getProfile () {
       if (uid && token) {
@@ -175,20 +185,17 @@ export default {
   width: 15%;
   height: 100%;
   display: inline-block;
-  /* background: red; */
 }
 .nav .option {
   width: 70%;
   display: inline-block;
   font-size: 0;
   vertical-align: top;
-  /* background: tan; */
 }
 .nav .user {
   width: 15%;
   display: inline-block;
   height: 100%;
-  /* background: gold; */
 }
 .nav .logo img {
   height: 2.4rem;
@@ -209,7 +216,6 @@ export default {
   line-height: 4rem;
   font-size: 1.4rem;
   cursor: pointer;
-  /* background: rebeccapurple; */
 }
 .option .listSmall {
   display: none;
@@ -217,7 +223,6 @@ export default {
 .option .search {
   width: 28%;
   display: inline-block;
-  /* background: yellowgreen; */
   vertical-align: top;
 }
 .option .search input {
@@ -268,17 +273,15 @@ export default {
   margin-top: 0.7rem;
   padding-left: 1rem;
   font-size: 1.2rem;
-  /* background: yellowgreen; */
 }
 @media screen and (max-width: 700px) {
   .nav {
     margin: auto;
-    background: teal;
-    /* background: indianred; */
+    background: indianred;
   }
   .nav .option {
     width: 60%;
-    /* background: indianred; */
+    background: indianred;
   }
   .nav .user {
     width: 25%;
@@ -307,7 +310,8 @@ export default {
     width: 100%;
     text-align: left;
     text-indent: 1rem;
-    background: teal;
+    /* background: teal; */
+    background: indianred;
   }
   .option .search {
     margin-left: 35%;

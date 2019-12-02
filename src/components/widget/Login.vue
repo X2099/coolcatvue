@@ -163,7 +163,7 @@ export default {
   width: 27rem;
   height: 3.2rem;
   border: 0;
-  border-radius: 0rem;
+  border-radius: 0.4rem;
   background: #4f4f4f;
   color: #fff;
   cursor: pointer;
@@ -174,8 +174,29 @@ export default {
   filter: alpha=(opacity(100));
 }
 @media screen and (max-width: 700px) {
+  .login_form h1 {
+    line-height: 5rem;
+    font-size: 1.5rem;
+  }
+  .login_form {
+    width: 20rem;
+    height: 20rem;
+    margin-top: -10rem;
+    margin-left: -10rem;
+  }
+  .input_txt {
+    width: 15rem;
+    height: 2rem;
+    margin: 1rem auto 0;
+  }
   .input_sub {
-    background: teal;
+    width: 15rem;
+    height: 2rem;
+    margin: 2rem auto 0;
+    background: indianred;
+  }
+  .login_form .error_tip {
+    bottom: 8rem;
   }
 }
 </style>

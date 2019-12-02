@@ -315,7 +315,7 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .input_sub {
-    background: teal;
+    background: indianred;
   }
 }
 </style>
