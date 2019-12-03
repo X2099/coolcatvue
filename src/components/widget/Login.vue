@@ -174,23 +174,25 @@ export default {
   filter: alpha=(opacity(100));
 }
 @media screen and (max-width: 700px) {
+  .login_form {
+    width: 26rem;
+    height: 26rem;
+    margin-top: -13rem;
+    margin-left: -13rem;
+  }
   .login_form h1 {
     line-height: 5rem;
     font-size: 1.5rem;
-  }
-  .login_form {
-    width: 20rem;
-    height: 20rem;
-    margin-top: -10rem;
-    margin-left: -10rem;
+    background: yellowgreen;
   }
   .input_txt {
-    width: 15rem;
+    width: 20rem;
     height: 2rem;
     margin: 1rem auto 0;
+    background: palegoldenrod;
   }
   .input_sub {
-    width: 15rem;
+    width: 20rem;
     height: 2rem;
     margin: 2rem auto 0;
     background: indianred;
