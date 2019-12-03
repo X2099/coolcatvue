@@ -156,6 +156,7 @@ export default {
   border-radius: 0.4rem;
   outline: none;
   text-indent: 1rem;
+  font-size: 1.2rem;
 }
 .input_sub {
   display: block;
@@ -168,6 +169,7 @@ export default {
   color: #fff;
   cursor: pointer;
   outline: none;
+  font-size: 1.2rem;
 }
 .input_sub:hover {
   opacity: 0.75;
@@ -175,30 +177,26 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .login_form {
-    width: 26rem;
-    height: 26rem;
-    margin-top: -13rem;
-    margin-left: -13rem;
+    width: 28rem;
+    height: 28rem;
+    margin-top: -14rem;
+    margin-left: -14rem;
   }
   .login_form h1 {
-    line-height: 5rem;
-    font-size: 1.5rem;
-    background: yellowgreen;
+    line-height: 6rem;
   }
   .input_txt {
-    width: 20rem;
-    height: 2rem;
-    margin: 1rem auto 0;
-    background: palegoldenrod;
+    width: 22rem;
+    height: 3rem;
   }
   .input_sub {
-    width: 20rem;
-    height: 2rem;
-    margin: 2rem auto 0;
+    width: 22rem;
+    height: 3rem;
+    margin: 4rem auto 0;
     background: indianred;
   }
   .login_form .error_tip {
-    bottom: 8rem;
+    bottom: 10rem;
   }
 }
 </style>

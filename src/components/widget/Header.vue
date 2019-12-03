@@ -39,10 +39,10 @@
         </div>
         <div class="operate"
              v-else>
-          <label class="register"
-                 @click="showRegister=true">注册</label>
-          <label class="welcome">✦</label>
-          <label @click="showLogin=true">登录</label>
+          <span class="register"
+                @click="showRegister=true">注册</span>
+          <span class="welcome">✦</span>
+          <span @click="showLogin=true">登录</span>
         </div>
       </div>
     </div>
@@ -235,13 +235,13 @@ export default {
   text-indent: 1rem;
   outline: none;
 }
-.user .operate label {
+.user .operate span {
   float: right;
   line-height: 4rem;
   font-size: 1.3rem;
   cursor: pointer;
 }
-.user .operate label:hover {
+.user .operate span:hover {
   color: dodgerblue;
 }
 .user .welcome {
@@ -316,6 +316,12 @@ export default {
   .option .search {
     margin-left: 35%;
     width: 65%;
+  }
+  .user .operate span {
+    cursor: default;
+  }
+  .user .operate span:hover {
+    color: #f5f5f5;
   }
 }
 </style>

@@ -295,6 +295,7 @@ export default {
   border-radius: 0.4rem;
   outline: none;
   text-indent: 1rem;
+  font-size: 1.2rem;
 }
 .input_sub {
   display: block;
@@ -303,19 +304,38 @@ export default {
   height: 3.2rem;
   border: 0;
   border-radius: 0.4rem;
-  /* background: dodgerblue; */
   background: #4f4f4f;
   color: #fff;
   cursor: pointer;
   outline: none;
+  font-size: 1.2rem;
 }
 .input_sub:hover {
   opacity: 0.75;
   filter: alpha=(opacity(100));
 }
 @media screen and (max-width: 700px) {
+  .register_form {
+    width: 28rem;
+    height: 46rem;
+    margin-top: -23rem;
+    margin-left: -14rem;
+  }
   .input_sub {
+    width: 22rem;
+    height: 3rem;
+    /* margin: 4rem auto 0; */
     background: indianred;
+  }
+  .register_form h1 {
+    line-height: 6rem;
+  }
+  .input_txt {
+    width: 22rem;
+    height: 3rem;
+  }
+  .register_form .error_tip {
+    width: 22rem;
   }
 }
 </style>
