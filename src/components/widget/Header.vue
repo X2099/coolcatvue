@@ -222,18 +222,21 @@ export default {
 }
 .option .search {
   width: 28%;
+  height: 4rem;
   display: inline-block;
   vertical-align: top;
 }
 .option .search input {
   width: 70%;
   height: 2.4rem;
-  margin: 0.7rem 0;
+  vertical-align: top;
+  margin: 0.8rem 0;
   border-radius: 0.2rem;
   font-size: 1.2rem;
   border: 1px solid #dcdfe6;
   text-indent: 1rem;
   outline: none;
+  border: none;
 }
 .user .operate span {
   float: right;
@@ -270,27 +273,30 @@ export default {
 }
 .el-icon-search {
   line-height: 2.4rem;
-  margin-top: 0.7rem;
+  margin-top: 0.8rem;
   padding-left: 1rem;
   font-size: 1.2rem;
+  /* background: yellowgreen; */
 }
 @media screen and (max-width: 700px) {
+  .forehead {
+    height: 5rem;
+    background: indianred;
+  }
   .nav {
     margin: auto;
-    background: indianred;
   }
   .nav .option {
     width: 60%;
-    background: indianred;
   }
   .nav .user {
     width: 25%;
   }
   .nav .logo img {
-    margin: 0.8rem 1rem;
+    margin: 1.3rem 1rem;
   }
   .user .profile img {
-    margin: 0.8rem 1rem;
+    margin: 1.3rem 1rem;
   }
   .option .listLarge {
     display: none;
@@ -304,7 +310,7 @@ export default {
     width: 21%;
   }
   .option .listSmall span {
-    line-height: 4rem;
+    line-height: 5rem;
     font-size: 1.4rem;
     display: block;
     width: 100%;
@@ -314,14 +320,23 @@ export default {
     background: indianred;
   }
   .option .search {
+    height: 5rem;
     margin-left: 35%;
     width: 65%;
   }
+  .option .search input {
+    margin: 1.3rem 0;
+  }
   .user .operate span {
+    line-height: 5rem;
     cursor: default;
   }
   .user .operate span:hover {
     color: #f5f5f5;
+  }
+  .el-icon-search {
+    line-height: 2.4rem;
+    margin: 1.3rem auto;
   }
 }
 </style>
