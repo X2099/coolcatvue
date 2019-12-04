@@ -1,8 +1,5 @@
 <template>
   <div class="main_wrap">
-    <div style="clear:both">
-      <p><br></p>
-    </div>
     <div class="editor_wrap">
       <quill-editor class="editor"
                     v-model="content"
@@ -15,9 +12,6 @@
       <div v-else><span @click="goLogin">登录</span>后可留言</div>
     </div>
     <MsgShow></MsgShow>
-    <div style="clear:both">
-      <p><br></p>
-    </div>
   </div>
 </template>
 
@@ -112,34 +106,33 @@ export default {
 }
 .editor_wrap {
   margin: auto 20%;
-  padding: 20px 100px 0px 100px;
+  padding: 2rem 10rem 0 10rem;
   background: #ffffff;
+  /* font-size: 1.8rem; */
 }
 .main_wrap .button {
   margin: auto 20%;
   background: #ffffff;
-  font-size: 12px;
   color: grey;
-  padding: 10px 100px;
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
+  padding: 1rem 10rem;
   text-align: right;
 }
 .button label {
   border: 1px solid #ccc;
-  padding: 2.5px 10px;
+  padding: 0.25rem 1rem;
+  font-size: 1.4rem;
 }
 .button .submit {
   color: #4f4f4f;
   cursor: pointer;
-  letter-spacing: 2.5px;
+  letter-spacing: 0.25rem;
+  font-size: 1.4rem;
 }
 .button span {
   color: #4f4f4f;
   cursor: pointer;
-  letter-spacing: 2.5px;
+  letter-spacing: 0.25rem;
+  font-size: 1.4rem;
 }
 .button span:hover {
   color: dodgerblue;
@@ -147,6 +140,9 @@ export default {
 .button .submit:hover {
   color: dodgerblue;
 }
+/* .editor_wrap >>> .ql-container {
+  font-size: 3.4rem;
+} */
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: "14px";
@@ -247,7 +243,7 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .editor_wrap {
-    margin: 1rem 0 0 0;
+    margin: 0;
     padding: 0;
   }
   .main_wrap .button {

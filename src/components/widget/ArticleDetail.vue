@@ -154,7 +154,7 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .title {
-    margin: 1rem 0 0 0;
+    margin: 1.5rem 0 0 0;
   }
   .main_wrap .article .md {
     margin: 0;

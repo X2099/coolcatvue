@@ -26,7 +26,7 @@
         </div>
         <div class="search">
           <input type="text"
-                 placeholder="CoolCat搜索" />
+                 placeholder="Cool搜索" />
           <i class="el-icon-search"></i>
         </div>
       </div>
@@ -286,11 +286,17 @@ export default {
   .nav {
     margin: auto;
   }
+  .nav .logo {
+    width: 10%;
+    /* background: yellowgreen; */
+  }
   .nav .option {
-    width: 60%;
+    width: 63%;
+    /* background: blueviolet; */
   }
   .nav .user {
-    width: 25%;
+    width: 27%;
+    /* background: tan; */
   }
   .nav .logo img {
     margin: 1.3rem 1rem;
@@ -303,15 +309,15 @@ export default {
   }
   .option .listSmall {
     position: absolute;
-    left: 15%;
+    left: 10%;
     height: 4rem;
     z-index: 1;
     display: block;
-    width: 21%;
+    width: 22.05%;
   }
   .option .listSmall span {
     line-height: 5rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     display: block;
     width: 100%;
     text-align: left;
@@ -323,12 +329,15 @@ export default {
     height: 5rem;
     margin-left: 35%;
     width: 65%;
+    /* background: teal; */
   }
   .option .search input {
     margin: 1.3rem 0;
+    font-size: 1.6rem;
   }
   .user .operate span {
     line-height: 5rem;
+    font-size: 1.6rem;
     cursor: default;
   }
   .user .operate span:hover {
@@ -337,6 +346,7 @@ export default {
   .el-icon-search {
     line-height: 2.4rem;
     margin: 1.3rem auto;
+    font-size: 1.6rem;
   }
 }
 </style>
