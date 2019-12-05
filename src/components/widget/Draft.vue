@@ -1,9 +1,6 @@
 <template>
   <div class="main_wrap"
        v-show="show">
-    <div style="clear:both">
-      <p><br></p>
-    </div>
     <div class="theme">
       <h4 class="draft">草稿专栏（{{ article_list.length }}）</h4>
       <div v-for="(article,index) in article_list"
@@ -28,9 +25,6 @@
           <p class="update_time">{{ article.update_time | FromNow }} ···</p>
         </div>
       </div>
-    </div>
-    <div style="clear:both">
-      <p><br></p>
     </div>
   </div>
 </template>
@@ -95,33 +89,38 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
   height: 94%;
 }
-.theme .draft {
-  margin: 0% 20%;
-  padding: 2% 8%;
-  background: #ffffff;
+.theme {
+  margin: 2rem 20% 2rem 20%;
 }
-.article {
-  margin: 0% 20%;
+.theme .draft {
+  margin: 0;
+  padding: 2rem 8rem;
+  background: #ffffff;
+  font-size: 1.8rem;
 }
 .article .intro {
   float: left;
   width: 50%;
-  height: 100px;
+  height: 10rem;
   background: #ffffff;
   padding: 2% 0;
+  /* background: khaki; */
 }
 .article .intro p {
   color: gray;
   margin: 1% auto;
-  font-size: 13px;
+  font-size: 1.3rem;
   cursor: default;
 }
 .article .intro .title {
-  font-size: 20px;
+  font-size: 2rem;
   color: black;
   font-weight: bold;
   cursor: pointer;
@@ -144,12 +143,33 @@ export default {
 .article .cover {
   float: left;
   width: 25%;
-  height: 100px;
+  height: 10rem;
   padding: 2% 0 2% 25%;
   background: #ffffff;
+  /* background: dodgerblue; */
 }
 .article .cover img {
-  height: 100px;
+  height: 10rem;
   cursor: pointer;
+}
+@media screen and (max-width: 700px) {
+  .theme {
+    margin: 1.5rem 0;
+  }
+  .theme .draft {
+    padding: 1.5rem 1rem;
+    /* background: yellowgreen; */
+    margin-bottom: 0.1rem;
+  }
+  .article .intro {
+    width: 90%;
+    min-height: 10rem;
+    height: auto;
+    /* background: #140f0f; */
+    padding: 0 5%;
+  }
+  .article .cover {
+    display: none;
+  }
 }
 </style>

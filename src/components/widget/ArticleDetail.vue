@@ -2,13 +2,11 @@
   <div class="main_wrap"
        v-show="show">
     <div class="title">
-      <div :style="imgSytle"
-           class="avatar">
+      <div class="avatar">
         <img :style="imgSytle"
-             src="static/images/author.png" />
+             :src="cons.apis + author.avatar" />
       </div>
-      <div class="profile"
-           ref="profile">
+      <div class="profile">
         <p class="username">{{ author.username }}</p>
         <p class="info">{{ article.pub_time | formatDate }} 阅读 {{ article.views }}</p>
       </div>
@@ -22,6 +20,7 @@
                     :editable=false
                     :scrollStyle=true
                     :ishljs=true
+                    fontSize="24px"
                     style="position:inherit"
                     codeStyle="agate"></mavon-editor>
     </div>
@@ -45,9 +44,10 @@ export default {
       tags: [],
       author: [],
       body: '',
-      height: null,
       imgSytle: {},
-      show: false
+      show: false,
+      cons,
+      fontSize: '24px'
     }
   },
   filters: {
@@ -63,19 +63,7 @@ export default {
       sessionStorage.setItem('id', JSON.stringify(this.id))
     })
   },
-  updated () {
-    if (this.height == null) {
-      this.setStyle()
-    }
-  },
   methods: {
-    // 设置样式
-    setStyle () {
-      this.height = window.getComputedStyle(this.$refs.profile).height
-      this.imgSytle = {
-        'height': this.height
-      }
-    },
     // 接收参数
     getArticleId () {
       this.id = this.$route.params.id
@@ -88,56 +76,73 @@ export default {
     getArticle () {
       this.axios.get(cons.apis + 'api/articles/' + this.id + '/', {
         responseType: 'json'
-      })
-        .then(response => {
-          let res = response.data
-          this.article = res
-          this.body = '# ' + res.title + '\n\n' + res.body
-          this.author = res.author
-          this.category = res.category
-          this.tags = res.tags
-          this.show = true
-        })
-        .catch(() => { alert('获取数据失败！') })
+      }).then(response => {
+        let res = response.data
+        this.article = res
+        this.body = '# ' + res.title + '\n\n' + res.body
+        this.author = res.author
+        this.category = res.category
+        this.tags = res.tags
+        this.show = true
+      }).catch(() => { alert('获取数据失败！') })
     }
   }
 }
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
 }
 .title {
-  margin: 2% 20% 0 20%;
-  height: 15%;
+  margin: 2rem 20% 0 20%;
+  padding-top: 3rem;
+  height: 4.5rem;
   background: #fbfbfb;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* background: tan; */
+  font-size: 0;
 }
 .title .avatar {
-  float: left;
-  margin-top: 5%;
-  margin-left: 1.65em;
+  height: 4.5rem;
+  width: 7.5rem;
+  display: inline-block;
+  /* background: purple; */
 }
 .title .profile {
-  float: left;
-  margin: 5% 0 0 2%;
+  height: 6rem;
+  display: inline-block;
+  /* background: teal; */
+  vertical-align: top;
 }
 .title .profile .username {
-  font-weight: bold;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 1.6rem;
+  font-weight: 550;
   margin-bottom: 2%;
   cursor: pointer;
+  /* background: yellowgreen; */
 }
 .title .profile .info {
-  font-size: 14px;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1.3rem;
   font-weight: 100;
   letter-spacing: 1px;
+  vertical-align: bottom;
 }
 .title .avatar img {
+  height: 4.5rem;
+  width: 4.5rem;
+  margin: 0 1rem 0 2rem;
   cursor: pointer;
   background: #e4e2e2;
   border-radius: 50%;
@@ -149,16 +154,17 @@ export default {
   clear: both;
 }
 .main_wrap .article .md {
-  margin: 0 20% 2% 20%;
+  margin: 0 20% 2rem 20%;
   background: #f2f6fc;
 }
 @media screen and (max-width: 700px) {
   .title {
     margin: 1.5rem 0 0 0;
+    padding-top: 2rem;
   }
   .main_wrap .article .md {
-    margin: 0;
-    background: #f2f6fc;
+    margin: 0 0 1.5rem 0;
+    /* font-size: 1.4rem; */
   }
 }
 </style>

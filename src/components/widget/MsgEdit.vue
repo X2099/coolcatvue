@@ -105,10 +105,9 @@ export default {
   overflow-y: auto;
 }
 .editor_wrap {
-  margin: auto 20%;
+  margin: 2rem 20% 0 20%;
   padding: 2rem 10rem 0 10rem;
   background: #ffffff;
-  /* font-size: 1.8rem; */
 }
 .main_wrap .button {
   margin: auto 20%;

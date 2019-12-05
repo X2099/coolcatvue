@@ -172,10 +172,14 @@ export default {
 </script>
 
 <style>
+html {
+  font-size: 10px;
+}
 .forehead {
   height: 4rem;
   background: #4f4f4f;
   color: #f5f5f5;
+  font-size: 10px;
 }
 .nav {
   margin: 0 15%;
@@ -287,15 +291,15 @@ export default {
     margin: auto;
   }
   .nav .logo {
-    width: 10%;
+    width: 13%;
     /* background: yellowgreen; */
   }
   .nav .option {
-    width: 63%;
+    width: 64%;
     /* background: blueviolet; */
   }
   .nav .user {
-    width: 27%;
+    width: 23%;
     /* background: tan; */
   }
   .nav .logo img {
@@ -309,20 +313,19 @@ export default {
   }
   .option .listSmall {
     position: absolute;
-    left: 10%;
+    left: 13%;
     height: 4rem;
     z-index: 1;
     display: block;
-    width: 22.05%;
+    width: 22.4%;
   }
   .option .listSmall span {
     line-height: 5rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     display: block;
     width: 100%;
     text-align: left;
     text-indent: 1rem;
-    /* background: teal; */
     background: indianred;
   }
   .option .search {
@@ -333,11 +336,11 @@ export default {
   }
   .option .search input {
     margin: 1.3rem 0;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
   .user .operate span {
     line-height: 5rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     cursor: default;
   }
   .user .operate span:hover {
@@ -346,7 +349,7 @@ export default {
   .el-icon-search {
     line-height: 2.4rem;
     margin: 1.3rem auto;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 }
 </style>

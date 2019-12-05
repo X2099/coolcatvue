@@ -6,8 +6,8 @@
       <div class="avatar">
         <img :src="cons.apis + msg.author_info.avatar" />
         <div class="profile">
-          <label>{{ msg.author_info.name }}&nbsp;</label>
-          <label>{{ msg.create_time | FromNow }}</label>
+          <span class="username">{{ msg.author_info.name }}&nbsp;</span>
+          <label class="datetime">{{ msg.create_time | FromNow }}</label>
         </div>
       </div>
       <div class="ql-editor"
@@ -62,24 +62,27 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   background: #ffffff;
   width: 60%;
-  margin: auto 20%;
+  margin: auto 20% 2rem 20%;
 }
 .main_wrap >>> .ql-container {
   background: #ffffff;
-  margin: 20px 100px;
+  margin: 1rem 10rem;
   border: none;
   /* border: 1px solid #ccc; */
 }
 .main_wrap .avatar {
-  /* background: yellowgreen; */
-  height: 35px;
+  /* background: tomato; */
+  height: 30px;
 }
 .main_wrap .avatar img {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   background: #e4e2e2;
   border-radius: 50%;
   float: left;
@@ -88,16 +91,31 @@ export default {
 .main_wrap .avatar .profile {
   height: 30px;
   line-height: 30px;
-  float: left;
+  display: inline-block;
+  /* background: yellowgreen; */
+}
+.profile .username {
+  color: tan;
+  font-size: 1.5rem;
+}
+.profile .datetime {
+  color: gray;
+  font-size: 1rem;
+}
+.avatar .profile label {
+  font-size: 1.4rem;
+}
+.main_wrap .ql-editor {
+  font-size: 1.4rem;
 }
 @media screen and (max-width: 700px) {
   .main_wrap {
     width: 100%;
-    margin: 0;
+    margin: 0 0 1.5rem 0;
     padding: 0;
   }
   .main_wrap >>> .ql-container {
-    margin: 2rem 0;
+    margin: 1rem 0;
   }
 }
 </style>

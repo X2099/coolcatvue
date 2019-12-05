@@ -115,6 +115,8 @@ export default {
   }
   .article .intro {
     width: 90%;
+    min-height: 10rem;
+    height: auto;
     background: #ffffff;
     padding: 0 5%;
   }

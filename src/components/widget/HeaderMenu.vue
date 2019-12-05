@@ -4,18 +4,24 @@
     <div class="option">
       <router-link to='/home'>我的主页</router-link>
     </div>
+    <hr>
     <div class="option">
       <router-link to='/articles'>我的文章</router-link>
     </div>
+    <hr>
     <div class="option">
       <router-link to='/drafts'>我的草稿</router-link>
     </div>
+    <hr>
     <div class="option">
       <router-link to='/'>管理</router-link>
     </div>
+    <hr>
     <div class="option">设置</div>
+    <hr>
     <div class="option"
          @click="fnLogout">退出</div>
+    <hr>
     <div class="option">关于</div>
   </div>
 </template>
@@ -34,24 +40,34 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   position: absolute;
   z-index: 3;
   top: 4rem;
   right: 20%;
   width: 15rem;
-  height: 45rem;
-  color: gray;
+  /* height: auto; */
+  color: #ff55ff;
   background: #ffffff;
   cursor: pointer;
   border: 1px solid rgb(190, 193, 194);
   border-radius: 0.35rem;
 }
+.main_wrap hr {
+  margin: auto 20% auto 10%;
+  height: 1px;
+  border: none;
+  border-top: 1px solid #dee0e4;
+}
 .option {
-  margin: 20% 10%;
+  margin: 12% 10%;
   /* font-size: 1.6rem; */
   color: rgb(138, 144, 145);
   font-size: 1.4rem;
+  /* background: yellowgreen; */
 }
 .option a {
   color: rgb(138, 144, 145);
@@ -60,14 +76,13 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .main_wrap {
-    top: 4rem;
+    top: 5rem;
     right: 0;
     width: 10rem;
-    height: 25rem;
+    height: auto;
   }
   .option {
     margin: 10% 10%;
-    color: rgb(138, 144, 145);
   }
 }
 </style>

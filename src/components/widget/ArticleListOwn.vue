@@ -1,8 +1,5 @@
 <template>
   <div class="main_wrap">
-    <div style="clear:both">
-      <p><br></p>
-    </div>
     <div v-for="(article,index) in article_list"
          :key="index"
          class="article">
@@ -27,9 +24,6 @@
         <p><span class="edit"
                 @click="articleEdit(article.id)">编辑</span></p>
       </div>
-    </div>
-    <div style="clear:both">
-      <p><br></p>
     </div>
   </div>
 </template>
@@ -102,28 +96,32 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
   height: 94%;
 }
 .article {
-  margin: 0% 20%;
+  margin: 2rem 20%;
 }
 .article .intro {
   float: left;
   width: 50%;
-  height: 100px;
+  height: 10rem;
   background: #ffffff;
   padding: 4% 0;
+  margin-bottom: 0.1rem;
 }
 .article .intro p {
   color: gray;
   margin: 1% auto;
-  font-size: 13px;
+  font-size: 1.3rem;
   cursor: default;
 }
 .article .intro .title {
-  font-size: 20px;
+  font-size: 2rem;
   color: black;
   font-weight: bold;
   cursor: pointer;
@@ -143,12 +141,28 @@ export default {
 .article .cover {
   float: left;
   width: 25%;
-  height: 100px;
+  height: 10rem;
   padding: 4% 0 4% 25%;
   background: #ffffff;
+  margin-bottom: 0.1rem;
 }
 .article .cover img {
-  height: 100px;
+  height: 10rem;
   cursor: pointer;
+}
+@media screen and (max-width: 700px) {
+  .article {
+    margin: 1.5rem 0;
+  }
+  .article .intro {
+    width: 90%;
+    min-height: 10rem;
+    height: auto;
+    background: #ffffff;
+    padding: 0 5%;
+  }
+  .article .cover {
+    display: none;
+  }
 }
 </style>
