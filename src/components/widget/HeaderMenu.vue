@@ -48,9 +48,8 @@ html {
   z-index: 3;
   top: 4rem;
   right: 20%;
-  width: 15rem;
+  width: 13rem;
   /* height: auto; */
-  color: #ff55ff;
   background: #ffffff;
   cursor: pointer;
   border: 1px solid rgb(190, 193, 194);
@@ -60,7 +59,7 @@ html {
   margin: auto 20% auto 10%;
   height: 1px;
   border: none;
-  border-top: 1px solid #dee0e4;
+  border-top: 1px solid #f3f4f7;
 }
 .option {
   margin: 12% 10%;
@@ -80,6 +79,11 @@ html {
     right: 0;
     width: 10rem;
     height: auto;
+    border: 1px solid indianred;
+  }
+  .main_wrap hr {
+    /* border-top: 1px solid rgb(224, 208, 208); */
+    margin: 0 10%;
   }
   .option {
     margin: 10% 10%;
