@@ -109,7 +109,7 @@ html {
 .article .intro {
   float: left;
   width: 50%;
-  height: 10rem;
+  min-height: 10rem;
   background: #ffffff;
   padding: 4% 0;
   margin-bottom: 0.1rem;
@@ -160,9 +160,14 @@ html {
     height: auto;
     background: #ffffff;
     padding: 0 5%;
+    /* background: yellowgreen; */
   }
   .article .cover {
     display: none;
+  }
+  .article .intro .edit {
+    float: right;
+    padding: 0 1rem 2% 0.5rem;
   }
 }
 </style>

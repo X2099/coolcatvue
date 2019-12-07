@@ -233,6 +233,9 @@ export default {
 </script>
 
 <style  scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
 }
@@ -249,9 +252,9 @@ export default {
   border-bottom: none;
 }
 .body .back {
-  padding: 15px 10% 0 0;
+  padding: 1.5rem 10% 0 0;
   text-align: right;
-  font-size: 14px;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 .body .back a {
@@ -270,8 +273,8 @@ export default {
 .avatar img {
   width: 100%;
   background: #c0c4cc;
-  border-radius: 7.5px;
-  border: 5px solid #ffffff;
+  border-radius: 0.75rem;
+  border: 0.5rem solid #ffffff;
 }
 .avatar .dummy {
   position: absolute;
@@ -281,7 +284,7 @@ export default {
 .profile .username {
   margin: auto 10%;
   padding-top: 4.5%;
-  font-size: 30px;
+  font-size: 3rem;
 }
 .profile .gender,
 .birthday,
@@ -289,43 +292,43 @@ export default {
 .email {
   margin: auto 10%;
   padding-top: 3.5%;
-  font-size: 30px;
+  font-size: 3rem;
 }
 .profile label {
   width: 10%;
   display: inline-block;
 }
 .username .show {
-  font-size: 30px;
+  font-size: 3rem;
   font-weight: 400;
 }
 .edit {
   margin-bottom: 3%;
 }
 .edit .outside {
-  height: 35px;
-  border-radius: 3px;
+  height: 3.5rem;
+  border-radius: 0.3rem;
   border: 1px solid #dcdfe6;
-  text-indent: 10px;
+  text-indent: 1rem;
   outline: none;
 }
 .edit .input {
-  height: 35px;
-  border-radius: 3px;
-  text-indent: 10px;
+  height: 3.5rem;
+  border-radius: 0.3rem;
+  text-indent: 1rem;
   outline: none;
   border: 1px solid #409eff;
 }
 .edit .radio {
-  margin: auto 5% auto 10px;
+  margin: auto 5% auto 1rem;
 }
 .edit .save {
   margin-left: 5%;
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
   background: #409eff;
   color: white;
-  border-radius: 3px;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 .edit .save:hover {
@@ -333,21 +336,21 @@ export default {
 }
 .edit .cancel {
   margin-left: 5%;
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
   background: #c0c4cc;
   color: white;
-  border-radius: 3px;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 .edit .cancel:hover {
   background: #909399;
 }
 .profile p {
-  font-size: 15px;
+  font-size: 1.5rem;
 }
 .profile p label {
-  margin-right: 100px;
+  margin-right: 10rem;
   font-weight: 550;
 }
 .profile hr {
@@ -368,10 +371,18 @@ export default {
   background: #ffffff;
 }
 .el-date-picker {
-  height: 25px;
-  border-radius: 3px;
+  height: 2.5rem;
+  border-radius: 0.3rem;
   border: 1px solid #909399;
-  text-indent: 10px;
+  text-indent: 1rem;
   outline: none;
+}
+@media screen and (max-width: 700px) {
+  .body {
+    margin: auto 0;
+  }
+  .background {
+    margin: 0.5% 0 auto 0;
+  }
 }
 </style>

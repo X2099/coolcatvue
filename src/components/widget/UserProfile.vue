@@ -65,6 +65,9 @@ export default {
 </script>
 
 <style  scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
   margin-top: 10px;
@@ -130,5 +133,13 @@ export default {
   cursor: pointer;
   color: dodgerblue;
   text-decoration: none;
+}
+@media screen and (max-width: 700px) {
+  .background {
+    margin: auto 0;
+  }
+  .profile {
+    margin: auto 0;
+  }
 }
 </style>
