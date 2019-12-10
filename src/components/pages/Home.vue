@@ -46,7 +46,7 @@ export default {
     },
     // 设置页面高度
     setHeight () {
-      let height = this.$refs.main_wrap.offsetHeight
+      let height = this.$refs.main_wrap.clientHeight
       this.heightStyle = {
         'height': height - 45 + 'px'
       }

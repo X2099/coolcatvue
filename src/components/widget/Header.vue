@@ -182,7 +182,7 @@ html {
   font-size: 10px;
 }
 .nav {
-  margin: 0 15%;
+  margin: 0 20%;
   font-size: 0;
 }
 .nav .logo {
@@ -218,7 +218,7 @@ html {
   text-align: center;
   display: inline-block;
   line-height: 4rem;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   cursor: pointer;
 }
 .option .listSmall {

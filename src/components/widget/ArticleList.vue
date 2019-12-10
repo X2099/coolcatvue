@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+html {
+  font-size: 10px;
+}
 .main_wrap {
   overflow-y: auto;
 }
@@ -81,7 +84,7 @@ export default {
   height: 10rem;
   background: #ffffff;
   padding: 4% 0 4% 10%;
-  margin-bottom: 0.1rem;
+  margin-bottom: 1px;
 }
 .article .intro p {
   color: gray;
@@ -103,7 +106,7 @@ export default {
   height: 10rem;
   padding: 4% 0;
   background: #ffffff;
-  margin-bottom: 0.1rem;
+  margin-bottom: 1px;
 }
 .article .cover img {
   height: 100%;

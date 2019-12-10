@@ -3,7 +3,7 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="showSwitch"></Header>
-    <ArticleList></ArticleList>
+    <ArticleList :style="heightStyle"></ArticleList>
   </div>
 </template>
 
@@ -19,7 +19,9 @@ export default {
   data () {
     return {
       showSwitch: { usermenuShow: false, listShow: false },
-      heightStyle: {}
+      heightStyle: {},
+      screenWidth: document.body.clientWidth,
+      screenHeight: document.body.clientHeight
     }
   },
   mounted () {
@@ -49,7 +51,7 @@ export default {
     setHeight () {
       let height = this.$refs.main_wrap.offsetHeight
       this.heightStyle = {
-        'height': height - 45 + 'px'
+        'height': height - 4 * 10 + 'px'
       }
     }
   }
