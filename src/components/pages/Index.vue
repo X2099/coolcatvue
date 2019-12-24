@@ -3,7 +3,7 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="showSwitch"></Header>
-    <ArticleList :style="heightStyle"></ArticleList>
+    <ArticleList></ArticleList>
   </div>
 </template>
 
@@ -46,24 +46,10 @@ export default {
       if (elm3 && elm4 && outElm3 && outElm4) {
         this.showSwitch.listShow = false
       }
-    },
-    // 设置页面高度
-    setHeight () {
-      let height = this.$refs.main_wrap.offsetHeight
-      this.heightStyle = {
-        'height': height - 4 * 10 + 'px'
-      }
     }
   }
 }
 </script>
 
 <style scoped>
-.main_wrap {
-  overflow-y: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-}
 </style>

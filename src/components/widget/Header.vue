@@ -172,14 +172,10 @@ export default {
 </script>
 
 <style>
-html {
-  font-size: 10px;
-}
 .forehead {
-  height: 4rem;
+  height: 5rem;
   background: #4f4f4f;
   color: #f5f5f5;
-  font-size: 10px;
 }
 .nav {
   margin: 0 20%;
@@ -202,11 +198,9 @@ html {
   height: 100%;
 }
 .nav .logo img {
-  height: 2.4rem;
-  margin: 0.8rem auto;
+  height: 3rem;
+  margin: 1rem auto;
   cursor: crosshair;
-  background: #ffffff;
-  border-radius: 50%;
 }
 .option .listLarge {
   width: 72%;
@@ -217,7 +211,7 @@ html {
   width: 25%;
   text-align: center;
   display: inline-block;
-  line-height: 4rem;
+  line-height: 5rem;
   font-size: 1.45rem;
   cursor: pointer;
 }
@@ -234,7 +228,7 @@ html {
   width: 70%;
   height: 2.4rem;
   vertical-align: top;
-  margin: 0.8rem 0;
+  margin: 1.3rem 0;
   border-radius: 0.2rem;
   font-size: 1.2rem;
   border: 1px solid #dcdfe6;
@@ -244,7 +238,7 @@ html {
 }
 .user .operate span {
   float: right;
-  line-height: 4rem;
+  line-height: 5rem;
   font-size: 1.3rem;
   cursor: pointer;
 }
@@ -261,9 +255,9 @@ html {
   margin-right: 7.5%;
 }
 .user .profile img {
-  height: 2.4rem;
-  width: 2.4rem;
-  margin: 0.8rem 0;
+  height: 2.8rem;
+  width: 2.8rem;
+  margin: 1.1rem 0;
   float: right;
   cursor: pointer;
   background: #ffffff;
@@ -277,7 +271,7 @@ html {
 }
 .el-icon-search {
   line-height: 2.4rem;
-  margin-top: 0.8rem;
+  margin-top: 1.3rem;
   padding-left: 1rem;
   font-size: 1.2rem;
   /* background: yellowgreen; */

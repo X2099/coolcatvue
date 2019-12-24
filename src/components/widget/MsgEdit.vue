@@ -101,16 +101,13 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap {
-  overflow-y: auto;
-}
 .editor_wrap {
   margin: 2rem 20% 0 20%;
   padding: 2rem 10rem 0 10rem;
   background: #ffffff;
 }
 .main_wrap .button {
-  margin: auto 20%;
+  margin: 0 20%;
   background: #ffffff;
   color: grey;
   padding: 1rem 10rem;
@@ -139,9 +136,6 @@ export default {
 .button .submit:hover {
   color: dodgerblue;
 }
-/* .editor_wrap >>> .ql-container {
-  font-size: 3.4rem;
-} */
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .editor_wrap >>> .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: "14px";

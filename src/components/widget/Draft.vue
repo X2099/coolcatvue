@@ -92,26 +92,24 @@ export default {
 html {
   font-size: 10px;
 }
-.main_wrap {
-  overflow-y: auto;
-  height: 94%;
-}
 .theme {
-  margin: 2rem 20% 2rem 20%;
+  margin: 2rem 20%;
 }
 .theme .draft {
   margin: 0;
-  padding: 2rem 8rem;
+  padding: 3rem 0 2rem 8rem;
   background: #ffffff;
   font-size: 1.8rem;
 }
+.article {
+  font-size: 0;
+}
 .article .intro {
-  float: left;
+  display: inline-block;
   width: 50%;
   height: 10rem;
   background: #ffffff;
   padding: 2% 0;
-  /* background: khaki; */
 }
 .article .intro p {
   color: gray;
@@ -141,12 +139,12 @@ html {
   color: dodgerblue;
 }
 .article .cover {
-  float: left;
+  display: inline-block;
+  vertical-align: top;
   width: 25%;
   height: 10rem;
   padding: 2% 0 2% 25%;
   background: #ffffff;
-  /* background: dodgerblue; */
 }
 .article .cover img {
   height: 10rem;

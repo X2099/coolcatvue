@@ -96,24 +96,19 @@ export default {
 </script>
 
 <style scoped>
-html {
-  font-size: 10px;
-}
 .main_wrap {
-  overflow-y: auto;
-  height: 94%;
-}
-.article {
   margin: 2rem 20%;
 }
+.article {
+  font-size: 0;
+}
 .article .intro {
-  float: left;
+  display: inline-block;
   width: 50%;
   height: 10rem;
   background: #ffffff;
   padding: 4% 0;
-  margin-bottom: 0.1rem;
-  /* background: teal; */
+  margin-bottom: 0.2rem;
 }
 .article .intro p {
   color: gray;
@@ -140,13 +135,13 @@ html {
   color: dodgerblue;
 }
 .article .cover {
-  float: left;
+  display: inline-block;
+  vertical-align: top;
   width: 25%;
   height: 10rem;
   padding: 4% 0 4% 25%;
   background: #ffffff;
-  margin-bottom: 0.1rem;
-  /* background: rebeccapurple; */
+  margin-bottom: 0.2rem;
 }
 .article .cover img {
   height: 10rem;

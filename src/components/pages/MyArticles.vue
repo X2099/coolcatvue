@@ -3,7 +3,7 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="usermenu_show"></Header>
-    <ArticleListOwn :style="this.heightStyle"></ArticleListOwn>
+    <ArticleListOwn></ArticleListOwn>
   </div>
 </template>
 
@@ -37,25 +37,10 @@ export default {
           this.usermenu_show = false
         }
       }
-    },
-    // 设置页面高度
-    setHeight () {
-      let height = this.$refs.main_wrap.offsetHeight
-      this.heightStyle = {
-        'height': height - 45 + 'px'
-      }
     }
   }
 }
 </script>
 
 <style scoped>
-.main_wrap {
-  overflow-y: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-  /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
-}
 </style>

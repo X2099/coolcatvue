@@ -62,17 +62,13 @@ export default {
 </script>
 
 <style scoped>
-html {
-  font-size: 10px;
-}
 .main_wrap {
   background: #ffffff;
-  width: 60%;
-  margin: auto 20% 2rem 20%;
+  margin: 0 20% 2rem 20%;
 }
 .main_wrap >>> .ql-container {
   background: #ffffff;
-  margin: 1rem 10rem;
+  margin: 0 10rem 1rem 10rem;
   border: none;
   /* border: 1px solid #ccc; */
 }
@@ -92,7 +88,6 @@ html {
   height: 30px;
   line-height: 30px;
   display: inline-block;
-  /* background: yellowgreen; */
 }
 .profile .username {
   color: tan;

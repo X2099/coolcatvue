@@ -46,7 +46,7 @@ html {
 .main_wrap {
   position: absolute;
   z-index: 3;
-  top: 4rem;
+  top: 5rem;
   right: 20%;
   width: 13rem;
   /* height: auto; */
