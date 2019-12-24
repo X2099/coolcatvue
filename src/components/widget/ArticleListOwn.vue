@@ -109,10 +109,11 @@ html {
 .article .intro {
   float: left;
   width: 50%;
-  min-height: 10rem;
+  height: 10rem;
   background: #ffffff;
   padding: 4% 0;
   margin-bottom: 0.1rem;
+  /* background: teal; */
 }
 .article .intro p {
   color: gray;
@@ -145,6 +146,7 @@ html {
   padding: 4% 0 4% 25%;
   background: #ffffff;
   margin-bottom: 0.1rem;
+  /* background: rebeccapurple; */
 }
 .article .cover img {
   height: 10rem;
