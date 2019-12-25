@@ -1,28 +1,30 @@
 <template>
-  <div id="user_menu"
-       class="main_wrap">
-    <div class="option">
-      <router-link to='/home'>我的主页</router-link>
+  <div id="user_menu" class="wrap">
+    <div class="arrow"></div>
+    <div class="main_wrap">
+      <div class="option">
+        <router-link to='/home'>我的主页</router-link>
+      </div>
+      <hr>
+      <div class="option">
+        <router-link to='/articles'>我的文章</router-link>
+      </div>
+      <hr>
+      <div class="option">
+        <router-link to='/drafts'>我的草稿</router-link>
+      </div>
+      <hr>
+      <div class="option">
+        <router-link to='/'>管理</router-link>
+      </div>
+      <hr>
+      <div class="option">设置</div>
+      <hr>
+      <div class="option"
+          @click="fnLogout">退出</div>
+      <hr>
+      <div class="option">关于</div>
     </div>
-    <hr>
-    <div class="option">
-      <router-link to='/articles'>我的文章</router-link>
-    </div>
-    <hr>
-    <div class="option">
-      <router-link to='/drafts'>我的草稿</router-link>
-    </div>
-    <hr>
-    <div class="option">
-      <router-link to='/'>管理</router-link>
-    </div>
-    <hr>
-    <div class="option">设置</div>
-    <hr>
-    <div class="option"
-         @click="fnLogout">退出</div>
-    <hr>
-    <div class="option">关于</div>
   </div>
 </template>
 
@@ -40,20 +42,34 @@ export default {
 </script>
 
 <style scoped>
-html {
-  font-size: 10px;
-}
-.main_wrap {
+.wrap{
   position: absolute;
   z-index: 3;
-  top: 5rem;
+  top: 6rem;
   right: 20%;
   width: 13rem;
-  /* height: auto; */
-  background: #ffffff;
+  margin-right: -5.1rem;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.wrap .arrow{
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 5.7rem;
+  top: -1rem;
+  border-bottom: 1rem solid #ffffff;
+  border-right: 0.8rem solid transparent;
+  border-left: 0.8rem solid transparent;
+}
+.main_wrap {
   cursor: pointer;
-  border: 1px solid rgb(190, 193, 194);
-  border-radius: 0.35rem;
+  /* border: 1px solid rgb(190, 193, 194); */
+  /* border-top: none; */
+  /* border-radius: 0.35rem; */
+  /* background: teal; */
+  background: #ffffff;
+
 }
 .main_wrap hr {
   margin: auto 20% auto 10%;
@@ -62,8 +78,7 @@ html {
   border-top: 1px solid #f3f4f7;
 }
 .option {
-  margin: 12% 10%;
-  /* font-size: 1.6rem; */
+  padding: 12% 10%;
   color: rgb(138, 144, 145);
   font-size: 1.4rem;
   /* background: yellowgreen; */

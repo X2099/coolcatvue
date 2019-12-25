@@ -91,9 +91,6 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap {
-  /* overflow-y: auto; */
-}
 .title {
   margin: 2rem 20% 0 20%;
   padding-top: 3rem;
