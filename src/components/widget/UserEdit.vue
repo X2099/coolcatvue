@@ -2,122 +2,153 @@
   <div class="main_wrap">
     <div class="background">
       <div class="avatar">
-        <img ref="avatar"
-             :src="avatar" />
-        <div class="dummy"
-             @click="addFile"><i class="el-icon-camera"></i>
-        </div>
-        <input id="hiddenFile"
-               type="file"
-               ref="image"
-               style="display:none"
-               @change="upload()"
-               accept="image/gif,image/jpeg,image/jpg,image/png" />
+        <img ref="avatar" :src="avatar" />
+        <div class="dummy" @click="addFile"><i class="el-icon-camera"></i></div>
+        <input
+          id="hiddenFile"
+          type="file"
+          ref="image"
+          style="display:none"
+          @change="upload()"
+          accept="image/gif,image/jpeg,image/jpg,image/png"
+        />
       </div>
     </div>
 
     <div class="body">
       <p class="back">
-        <router-link to="/home">返回我的主页 <i class="el-icon-arrow-right" /></router-link>
+        <router-link to="/home"
+          >返回我的主页 <i class="el-icon-arrow-right"
+        /></router-link>
       </p>
       <div class="profile">
         <div class="username">
-          <p class="edit"
-             v-if="editUsername"><label>用户名</label>
-            <input type="text"
-                   v-model="username"
-                   :class="usernameInput?'input':'outside'"
-                   @blur="usernameInput=!usernameInput"
-                   @focus="usernameInput=!usernameInput" />
-            <span class="save"
-                  @click="updateProfile('username',username)">保存</span>
-            <span class="cancel"
-                  @click="editUsername=false">取消</span>
+          <p class="edit" v-if="editUsername">
+            <label>用户名</label>
+            <input
+              type="text"
+              v-model="username"
+              :class="usernameInput ? 'input' : 'outside'"
+              @blur="usernameInput = !usernameInput"
+              @focus="usernameInput = !usernameInput"
+            />
+            <span class="save" @click="updateProfile('username', username)"
+              >保存</span
+            >
+            <span class="cancel" @click="editUsername = false">取消</span>
           </p>
-          <p class="show"
-             v-else>{{ profile.username }} <el-button type="primary"
-                       icon="el-icon-edit"
-                       @click="editUsername=true"></el-button>
+          <p class="show" v-else>
+            {{ profile.username }}
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              @click="editUsername = true"
+            ></el-button>
           </p>
         </div>
         <div class="gender">
-          <p class="edit"
-             v-if="editGender"><label>性别</label>
-            <input type="radio"
-                   value=0
-                   v-model="gender" /><span class="radio">男</span>
-            <input type="radio"
-                   value=1
-                   v-model="gender" /><span class="radio">女</span>
-            <span class="save"
-                  @click="updateProfile('gender',gender)">保存</span>
-            <span class="cancel"
-                  @click="editGender=false">取消</span>
+          <p class="edit" v-if="editGender">
+            <label>性别</label>
+            <input type="radio" value="0" v-model="gender" /><span class="radio"
+              >男</span
+            >
+            <input type="radio" value="1" v-model="gender" /><span class="radio"
+              >女</span
+            >
+            <span class="save" @click="updateProfile('gender', gender)"
+              >保存</span
+            >
+            <span class="cancel" @click="editGender = false">取消</span>
           </p>
-          <p class="show"
-             v-else><label>性别</label>{{ profile.gender!=null?(profile.gender==0?'男':'女'):"未知" }}
-            <el-button type="primary"
-                       icon="el-icon-edit"
-                       @click="editGender=true"></el-button>
+          <p class="show" v-else>
+            <label>性别</label
+            >{{
+              profile.gender != null
+                ? profile.gender == 0
+                  ? "男"
+                  : "女"
+                : "未知"
+            }}
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              @click="editGender = true"
+            ></el-button>
           </p>
         </div>
         <hr />
         <div class="birthday">
-          <p class="edit"
-             v-if="editBirthday"><label>生日</label>
-            <el-date-picker v-model="birthday"
-                            type="date"
-                            placeholder="选择日期">
+          <p class="edit" v-if="editBirthday">
+            <label>生日</label>
+            <el-date-picker
+              v-model="birthday"
+              type="date"
+              placeholder="选择日期"
+            >
             </el-date-picker>
-            <span class="save"
-                  @click="updateProfile('birthday',birthday)">保存</span>
-            <span class="cancel"
-                  @click="editBirthday=false">取消</span>
+            <span class="save" @click="updateProfile('birthday', birthday)"
+              >保存</span
+            >
+            <span class="cancel" @click="editBirthday = false">取消</span>
           </p>
-          <p v-else><label>生日</label>{{ profile.birthday?profile.birthday:"未知" }}
-            <el-button type="primary"
-                       icon="el-icon-edit"
-                       @click="editBirthday=true"></el-button>
+          <p v-else>
+            <label>生日</label
+            >{{ profile.birthday ? profile.birthday : "未知" }}
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              @click="editBirthday = true"
+            ></el-button>
           </p>
         </div>
         <hr />
         <div class="mobile">
-          <p class="edit"
-             v-if="editMobile"><label>手机</label>
-            <input type="text"
-                   v-model="mobile"
-                   :class="mobileInput?'input':'outside'"
-                   @blur="mobileInput=!mobileInput"
-                   @focus="mobileInput=!mobileInput" />
-            <span class="save"
-                  @click="updateProfile('mobile',mobile)">保存</span>
-            <span class="cancel"
-                  @click="editMobile=false">取消</span>
+          <p class="edit" v-if="editMobile">
+            <label>手机</label>
+            <input
+              type="text"
+              v-model="mobile"
+              :class="mobileInput ? 'input' : 'outside'"
+              @blur="mobileInput = !mobileInput"
+              @focus="mobileInput = !mobileInput"
+            />
+            <span class="save" @click="updateProfile('mobile', mobile)"
+              >保存</span
+            >
+            <span class="cancel" @click="editMobile = false">取消</span>
           </p>
-          <p v-else><label>手机</label>{{ profile.mobile?profile.mobile:"未知" }}
-            <el-button type="primary"
-                       icon="el-icon-edit"
-                       @click="editMobile=true"></el-button>
+          <p v-else>
+            <label>手机</label>{{ profile.mobile ? profile.mobile : "未知" }}
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              @click="editMobile = true"
+            ></el-button>
           </p>
         </div>
         <hr />
         <div class="email">
-          <p class="edit"
-             v-if="editEmail"><label>邮箱</label>
-            <input type="text"
-                   v-model="email"
-                   :class="emailInput?'input':'outside'"
-                   @blur="emailInput=!emailInput"
-                   @focus="emailInput=!emailInput" />
-            <span class="save"
-                  @click="updateProfile('email',email)">保存</span>
-            <span class="cancel"
-                  @click="editEmail=false">取消</span>
+          <p class="edit" v-if="editEmail">
+            <label>邮箱</label>
+            <input
+              type="text"
+              v-model="email"
+              :class="emailInput ? 'input' : 'outside'"
+              @blur="emailInput = !emailInput"
+              @focus="emailInput = !emailInput"
+            />
+            <span class="save" @click="updateProfile('email', email)"
+              >保存</span
+            >
+            <span class="cancel" @click="editEmail = false">取消</span>
           </p>
-          <p v-else><label>邮箱</label>{{ profile.email?profile.email:"未知" }}
-            <el-button type="primary"
-                       icon="el-icon-edit"
-                       @click="editEmail=true"></el-button>
+          <p v-else>
+            <label>邮箱</label>{{ profile.email ? profile.email : "未知" }}
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              @click="editEmail = true"
+            ></el-button>
           </p>
         </div>
         <hr />
@@ -127,14 +158,13 @@
 </template>
 
 <script>
-import moment from 'moment'
-import 'moment/locale/zh-cn'
-import cons from '@/components/constent'
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import cons from '@/components/constent';
 let { uid, token } = localStorage
 
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       profile: [],
@@ -178,25 +208,29 @@ export default {
       img.src = imgSrc
       let Form = new FormData()
       Form.append('avatar', file)
-      this.axios.patch(cons.apis + 'api/auth/avatar/', Form, {
-        headers: {
-          'Authorization': 'JWT ' + token
-        },
-        responseType: 'json'
-      }).then(response => {
-        this.$router.go(0)
-      }).catch(() => {
-        alert('失败')
-      })
+      this.axios
+        .patch(cons.apis + 'api/auth/avatar/', Form, {
+          headers: {
+            Authorization: 'JWT ' + token
+          },
+          responseType: 'json'
+        })
+        .then(response => {
+          this.$router.go(0)
+        })
+        .catch(() => {
+          alert('失败')
+        })
     },
     // 获取用户资料
     getProfile () {
-      this.axios.get(cons.apis + 'api/auth/' + uid + '/', {
-        headers: {
-          'Authorization': 'JWT ' + token
-        },
-        responseType: 'json'
-      })
+      this.axios
+        .get(cons.apis + 'api/auth/' + uid + '/', {
+          headers: {
+            Authorization: 'JWT ' + token
+          },
+          responseType: 'json'
+        })
         .then(response => {
           let profile = response.data
           this.profile = profile
@@ -204,13 +238,17 @@ export default {
           this.gender = profile.gender
           this.birthday = profile.birthday
           if (profile.birthday) {
-            profile.birthday = moment(profile.birthday).format('YYYY年MM月DD日')
+            profile.birthday = moment(profile.birthday).format(
+              'YYYY年MM月DD日'
+            )
           }
           this.mobile = profile.mobile
           this.email = profile.email
           this.avatar = cons.apis + profile.avatar
         })
-        .catch(() => { alert('获取用户资料失败！') })
+        .catch(() => {
+          alert('获取用户资料失败！')
+        })
     },
     // 更新用户资料
     updateProfile (key, value) {
@@ -219,28 +257,30 @@ export default {
       }
       let Form = new FormData()
       Form.append(key, value)
-      this.axios.patch(cons.apis + 'api/auth/' + uid + '/', Form, {
-        headers: {
-          'Authorization': 'JWT ' + token
-        },
-        responseType: 'json'
-      }).then(response => { this.$router.go(0) })
-        .catch(() => { alert('修改失败') })
+      this.axios
+        .patch(cons.apis + 'api/auth/' + uid + '/', Form, {
+          headers: {
+            Authorization: 'JWT ' + token
+          },
+          responseType: 'json'
+        })
+        .then(response => {
+          this.$router.go(0)
+        })
+        .catch(() => {
+          alert('修改失败')
+        })
     }
   }
-
 }
 </script>
 
-<style  scoped>
-html {
-  font-size: 10px;
-}
+<style scoped>
 .main_wrap {
-  overflow-y: auto;
+  margin-bottom: 2rem;
 }
 .body {
-  height: 83%;
+  /* height: 83%; */
   margin: auto 20%;
   padding: auto 2%;
   background: #ffffff;
