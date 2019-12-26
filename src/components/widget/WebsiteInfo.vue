@@ -3,8 +3,7 @@
     <hr />
     <div class="info">
       <span>
-        <a href="https://tsm.miit.gov.cn/dxxzsp/">京ICP备19020719号</a>
-        联系作者：moonpython@163.com
+        <a href="https://tsm.miit.gov.cn/dxxzsp/">京ICP备19020719号</a>&emsp;联系作者：moonpython@163.com
       </span>
     </div>
   </div>
@@ -17,6 +16,7 @@ export default {}
 <style scoped>
 .main_wrap {
   margin: 0 20%;
+  text-align: center;
 }
 .main_wrap hr {
   background-color: #cdc9c9;
@@ -25,7 +25,6 @@ export default {}
 }
 .main_wrap .info {
   margin: 1rem auto;
-  float: right;
   color: #4f4f4f;
 }
 .info a {

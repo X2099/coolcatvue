@@ -2,153 +2,138 @@
   <div class="main_wrap">
     <div class="background">
       <div class="avatar">
-        <img ref="avatar" :src="avatar" />
-        <div class="dummy" @click="addFile"><i class="el-icon-camera"></i></div>
-        <input
-          id="hiddenFile"
-          type="file"
-          ref="image"
-          style="display:none"
-          @change="upload()"
-          accept="image/gif,image/jpeg,image/jpg,image/png"
-        />
+        <img ref="avatar"
+             :src="avatar" />
+        <div class="dummy"
+             @click="addFile"><i class="el-icon-camera"></i></div>
+        <input id="hiddenFile"
+               type="file"
+               ref="image"
+               style="display:none"
+               @change="upload()"
+               accept="image/gif,image/jpeg,image/jpg,image/png" />
       </div>
     </div>
 
     <div class="body">
       <p class="back">
-        <router-link to="/home"
-          >返回我的主页 <i class="el-icon-arrow-right"
-        /></router-link>
+        <router-link to="/home">返回我的主页 <i class="el-icon-arrow-right" /></router-link>
       </p>
       <div class="profile">
         <div class="username">
-          <p class="edit" v-if="editUsername">
+          <p class="edit"
+             v-if="editUsername">
             <label>用户名</label>
-            <input
-              type="text"
-              v-model="username"
-              :class="usernameInput ? 'input' : 'outside'"
-              @blur="usernameInput = !usernameInput"
-              @focus="usernameInput = !usernameInput"
-            />
-            <span class="save" @click="updateProfile('username', username)"
-              >保存</span
-            >
-            <span class="cancel" @click="editUsername = false">取消</span>
+            <input type="text"
+                   v-model="username"
+                   :class="usernameInput ? 'input' : 'outside'"
+                   @blur="usernameInput = !usernameInput"
+                   @focus="usernameInput = !usernameInput" />
+            <span class="save"
+                  @click="updateProfile('username', username)">保存</span>
+            <span class="cancel"
+                  @click="editUsername = false">取消</span>
           </p>
-          <p class="show" v-else>
+          <p class="show"
+             v-else>
             {{ profile.username }}
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              @click="editUsername = true"
-            ></el-button>
+            <el-button type="primary"
+                       icon="el-icon-edit"
+                       @click="editUsername = true"></el-button>
           </p>
         </div>
         <div class="gender">
-          <p class="edit" v-if="editGender">
+          <p class="edit"
+             v-if="editGender">
             <label>性别</label>
-            <input type="radio" value="0" v-model="gender" /><span class="radio"
-              >男</span
-            >
-            <input type="radio" value="1" v-model="gender" /><span class="radio"
-              >女</span
-            >
-            <span class="save" @click="updateProfile('gender', gender)"
-              >保存</span
-            >
-            <span class="cancel" @click="editGender = false">取消</span>
+            <input type="radio"
+                   value="0"
+                   v-model="gender" /><span class="radio">男</span>
+            <input type="radio"
+                   value="1"
+                   v-model="gender" /><span class="radio">女</span>
+            <span class="save"
+                  @click="updateProfile('gender', gender)">保存</span>
+            <span class="cancel"
+                  @click="editGender = false">取消</span>
           </p>
-          <p class="show" v-else>
-            <label>性别</label
-            >{{
+          <p class="show"
+             v-else>
+            <label>性别</label>{{
               profile.gender != null
                 ? profile.gender == 0
                   ? "男"
                   : "女"
                 : "未知"
             }}
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              @click="editGender = true"
-            ></el-button>
+            <el-button type="primary"
+                       icon="el-icon-edit"
+                       @click="editGender = true"></el-button>
           </p>
         </div>
         <hr />
         <div class="birthday">
-          <p class="edit" v-if="editBirthday">
+          <p class="edit"
+             v-if="editBirthday">
             <label>生日</label>
-            <el-date-picker
-              v-model="birthday"
-              type="date"
-              placeholder="选择日期"
-            >
+            <el-date-picker v-model="birthday"
+                            type="date"
+                            placeholder="选择日期">
             </el-date-picker>
-            <span class="save" @click="updateProfile('birthday', birthday)"
-              >保存</span
-            >
-            <span class="cancel" @click="editBirthday = false">取消</span>
+            <span class="save"
+                  @click="updateProfile('birthday', birthday)">保存</span>
+            <span class="cancel"
+                  @click="editBirthday = false">取消</span>
           </p>
           <p v-else>
-            <label>生日</label
-            >{{ profile.birthday ? profile.birthday : "未知" }}
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              @click="editBirthday = true"
-            ></el-button>
+            <label>生日</label>{{ profile.birthday ? profile.birthday : "未知" }}
+            <el-button type="primary"
+                       icon="el-icon-edit"
+                       @click="editBirthday = true"></el-button>
           </p>
         </div>
         <hr />
         <div class="mobile">
-          <p class="edit" v-if="editMobile">
+          <p class="edit"
+             v-if="editMobile">
             <label>手机</label>
-            <input
-              type="text"
-              v-model="mobile"
-              :class="mobileInput ? 'input' : 'outside'"
-              @blur="mobileInput = !mobileInput"
-              @focus="mobileInput = !mobileInput"
-            />
-            <span class="save" @click="updateProfile('mobile', mobile)"
-              >保存</span
-            >
-            <span class="cancel" @click="editMobile = false">取消</span>
+            <input type="text"
+                   v-model="mobile"
+                   :class="mobileInput ? 'input' : 'outside'"
+                   @blur="mobileInput = !mobileInput"
+                   @focus="mobileInput = !mobileInput" />
+            <span class="save"
+                  @click="updateProfile('mobile', mobile)">保存</span>
+            <span class="cancel"
+                  @click="editMobile = false">取消</span>
           </p>
           <p v-else>
             <label>手机</label>{{ profile.mobile ? profile.mobile : "未知" }}
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              @click="editMobile = true"
-            ></el-button>
+            <el-button type="primary"
+                       icon="el-icon-edit"
+                       @click="editMobile = true"></el-button>
           </p>
         </div>
         <hr />
         <div class="email">
-          <p class="edit" v-if="editEmail">
+          <p class="edit"
+             v-if="editEmail">
             <label>邮箱</label>
-            <input
-              type="text"
-              v-model="email"
-              :class="emailInput ? 'input' : 'outside'"
-              @blur="emailInput = !emailInput"
-              @focus="emailInput = !emailInput"
-            />
-            <span class="save" @click="updateProfile('email', email)"
-              >保存</span
-            >
-            <span class="cancel" @click="editEmail = false">取消</span>
+            <input type="text"
+                   v-model="email"
+                   :class="emailInput ? 'input' : 'outside'"
+                   @blur="emailInput = !emailInput"
+                   @focus="emailInput = !emailInput" />
+            <span class="save"
+                  @click="updateProfile('email', email)">保存</span>
+            <span class="cancel"
+                  @click="editEmail = false">取消</span>
           </p>
           <p v-else>
             <label>邮箱</label>{{ profile.email ? profile.email : "未知" }}
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              @click="editEmail = true"
-            ></el-button>
+            <el-button type="primary"
+                       icon="el-icon-edit"
+                       @click="editEmail = true"></el-button>
           </p>
         </div>
         <hr />
@@ -158,9 +143,9 @@
 </template>
 
 <script>
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import cons from '@/components/constent';
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+import cons from '@/components/constent'
 let { uid, token } = localStorage
 
 export default {
@@ -277,22 +262,22 @@ export default {
 
 <style scoped>
 .main_wrap {
-  margin-bottom: 2rem;
+  margin: 1rem auto;
 }
 .body {
-  /* height: 83%; */
   margin: auto 20%;
-  padding: auto 2%;
+  padding: 0 10rem 10rem 10rem;
   background: #ffffff;
 }
 .background {
-  height: 15%;
-  margin: 0.5% 20% auto 20%;
+  height: 10rem;
+  margin: 0 20%;
   background: url("https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg");
   border-bottom: none;
 }
 .body .back {
-  padding: 1.5rem 10% 0 0;
+  height: 4rem;
+  padding: 1rem 0;
   text-align: right;
   font-size: 1.4rem;
   cursor: pointer;
@@ -305,33 +290,31 @@ export default {
   color: #606266;
 }
 .avatar {
-  position: absolute;
-  top: 8%;
-  left: 25.5%;
-  width: 7.5%;
+  margin-left: 10rem;
 }
 .avatar img {
-  width: 100%;
+  width: 12rem;
+  height: 12rem;
+  margin-top: 3.5rem;
   background: #c0c4cc;
   border-radius: 0.75rem;
   border: 0.5rem solid #ffffff;
+  border-bottom: none;
 }
 .avatar .dummy {
-  position: absolute;
-  top: 80%;
-  left: 110%;
+  height: 2rem;
+  margin-left: 12.5rem;
 }
 .profile .username {
-  margin: auto 10%;
-  padding-top: 4.5%;
+  margin: 2rem 0 0 0.5rem;
   font-size: 3rem;
 }
 .profile .gender,
 .birthday,
 .mobile,
 .email {
-  margin: auto 10%;
-  padding-top: 3.5%;
+  margin: auto 0.5rem;
+  padding-top: 2rem;
   font-size: 3rem;
 }
 .profile label {
@@ -394,7 +377,7 @@ export default {
   font-weight: 550;
 }
 .profile hr {
-  margin: auto 10%;
+  margin: auto 0.5rem;
   height: 1px;
   border: none;
   border-top: 1px solid #dee0e4;
