@@ -1,13 +1,15 @@
 <template>
-  <div class="main_wrap" @click="hideMenu" ref="main_wrap">
+  <div class="main_wrap"
+       @click="hideMenu"
+       ref="main_wrap">
     <Header :show.sync="usermenu_show"></Header>
     <UserEdit />
   </div>
 </template>
 
 <script>
-import Header from '@/components/widget/Header';
-import UserEdit from '@/components/widget/UserEdit';
+import Header from '@/components/widget/Header'
+import UserEdit from '@/components/widget/UserEdit'
 
 let { uid, token } = localStorage
 export default {

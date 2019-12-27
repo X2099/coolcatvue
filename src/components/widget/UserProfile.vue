@@ -65,54 +65,50 @@ export default {
 </script>
 
 <style  scoped>
-html {
-  font-size: 10px;
-}
 .main_wrap {
-  overflow-y: auto;
-  margin-top: 10px;
+  background: yellowgreen;
 }
 .background {
-  height: 15%;
-  margin: auto 20%;
+  height: 10rem;
+  margin: 1rem 20% 0 20%;
   display: block;
   background: #c0c4cc;
+  background: thistle;
 }
 .profile {
-  height: 15%;
   margin: auto 20%;
-  padding: auto 2%;
   background: #ffffff;
   font-size: 0; /* 消除div之间的间隙 */
+  background: teal;
 }
 .profile .avatar {
-  height: 15%;
-  top: 7.5%;
-  left: 22%;
-  position: absolute;
+  width: 20%;
   display: inline-block;
   vertical-align: bottom;
+  background: purple;
 }
 .avatar img {
-  height: 100%;
+  height: 15rem;
+  width: 15rem;
+  margin: -8rem 0 0 2rem;
   border-radius: 5px;
-  border: 5px solid #ffffff;
+  border: 0.5rem solid #ffffff;
 }
 .look {
-  width: 45%;
-  margin-left: 15%;
+  width: 40%;
   display: inline-block;
+  background: forestgreen;
 }
 .look .username {
-  padding: 1% 0 0 5%;
+  padding: 0 0 0 0;
   font-size: 30px;
   font-weight: solid;
+  /* background: tan; */
 }
 .look .detail {
   height: 30px;
   line-height: 30px;
-  padding-left: 5%;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: #909399;
   cursor: pointer;
 }
@@ -123,9 +119,9 @@ html {
   width: 40%;
   display: inline-block;
   text-align: right;
+  background: tomato;
 }
 .edit a {
-  margin-right: 10%;
   padding: 5px 10px;
   color: dodgerblue;
   border: 1px solid dodgerblue;

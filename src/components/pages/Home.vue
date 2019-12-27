@@ -43,25 +43,10 @@ export default {
           }
         }
       }
-    },
-    // 设置页面高度
-    setHeight () {
-      let height = this.$refs.main_wrap.clientHeight
-      this.heightStyle = {
-        'height': height - 45 + 'px'
-      }
     }
   }
 }
 </script>
 
 <style scoped>
-.main_wrap {
-  overflow-y: hidden;
-  /* position: absolute; */
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-  /* min-height: 1200px; */
-}
 </style>
