@@ -1,7 +1,6 @@
 <template>
   <div class="main_wrap">
     <div class="body">
-      用户动态
     </div>
   </div>
 </template>
@@ -12,6 +11,7 @@
 } */
 .body {
   margin: auto 20%;
-  background: palegoldenrod;
+  background: #ffffff;
+  padding-left: 2.5rem;
 }
 </style>

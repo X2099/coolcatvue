@@ -65,27 +65,25 @@ export default {
 </script>
 
 <style  scoped>
-.main_wrap {
-  background: yellowgreen;
-}
 .background {
   height: 10rem;
   margin: 1rem 20% 0 20%;
   display: block;
   background: #c0c4cc;
-  background: thistle;
+  /* background: thistle; */
 }
 .profile {
   margin: auto 20%;
+  padding-bottom: 2rem;
   background: #ffffff;
   font-size: 0; /* 消除div之间的间隙 */
-  background: teal;
+  /* background: teal; */
 }
 .profile .avatar {
   width: 20%;
   display: inline-block;
   vertical-align: bottom;
-  background: purple;
+  /* background: purple; */
 }
 .avatar img {
   height: 15rem;
@@ -97,31 +95,33 @@ export default {
 .look {
   width: 40%;
   display: inline-block;
-  background: forestgreen;
+  /* background: forestgreen; */
 }
 .look .username {
   padding: 0 0 0 0;
   font-size: 30px;
   font-weight: solid;
-  /* background: tan; */
 }
 .look .detail {
-  height: 30px;
-  line-height: 30px;
+  height: 3rem;
+  line-height: 3rem;
   font-size: 1.2rem;
   color: #909399;
   cursor: pointer;
+  /* background: teal; */
 }
 .look .detail span {
   margin-right: 10px;
 }
 .edit {
   width: 40%;
+  /* margin-bottom: 0.9rem; */
   display: inline-block;
   text-align: right;
-  background: tomato;
+  /* background: tomato; */
 }
 .edit a {
+  margin-right: 2rem;
   padding: 5px 10px;
   color: dodgerblue;
   border: 1px solid dodgerblue;
