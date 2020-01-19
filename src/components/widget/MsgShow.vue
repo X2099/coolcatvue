@@ -64,7 +64,7 @@ export default {
 <style scoped>
 .main_wrap {
   background: #ffffff;
-  margin: 0 20% 2rem 20%;
+  margin: 0 30rem 2rem 30rem;
 }
 .main_wrap >>> .ql-container {
   background: #ffffff;

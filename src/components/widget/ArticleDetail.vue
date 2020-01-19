@@ -92,7 +92,7 @@ export default {
 
 <style scoped>
 .title {
-  margin: 2rem 20% 0 20%;
+  margin: 2rem 30rem 0 30rem;
   padding-top: 3rem;
   height: 4.5rem;
   background: #fbfbfb;

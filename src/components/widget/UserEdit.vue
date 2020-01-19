@@ -265,7 +265,7 @@ export default {
   margin: 1rem auto;
 }
 .body {
-  margin: auto 20%;
+  margin: auto 30rem;
   padding: 0 10rem 10rem 10rem;
   background: #ffffff;
 }

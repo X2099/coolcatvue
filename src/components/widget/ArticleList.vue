@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 .main_wrap {
-  margin: 2rem 20%;
+  margin: 2rem 30rem;
 }
 .article {
   font-size: 0;

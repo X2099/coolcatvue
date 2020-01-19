@@ -93,7 +93,7 @@ html {
   font-size: 10px;
 }
 .theme {
-  margin: 2rem 20%;
+  margin: 2rem 30rem;
 }
 .theme .draft {
   margin: 0;

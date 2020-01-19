@@ -10,7 +10,7 @@
   overflow-y: auto;
 } */
 .body {
-  margin: auto 20%;
+  margin: auto 30rem;
   background: #ffffff;
   padding-left: 2.5rem;
 }

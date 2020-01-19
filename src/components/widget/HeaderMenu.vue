@@ -1,5 +1,6 @@
 <template>
-  <div id="user_menu" class="wrap">
+  <div id="user_menu"
+       class="wrap">
     <div class="arrow"></div>
     <div class="main_wrap">
       <div class="option">
@@ -21,7 +22,7 @@
       <div class="option">设置</div>
       <hr>
       <div class="option"
-          @click="fnLogout">退出</div>
+           @click="fnLogout">退出</div>
       <hr>
       <div class="option">关于</div>
     </div>
@@ -42,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-.wrap{
+.wrap {
   position: absolute;
   z-index: 3;
   top: 6rem;
@@ -52,7 +53,7 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
-.wrap .arrow{
+.wrap .arrow {
   width: 0;
   height: 0;
   position: absolute;
@@ -64,12 +65,7 @@ export default {
 }
 .main_wrap {
   cursor: pointer;
-  /* border: 1px solid rgb(190, 193, 194); */
-  /* border-top: none; */
-  /* border-radius: 0.35rem; */
-  /* background: teal; */
   background: #ffffff;
-
 }
 .main_wrap hr {
   margin: auto 20% auto 10%;

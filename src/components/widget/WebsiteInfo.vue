@@ -15,7 +15,7 @@ export default {}
 
 <style scoped>
 .main_wrap {
-  margin: 0 20%;
+  margin: 0 30rem;
   text-align: center;
 }
 .main_wrap hr {

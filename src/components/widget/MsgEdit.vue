@@ -102,12 +102,12 @@ export default {
 
 <style scoped>
 .editor_wrap {
-  margin: 2rem 20% 0 20%;
+  margin: 2rem 30rem 0 30rem;
   padding: 2rem 10rem 0 10rem;
   background: #ffffff;
 }
 .main_wrap .button {
-  margin: 0 20%;
+  margin: 0 30rem;
   background: #ffffff;
   color: grey;
   padding: 1rem 10rem;

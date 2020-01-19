@@ -67,14 +67,14 @@ export default {
 <style  scoped>
 .background {
   height: 10rem;
-  margin: 1rem 25rem 0 25rem;
+  margin: 1rem 30rem 0 30rem;
   display: block;
   background: #c0c4cc;
   /* background: thistle; */
   /* background: url("https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png"); */
 }
 .profile {
-  margin: auto 25rem;
+  margin: auto 30rem;
   padding-bottom: 2rem;
   background: #ffffff;
   font-size: 0; /* 消除div之间的间隙 */
@@ -87,9 +87,9 @@ export default {
   /* background: purple; */
 }
 .avatar img {
-  height: 15rem;
-  width: 15rem;
-  margin: -8rem 0 0 3rem;
+  height: 14rem;
+  width: 14rem;
+  margin: -8rem 0 0 2rem;
   border-radius: 0.5rem;
   border: 0.5rem solid #ffffff;
 }
