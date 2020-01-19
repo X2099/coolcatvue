@@ -83,23 +83,24 @@ export default {
   width: 20%;
   display: inline-block;
   vertical-align: bottom;
-  /* background: purple; */
+  background: purple;
 }
 .avatar img {
   height: 15rem;
   width: 15rem;
   margin: -8rem 0 0 2rem;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 0.5rem solid #ffffff;
 }
 .look {
   width: 40%;
+  margin-left: 17rem;
   display: inline-block;
-  /* background: forestgreen; */
+  background: forestgreen;
 }
 .look .username {
   padding: 0 0 0 0;
-  font-size: 30px;
+  font-size: 3rem;
   font-weight: solid;
 }
 .look .detail {

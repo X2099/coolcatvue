@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-html{
+html {
   font-size: 10px;
   background: #f6f6f6;
   /* background: teal; */

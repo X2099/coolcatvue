@@ -40,7 +40,7 @@
     <div class="body">
       <mavon-editor placeholder="此处输入正文..."
                     codeStyle="agate"
-                    :value="body"
+                    v-model="body"
                     ref="md"
                     @imgAdd="$imgAdd"
                     @imgDel="$imgDel"
@@ -48,12 +48,12 @@
                     style="height:100%" />
     </div>
     <PubMenu id="pub_menu"
-             :article_id=id
+             :article_id='id'
              :title=title
-             :body=body
-             :edited_category=category
-             :edited_tags=tags
-             :cover_image=cover_image
+             :body='body'
+             :edited_category='category'
+             :edited_tags='tags'
+             :cover_image='cover_image'
              v-show="menu_show"></PubMenu>
     <UserMenu id="user_menu"
               v-show="usermenu_show"></UserMenu>

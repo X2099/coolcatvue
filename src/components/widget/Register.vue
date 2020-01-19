@@ -216,13 +216,32 @@ export default {
             code: this.code
           })
           .then(response => {
-            this.$router.push({ path: '/login' })
+            this.fnLogin(this.username, this.password1)
           })
           .catch(error => {
             this.code_errmsg = error.response.data.code
             this.code_errshow = true
           })
       }
+    },
+    fnLogin (username, password) {
+      this.axios.post(cons.apis + 'api/login',
+        {
+          username: username,
+          password: password
+        })
+        .then(response => {
+          sessionStorage.clear()
+          localStorage.clear()
+          localStorage.token = response.data.token
+          localStorage.username = response.data.username
+          localStorage.uid = response.data.id
+          this.$router.push({ path: '/' })
+          location.reload()
+        })
+        .catch(() => {
+          this.$router.push({ path: '/' })
+        })
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="main_wrap"
        @click="hideMenu"
        ref="main_wrap">
-    <Header :show.sync="usermenu_show"></Header>
+    <Header :show.sync="showSwitch"></Header>
     <UserEdit />
   </div>
 </template>
@@ -19,25 +19,30 @@ export default {
   },
   data () {
     return {
-      usermenu_show: false,
-      heightStyle: {}
+      showSwitch: { usermenuShow: false, listShow: false }
     }
-  },
-  mounted () {
-    this.setHeight()
   },
   methods: {
     // 隐藏用户菜单
     hideMenu (event) {
       if (uid && token) {
-        let elm1 = document.getElementById('user_img')
-        let elm2 = document.getElementById('user_menu')
-        let outElm1 = !elm1.contains(event.target)
-        let outElm2 = !elm2.contains(event.target)
+        let elm1 = document.getElementById('userImg')
+        let elm2 = document.getElementById('userMenu')
         if (elm1 && elm2) {
-          if (outElm1 && outElm2) {
-            this.usermenu_show = false
+          let outElm1 = !elm1.contains(event.target)
+          let outElm2 = !elm2.contains(event.target)
+          if (elm1 && elm2 && outElm1 && outElm2) {
+            this.showSwitch.usermenuShow = false
           }
+        }
+      }
+      let elm3 = document.getElementById('smallButton')
+      let elm4 = document.getElementById('smallList')
+      if (elm3 && elm4) {
+        let outElm3 = !elm3.contains(event.target)
+        let outElm4 = !elm4.contains(event.target)
+        if (elm3 && elm4 && outElm3 && outElm4) {
+          this.showSwitch.listShow = false
         }
       }
     }
