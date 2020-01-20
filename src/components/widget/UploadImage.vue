@@ -131,7 +131,7 @@ export default {
 .main_wrap {
   position: fixed;
   z-index: 2;
-  top: 6%;
+  top: 5rem;
   right: 21%;
   width: 300px;
   height: 160px;

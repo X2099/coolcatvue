@@ -37,7 +37,8 @@
              @click="usermenu_show=!usermenu_show" />
       </div>
     </div>
-    <div class="body">
+    <div class="body"
+         ref="body">
       <mavon-editor placeholder="此处输入正文..."
                     codeStyle="agate"
                     v-model="body"
@@ -87,6 +88,7 @@ export default {
     UploadImage
   },
   mounted () {
+    this.setHeight()
     this.getArticle()
     this.getProfile()
     this.setAvatar()
@@ -237,6 +239,12 @@ export default {
           this.upload_show = false
         }
       }
+    },
+    // 动态设置编辑区高度
+    setHeight () {
+      let ch = document.body.clientHeight || document.documentElement.clientHeight
+      let cw = document.body.clientWidth || document.documentElement.clientWidth
+      this.$refs.body.style.height = ch * 150 / cw - 5 + 'rem'
     }
   }
 }
@@ -251,25 +259,27 @@ export default {
 }
 .title {
   width: 75%;
-  height: 6%;
+  height: 5rem;
   float: left;
   background: #ffffff;
+  /* background: teal; */
 }
 .title .input_txt {
   float: left;
   width: 90%;
   height: 100%;
   margin-left: 2%;
-  font-size: 24px;
+  font-size: 2.4rem;
   line-height: 100%;
   font-weight: bold;
   border: none;
   outline: none;
+  /* background: thistle; */
 }
 .sub_menu {
   float: left;
   width: 25%;
-  height: 6%;
+  height: 5rem;
   background: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -283,7 +293,7 @@ export default {
   margin-left: 5%;
   width: 20%;
   height: 100%;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: rgb(138, 144, 145);
   text-align: center;
 }
@@ -300,11 +310,12 @@ export default {
 }
 .sub_menu .user img {
   position: fixed;
-  top: 1%;
+  top: 1rem;
   right: 1.1%;
   float: left;
   border-radius: 50%;
-  height: 3.8%;
+  width: 3rem;
+  height: 3rem;
   background: #ccc;
   opacity: 1;
   filter: alpha=(opacity(100));
@@ -318,6 +329,5 @@ export default {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 94%;
 }
 </style>

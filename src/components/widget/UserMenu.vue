@@ -33,7 +33,7 @@
 .main_wrap {
   position: absolute;
   z-index: 2;
-  top: 6%;
+  top: 5rem;
   right: 0;
   width: 15rem;
   height: auto;

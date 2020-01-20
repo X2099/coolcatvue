@@ -328,7 +328,7 @@ export default {
 <style scoped>
 .main_wrap {
   z-index: 2;
-  top: 6%;
+  top: 5rem;
   right: 6.25%;
   width: 300px;
   height: auto;
