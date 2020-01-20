@@ -52,7 +52,6 @@ export default {
   margin-right: -5.1rem;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
-
 .wrap .arrow {
   width: 0;
   height: 0;
@@ -85,12 +84,17 @@ export default {
   font-size: 1.4rem;
 }
 @media screen and (max-width: 700px) {
-  .main_wrap {
+  .wrap {
     top: 5rem;
     right: 0;
-    width: 10rem;
-    height: auto;
-    border: 1px solid indianred;
+    margin-right: 0;
+    background: indianred;
+  }
+  .main_wrap {
+    background: indianred;
+  }
+  .wrap .arrow {
+    display: none;
   }
   .main_wrap hr {
     /* border-top: 1px solid rgb(224, 208, 208); */
@@ -98,6 +102,10 @@ export default {
   }
   .option {
     margin: 10% 10%;
+    color: white;
+  }
+  .option a {
+    color: white;
   }
 }
 </style>

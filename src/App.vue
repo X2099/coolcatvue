@@ -15,7 +15,11 @@ export default {
     setRem () {
       let html = document.getElementsByTagName('html')[0]
       var oWidth = document.body.clientWidth || document.documentElement.clientWidth
-      html.style.fontSize = oWidth / 150 + 'px'
+      if (oWidth > 700) {
+        html.style.fontSize = oWidth / 150 + 'px'
+      } else {
+        html.style.fontSize = oWidth / 50 + 'px'
+      }
     }
   }
 }

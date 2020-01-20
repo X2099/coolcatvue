@@ -148,23 +148,23 @@ export default {
   cursor: pointer;
 }
 @media screen and (max-width: 700px) {
-  .article {
+  .main_wrap {
     margin: 1.5rem 0;
   }
-  .article .intro {
+  /* .article .intro {
     width: 90%;
     min-height: 10rem;
     height: auto;
     background: #ffffff;
     padding: 0 5%;
-    /* background: yellowgreen; */
+    background: yellowgreen;
   }
   .article .cover {
     display: none;
-  }
-  .article .intro .edit {
+  } */
+  /* .article .intro .edit {
     float: right;
     padding: 0 1rem 2% 0.5rem;
-  }
+  } */
 }
 </style>

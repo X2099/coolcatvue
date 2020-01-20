@@ -31,4 +31,9 @@ export default {}
   text-decoration: none;
   color: #4f4f4f;
 }
+@media screen and (max-width: 700px) {
+  .main_wrap {
+    margin: 0;
+  }
+}
 </style>

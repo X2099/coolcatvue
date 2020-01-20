@@ -110,6 +110,7 @@ html {
   height: 10rem;
   background: #ffffff;
   padding: 2% 0;
+  /* background: teal; */
 }
 .article .intro p {
   color: gray;
@@ -145,6 +146,7 @@ html {
   height: 10rem;
   padding: 2% 0 2% 25%;
   background: #ffffff;
+  /* background: coral; */
 }
 .article .cover img {
   height: 10rem;
@@ -156,18 +158,27 @@ html {
   }
   .theme .draft {
     padding: 1.5rem 1rem;
-    /* background: yellowgreen; */
     margin-bottom: 0.1rem;
   }
-  .article .intro {
-    width: 90%;
-    min-height: 10rem;
-    height: auto;
-    /* background: #140f0f; */
-    padding: 0 5%;
-  }
   .article .cover {
-    display: none;
+    display: inline-block;
+    vertical-align: top;
+    width: 35%;
+    height: 15rem;
+    padding: 1rem 0 1rem 15%;
+    background: #ffffff;
+    background: coral;
+  }
+  .article .cover img {
+    height: 100%;
+  }
+  .article .intro {
+    display: inline-block;
+    width: 50%;
+    height: 15rem;
+    background: #ffffff;
+    padding: 2% 0;
+    background: teal;
   }
 }
 </style>

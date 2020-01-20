@@ -74,18 +74,20 @@ export default {
 }
 .article {
   font-size: 0;
+  width: 100%;
+  min-height: 10rem;
+  background: #ffffff;
+  margin-bottom: 0.2rem;
 }
 .article .intro {
-  display: inline-block;
   width: 50%;
-  height: 10rem;
-  background: #ffffff;
-  padding: 4% 0 4% 10%;
-  margin-bottom: 0.2rem;
+  display: inline-block;
+  padding-top: 4rem;
 }
 .article .intro p {
   color: gray;
-  margin: 2% auto;
+  margin-bottom: 1rem;
+  padding-left: 8rem;
   font-size: 1.3rem;
 }
 .article .intro .title {
@@ -98,31 +100,28 @@ export default {
   text-decoration: underline;
 }
 .article .cover {
+  width: 50%;
   display: inline-block;
   vertical-align: top;
-  width: 40%;
   height: 10rem;
-  padding: 4% 0;
-  background: #ffffff;
-  margin-bottom: 0.2rem;
+  padding: 4rem 0;
 }
 .article .cover img {
-  height: 100%;
+  max-height: 100%;
+  max-width: 40rem;
+  padding-left: 4rem;
   cursor: pointer;
 }
 @media screen and (max-width: 700px) {
-  .article {
+  .main_wrap {
     margin: 1.5rem 0;
   }
-  .article .intro {
-    width: 90%;
-    min-height: 10rem;
-    height: auto;
-    background: #ffffff;
-    padding: 0 5%;
+  .article .intro p {
+    padding-left: 4rem;
   }
-  .article .cover {
-    display: none;
+  article .cover img {
+    width: 40rem;
+    padding-left: 4rem;
   }
 }
 </style>

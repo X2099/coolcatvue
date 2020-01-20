@@ -138,5 +138,9 @@ export default {
   .profile {
     margin: auto 0;
   }
+  .avatar img {
+    height: 16rem;
+    width: 16rem;
+  }
 }
 </style>
