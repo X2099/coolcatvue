@@ -84,7 +84,8 @@
     <div class="submit">
       <button class="draft"
               @click="status='d';createArticle()">保存为草稿</button>
-      <button @click="createArticle">确认并发布</button>
+      <button class="main"
+              @click="createArticle">确认并发布</button>
     </div>
 
     <div class="error">
@@ -388,7 +389,7 @@ textarea::-webkit-input-placeholder {
   border-bottom: 1px solid slategray;
 }
 .add_submit {
-  font-size: 14px;
+  font-size: 1.4rem;
   border: none;
   outline: none;
   color: dodgerblue;
@@ -398,12 +399,13 @@ textarea::-webkit-input-placeholder {
 .nonempty {
   margin-bottom: 3%;
   float: left;
+  width: 100%;
 }
 .category .parent {
   float: left;
   margin-right: 5%;
   margin-bottom: 1%;
-  font-size: 13px;
+  font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -411,7 +413,7 @@ textarea::-webkit-input-placeholder {
   float: left;
   margin-right: 5%;
   margin-bottom: 1%;
-  font-size: 12px;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 .category .parent:hover {
@@ -440,12 +442,16 @@ textarea::-webkit-input-placeholder {
 .submit button {
   text-align: center;
   padding: 1% 8%;
-  color: dodgerblue;
+  color: #87ceff;
   font-size: 14px;
   background: none;
-  border: 1px solid dodgerblue;
+  border: 1px solid #87ceff;
   outline: none;
   cursor: pointer;
+}
+.submit .main:hover {
+  color: dodgerblue;
+  border: 1px solid dodgerblue;
 }
 .submit .draft {
   color: LightGray;
