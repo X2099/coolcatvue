@@ -212,7 +212,7 @@ export default {
   text-align: center;
   display: inline-block;
   line-height: 5rem;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 .option .listSmall {
@@ -278,7 +278,6 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .forehead {
-    height: 5rem;
     background: indianred;
   }
   .nav {
@@ -286,6 +285,7 @@ export default {
   }
   .nav .logo {
     width: 13%;
+    height: 5rem;
     /* background: yellowgreen; */
   }
   .nav .option {
@@ -294,6 +294,8 @@ export default {
   }
   .nav .user {
     width: 23%;
+    height: 5rem;
+    vertical-align: top;
     /* background: tan; */
   }
   .nav .logo img {
@@ -315,7 +317,7 @@ export default {
   }
   .option .listSmall span {
     line-height: 5rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     display: block;
     width: 100%;
     text-align: left;

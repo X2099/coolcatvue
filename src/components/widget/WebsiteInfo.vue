@@ -19,7 +19,7 @@ export default {}
   text-align: center;
 }
 .main_wrap hr {
-  background-color: #cdc9c9;
+  background-color: #c0c0c0;
   height: 1px;
   border: 0 solid darkgrey;
 }

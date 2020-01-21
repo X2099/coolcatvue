@@ -70,24 +70,25 @@ export default {
   margin: auto 20% auto 10%;
   height: 1px;
   border: none;
-  border-top: 1px solid #f3f4f7;
+  border-top: 0.1rem solid #f3f4f7;
 }
 .option {
   padding: 12% 10%;
   color: rgb(138, 144, 145);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   /* background: yellowgreen; */
 }
 .option a {
   color: rgb(138, 144, 145);
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 @media screen and (max-width: 700px) {
   .wrap {
     top: 5rem;
     right: 0;
     margin-right: 0;
+    box-shadow: none;
     background: indianred;
   }
   .main_wrap {
@@ -99,9 +100,10 @@ export default {
   .main_wrap hr {
     /* border-top: 1px solid rgb(224, 208, 208); */
     margin: 0 10%;
+    /* display: none; */
   }
   .option {
-    margin: 10% 10%;
+    margin-left: 10%;
     color: white;
   }
   .option a {
