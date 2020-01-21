@@ -100,15 +100,15 @@ export default {
   margin: 2rem 30rem;
 }
 .article {
+  min-height: 12rem;
   font-size: 0;
+  background: #ffffff;
+  margin-bottom: 0.2rem;
 }
 .article .intro {
   display: inline-block;
   width: 50%;
-  height: 10rem;
-  background: #ffffff;
   padding: 4% 0;
-  margin-bottom: 0.2rem;
 }
 .article .intro p {
   color: gray;
@@ -138,10 +138,7 @@ export default {
   display: inline-block;
   vertical-align: top;
   width: 25%;
-  height: 10rem;
   padding: 4% 0 4% 25%;
-  background: #ffffff;
-  margin-bottom: 0.2rem;
 }
 .article .cover img {
   height: 10rem;
@@ -151,20 +148,26 @@ export default {
   .main_wrap {
     margin: 1.5rem 0;
   }
-  /* .article .intro {
-    width: 90%;
-    min-height: 10rem;
-    height: auto;
-    background: #ffffff;
-    padding: 0 5%;
-    background: yellowgreen;
+  .article .intro {
+    width: 60%;
+    /* background: teal; */
+  }
+  .article .intro p {
+    padding: 0 3rem 0 2rem;
+  }
+  .article .intro .edit {
+    padding-right: 3rem;
+    float: right;
   }
   .article .cover {
-    display: none;
-  } */
-  /* .article .intro .edit {
-    float: right;
-    padding: 0 1rem 2% 0.5rem;
-  } */
+    width: 40%;
+    padding: 5% 0;
+    /* background: tomato; */
+  }
+  .article .cover img {
+    width: 15rem;
+    height: auto;
+    padding-left: 3rem;
+  }
 }
 </style>
