@@ -83,12 +83,13 @@ export default {
 .profile .avatar {
   width: 20%;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: top;
   /* background: purple; */
 }
 .avatar img {
   height: 14rem;
   width: 14rem;
+  max-width: 100%;
   margin: -8rem 0 0 2rem;
   border-radius: 0.5rem;
   border: 0.5rem solid #ffffff;
@@ -138,9 +139,19 @@ export default {
   .profile {
     margin: auto 0;
   }
+  .profile .avatar {
+    width: 30%;
+  }
   .avatar img {
-    height: 16rem;
-    width: 16rem;
+    width: 10rem;
+    height: 10rem;
+    margin: -5.5rem 0 0 2rem;
+  }
+  .look {
+    width: 30%;
+  }
+  .edit {
+    width: 40%;
   }
 }
 </style>
