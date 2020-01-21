@@ -20,7 +20,7 @@ export default {}
 }
 .main_wrap hr {
   background-color: #c0c0c0;
-  height: 1px;
+  height: 0.1rem;
   border: 0 solid darkgrey;
 }
 .main_wrap .info {

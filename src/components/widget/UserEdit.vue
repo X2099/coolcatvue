@@ -21,8 +21,8 @@
       </p>
       <div class="profile">
         <div class="username">
-          <p class="edit"
-             v-if="editUsername">
+          <div class="edit"
+               v-if="editUsername">
             <label>用户名</label>
             <input type="text"
                    v-model="username"
@@ -33,19 +33,20 @@
                   @click="updateProfile('username', username)">保存</span>
             <span class="cancel"
                   @click="editUsername = false">取消</span>
-          </p>
-          <p class="show"
-             v-else>
+          </div>
+          <div class="show"
+               v-else>
             {{ profile.username }}
             <el-button type="primary"
                        icon="el-icon-edit"
                        @click="editUsername = true"></el-button>
-          </p>
+          </div>
         </div>
         <div class="gender">
-          <p class="edit"
-             v-if="editGender">
+          <div class="edit"
+               v-if="editGender">
             <label>性别</label>
+            <!-- <div class="genderEdit"> -->
             <input type="radio"
                    value="0"
                    v-model="gender" /><span class="radio">男</span>
@@ -56,27 +57,29 @@
                   @click="updateProfile('gender', gender)">保存</span>
             <span class="cancel"
                   @click="editGender = false">取消</span>
-          </p>
-          <p class="show"
-             v-else>
-            <label>性别</label>{{
+            <!-- </div> -->
+          </div>
+          <div class="show"
+               v-else>
+            <label>性别</label><span>{{
               profile.gender != null
                 ? profile.gender == 0
                   ? "男"
                   : "女"
                 : "未知"
-            }}
+            }}</span>
             <el-button type="primary"
                        icon="el-icon-edit"
                        @click="editGender = true"></el-button>
-          </p>
+          </div>
         </div>
         <hr />
         <div class="birthday">
-          <p class="edit"
-             v-if="editBirthday">
+          <div class="edit"
+               v-if="editBirthday">
             <label>生日</label>
-            <el-date-picker v-model="birthday"
+            <el-date-picker style="padding:0;width:18rem"
+                            v-model="birthday"
                             type="date"
                             placeholder="选择日期">
             </el-date-picker>
@@ -84,18 +87,18 @@
                   @click="updateProfile('birthday', birthday)">保存</span>
             <span class="cancel"
                   @click="editBirthday = false">取消</span>
-          </p>
-          <p v-else>
-            <label>生日</label>{{ profile.birthday ? profile.birthday : "未知" }}
+          </div>
+          <div v-else>
+            <label>生日</label><span>{{ profile.birthday ? profile.birthday : "未知" }}</span>
             <el-button type="primary"
                        icon="el-icon-edit"
                        @click="editBirthday = true"></el-button>
-          </p>
+          </div>
         </div>
         <hr />
         <div class="mobile">
-          <p class="edit"
-             v-if="editMobile">
+          <div class="edit"
+               v-if="editMobile">
             <label>手机</label>
             <input type="text"
                    v-model="mobile"
@@ -106,18 +109,18 @@
                   @click="updateProfile('mobile', mobile)">保存</span>
             <span class="cancel"
                   @click="editMobile = false">取消</span>
-          </p>
-          <p v-else>
-            <label>手机</label>{{ profile.mobile ? profile.mobile : "未知" }}
+          </div>
+          <div v-else>
+            <label>手机</label><span>{{ profile.mobile ? profile.mobile : "未知" }}</span>
             <el-button type="primary"
                        icon="el-icon-edit"
                        @click="editMobile = true"></el-button>
-          </p>
+          </div>
         </div>
         <hr />
         <div class="email">
-          <p class="edit"
-             v-if="editEmail">
+          <div class="edit"
+               v-if="editEmail">
             <label>邮箱</label>
             <input type="text"
                    v-model="email"
@@ -128,13 +131,13 @@
                   @click="updateProfile('email', email)">保存</span>
             <span class="cancel"
                   @click="editEmail = false">取消</span>
-          </p>
-          <p v-else>
-            <label>邮箱</label>{{ profile.email ? profile.email : "未知" }}
+          </div>
+          <div v-else>
+            <label>邮箱</label><span>{{ profile.email ? profile.email : "未知" }}</span>
             <el-button type="primary"
                        icon="el-icon-edit"
                        @click="editEmail = true"></el-button>
-          </p>
+          </div>
         </div>
         <hr />
       </div>
@@ -308,6 +311,7 @@ export default {
 .profile .username {
   margin: 2rem 0 0 0.5rem;
   font-size: 3rem;
+  width: 100%;
 }
 .profile .gender,
 .birthday,
@@ -318,8 +322,13 @@ export default {
   font-size: 3rem;
 }
 .profile label {
-  width: 10%;
+  width: 15%;
   display: inline-block;
+  font-size: 2rem;
+  font-weight: 550;
+}
+.profile span {
+  font-size: 2rem;
 }
 .username .show {
   font-size: 3rem;
@@ -327,6 +336,7 @@ export default {
 }
 .edit {
   margin-bottom: 3%;
+  font-size: 1.5rem;
 }
 .edit .outside {
   height: 3.5rem;
@@ -348,7 +358,7 @@ export default {
 .edit .save {
   margin-left: 5%;
   padding: 0.5rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   background: #409eff;
   color: white;
   border-radius: 0.3rem;
@@ -360,7 +370,7 @@ export default {
 .edit .cancel {
   margin-left: 5%;
   padding: 0.5rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   background: #c0c4cc;
   color: white;
   border-radius: 0.3rem;
@@ -369,12 +379,10 @@ export default {
 .edit .cancel:hover {
   background: #909399;
 }
-.profile p {
-  font-size: 1.5rem;
-}
-.profile p label {
+.profile label {
   margin-right: 10rem;
   font-weight: 550;
+  font-size: 2rem;
 }
 .profile hr {
   margin: auto 0.5rem;
@@ -393,19 +401,28 @@ export default {
   color: dodgerblue;
   background: #ffffff;
 }
-.el-date-picker {
-  height: 2.5rem;
-  border-radius: 0.3rem;
-  border: 1px solid #909399;
-  text-indent: 1rem;
-  outline: none;
-}
 @media screen and (max-width: 700px) {
   .body {
     margin: auto 0;
+    padding: 0 2rem 10rem 2rem;
+  }
+  .avatar {
+    margin-left: 2.5rem;
   }
   .background {
     margin: 0.5% 0 auto 0;
+  }
+  .profile label {
+    margin-right: 2rem;
+  }
+  .username input {
+    width: 15rem;
+  }
+  .mobile input {
+    width: 15rem;
+  }
+  .email input {
+    width: 15rem;
   }
 }
 </style>

@@ -98,9 +98,7 @@ export default {
     display: none;
   }
   .main_wrap hr {
-    /* border-top: 1px solid rgb(224, 208, 208); */
-    margin: 0 10%;
-    /* display: none; */
+    display: none;
   }
   .option {
     margin-left: 10%;
