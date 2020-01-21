@@ -241,7 +241,7 @@ export default {
   }
   .main_wrap .button {
     margin: 0;
-    padding: 1rem 1rem 0 0;
+    padding: 1rem 1rem 1rem 0;
   }
 }
 </style>

@@ -110,7 +110,7 @@ export default {
     padding: 0;
   }
   .main_wrap >>> .ql-container {
-    margin: 1rem 0;
+    margin: 0;
   }
 }
 </style>
