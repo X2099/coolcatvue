@@ -18,7 +18,7 @@
                style="font-size:20px"></i></p>
         </label>
       </div>
-      <div class="button">
+      <div class="button editor">
         <label>
           <p>•••</p>
         </label>
@@ -285,6 +285,7 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* background: tomato; */
 }
 .sub_menu .button {
   display: table;
@@ -296,6 +297,7 @@ export default {
   font-size: 1.4rem;
   color: rgb(138, 144, 145);
   text-align: center;
+  /* background: teal; */
 }
 .sub_menu .button label {
   vertical-align: middle;
@@ -306,7 +308,7 @@ export default {
 }
 #pub_button {
   color: dodgerblue;
-  font-size: 16px;
+  font-size: 2rem;
 }
 .sub_menu .user img {
   position: fixed;
@@ -329,5 +331,20 @@ export default {
   position: relative;
   z-index: 1;
   width: 100%;
+}
+@media screen and (max-width: 700px) {
+  .title {
+    width: 60%;
+  }
+  .sub_menu {
+    width: 40%;
+  }
+  .sub_menu .button {
+    width: 40%;
+    margin: 0;
+  }
+  .sub_menu .editor {
+    display: none;
+  }
 }
 </style>

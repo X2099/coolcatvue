@@ -22,7 +22,7 @@
                    v-for="(tag,index) in article.tags"
                    :key="index">{{ tag.name }} </label>
           </p>
-          <p class="update_time">{{ article.update_time | FromNow }} ···</p>
+          <p class="update_time">{{ article.update_time | FromNow }}</p>
         </div>
       </div>
     </div>
@@ -102,13 +102,13 @@ html {
   font-size: 1.8rem;
 }
 .article {
+  min-height: 10rem;
   font-size: 0;
+  background: #ffffff;
 }
 .article .intro {
   display: inline-block;
   width: 50%;
-  height: 10rem;
-  background: #ffffff;
   padding: 2% 0;
   /* background: teal; */
 }
@@ -145,7 +145,6 @@ html {
   width: 25%;
   height: 10rem;
   padding: 2% 0 2% 25%;
-  background: #ffffff;
   /* background: coral; */
 }
 .article .cover img {
@@ -161,24 +160,19 @@ html {
     margin-bottom: 0.1rem;
   }
   .article .cover {
-    display: inline-block;
-    vertical-align: top;
-    width: 35%;
-    height: 15rem;
-    padding: 1rem 0 1rem 15%;
-    background: #ffffff;
-    background: coral;
+    width: 50%;
+    padding: 1rem 0;
+    /* background: teal; */
   }
   .article .cover img {
-    height: 100%;
+    max-width: 20rem;
+    padding-left: 3rem;
   }
   .article .intro {
-    display: inline-block;
-    width: 50%;
-    height: 15rem;
-    background: #ffffff;
     padding: 2% 0;
-    background: teal;
+  }
+  .article .intro p {
+    padding-right: 3rem;
   }
 }
 </style>
