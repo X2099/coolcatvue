@@ -308,7 +308,7 @@ export default {
 }
 #pub_button {
   color: dodgerblue;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 .sub_menu .user img {
   position: fixed;
@@ -335,13 +335,18 @@ export default {
 @media screen and (max-width: 700px) {
   .title {
     width: 60%;
+    /* background: tomato; */
   }
   .sub_menu {
     width: 40%;
+    /* background: teal; */
   }
   .sub_menu .button {
     width: 40%;
     margin: 0;
+  }
+  .sub_menu .user img {
+    right: 2%;
   }
   .sub_menu .editor {
     display: none;
