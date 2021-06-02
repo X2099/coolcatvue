@@ -102,7 +102,7 @@ let uid = localStorage.uid
 
 export default {
   name: '',
-  props: ['article_id', 'title', 'body', 'edited_category', 'edited_tags', 'cover_image'],
+  props: ['article_id', 'title', 'body', 'edited_category', 'edited_tags', 'cover_image', 'cover_url'],
   data () {
     return {
       category: '', // 文章分类
@@ -266,7 +266,9 @@ export default {
       }
       articleForm.append('author', uid)
       articleForm.append('status', this.status)
-      articleForm.append('cover_image', this.cover_image)
+      if (this.cover_image !== '') {
+        articleForm.append('cover_image', this.cover_image)
+      }
       if (this.article_id) {
         this.axios.put(cons.apis + 'api/articles/' + this.article_id + '/',
           articleForm,
