@@ -57,12 +57,11 @@ export default {
         })
     },
     articleDetail (id) {
-      this.$router.push({
-        name: 'Article',
-        params: {
-          id: id
-        }
+      let newpage = this.$router.resolve({
+        name: 'Article'
       })
+      sessionStorage.setItem('id', JSON.stringify(id))
+      window.open(newpage.href, '_blank')
     }
   }
 }

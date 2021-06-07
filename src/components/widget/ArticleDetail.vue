@@ -66,11 +66,8 @@ export default {
   methods: {
     // 接收参数
     getArticleId () {
-      this.id = this.$route.params.id
-      if (!this.id) {
-        this.id = parseInt(sessionStorage.getItem('id'))
-        sessionStorage.clear()
-      }
+      this.id = parseInt(sessionStorage.getItem('id'))
+      sessionStorage.clear()
     },
     // 获取文章
     getArticle () {
