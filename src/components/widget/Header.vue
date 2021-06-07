@@ -158,7 +158,10 @@ export default {
     // 文章编辑页
     edit () {
       if (uid && token) {
-        this.$router.push({ path: '/edit' }).catch(() => { })
+        let newpage = this.$router.resolve({
+          path: '/edit'
+        })
+        window.open(newpage.href, '_blank')
       } else {
         this.showLogin = true
       }
