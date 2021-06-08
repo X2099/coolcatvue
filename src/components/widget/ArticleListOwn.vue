@@ -75,12 +75,11 @@ export default {
     },
     // 去详情页传递参数
     articleDetail (id) {
-      this.$router.push({
-        name: 'Article',
-        params: {
-          id: id
-        }
+      let newpage = this.$router.resolve({
+        name: 'Article'
       })
+      sessionStorage.setItem('id', JSON.stringify(id))
+      window.open(newpage.href, '_blank')
     },
     // 去编辑页传参
     articleEdit (id) {
