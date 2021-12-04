@@ -5,6 +5,7 @@
     <Header :show.sync="showSwitch"></Header>
     <UserProfile></UserProfile>
     <UserStatus></UserStatus>
+    <WebsiteInfo />
   </div>
 </template>
 
@@ -12,13 +13,15 @@
 import Header from '@/components/widget/Header'
 import UserProfile from '@/components/widget/UserProfile'
 import UserStatus from '@/components/widget/UserStatus'
+import WebsiteInfo from '@/components/widget/WebsiteInfo'
 
 let { uid, token } = localStorage
 export default {
   components: {
     Header,
     UserProfile,
-    UserStatus
+    UserStatus,
+    WebsiteInfo
   },
   data () {
     return {

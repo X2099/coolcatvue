@@ -3,19 +3,22 @@
        @click="hideMenu"
        ref="main_wrap">
     <Header :show.sync="showSwitch"></Header>
-    <Draft></Draft>
+    <Draft />
+    <WebsiteInfo />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import Draft from '@/components/widget/Draft'
+import WebsiteInfo from '@/components/widget/WebsiteInfo'
 let { uid, token } = localStorage
 
 export default {
   components: {
     Header,
-    Draft
+    Draft,
+    WebsiteInfo
   },
   data () {
     return {

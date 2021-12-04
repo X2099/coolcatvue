@@ -3,7 +3,8 @@
     <hr />
     <div class="info">
       <span>
-        <a href="https://tsm.miit.gov.cn/dxxzsp/">京ICP备19020719号</a>&emsp;联系作者：moonpython@163.com
+        <a href="https://beian.miit.gov.cn/"
+           target="_blank">京ICP备19020719号</a>&emsp;联系作者：moonpython@163.com
       </span>
     </div>
   </div>

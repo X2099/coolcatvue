@@ -4,18 +4,21 @@
        ref="main_wrap">
     <Header :show.sync="showSwitch"></Header>
     <ArticleListOwn></ArticleListOwn>
+    <WebsiteInfo />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import ArticleListOwn from '@/components/widget/ArticleListOwn'
+import WebsiteInfo from '@/components/widget/WebsiteInfo'
 let { uid, token } = localStorage
 
 export default {
   components: {
     Header,
-    ArticleListOwn
+    ArticleListOwn,
+    WebsiteInfo
   },
   data () {
     return {

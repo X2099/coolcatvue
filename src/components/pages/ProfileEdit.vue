@@ -4,18 +4,21 @@
        ref="main_wrap">
     <Header :show.sync="showSwitch"></Header>
     <UserEdit />
+    <WebsiteInfo />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import UserEdit from '@/components/widget/UserEdit'
+import WebsiteInfo from '@/components/widget/WebsiteInfo'
 
 let { uid, token } = localStorage
 export default {
   components: {
     Header,
-    UserEdit
+    UserEdit,
+    WebsiteInfo
   },
   data () {
     return {

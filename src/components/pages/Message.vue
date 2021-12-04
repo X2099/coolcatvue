@@ -6,19 +6,22 @@
             :toLogin="toLogin"
             @resetLogin="resetLogin"></Header>
     <MsgEdit @goLogin="goLogin"></MsgEdit>
+    <WebsiteInfo />
   </div>
 </template>
 
 <script>
 import Header from '@/components/widget/Header'
 import MsgEdit from '@/components/widget/MsgEdit'
+import WebsiteInfo from '@/components/widget/WebsiteInfo'
 let uid = localStorage.uid
 let token = localStorage.token
 
 export default {
   components: {
     Header,
-    MsgEdit
+    MsgEdit,
+    WebsiteInfo
   },
   data () {
     return {
