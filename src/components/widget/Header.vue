@@ -121,7 +121,14 @@ export default {
           .then(response => {
             this.avatar = cons.apis + response.data.avatar
           })
-          .catch(() => { alert('获取用户资料失败！') })
+          .catch(error => {
+            if (error.response.status === 401) {
+              alert('登录状态已经失效，请重新登录！')
+              location.reload()
+            } else {
+              alert('获取用户资料失败！')
+            }
+          })
       }
     },
     // 关闭注册窗
