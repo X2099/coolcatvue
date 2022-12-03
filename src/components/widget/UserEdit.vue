@@ -236,7 +236,6 @@ export default {
         })
         .catch(error => {
           if (error.response.status === 401) {
-            alert('登录状态已经失效，请重新登录！')
             location.reload()
           } else {
             alert('获取用户资料失败！')
