@@ -46,6 +46,7 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           // 返回 401 清除token信息并跳转到登录页面
+          sessionStorage.clear()
           localStorage.clear()
           router.replace({
             path: '/',

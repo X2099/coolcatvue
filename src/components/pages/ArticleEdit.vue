@@ -144,8 +144,9 @@ export default {
         })
         .catch(error => {
           if (error.response.status === 401) {
+            sessionStorage.clear()
+            localStorage.clear()
             this.$router.push({ path: '/' })
-            // location.reload()
           } else {
             alert('获取用户资料失败！')
           }
